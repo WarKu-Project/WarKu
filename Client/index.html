@@ -9,8 +9,121 @@
     <title>WarKu!</title>
   </head>
   <body>
+    <!--Connect to socket.io -->
+    <script type="text/javascript">
+      var socket = io.connect('http://192.168.1.39:5555');
+      $('#login-page').hide();
+      $('#regis-page').hide();
+    </script>
 
-    
+    <!--Heading with logo -->
+    <div class="container">
+      <div class="row">
+        <!-- TODO add logo here-->
+      </div>
+    </div>
 
+    <!--login page-->
+    <div class="container" id="login-page">
+      <div class="row row-centered">
+        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered text-center">
+            <!--Input username box-->
+              <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                  <input type="text" class="form-control" id="login-username" placeholder="Username">
+              </div>
+            </div>
+            <!--Input password box-->
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 ">
+                  <input type="password" class="form-control" id="login-password" placeholder="Password">
+              </div>
+            </div>
+            <!--Button panel-->
+            <div class="row">
+              <!--Login Button-->
+              <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 ">
+                <button type="button" class="btn btn-primary" id="login-btn">Login</button>
+              </div>
+              <!--Register Button-->
+                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 ">
+                  <button type="button" class="btn btn-primary" id="login-register-btn">Register</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- ActionListener for Login-btn and login-register-btn -->
+      <script type="text/javascript">
+        /** Function to login **/
+        function login(){
+          socket.emit('login',{"username":$('#login-username').val(),"password":$('#login-password').val()});
+          socket.on('login-status',function(status) {
+            if (status) console.log('success');
+            else {
+              $('#login-username').addClass('has-error');
+              $('#login-username').attr('placeholder','Invalid Username or Password');
+              $('#login-password').addClass('has-error');
+              $('#login-password').attr('placeholder','Invalid Username or Password');
+            }
+          });
+        }
+        /** Function to go to register page **/
+        function goToRegisterPage() {
+          $('#login-page').fadeOut();
+          $('#regis-page').fadeIn();
+        }
+        $('#login-page').fadeIn();
+        /** set function to button **/
+        $('#login-btn').click(login);
+        $('#login-register-btn').click(goToRegisterPage);
+      </script>
+    </div>
+
+    <!--register page-->
+    <div class="container" id="regis-page">
+            <div class="row row-centered">
+              <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered text-center">
+                  <!--Input username box-->
+                    <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                        <input type="text" class="form-control" id="regis-username" placeholder="Username">
+                    </div>
+                  </div>
+                  <!--Input password box-->
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 ">
+                        <input type="password" class="form-control" id="regis-password" placeholder="Password">
+                    </div>
+                  </div>
+                  <!--Input email box-->
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 ">
+                        <input type="email" class="form-control" id="regis-email" placeholder="E-mail">
+                    </div>
+                  </div>
+                  <!--Button panel-->
+                  <div class="row">
+                    <!--register Button-->
+                    <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 ">
+                      <button type="button" class="btn btn-primary" id="regis-btn">Register</button>
+                    </div>
+                  </div>
+              </div>
+              <!-- ActionListener for regis button -->
+              <script type="text/javascript">
+                function regis(){
+                  socket.emit('register',{'username' : $('#regis-username').val(), 'password' : $('#regis-password').val(), 'email' : $('#regis-email').val()});
+                  socket.on('register-status',function(status) {
+                    if (status){
+                      console.log('Regis Success');
+                      $('#regis-page').fadeOut();
+                      $('#login-page').fadeIn();
+                    }else {
+                      console.log('NOOOO');
+                    }
+                  });
+                }
+                $('#regis-btn').click(regis);
+              </script>
+    </div>
   </body>
 </html>

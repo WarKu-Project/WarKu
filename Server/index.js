@@ -21,6 +21,7 @@ app.use(bp.json());
 app.use(bp.urlencoded({
     extended: true
 }));
+
 /** use cors for prevent different access origin problem **/
 app.use(cors());
 
@@ -35,7 +36,7 @@ var io = require('socket.io').listen(server);
 /** Intitlize Project Module
 * player.js
 */
-var player = require('player');
+var player = require('./player');
 
 /**
 * Server variable
@@ -47,16 +48,18 @@ var online_user = {};
 /** connect socket with io **/
 io.on('connection',function(socket){
   //get client ip
-  var address = socket.handshake.address;
+  var address = socket.request.connection.remoteAddress;
   //notice client has connected
-  console.log('Client IP = '+address.address+":"+address.port+' is connected.');
+  console.log('Client IP = '+address+' is connected.');
 
   /**
   * Received function
   **/
   /** Fuction to regist new player **/
   socket.on('register',function(info) {
-    if (!player.authorized(info)) {
+    // log what info is
+    console.log('Info : '+info);
+    if (!player.authorize(info)) {
       player.createPlayer(info);
       socket.emit('register-status',true);
     } else {
@@ -65,9 +68,11 @@ io.on('connection',function(socket){
   });
   /** Function to login **/
   socket.on('login',function(info) {
-    if (player.authorized(info)){
+    //Log what info is
+    console.log('Info : '+info.toString());
+    if (player.authorize(info)){
       //add player to online list
-      online_user[socket.address.address+":"+socket.address.port] = info["username"];
+      online_user[socket.request.connection.remoteAddress] = info["username"];
       socket.emit('login-status',true);
     }else {
       socket.emit('login-status',false);
