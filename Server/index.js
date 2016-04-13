@@ -66,10 +66,12 @@ io.on('connection',function(socket){
   /** Function to login **/
   socket.on('login',function(info) {
     if (player.authorized(info)){
+      //add player to online list
       online_user[socket.address.address+":"+socket.address.port] = info["username"];
       socket.emit('login-status',true);
     }else {
       socket.emit('login-status',false);
     }
   });
+
 });
