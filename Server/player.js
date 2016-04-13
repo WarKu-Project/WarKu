@@ -45,6 +45,20 @@ exports.createPlayer = function(info) {
     updateNumberPlayer();
   })
 }
+/**Function to authorize player**/
+exports.authorize = function(info) {
+  this.in = false;
+  var player = [info['username'],info['password']];
+  con.query('SELECT * FROM player WHERE username=? AND password=?',player,function(err,rows) {
+    if (err) throw err;
+    if (rows.length==0) console.log('Player doesn\'t exist');
+    else {
+      this.in = true;
+      console.log('Player '+rows[0]+'is authorized.');
+    }
+  });
+  return this.in;
+}
 
 /**
 * First access done
