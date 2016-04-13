@@ -31,3 +31,11 @@ var server = app.listen(port,function() {
 
 /** initialize socket.io **/
 var io = require('socket.io').listen(server);
+
+/** connect socket with io **/
+io.on('connection',function(socket){
+  //get client ip
+  var address = socket.handshake.address;
+  console.log('Client IP = '+address.address+":"+address.port+' is connected.');
+   
+});

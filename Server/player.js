@@ -37,7 +37,7 @@ function updateNumberPlayer(){
 exports.createPlayer = function(info) {
   console.log('Received Data = '+info);
   //create dictionary and adapt json array to simulate row of sql
-  var player = {pid : global.num_player,username:info['username'],password['password']};
+  var player = {pid : global.num_player,username:info['username'],password['password'],email: info['email']};
   con.query('INSERT INTO player SET ?',player,function(err,rows) {
     if (err) throw err;
     console.log('Success! New Player Created!!!');
@@ -49,12 +49,12 @@ exports.createPlayer = function(info) {
 exports.authorize = function(info) {
   this.in = false;
   var player = [info['username'],info['password']];
-  con.query('SELECT * FROM player WHERE username=? AND password=?',player,function(err,rows) {
+  con.query('SELECT username FROM player WHERE username=? AND password=?',player,function(err,rows) {
     if (err) throw err;
     if (rows.length==0) console.log('Player doesn\'t exist');
     else {
       this.in = true;
-      console.log('Player '+rows[0]+'is authorized.');
+      console.log('Player '+rows[0].username+'is authorized.');
     }
   });
   return this.in;
