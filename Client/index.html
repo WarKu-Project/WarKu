@@ -1,23 +1,4 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <script src="socket.io-client/socket.io.js"></script>
-    <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
-    <script src="jquery-2.2.3.min.js"></script>
-    <title>WarKu!</title>
-  </head>
-  <body>
-    <!--Connect to socket.io -->
-    <script type="text/javascript">
-      var socket = io.connect('http://localhost:5555');
-      $('#login-page').hide();
-      $('#regis-page').hide();
-    </script>
-=======
-    <!DOCTYPE html>
+
     <!DOCTYPE html>
     <html>
       <head>
@@ -31,11 +12,10 @@
       <body>
         <!--Connect to socket.io -->
         <script type="text/javascript">
-          var socket = io.connect('localhost:5555');
+          var socket = io.connect('http://localhost:5555');
           $('#login-page').hide();
           $('#regis-page').hide();
         </script>
->>>>>>> 92d5ef2c45b560e83744f0cd0dfb00625a398df0
 
         <!--Heading with logo -->
         <div class="container">
@@ -145,7 +125,7 @@
                     }
                     $('#regis-btn').click(regis);
                   </script>
-        
+
          <!-- Initialize -->
             <script type="text/javascript">
                 function init(){
