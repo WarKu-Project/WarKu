@@ -7,5 +7,17 @@
     float:none;
     text-align:left;
     margin-right:-4px;
-    padding-top: 10px;
+    padding-top: 20px;
+}
+
+body  {
+  background-image: url("picture/BG.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+header {
+    background: url("picture/logo.jpg") no-repeat top center;
 }
