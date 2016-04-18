@@ -18,6 +18,7 @@ body  {
   background-size: cover;
 }
 
-header {
-    background: url("picture/logo.jpg") no-repeat top center;
+.logo {
+    width: 251px;
+    height: 201px;
 }
