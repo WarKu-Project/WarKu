@@ -30,22 +30,31 @@ con.query('CREATE TABLE structure (sid int NOT NULL,level int NOT NULL,vid int N
 });
 
 /** Initialize resource table **/
-con.query('CREATE TABLE resource (sid int NOT NULL,level int NOT NULL,resource_pos int NOT NULL,resource_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level) REFERENCES structure(sid,level))',function(err) {
+con.query('CREATE TABLE resource (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,resource_pos int NOT NULL,resource_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('resource table is created to MySQL');
 });
 
 /** Initialize building table **/
-con.query('CREATE TABLE building (sid int NOT NULL,level int NOT NULL,building_pos int NOT NULL,building_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level) REFERENCES structure(sid,level))',function(err) {
+con.query('CREATE TABLE building (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,building_pos int NOT NULL,building_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('building table is created to MySQL');
 })
 
 /** Initialize wall table **/
-con.query('CREATE TABLE wall (sid int NOT NULL,level int NOT NULL,wall_pos varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level) REFERENCES structure(sid,level))',function(err) {
+con.query('CREATE TABLE wall (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,wall_pos varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('wall table is created to MySQL');
 })
 
 /** Initialize troop table **/
-//con.query('CREATE TABLE unit ()')
+con.query('CREATE TABLE troop (tid int NOT NULL,type varchar(20) NOT NULL,amount int NOT NULL,level int NOT NULL,morale int NOT NULL,vid int NOT NULL,PRIMARY KEY(tid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('troop table is created to MySQL');
+});
+
+/** Initialize hero table **/
+con.query('CREATE TABLE hero (hid int NOT NULL,hero_name varchar(20) NOT NULL,level int NOT NULL,str int NOT NULL,def int NOT NULL,wis int NOT NULL,ability char(2),vid int NOT NULL,PRIMARY KEY(hid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('hero table is created to MySQL');
+});
