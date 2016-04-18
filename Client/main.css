@@ -22,3 +22,26 @@ body  {
     width: 251px;
     height: 201px;
 }
+
+
+nav ul li {
+		display: inline-block;
+		list-style-type: none;
+		-webkit-transition: all 0.2s;
+		-moz-transition: all 0.2s;
+		-ms-transition: all 0.2s;
+		-o-transition: all 0.2s;
+		transition: all 0.2s; 
+	}
+nav > ul > li > a {
+			color: #aaa;
+			display: block;
+			line-height: 56px;
+			padding: 0 54px;
+			text-decoration: none;
+}
+
+.source{
+    height: 200px;
+}
+
