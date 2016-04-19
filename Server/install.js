@@ -42,10 +42,10 @@ con.query('CREATE TABLE building (sid int NOT NULL,building_pos int NOT NULL,bui
 });
 
 /** Initialize wall table **/
-con.query('CREATE TABLE wall (sid int NOT NULL,wall_pos varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
+con.query('CREATE TABLE wall (sid int NOT NULL,wall_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('wall table is created to MySQL');
-})
+});
 
 /** Initialize troop table **/
 con.query('CREATE TABLE troop (tid int NOT NULL,type varchar(20) NOT NULL,amount int NOT NULL,level int NOT NULL,morale int NOT NULL,vid int NOT NULL,PRIMARY KEY(tid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
