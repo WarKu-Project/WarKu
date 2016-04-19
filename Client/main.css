@@ -79,10 +79,8 @@ img {
     width: 450px;
     height: 320px;
     background: url(picture/ResourceSprite.png) 0 0;
-    
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: 0 0; 
 }
 
 .source1 {
