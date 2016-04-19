@@ -39,7 +39,7 @@ con.query('CREATE TABLE resource (sid int NOT NULL,level int NOT NULL,vid int NO
 con.query('CREATE TABLE building (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,building_pos int NOT NULL,building_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('building table is created to MySQL');
-})
+});
 
 /** Initialize wall table **/
 con.query('CREATE TABLE wall (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,wall_pos varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
@@ -58,3 +58,9 @@ con.query('CREATE TABLE hero (hid int NOT NULL,hero_name varchar(20) NOT NULL,le
   if (err) console.log(err.toString());
   else console.log('hero table is created to MySQL');
 });
+
+/** Initialize task table **/
+con.query('CREATE TABLE task (taskid int NOT NULL,endtime datetime NOT NULL,PRIMARY KEY(taskid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('task table is created to MySQL');
+})
