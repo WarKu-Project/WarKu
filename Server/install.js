@@ -64,3 +64,9 @@ con.query('CREATE TABLE task (taskid int NOT NULL,endtime datetime NOT NULL,PRIM
   if (err) console.log(err.toString());
   else console.log('task table is created to MySQL');
 })
+
+/** Initialize buildingtask **/
+con.query('CREATE TABLE buildingtask (taskid int NOT NULL,PRIMARY KEY(taskid),FOREIGN KEY(taskid) REFERENCES task(taskid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('buildingtask is created to MySQL');
+})
