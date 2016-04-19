@@ -88,3 +88,15 @@ con.query('CREATE TABLE markettask (taskid int NOT NULL,wood int,clay int,iron i
   if (err) console.log(err.toString());
   else console.log('markettask table is created to MySQL');
 });
+
+/** Initialize info table **/
+con.query('CREATE TABLE info (pid int NOT NULL,infomation varchar(500),PRIMARY KEY(pid),FOREIGN KEY(pid) REFERENCES player(pid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('info table is created to MySQL');
+});
+
+/** Initialize mail table **/
+con.query('CREATE TABLE mail (mid int NOT NULL,title varchar(50) DEFAULT\'Untitled\',information varchar(500),status char(1) NOT NULL,time datetime NOT NULL,sender_id int NOT NULL,receiver_id int NOT NULL,PRIMARY KEY(mid),FOREIGN KEY(sender_id) REFERENCES played(pid),FOREIGN KEY(receiver_id) REFERENCES player(pid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('mail table is created to MySQL');
+});
