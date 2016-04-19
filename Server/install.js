@@ -30,19 +30,19 @@ con.query('CREATE TABLE structure (sid int NOT NULL,level int NOT NULL,vid int N
 });
 
 /** Initialize resource table **/
-con.query('CREATE TABLE resource (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,resource_pos int NOT NULL,resource_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
+con.query('CREATE TABLE resource (sid int NOT NULL,resource_pos int NOT NULL,resource_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('resource table is created to MySQL');
 });
 
 /** Initialize building table **/
-con.query('CREATE TABLE building (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,building_pos int NOT NULL,building_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
+con.query('CREATE TABLE building (sid int NOT NULL,building_pos int NOT NULL,building_type varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('building table is created to MySQL');
 });
 
 /** Initialize wall table **/
-con.query('CREATE TABLE wall (sid int NOT NULL,level int NOT NULL,vid int NOT NULL,wall_pos varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid,level,vid) REFERENCES structure(sid,level,vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function(err) {
+con.query('CREATE TABLE wall (sid int NOT NULL,wall_pos varchar(20) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('wall table is created to MySQL');
 })
