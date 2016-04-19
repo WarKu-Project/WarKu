@@ -63,10 +63,28 @@ con.query('CREATE TABLE hero (hid int NOT NULL,hero_name varchar(20) NOT NULL,le
 con.query('CREATE TABLE task (taskid int NOT NULL,endtime datetime NOT NULL,PRIMARY KEY(taskid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('task table is created to MySQL');
-})
+});
 
-/** Initialize buildingtask **/
-con.query('CREATE TABLE buildingtask (taskid int NOT NULL,PRIMARY KEY(taskid),FOREIGN KEY(taskid) REFERENCES task(taskid))',function(err) {
+/** Initialize buildingtask table **/
+con.query('CREATE TABLE buildingtask (taskid int NOT NULL,sid int NOT NULL,PRIMARY KEY(taskid),FOREIGN KEY(taskid) REFERENCES task(taskid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
   if (err) console.log(err.toString());
-  else console.log('buildingtask is created to MySQL');
-})
+  else console.log('buildingtask table is created to MySQL');
+});
+
+/** Initialize trainingtask table **/
+con.query('CREATE TABLE trainingtask (taskid int NOT NULL,type varchar(20) NOT NULL,amount int,starttime datetime NOT NULL,tid int NOT NULL,PRIMARY KEY(taskid),FOREIGN KEY(taskid) REFERENCES task(taskid),FOREIGN KEY(tid) REFERENCES troop(tid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('traingtask table is created to MySQL');
+});
+
+/** Initialize movingtask table **/
+con.query('CREATE TABLE movingtask (taskid int NOT NULL,purpose char(3) NOT NULL,maceman_amount int,swordman_amount int,spearman_amount int,guardian_amount int,archer_amount int,scout_amount int,pathfinder_amount int,mountedarcher_amount int,mountedwarrior_amount int,heavymountedknight_amount int,ram_amount int,catapult_amount int,diplomat_amount int,settler_ammount int,home_id int NOT NULL,des_id int NOT NULL,PRIMARY KEY(taskid),FOREIGN KEY(taskid) REFERENCES task(taskid),FOREIGN KEY(home_id) REFERENCES villege(vid),FOREIGN KEY(des_id) REFERENCES villege(vid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('movingtask table is created to MySQL');
+});
+
+/** Initialize markettask table **/
+con.query('CREATE TABLE markettask (taskid int NOT NULL,wood int,clay int,iron int,crop int,start_id int NOT NULL,des_id int NOT NULL,PRIMARY KEY(taskid),FOREIGN KEY(taskid) REFERENCES task(taskid),FOREIGN KEY(start_id) REFERENCES villege(vid),FOREIGN KEY(des_id) REFERENCES villege(vid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('markettask table is created to MySQL');
+});
