@@ -13,37 +13,37 @@
         <nav>
             <ul class="row-centered">
                 <!--menu resource-->
-                <li><div class="source">
+                <li><div class="menu" id="resource_menu">
                     <a href="#">
-                    <img src="picture/resource.png" class="source">
+                    <img src="picture/resource.png">
                     </a>
                     </div>
                 </li>
                 <!--menu village-->
-                <li><div class="source">
+                <li><div class="menu" id="village_menu">
                     <a href="#">
-                    <img src="picture/village.png" class="source">
+                    <img src="picture/village.png">
                     </a>
                     </div>
                 </li>
                 <!--menu map-->
-                <li><div class="source">
+                <li><div class="menu" id="map_menu">
                     <a href="#">
-                    <img src="picture/map.png" class="source">
+                    <img src="picture/map.png">
                     </a>
                     </div>
                 </li>
                 <!--menu report-->
-                <li><div class="source">
+                <li><div class="menu" id="report_menu">
                     <a href="#">
-                    <img src="picture/report.png" class="source">
+                    <img src="picture/report.png">
                     </a>
                     </div>
                 </li>
                 <!--menu mail-->
-                <li><div class="source">
+                <li><div class="menu" id="mail_menu">
                     <a href="#">
-                    <img src="picture/mail.png" class="source">
+                    <img src="picture/mail.png">
                     </a>
                     </div>
                 </li>
@@ -51,18 +51,136 @@
             </ul>
         </nav>
         
-     <nav>
+        <nav>
             <ul class="row-centered">
                 <!--menu mail-->
-                <li><div class="source">
+                <li><div class="menu" id="statistic_menu">
                     <a href="#">
-                    <img src="picture/statistic.png" class="source">
+                    <img src="picture/statistic.png">
                     </a>
                     </div>
                 </li>
                
             </ul>
         </nav>
+        
+        <!--resource container-->
+        <div class ="container" id="resource_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/resource.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="village_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/village.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="map_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/map.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="report_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/report.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="mail_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/mail.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="statistic_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/statistic.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        
+       <!-- Initialize -->
+        <script type="text/javascript">
+            function init(){
+                $('#resource_container').hide();
+                $('#village_container').hide();
+                $('#map_container').hide();
+                $('#report_container').hide();
+                $('#mail_container').hide();
+                $('#statistic_container').hide();
+            }
+                
+            function doit1(){
+                init();
+                $('#resource_container').show(); 
+            }     
+        
+            function doit2(){
+                init();
+                $('#village_container').show(); 
+            }
+            
+            function doit3(){
+                init();
+                $('#map_container').show(); 
+            }
+            
+            function doit4(){
+                init();
+                $('#report_container').show(); 
+            }
+            
+            function doit5(){
+                init();
+                $('#mail_container').show(); 
+            }
+            
+            function doit6(){
+                init();
+                $('#statistic_container').show(); 
+            }
+            
+            init();
+            $('#resource_menu').click(doit1);
+            $('#village_menu').click(doit2);
+            $('#map_menu').click(doit3);
+            $('#report_menu').click(doit4);
+            $('#mail_menu').click(doit5);
+            $('#statistic_menu').click(doit6);
+        </script>
+        
         
     </body>
 </html>
