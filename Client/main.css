@@ -51,13 +51,15 @@ img {
     height:auto;
 }
 
-.container{
+#resource_container{
+    position: relative;
     height: 700px;
 }
 
 .village{
-    left: 30%;
-    margin: -30px 0 0 -80px;
+    left: 50%;
+    top: 50%;
+    
     position: absolute;
 }
 
@@ -69,8 +71,10 @@ img {
 }
 
 .village img{
-    max-width: 800px;
-    max-height: 800px; 
+    max-width: 100%;
+    max-height: 100%; 
+    margin-left: -50%;
+    margin-top: -50%;
     display: inline-block;
     vertical-align: middle;
 }
