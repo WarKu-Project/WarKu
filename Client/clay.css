@@ -1,127 +1,107 @@
 .clay1{
     position: absolute;
-    top: -200%;
-    left: 14%;
-    width: 33%;
+    top: -4%;
+    left: 47%;
+    width: 35%;
     
 }
 .clay2{
     position: absolute;
-    top: 55px;
-    left: 560px;
-    width: 230;
-    display: inline-block;
-    vertical-align: middle;
+    top: 7.5%;
+    left: 70.5%;
+    width: 30%;
+
 }
 .clay3{
     position: absolute;
-    top: 195px;
-    left: 570px;
-    width: 230;
-    display: inline-block;
-    vertical-align: middle;
+    top: 33%;
+    left: 71.5%;
+    width: 31%;
+    
 }
 .clay4{
     position: absolute;
-    top: 345px;
-    left: 380px;
-    width: 325;
-    display: inline-block;
-    vertical-align: middle;
+    top: 63%;
+    left: 47%;
+    width: 43%;
+   
 }
 .clay5{
     position: absolute;
-    top: 325px;
-    left: 70px;
-    width: 360;
-    display: inline-block;
-    vertical-align: middle;
+    top: 59%;
+    left: 6%;
+    width: 48%;
 }
 .clay6{
     position: absolute;
-    top: 185px;
-    left: 5px;
-    width: 215;
-    display: inline-block;
-    vertical-align: middle;
+    top: 34%;
+    left: -1%;
+    width: 27%;
 }
 .clay7{
     position: absolute;
-    top: 60px;
-    left: 15px;
-    width: 260;
-    display: inline-block;
-    vertical-align: middle;
+    top: 8%;
+    left: 0%;
+    width: 34%;
+    
 }
 .clay8{
     position: absolute;
-    top: -6px;
-    left: 187px;
-    width: 230;
-    display: inline-block;
-    vertical-align: middle;
+    top: -4%;
+    left: 23%;
+    width: 29%;
+   
 }
 .clay9{
     position: absolute;
-    top: 65px;
-    left: 375px;
-    width: 195;
-    display: inline-block;
-    vertical-align: middle;
+    top: 10%;
+    left: 46.5%;
+    width: 25%;
+    
 }
 .clay10{
     position: absolute;
-    top: 110px;
-    left: 450px;
-    width: 250;
-    display: inline-block;
-    vertical-align: middle;
+    top: 18.5%;
+    left: 57%;
+    width: 31%;
+   
 }
 .clay11{
     position: absolute;
-    top: 185px;
-    left: 440px;
-    width: 250;
-    display: inline-block;
-    vertical-align: middle;
+    top: 32.5%;
+    left: 56.5%;
+    width: 31%;
+    
 }
 .clay12{
     position: absolute;
-    top: 255px;
-    left: 380px;
-    width: 200;
-    display: inline-block;
-    vertical-align: middle;
+    top: 46%;
+    left: 48%;
+    width: 26%;
+    
 }
 .clay13{
     position: absolute;
-    top: 240px;
-    left: 185px;
-    width: 230;
-    display: inline-block;
-    vertical-align: middle;
+    top: 43%;
+    left: 22%;
+    width: 30%;
+    
 }
 .clay14{
     position: absolute;
-    top: 201px;
-    left: 115px;
-    width: 230;
-    display: inline-block;
-    vertical-align: middle;
+    top: 36%;
+    left: 13%;
+    width: 29%;
 }
 .clay15{
     position: absolute;
-    top: 96px;
-    left: 115px;
-    width: 235;
-    display: inline-block;
-    vertical-align: middle;
+    top: 16%;
+    left: 14%;
+    width: 30%;
 }
 .clay16{
     position: absolute;
-    top: 85px;
-    left: 250px;
-    width: 170;
-    display: inline-block;
-    vertical-align: middle;
+    top: 13.5%;
+    left: 31%;
+    width: 21.5%;
 }
