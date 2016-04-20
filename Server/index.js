@@ -38,6 +38,9 @@ var io = require('socket.io').listen(server);
 */
 var player = require('./player');
 
+/** Initialize GameEngine Module **/
+var GameEngine = require('./gameengine');
+
 /**
 * Server variable
 * online_user
