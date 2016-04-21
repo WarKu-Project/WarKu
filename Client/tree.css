@@ -1,0 +1,123 @@
+.tree1{
+    content: url(picture/resource/tree1.png);
+    position: absolute;
+    top: -1.8%;
+    left: 46.5%;
+    width: 35%;
+    
+}
+.tree2{
+    content: url(picture/resource/tree2.png);
+    position: absolute;
+    top: 9%;
+    left: 69%;
+    width: 30%;
+
+}
+.tree3{
+    content: url(picture/resource/tree3.png);
+    position: absolute;
+    top: 33%;
+    left: 70.8%;
+    width: 31%;
+    
+}
+.tree4{
+    content: url(picture/resource/tree4.png);
+    position: absolute;
+    top: 63.2%;
+    left: 46.5%;
+    width: 43%;
+   
+}
+.tree5{
+    content: url(picture/resource/tree5.png);
+    position: absolute;
+    top: 56.5%;
+    left: 6%;
+    width: 48%;
+}
+.tree6{
+    content: url(picture/resource/tree6.png);
+    position: absolute;
+    top: 34%;
+    left: -1%;
+    width: 27%;
+}
+.tree7{
+    content: url(picture/resource/tree7.png);
+    position: absolute;
+    top: 7.5%;
+    left: -2%;
+    width: 34%;
+    
+}
+.tree8{
+    content: url(picture/resource/tree8.png);
+    position: absolute;
+    top: -3%;
+    left: 22%;
+    width: 29%;
+   
+}
+.tree9{
+    content: url(picture/resource/tree9.png);
+    position: absolute;
+    top: 11.5%;
+    left: 47.5%;
+    width: 25%;
+    
+}
+.tree10{
+    content: url(picture/resource/tree10.png);
+    position: absolute;
+    top: 17%;
+    left: 56.5%;
+    width: 31%;
+   
+}
+.tree11{
+    content: url(picture/resource/tree11.png);
+    position: absolute;
+    top: 31%;
+    left: 57.8%;
+    width: 31%;
+    
+}
+.tree12{
+    content: url(picture/resource/tree12.png);
+    position: absolute;
+    top: 48%;
+    left: 46%;
+    width: 26%;
+    
+}
+.tree13{
+    content: url(picture/resource/tree13.png);
+    position: absolute;
+    top: 45%;
+    left: 24.4%;
+    width: 30%;
+    
+}
+.tree14{
+    content: url(picture/resource/tree14.png);
+    position: absolute;
+    top: 32%;
+    left: 12%;
+    width: 29%;
+}
+.tree15{
+    content: url(picture/resource/tree15.png);
+    position: absolute;
+    top: 17.8%;
+    left: 13.8%;
+    width: 30%;
+}
+.tree16{
+    content: url(picture/resource/tree16.png);
+    position: absolute;
+    top: 11.5%;
+    left: 32%;
+    width: 21.5%;
+}

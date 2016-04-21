@@ -1,0 +1,123 @@
+.crop1{
+    content: url(picture/resource/crop1.png);
+    position: absolute;
+    top: -1.8%;
+    left: 46.5%;
+    width: 35%;
+    
+}
+.crop2{
+    content: url(picture/resource/crop2.png);
+    position: absolute;
+    top: 10%;
+    left: 69%;
+    width: 30%;
+
+}
+.crop3{
+    content: url(picture/resource/crop3.png);
+    position: absolute;
+    top: 33%;
+    left: 68%;
+    width: 31%;
+    
+}
+.crop4{
+    content: url(picture/resource/crop4.png);
+    position: absolute;
+    top: 60.2%;
+    left: 46.5%;
+    width: 43%;
+   
+}
+.crop5{
+    content: url(picture/resource/crop5.png);
+    position: absolute;
+    top: 54.5%;
+    left: 6%;
+    width: 48%;
+}
+.crop6{
+    content: url(picture/resource/crop6.png);
+    position: absolute;
+    top: 36.2%;
+    left: -2.5%;
+    width: 27%;
+}
+.crop7{
+    content: url(picture/resource/crop7.png);
+    position: absolute;
+    top: 6.5%;
+    left: 2%;
+    width: 34%;
+    
+}
+.crop8{
+    content: url(picture/resource/crop8.png);
+    position: absolute;
+    top: -1.7%;
+    left: 23.2%;
+    width: 29%;
+   
+}
+.crop9{
+    content: url(picture/resource/crop9.png);
+    position: absolute;
+    top: 10.5%;
+    left: 46.5%;
+    width: 25%;
+    
+}
+.crop10{
+    content: url(picture/resource/crop10.png);
+    position: absolute;
+    top: 17%;
+    left: 54.5%;
+    width: 31%;
+   
+}
+.crop11{
+    content: url(picture/resource/crop11.png);
+    position: absolute;
+    top: 33.5%;
+    left: 54.5%;
+    width: 31%;
+    
+}
+.crop12{
+    content: url(picture/resource/crop12.png);
+    position: absolute;
+    top: 50.5%;
+    left: 47.4%;
+    width: 26%;
+    
+}
+.crop13{
+    content: url(picture/resource/crop13.png);
+    position: absolute;
+    top: 44%;
+    left: 22.4%;
+    width: 30%;
+    
+}
+.crop14{
+    content: url(picture/resource/crop14.png);
+    position: absolute;
+    top: 37%;
+    left: 13%;
+    width: 29%;
+}
+.crop15{
+    content: url(picture/resource/crop15.png);
+    position: absolute;
+    top: 15.8%;
+    left: 15.8%;
+    width: 30%;
+}
+.crop16{
+    content: url(picture/resource/crop16.png);
+    position: absolute;
+    top: 10.5%;
+    left: 31%;
+    width: 21.5%;
+}

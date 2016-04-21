@@ -77,113 +77,40 @@
                 
             <image src="picture/resource-structure-test.png"></image>
                 
-                <!--clay 1-16-->    
+                  <!--resource 1-16-->  
                 
-<!--
-                <div class="clay1">
-                <image src="picture/resource/clay1.png"></image>
+                <div id="resource1">
                 </div>
-                <div class="clay2">
-                <image src="picture/resource/clay2.png"></image>
+                <div id="resource2">
                 </div>
-                <div class="clay3">
-                <image src="picture/resource/clay3.png"></image>
+                <div id="resource3">
                 </div>
-                <div class="clay4">
-                <image src="picture/resource/clay4.png"></image>
+                <div id="resource4">
                 </div>
-                <div class="clay5">
-                <image src="picture/resource/clay5.png"></image>
+                <div id="resource5">
                 </div>
-                <div class="clay6">
-                <image src="picture/resource/clay6.png"></image>
+                <div id="resource6">
                 </div>
-                <div class="clay7">
-                <image src="picture/resource/clay7.png"></image>
+                <div id="resource7">
                 </div>
-                <div class="clay8">
-                <image src="picture/resource/clay8.png"></image>
+                <div id="resource8">
                 </div>
-                <div class="clay9">
-                <image src="picture/resource/clay9.png"></image>
+                <div id="resource9">
                 </div>
-                <div class="clay10">
-                <image src="picture/resource/clay10.png"></image>
+                <div id="resource10">
                 </div>
-                <div class="clay11">
-                <image src="picture/resource/clay11.png"></image>
+                <div id="resource11">
                 </div>
-                <div class="clay12">
-                <image src="picture/resource/clay12.png"></image>
+                <div id="resource12">
                 </div>
-                <div class="clay13">
-                <image src="picture/resource/clay13.png"></image>
+                <div id="resource13">
                 </div>
-                <div class="clay14">
-                <image src="picture/resource/clay14.png"></image>
+                <div id="resource14">
                 </div>
-                <div class="clay15">
-                <image src="picture/resource/clay15.png"></image>
+                <div id="resource15">
                 </div>
-                <div class="clay16">
-                <image src="picture/resource/clay16.png"></image>
+                <div id="resource16">
                 </div>
--->
-                
-                <!--iron 1-16-->  
-                
-                <div class="iron14">
-                <image src="picture/resource/iron14.png"></image>
-                </div>
-                <div class="iron13">
-                <image src="picture/resource/iron13.png"></image>
-                </div>
-                <div class="iron12">
-                <image src="picture/resource/iron12.png"></image>
-                </div>
-                <div class="iron11">
-                <image src="picture/resource/iron11.png"></image>
-                </div>
-                <div class="iron1">
-                <image src="picture/resource/iron1.png"></image>
-                </div>
-                <div class="iron2">
-                <image src="picture/resource/iron2.png"></image>
-                </div>
-                <div class="iron8">
-                <image src="picture/resource/iron8.png"></image>
-                </div>
-                <div class="iron7">
-                <image src="picture/resource/iron7.png"></image>
-                </div>
-                <div class="iron6">
-                <image src="picture/resource/iron6.png"></image>
-                </div>
-                <div class="iron5">
-                <image src="picture/resource/iron5.png"></image>
-                </div>
-                <div class="iron4">
-                <image src="picture/resource/iron4.png"></image>
-                </div>
-                <div class="iron3">
-                <image src="picture/resource/iron3.png"></image>
-                </div>
-                <div class="iron16">
-                <image src="picture/resource/iron16.png"></image>
-                </div>
-                <div class="iron15">
-                <image src="picture/resource/iron15.png"></image>
-                </div>
-                <div class="iron10">
-                <image src="picture/resource/iron10.png"></image>
-                </div>
-
-                <div class="iron9">
-                <image src="picture/resource/iron9.png"></image>
-                </div>
-                
-                
-                
                 
             </div>
             
@@ -256,43 +183,59 @@
                 $('#statistic_container').hide();
             }
                 
-            function doit1(){
+            function resourceClick(){
                 init();
                 $('#resource_container').show(); 
+                document.getElementById("resource1").className = "iron1";
+                document.getElementById("resource2").className = "clay2";
+                document.getElementById("resource3").className = "tree3";
+                document.getElementById("resource4").className = "tree4";
+                document.getElementById("resource5").className = "crop5";
+                document.getElementById("resource6").className = "clay6";
+                document.getElementById("resource7").className = "iron7";
+                document.getElementById("resource8").className = "crop8";
+                document.getElementById("resource9").className = "tree9";
+                document.getElementById("resource10").className = "iron10";
+                document.getElementById("resource11").className = "tree11";
+                document.getElementById("resource12").className = "crop12";
+                document.getElementById("resource13").className = "clay13";
+                document.getElementById("resource14").className = "iron14";
+                document.getElementById("resource15").className = "crop15";
+                document.getElementById("resource16").className = "tree16";
             }     
         
-            function doit2(){
+            function villageClick(){
                 init();
                 $('#village_container').show(); 
             }
             
-            function doit3(){
+            function mapClick(){
                 init();
                 $('#map_container').show(); 
             }
             
-            function doit4(){
+            function reportClick(){
                 init();
                 $('#report_container').show(); 
             }
             
-            function doit5(){
+            function mailClick(){
                 init();
                 $('#mail_container').show(); 
             }
             
-            function doit6(){
+            function statisticClick(){
                 init();
                 $('#statistic_container').show(); 
             }
             
             init();
-            $('#resource_menu').click(doit1);
-            $('#village_menu').click(doit2);
-            $('#map_menu').click(doit3);
-            $('#report_menu').click(doit4);
-            $('#mail_menu').click(doit5);
-            $('#statistic_menu').click(doit6);
+            $('#resource_menu').click(resourceClick);
+            $('#village_menu').click(villageClick);
+            $('#map_menu').click(mapClick);
+            $('#report_menu').click(reportClick);
+            $('#mail_menu').click(mailClick);
+            $('#statistic_menu').click(statisticClick);
         </script>
         
         
