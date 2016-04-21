@@ -1,4 +1,5 @@
 .iron1{
+    content: url(picture/resource/iron1.png);
     position: absolute;
     top: -19%;
     left: 40%;
@@ -6,6 +7,7 @@
     
 }
 .iron2{
+    content: url(picture/resource/iron2.png);
     position: absolute;
     top: -3%;
     left: 70%;
@@ -13,6 +15,7 @@
 
 }
 .iron3{
+    content: url(picture/resource/iron3.png);
     position: absolute;
     top: 30%;
     left: 70%;
@@ -20,6 +23,7 @@
     
 }
 .iron4{
+    content: url(picture/resource/iron4.png);
     position: absolute;
     top: 54%;
     left: 40%;
@@ -27,18 +31,21 @@
    
 }
 .iron5{
+    content: url(picture/resource/iron5.png);
     position: absolute;
     top: 46%;
     left: 8%;
     width: 52%;
 }
 .iron6{
+    content: url(picture/resource/iron6.png);
     position: absolute;
     top: 19%;
     left: -7%;
     width: 33%;
 }
 .iron7{
+    content: url(picture/resource/iron7.png);
     position: absolute;
     top: -6%;
     left: -3%;
@@ -46,6 +53,7 @@
     
 }
 .iron8{
+    content: url(picture/resource/iron8.png);
     position: absolute;
     top: -20%;
     left: 19%;
@@ -53,6 +61,7 @@
    
 }
 .iron9{
+    content: url(picture/resource/iron9.png);
     position: absolute;
     top: 9%;
     left: 48%;
@@ -60,6 +69,7 @@
     
 }
 .iron10{
+    content: url(picture/resource/iron10.png);
     position: absolute;
     top: 17%;
     left: 56%;
@@ -67,6 +77,7 @@
    
 }
 .iron11{
+    content: url(picture/resource/iron11.png);
     position: absolute;
     top: 34.5%;
     left: 55.5%;
@@ -74,6 +85,7 @@
     
 }
 .iron12{
+    content: url(picture/resource/iron12.png);
     position: absolute;
     top: 44%;
     left: 46.5%;
@@ -81,6 +93,7 @@
     
 }
 .iron13{
+    content: url(picture/resource/iron13.png);
     position: absolute;
     top: 43%;
     left: 22%;
@@ -88,18 +101,21 @@
     
 }
 .iron14{
+    content: url(picture/resource/iron14.png);
     position: absolute;
     top: 32%;
     left: 11.5%;
     width: 35%;
 }
 .iron15{
+    content: url(picture/resource/iron15.png);
     position: absolute;
     top: 11%;
     left: 15%;
     width: 33%;
 }
 .iron16{
+    content: url(picture/resource/iron16.png);
     position: absolute;
     top: 8%;
     left: 32%;
