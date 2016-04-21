@@ -39,7 +39,7 @@ var io = require('socket.io').listen(server);
 var player = require('./player');
 
 /** Initialize GameEngine Module **/
-var GameEngine = require('./gameengine');
+var engine = require('./gameengine');
 
 /**
 * Server variable
@@ -61,9 +61,9 @@ io.on('connection',function(socket){
   /** Fuction to regist new player **/
   socket.on('register',function(info) {
     // log what info is
-    console.log('Info : '+info);
-    if (!player.authorize(info)) {
-      player.createPlayer(info);
+    console.log('Info : '+JSON.stringify(info));
+    if (!engine.exist(info)) {
+      engine.createPlayer(info);
       socket.emit('register-status',true);
     } else {
       socket.emit('register-status',false);
@@ -72,8 +72,8 @@ io.on('connection',function(socket){
   /** Function to login **/
   socket.on('login',function(info) {
     //Log what info is
-    console.log('Info : '+info.toString());
-    if (player.authorize(info)){
+    console.log('Info : '+JSON.stringify(info));
+    if (engine.verify(info)){
       //add player to online list
       online_user[socket.request.connection.remoteAddress] = info["username"];
       socket.emit('login-status',true);
