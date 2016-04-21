@@ -43,54 +43,67 @@ con.query('CREATE TABLE resource (sid int NOT NULL ,pos int NOT NULL,type varcha
 
 //Initialize starter villege
 global.resource_list = ['wood','clay','iron','crop'];
-for (var j = 0;j<100;j++){
-  var randomXY = [Math.floor(Math.random()*100),Math.floor(Math.random()*100)];
-  con.query('INSERT IGNORE INTO villege(x,y) values(?,?)',randomXY,function(err) {
-    if (err) console.log(err.toString());
-    else {
-      console.log('villege is created!');
-    }
-  });
-  for (var i = 1;i<=16;i++){
-    con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {
-      if (err) console.log(err.toString());
-      else console.log('structure inserted!');
-    });
-    var resource = global.resource_list[Math.floor(Math.random()*4)];
-    if (i<4) resource = 'crop';
-    con.query('INSERT INTO resource(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),?,?)',[i,resource],function(err) {
-      if (err) console.log(err.toString());
-      else {
-        console.log('Starter Villege is created');
-      }
-    });
-  }
-}
+// for (var j = 0;j<100;j++){
+//   var randomXY = [Math.floor(Math.random()*100),Math.floor(Math.random()*100)];
+//   con.query('INSERT IGNORE INTO villege(x,y) values(?,?)',randomXY,function(err,result) {
+//     if (err) console.log(err.toString());
+//     else {
+//       console.log('villege '+result.affectedRows+'is created!');
+//     }
+//   });
+//   for (var i = 1;i<=16;i++){
+//     con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {
+//       if (err) console.log(err.toString());
+//       else console.log('structure inserted!');
+//     });
+//     var resource = global.resource_list[Math.floor(Math.random()*4)];
+//     if (i<4) resource = 'crop';
+//     con.query('INSERT INTO resource(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),?,?)',[i,resource],function(err) {
+//       if (err) console.log(err.toString());
+//       else {
+//         console.log('Starter Villege is created');
+//       }
+//     });
+//   }
+// }
+
+
 //Initialize villege
 for (var i = 0;i<100;i++){
   for (var j = 0;j<100;j++){
-        con.query('INSERT IGNORE INTO villege(x,y) values(?,?)',[i,j],function(err) {
+        if (con.query('INSERT IGNORE INTO villege(x,y) values(?,?)',[i,j],function(err,result) {
           if (err) console.log(err.toString());
           else {
-            console.log('villege is created!');
+            if (result.affectedRows>0) {
+              console.log('villege is created!');
+              return true;
+            }else {
+              console.log('villege is existed');
+              return false
+            }
           }
-        });
-          for (var k = 1;k<=16;k++){
-            con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {
-              if (err) console.log(err.toString());
-              else console.log('structure inserted!');
-            });
-            var resource = global.resource_list[Math.floor(Math.random()*4)];
-            con.query('INSERT INTO resource(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),?,?)',[i,resource],function(err) {
-              if (err) console.log(err.toString());
-              else {
-                console.log('Natural Villege is created');
-              }
-            });
-          }
-
+        })){
+        for (var k = 1;k<=16;k++){
+              con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {
+                if (err) console.log(err.toString());
+                else console.log('structure inserted!');
+              });
+              var resource = global.resource_list[Math.floor(Math.random()*4)];
+              con.query('INSERT INTO resource(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),?,?)',[i,resource],function(err) {
+                if (err) console.log(err.toString());
+                else {
+                  console.log('Natural Villege is created');
+                }
+              });
+        }
+      }
   }
 }
+/** Initialize recentstatus tabke **/
+con.query('CREATE TABLE recentstatus (pid int NOT NULL,vid int NOT NULL,PRIMARY KEY(pid),lastvisitedtime datetime DEFAULT NOW(),FOREIGN KEY(pid) REFERENCES player(pid),FOREIGN KEY(vid) REFERENCES villege(vid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('recentstatus is created to mysql');
+})
 
 con.end(function(err) {
   // The connection is terminated gracefully

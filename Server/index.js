@@ -75,6 +75,7 @@ io.on('connection',function(socket){
       //add player to online list
       online_user[socket.request.connection.remoteAddress] = info["username"];
       socket.emit('login-status',true);
+      socket.emit('loaded-resouce',engine.loadResource(info["username"]);)
     }else {
       socket.emit('login-status',false);
     }
