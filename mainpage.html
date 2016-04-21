@@ -1,0 +1,410 @@
+<!DOCTYE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="socket.io-client/socket.io.js"></script>
+        <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="clay.css">
+        <link rel="stylesheet" href="iron.css">
+        <link rel="stylesheet" href="tree.css">
+        <link rel="stylesheet" href="crop.css">
+        <script src="jquery-2.2.3.min.js"></script>
+        <title>WarKu!</title>
+    </head>
+    <body>
+        <!--menu-->
+        <div class="menu-frame">
+           <nav>
+              <ul class="row-centered">
+                <!--menu resource-->
+                <li><div class="menu" id="resource_menu">
+                    <a href="#">
+                    <img class="menu_img" src="picture/resource.png">
+                    </a>
+                    </div>
+                </li>
+                <!--menu village-->
+                <li><div class="menu" id="village_menu">
+                    <a href="#">
+                    <img class="menu_img" src="picture/village.png">
+                    </a>
+                    </div>
+                </li>
+                <!--menu map-->
+                <li><div class="menu" id="map_menu">
+                    <a href="#">
+                    <img class="menu_img" src="picture/map.png">
+                    </a>
+                    </div>
+                </li>
+                <!--menu report-->
+                <li><div class="menu" id="report_menu">
+                    <a href="#">
+                    <img class="menu_img" src="picture/report.png">
+                    </a>
+                    </div>
+                </li>
+                <!--menu mail-->
+                <li><div class="menu" id="mail_menu">
+                    <a href="#">
+                    <img class="menu_img" src="picture/mail.png">
+                    </a>
+                    </div>
+                </li>
+               </ul>
+            </nav>
+        </div>
+        <div class="menu-frame">
+        <nav>
+            <ul class="row-centered">
+                <!--menu mail-->
+                <li><div class="menu" id="statistic_menu">
+                    <a href="#">
+                    <img class="menu_img" src="picture/statistic.png">
+                    </a>
+                    </div>
+                </li>
+               
+            </ul>
+        </nav>
+        </div>
+        <!--resource container-->
+        <div class ="container" id="resource_container">
+            <span class="Centerer"></span>
+            <div class="resoucre">
+                
+                
+                <image src="picture/resource-structure.png"></image>
+                
+                <!--clay 1-16-->    
+                
+<!--
+                <div class="clay1">
+                <image src="picture/resource/clay1.png"></image>
+                </div>
+                <div class="clay2">
+                <image src="picture/resource/clay2.png"></image>
+                </div>
+                <div class="clay3">
+                <image src="picture/resource/clay3.png"></image>
+                </div>
+                <div class="clay4">
+                <image src="picture/resource/clay4.png"></image>
+                </div>
+                <div class="clay5">
+                <image src="picture/resource/clay5.png"></image>
+                </div>
+                <div class="clay6">
+                <image src="picture/resource/clay6.png"></image>
+                </div>
+                <div class="clay7">
+                <image src="picture/resource/clay7.png"></image>
+                </div>
+                <div class="clay8">
+                <image src="picture/resource/clay8.png"></image>
+                </div>
+                <div class="clay9">
+                <image src="picture/resource/clay9.png"></image>
+                </div>
+                <div class="clay10">
+                <image src="picture/resource/clay10.png"></image>
+                </div>
+                <div class="clay11">
+                <image src="picture/resource/clay11.png"></image>
+                </div>
+                <div class="clay12">
+                <image src="picture/resource/clay12.png"></image>
+                </div>
+                <div class="clay13">
+                <image src="picture/resource/clay13.png"></image>
+                </div>
+                <div class="clay14">
+                <image src="picture/resource/clay14.png"></image>
+                </div>
+                <div class="clay15">
+                <image src="picture/resource/clay15.png"></image>
+                </div>
+                <div class="clay16">
+                <image src="picture/resource/clay16.png"></image>
+                </div>
+-->
+                
+                <!--iron 1-16-->  
+                
+<!--
+                <div class="iron1">
+                <image src="picture/resource/iron1.png"></image>
+                </div>
+                <div class="iron2">
+                <image src="picture/resource/iron2.png"></image>
+                </div>
+                <div class="iron3">
+                <image src="picture/resource/iron3.png"></image>
+                </div>
+                <div class="iron4">
+                <image src="picture/resource/iron4.png"></image>
+                </div>
+                <div class="iron5">
+                <image src="picture/resource/iron5.png"></image>
+                </div>
+                <div class="iron6">
+                <image src="picture/resource/iron6.png"></image>
+                </div>
+                <div class="iron7">
+                <image src="picture/resource/iron7.png"></image>
+                </div>
+                <div class="iron8">
+                <image src="picture/resource/iron8.png"></image>
+                </div>
+                <div class="iron9">
+                <image src="picture/resource/iron9.png"></image>
+                </div>
+                <div class="iron10">
+                <image src="picture/resource/iron10.png"></image>
+                </div>
+                <div class="iron11">
+                <image src="picture/resource/iron11.png"></image>
+                </div>
+                <div class="iron12">
+                <image src="picture/resource/iron12.png"></image>
+                </div>
+                <div class="iron13">
+                <image src="picture/resource/iron13.png"></image>
+                </div>
+                <div class="iron14">
+                <image src="picture/resource/iron14.png"></image>
+                </div>
+                <div class="iron15">
+                <image src="picture/resource/iron15.png"></image>
+                </div>
+                <div class="iron16">
+                <image src="picture/resource/iron16.png"></image>
+                </div>
+-->
+                
+                 <!--tree 1-16-->  
+                
+                
+                <div class="tree1">
+                <image src="picture/resource/tree1.png"></image>
+                </div>
+                
+                <div class="tree2">
+                <image src="picture/resource/tree2.png"></image>
+                </div>
+                <div class="tree3">
+                <image src="picture/resource/tree3.png"></image>
+                </div>
+                <div class="tree4">
+                <image src="picture/resource/tree4.png"></image>
+                </div>
+                <div class="tree5">
+                <image src="picture/resource/tree5.png"></image>
+                </div>
+                <div class="tree6">
+                <image src="picture/resource/tree6.png"></image>
+                </div>
+                <div class="tree7">
+                <image src="picture/resource/tree7.png"></image>
+                </div>
+                <div class="tree8">
+                <image src="picture/resource/tree8.png"></image>
+                </div>
+                <div class="tree9">
+                <image src="picture/resource/tree9.png"></image>
+                </div>
+                <div class="tree10">
+                <image src="picture/resource/tree10.png"></image>
+                </div>
+                <div class="tree11">
+                <image src="picture/resource/tree11.png"></image>
+                </div>
+                <div class="tree12">
+                <image src="picture/resource/tree12.png"></image>
+                </div>
+                <div class="tree13">
+                <image src="picture/resource/tree13.png"></image>
+                </div>
+                <div class="tree14">
+                <image src="picture/resource/tree14.png"></image>
+                </div>
+                <div class="tree15">
+                <image src="picture/resource/tree15.png"></image>
+                </div>
+                <div class="tree16">
+                <image src="picture/resource/tree16.png"></image>
+                </div>
+                
+
+                
+<!--
+                
+                
+                <div class="crop1">
+                <image src="picture/resource/crop1.png"></image>
+                </div>
+                
+                <div class="crop2">
+                <image src="picture/resource/crop2.png"></image>
+                </div>
+                <div class="crop3">
+                <image src="picture/resource/crop3.png"></image>
+                </div>
+                <div class="crop4">
+                <image src="picture/resource/crop4.png"></image>
+                </div>
+                <div class="crop5">
+                <image src="picture/resource/crop5.png"></image>
+                </div>
+                <div class="crop6">
+                <image src="picture/resource/crop6.png"></image>
+                </div>
+                <div class="crop7">
+                <image src="picture/resource/crop7.png"></image>
+                </div>
+                <div class="crop8">
+                <image src="picture/resource/crop8.png"></image>
+                </div>
+                <div class="crop9">
+                <image src="picture/resource/crop9.png"></image>
+                </div>
+                <div class="crop10">
+                <image src="picture/resource/crop10.png"></image>
+                </div>
+                <div class="crop11">
+                <image src="picture/resource/crop11.png"></image>
+                </div>
+                <div class="crop12">
+                <image src="picture/resource/crop12.png"></image>
+                </div>
+                <div class="crop13">
+                <image src="picture/resource/crop13.png"></image>
+                </div>
+                <div class="crop14">
+                <image src="picture/resource/crop14.png"></image>
+                </div>
+                <div class="crop15">
+                <image src="picture/resource/crop15.png"></image>
+                </div>
+                <div class="crop16">
+                <image src="picture/resource/crop16.png"></image>
+                </div>
+                
+-->
+
+                
+                
+            </div>
+            
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="village_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/village.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="map_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/map.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="report_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/report.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="mail_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/mail.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        <!--village container-->
+        <div class ="container" id="statistic_container">
+            <span class="Centerer"></span>
+            <div class="village">
+                <image src="picture/statistic.png"></image>
+            </div>
+            <div class="resource1">
+                <image id="resource_pos1"></image>
+            </div>
+        </div>
+        
+        
+       <!-- Initialize -->
+        <script type="text/javascript">
+            function init(){
+                $('#resource_container').hide();
+                $('#village_container').hide();
+                $('#map_container').hide();
+                $('#report_container').hide();
+                $('#mail_container').hide();
+                $('#statistic_container').hide();
+            }
+                
+            function doit1(){
+                init();
+                $('#resource_container').show(); 
+            }     
+        
+            function doit2(){
+                init();
+                $('#village_container').show(); 
+            }
+            
+            function doit3(){
+                init();
+                $('#map_container').show(); 
+            }
+            
+            function doit4(){
+                init();
+                $('#report_container').show(); 
+            }
+            
+            function doit5(){
+                init();
+                $('#mail_container').show(); 
+            }
+            
+            function doit6(){
+                init();
+                $('#statistic_container').show(); 
+            }
+            
+            init();
+            $('#resource_menu').click(doit1);
+            $('#village_menu').click(doit2);
+            $('#map_menu').click(doit3);
+            $('#report_menu').click(doit4);
+            $('#mail_menu').click(doit5);
+            $('#statistic_menu').click(doit6);
+        </script>
+        
+        
+    </body>
+</html>
