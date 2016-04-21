@@ -34,10 +34,8 @@ var server = app.listen(port,function() {
 var io = require('socket.io').listen(server);
 
 /** Intitlize Project Module
-* player.js
+* engine.js
 */
-var player = require('./player');
-
 /** Initialize GameEngine Module **/
 var engine = require('./gameengine');
 
