@@ -98,6 +98,9 @@
                   $('#login-password').attr('placeholder','Invalid Username or Password');
                 }
               });
+              socket.on('resource-data',function(resource) {
+                console.log(resource);
+              })
             }
             /** Function to go to register page **/
             function goToRegisterPage() {

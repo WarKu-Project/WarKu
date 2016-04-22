@@ -27,31 +27,31 @@ function updateNumberPlayer(){
 //Update Number of player from database for first time
 updateNumberPlayer();
 /** Function to verify player **/
-exports.verify = function(info) {
+exports.verify = function(info,callback) {
   console.log('Received Data = '+JSON.stringify(info));
-  return con.query('SELECT username FROM player WHERE username=? AND password=?',[info['username'],info['password']],function(err,rows){
-    if (err) throw err;
+  con.query('SELECT username FROM player WHERE username=? AND password=?',[info['username'],info['password']],function(err,rows){
+    if (err) callback(err,null);
     console.log('Query result'+JSON.stringify(rows));
     if (rows.length==0) {
       console.log('Player doesn\'t exist');
-      return false;
+      callback(null,false);
     }else {
       console.log('Player '+rows[0].username+' is verify.');
-      return true;
+      callback(null,true);
     }
   });
 }
 /** Function to check that player is existing in Database **/
-exports.exist = function(info) {
-  return con.query('SELECT username FROM player WHERE username = ? OR email = ?',[info['username'],[info['email']]],function(err,rows) {
-    if (err) throw err;
+exports.exist = function(info,callback) {
+  con.query('SELECT username FROM player WHERE username = ? OR email = ?',[info['username'],[info['email']]],function(err,rows) {
+    if (err) callback(err,null);
     console.log('Query result'+JSON.stringify(rows));
     if (rows.length==0) {
       console.log('Player doesn\'t exist');
-      return false;
+      callback(null,false);
     }else{
       console.log('Player '+rows[0].username+'is existed');
-      return true;
+      callback(null,true);
     }
   });
 }
@@ -118,11 +118,11 @@ function updateOwnerOfVillege(pid,vid) {
   })
 }
 /** Function to load resource **/
-exports.loadResource = function(username){
+exports.loadResource = function(username,callback){
   console.log("Received data " + username);
-  return con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?))',username,function(err,rows) {
-    if (err) throw err;
+  con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?))',username,function(err,rows) {
+    if (err) callback(err,null);
     console.log("Query Result : "+JSON.stringify(rows));
-    return rows;
+    callback(null,rows);
   });
 }

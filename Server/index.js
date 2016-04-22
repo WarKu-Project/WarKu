@@ -60,25 +60,33 @@ io.on('connection',function(socket){
   socket.on('register',function(info) {
     // log what info is
     console.log('Info : '+JSON.stringify(info));
-    if (!engine.exist(info)) {
-      engine.createPlayer(info);
-      socket.emit('register-status',true);
-    } else {
-      socket.emit('register-status',false);
-    }
+    engine.exist(info,function(err,result) {
+      if (err) throw err;
+      if (result) socket.emit('register-status',false);
+      else {
+        engine.createPlayer(info);
+        socket.emit('register-status',true);
+      }
+    });
   });
   /** Function to login **/
   socket.on('login',function(info) {
     //Log what info is
     console.log('Info : '+JSON.stringify(info));
-    if (engine.verify(info)){
-      //add player to online list
-      online_user[socket.request.connection.remoteAddress] = info["username"];
-      socket.emit('login-status',true);
-      socket.emit('loaded-resouce',engine.loadResource(info["username"]);)
-    }else {
-      socket.emit('login-status',false);
-    }
+    engine.verify(info,function(err,result) {
+      if (err) throw err;
+      if (result) {
+        //add player to online list
+        online_user[socket.request.connection.remoteAddress] = info["username"];
+        engine.loadResource(info["username"],function (err,result) {
+          if (err) throw err;
+          socket.emit('resource-data',result);
+        })
+        socket.emit('login-status',true);
+      }else{
+        socket.emit('login-status',false);
+      }
+    });
   });
 
 });

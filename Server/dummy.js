@@ -66,7 +66,7 @@ global.resource_list = ['wood','clay','iron','crop'];
 //     });
 //   }
 // }
-
+//
 
 //Initialize villege
 for (var i = 0;i<100;i++){
@@ -104,7 +104,16 @@ con.query('CREATE TABLE recentstatus (pid int NOT NULL,vid int NOT NULL,PRIMARY 
   if (err) console.log(err.toString());
   else console.log('recentstatus is created to mysql');
 })
-
+/** Initialize Building table **/
+con.query('CREATE TABLE building (sid int NOT NULL,pos int NOT NULL,type varchar(10) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('building is created to mysql');
+})
+/** Initialize Wall table **/
+con.query('CREATE TABLE wall (sid int NOT NULL,type varcahr(5) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('wall is created to mysql');
+})
 con.end(function(err) {
   // The connection is terminated gracefully
   // Ensures all previously enqueued queries are still
