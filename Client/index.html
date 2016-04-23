@@ -1,168 +1,195 @@
-    <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <script src="socket.io-client/socket.io.js"></script>
-            <script src="jquery-2.2.3.min.js"></script>
-            <script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.js"></script>
-            <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
-            <link rel="stylesheet" href="main.css">
-            <title>WarKu!</title>
-          </head>
-          <body>
-            <!--Connect to socket.io -->
-            <script type="text/javascript">
-              var socket = io.connect('http://localhost:5555');
-              $('#login-page').hide();
-              $('#regis-page').hide();
-            </script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="socket.io-client/socket.io.js"></script>
+        <script src="jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="login.css">
+        <title>WarKu!</title>
+    </head>
+    <body>
+        <!--Connect to socket.io -->
+        <script type="text/javascript">
+            var socket = io.connect('http://localhost:5555');
+        </script>
 
-            <!--Heading with logo -->
-            <div class="logo-image">
-                <div class = "row row-centered">
-                    <div class="col-centered">
+        <!--Heading with logo -->
+        <div class="logo-image">
+            <div class = "row row-centered">
+                <div class="col-centered">
                     <img src = "picture/logo.png" alt="image-logo" class = "logo">
-                    </div>
                 </div>
             </div>
+        </div>
 
-            <!--login page-->
-            <div class="container" id="login-page">
-                    <div class="row row-centered">
-                    <!--Input username box-->
-                      <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 col-centered">
-                          <input type="text" class="form-control" id="login-username" placeholder="Username">
-                      </div>
-                    </div>
-                    <!--Input password box-->
-                    <div class="row row-centered">
-                      <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 col-centered">
-                          <input type="password" class="form-control" id="login-password" placeholder="Password">
-                      </div>
-                    </div>
-                    <!--Button panel-->
-                    <div class="row row-centered">
-                      <!--Login Button-->
-                      <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-centered">
-                        <button type="button" class="btn btn-primary" id="login-btn">Login</button>
-                      </div>
-                      <!--Register Button-->
-                        <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-centered">
-                          <button type="button" class="btn btn-primary" id="login-register-btn">Register</button>
-                        </div>
-                    </div>
-            </div>
-
-            <!--register page-->
-            <div class="container" id="regis-page">
-
-                          <!--Input username box-->
-                        <div class="row row-centered">
-                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 col-centered">
-                                <input type="text" class="form-control" id="regis-username" placeholder="Username">
-                            </div>
-                        </div>
-                          <!--Input password box-->
-                          <div class="row row-centered">
-                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 col-centered">
-                                <input type="password" class="form-control" id="regis-password" placeholder="Password">
-                            </div>
-                          </div>
-                          <!--Input email box-->
-                          <div class="row row-centered">
-                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 col-centered">
-                                <input type="email" class="form-control" id="regis-email" placeholder="E-mail">
-                            </div>
-                          </div>
-                          <!--Button panel-->
-                          <div class="row row-centered">
-                            <!--register Button-->
-                            <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-centered">
-                              <button type="button" class="btn btn-primary" id="regis-btn">Register</button>
-                            </div>
-                          </div>
-
-            </div>
-
-              <!-- Login Modal -->
-            <div class="modal fade" id="loginModal" role="dialog">
-                <div class="modal-dialog">
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" role="dialog">
+            <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Login not success</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Invalid Username or Password.</p>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-                </div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="modal-header-title"></h4>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-
-              <!-- ActionListener for Login-btn and login-register-btn -->
-              <script type="text/javascript">
-                /** Function to login **/
-                function login(){
-                  socket.emit('login',{"username":$('#login-username').val(),"password":$('#login-password').val()});
-                  socket.on('login-status',function(status) {
-
+        <!-- Login and Register Form -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-login">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form id="login-form" action="#" role="form" style="display: block;">
+                                        <h2>LOGIN</h2>
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="login-username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="login-password" id="login-password" tabindex="2" class="form-control" placeholder="Password">
+                                        </div>
+                                        <div class="col-xs-6 form-group pull-right">     
+                                            <input name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" readonly="readonly">
+                                        </div>
+                                    </form>
+                                    <form id="register-form" action="#" role="form" style="display: none;">
+                                        <h2>REGISTER</h2>
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="regis-username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="regis-password" tabindex="2" class="form-control" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="confirm-password" id="regis-confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="regis-email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <input name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now" readonly="readonly">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6 tabs">
+                                    <a href="#" class="active" id="login-form-link"><div class="login">LOGIN</div></a>
+                                </div>
+                                <div class="col-xs-6 tabs">
+                                    <a href="#" id="register-form-link"><div class="register">REGISTER</div></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ActionListener for Login and Register Form -->
+        <script type="text/javascript">
+            /** Function to login **/
+            function login(){
+                console.log('login');
+                socket.emit('login',{"username":$('#login-username').val(),"password":$('#login-password').val()});
+                socket.on('login-status',function(status) {
                     if (status) {
-                      location.assign("http:/Client/mainpage.html");
-                      console.log('success');
-                      socket.emit('resource-request');
-                      socket.on('resource-data',function(resource) {
-                        console.log(JSON.stringify(resource));
-                      })
+                        location.assign("http:/Client/mainpage.html");
+                        console.log('success');
+                        socket.emit('resource-request');
+                        socket.on('resource-data',function(resource) {
+                            console.log(JSON.stringify(resource));
+                        })
                     }else {
-                      $("#loginModal").modal("show");
-                      $('#login-username').addClass('has-error');
-                      $('#login-username').attr('placeholder','Invalid Username or Password');
-                      $('#login-password').addClass('has-error');
-                      $('#login-password').attr('placeholder','Invalid Username or Password');
+                        $("#modal-header-title").text('Login not success');
+                        $("#modal-body").text('Invalid Username or Password.');
+                        $("#loginModal").modal("show");
+                        $('#login-username').addClass('has-error');
+                        $('#login-username').attr('placeholder','Invalid Username or Password');
+                        $('#login-password').addClass('has-error');
+                        $('#login-password').attr('placeholder','Invalid Username or Password');
                     }
-                  });
+                });
 
+            }
+            
+            /** Function to regis **/
+            function regis(){
+                if( $('#regis-username').val() == '' || $('#regis-password').val() =='' || $('#regis-confirm-password').val() =='' || $('#regis-email').val() =='' ){
+                    $("#modal-header-title").text('Register not success');
+                    $("#modal-body").text('Please fill in complete data.');
+                    $("#loginModal").modal("show");
                 }
-                /** Function to go to register page **/
-                function goToRegisterPage() {
-                  $('#login-page').fadeOut();
-                  $('#regis-page').fadeIn();
+                else if($('#regis-password').val() != $('#regis-confirm-password').val()){
+                    $("#modal-header-title").text('Register not success');
+                    $("#modal-body").text('Password and Confirm Password do not match.');
+                    $("#loginModal").modal("show");
                 }
-                $('#login-page').fadeIn();
-                /** set function to button **/
-                $('#login-btn').click(login);
-                $('#login-register-btn').click(goToRegisterPage);
-              </script>
-
-             <!-- ActionListener for regis button -->
-                      <script type="text/javascript">
-                        function regis(){
-                          socket.emit('register',{'username' : $('#regis-username').val(), 'password' : $('#regis-password').val(), 'email' : $('#regis-email').val()});
-                          socket.on('register-status',function(status) {
-                            if (status){
-                              console.log('Regis Success');
-                              $('#regis-page').fadeOut();
-                              $('#login-page').fadeIn();
-                            }else {
-                              console.log('NOOOO');
-                            }
-                          });
-                        }
-                        $('#regis-btn').click(regis);
-                      </script>
-
-             <!-- Initialize -->
-                <script type="text/javascript">
-                    function init(){
-                        $('#regis-page').hide();
+                else{
+                socket.emit('register',{'username' : $('#regis-username').val(), 'password' : $('#regis-password').val(), 'email' : $('#regis-email').val()});
+                socket.on('register-status',function(status) {
+                    if (status){
+                        console.log('Regis Success');
+                        $("#login-form").delay(100).fadeIn(100);
+                        $("#register-form").fadeOut(100);
+                        $('#register-form-link').removeClass('active');
+                        $("#register-form").addClass('active');
+                        clear();
+                    }else {
+                        $("#modal-header-title").text('Register not success');
+                        $("#modal-body").text('Username or Email have already exist.');
+                        $("#loginModal").modal("show");
                     }
-                    init();
-            </script>
-        </body>
-    </html>
+                });
+                }
+            }
+            
+            /* clear register form*/
+            function clear(){
+                $('#regis-username').val("");
+                $('#regis-password').val("");
+                $('#regis-confirm-password').val("");
+                $('#regis-email').val("");
+            }
+            
+            /** set function to button **/
+            $('#register-submit').click(regis);
+            $('#login-submit').click(login);
+            
+            $('#login-form-link').click(function(e) {
+                $("#login-form").delay(100).fadeIn(100);
+                $("#register-form").fadeOut(100);
+                $('#register-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+                clear();
+            });
+            $('#register-form-link').click(function(e) {
+                $("#register-form").delay(100).fadeIn(100);
+                $("#login-form").fadeOut(100);
+                $('#login-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+        </script>
+    </body>
+</html>
