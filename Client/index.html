@@ -90,18 +90,20 @@
             function login(){
               socket.emit('login',{"username":$('#login-username').val(),"password":$('#login-password').val()});
               socket.on('login-status',function(status) {
-                if (status) console.log('success');
-                else {
+                if (status) {
+                  console.log('success');
+                  socket.emit('resource-request');
+                  socket.on('resource-data',function(resource) {
+                    console.log(JSON.stringify(resource));
+                  })
+                }else {
                   $('#login-username').addClass('has-error');
                   $('#login-username').attr('placeholder','Invalid Username or Password');
                   $('#login-password').addClass('has-error');
                   $('#login-password').attr('placeholder','Invalid Username or Password');
                 }
               });
-              socket.emit('resource-request');
-              socket.on('resource-data',function(resource) {
-                console.log(JSON.stringify(resource));
-              })
+
             }
             /** Function to go to register page **/
             function goToRegisterPage() {

@@ -151,9 +151,10 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
     if (err) callback(err,null);
     console.log("Query Result : "+JSON.stringify(result));
     var vid = result[0].vid;
-    con.query('SELECT level,type FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = ? AND pos = ?',[vid,pos],function(err,result) {
+    con.query('SELECT sid,level,type FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = ? AND pos = ?',[vid,pos],function(err,result) {
       if (err) callback(err,null);
       console.log("Query Result : "+JSON.stringify(result));
+      var sid = result[0].sid;
       var level = result[0].level;
       var type = result[0].type;
       var require_resource = resource_info[type].cost[level];
@@ -163,7 +164,29 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
         console.log("Query Result : "+JSON.stringify(result));
         if (result[0].wood>require_resource[0]&&result[0].clay>require_resource[1]&&result[0].iron>require_resource[2]&&result[0].crop>require_resource[3]){
           console.log('Can upgrade');
-          callback(null,true);
+          var left_resource = { wood : (result[0].wood-require_resource[0]) , clay : (result[0].clay-require_resource[1]), iron : (result[0].iron-require_resource[2]) , crop : (result[0].crop-require_resource[3])};
+          var time = new Date();
+          var y = time.getFullYear();
+          var m = time.getMonth();
+          var d = time.getDate();
+          var h = time.getHours();
+          var mi = time.getMinutes();
+          var s = time.getSecond();
+          s += resource_info[type].time[level].sec;
+          if (s>=60) {
+            mi += s/60;
+            s = s%60;
+          }
+          mi += resource_info[type].time[level].min;
+          if (mi>=60){
+            h += mi/60;
+            mi = mi%60;
+          }
+          h += resource_info[type].time[level].hour;
+          if (h>=24){
+            
+          }
+          callback(null,true,left_resource,sid,vid);
         }
         else {
           console.log('Can\'t upgrade');
@@ -171,5 +194,19 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
         }
       })
     })
+  })
+}
+/** Function to upgrade resource **/
+exports.upgradeResource = function(username,pos){
+  getResourceUpgradeStatus(username,pos,function(err,left_resource,sid,vid) {
+    if (err) throw err;
+    if (status){
+      console.log('Receive data | left_resource : '+left_resource+' sid : '+sid + ' vid  :'+vid);
+      con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,vid],function(err) {
+        if (err) throw err;
+        console.log('Success update resource in villege');
+      })
+      con.query('INSERT INTO task(vid,endtime)',[vid,])
+    }
   })
 }
