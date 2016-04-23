@@ -93,10 +93,10 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-6 tabs">
-                                    <a href="#" class="active" id="login-form-link"><div class="login">LOGIN</div></a>
+                                    <a href="#" class="active" id="login-form-link"><div class="login" id='login-heading'>LOGIN</div></a>
                                 </div>
                                 <div class="col-xs-6 tabs">
-                                    <a href="#" id="register-form-link"><div class="register">REGISTER</div></a>
+                                    <a href="#" id="register-form-link"><div class="register" id='regis-heading'>REGISTER</div></a>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +170,8 @@
                 $('#regis-confirm-password').val("");
                 $('#regis-email').val("");
             }
-            
+            /* init heading */
+            $('#login-heading').addClass('active-panel-heading');
             /** set function to button **/
             $('#register-submit').click(regis);
             $('#login-submit').click(login);
@@ -180,6 +181,8 @@
                 $("#register-form").fadeOut(100);
                 $('#register-form-link').removeClass('active');
                 $(this).addClass('active');
+                $('#login-heading').addClass('active-panel-heading');
+                $('#regis-heading').removeClass('active-panel-heading');
                 e.preventDefault();
                 clear();
             });
@@ -188,6 +191,8 @@
                 $("#login-form").fadeOut(100);
                 $('#login-form-link').removeClass('active');
                 $(this).addClass('active');
+                $('#regis-heading').addClass('active-panel-heading');
+                $('#login-heading').removeClass('active-panel-heading');
                 e.preventDefault();
             });
         </script>

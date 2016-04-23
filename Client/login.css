@@ -89,11 +89,10 @@ label {
 }
 .panel-login>.panel-heading .login {
   padding: 20px 30px;
-  border-bottom-leftt-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .panel-login>.panel-heading .register {
   padding: 20px 30px;
-  background: #2d3b55;
   border-bottom-right-radius: 5px;
 }
 .panel-login>.panel-heading a{
@@ -106,7 +105,7 @@ label {
   transition: all 0.1s linear;
 }
 .panel-login>.panel-heading a#register-form-link {
-  color: #fff;
+  color: #666;
   width: 100%;
   text-align: right;
 }
@@ -181,4 +180,9 @@ label {
 .btn-register:focus {
   color: #fff;
   background-color: #2D3B55;
+}
+
+.active-panel-heading{
+    background-color: #2d3b55;
+    color: #fff;
 }
