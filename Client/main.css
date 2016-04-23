@@ -37,7 +37,7 @@ nav ul li {
     max-width: 100%;
 }
 
-li{
+.menu-li{
    height: 100%;
    width: 10%;
 }
@@ -81,6 +81,10 @@ img {
 
 .modal-footer{
     
+}
+
+.menu-padding{
+    height: 10%;
 }
 
 

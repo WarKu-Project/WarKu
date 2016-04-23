@@ -19,26 +19,43 @@
               var socket = io.connect('http://localhost:5555');
             </script>
         
+        <!--Navbar menu-->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Account</a></li>
+                        <li><a href="#">Setting</a></li>
+                        <li><a href="#" id="logout-btn">Logout</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        
+        <div class="menu-padding"></div>
         <!--menu-->
         <div class="menu-frame">
            <nav>
               <ul class="row-centered">
                 <!--menu resource-->
-                <li><div class="menu" id="resource_menu">
+                <li class="menu-li"><div class="menu" id="resource_menu">
                     <a href="#">
                     <img class="menu_img" src="picture/resource.png">
                     </a>
                     </div>
                 </li>
                 <!--menu village-->
-                <li><div class="menu" id="village_menu">
+                <li class="menu-li"><div class="menu" id="village_menu">
                     <a href="#">
                     <img class="menu_img" src="picture/village.png">
                     </a>
                     </div>
                 </li>
                 <!--menu map-->
-                <li><div class="menu" id="map_menu">
+                <li class="menu-li"><div class="menu" id="map_menu">
                     <a href="#">
                     <img class="menu_img" src="picture/map.png">
                     </a>
@@ -52,7 +69,7 @@
                     </div>
                 </li>
                 <!--menu mail-->
-                <li><div class="menu" id="mail_menu">
+                <li class="menu-li"><div class="menu" id="mail_menu">
                     <a href="#">
                     <img class="menu_img" src="picture/mail.png">
                     </a>
@@ -65,7 +82,7 @@
         <nav>
             <ul class="row-centered">
                 <!--menu mail-->
-                <li><div class="menu" id="statistic_menu">
+                <li class="menu-li"><div class="menu" id="statistic_menu">
                     <a href="#">
                     <img class="menu_img" src="picture/statistic.png">
                     </a>
@@ -285,6 +302,11 @@
                 $('#statistic_container').show(); 
             }
             
+            function logout(){
+                location.assign("http:/Client/index.html");
+                //TODO remove user from server
+            }
+            
             init();
             resourceClick();
             $('#resource_menu').click(resourceClick);
@@ -293,6 +315,8 @@
             $('#report_menu').click(reportClick);
             $('#mail_menu').click(mailClick);
             $('#statistic_menu').click(statisticClick);
+            
+            $('#logout-btn').click(logout);
         </script>
         
         
