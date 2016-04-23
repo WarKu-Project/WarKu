@@ -1,0 +1,151 @@
+.level1 {
+    content: url(picture/CricleLevel/CricleLevel1.png); 
+}
+
+.level2 {
+    content: url(picture/CricleLevel/CricleLevel2.png); 
+}
+
+.level3 {
+    content: url(picture/CricleLevel/CricleLevel3.png); 
+}
+
+.level4 {
+    content: url(picture/CricleLevel/CricleLevel4.png); 
+}
+
+.level5 {
+    content: url(picture/CricleLevel/CricleLevel5.png); 
+}
+
+.level6 {
+    content: url(picture/CricleLevel/CricleLevel6.png); 
+}
+
+.level7 {
+    content: url(picture/CricleLevel/CricleLevel7.png); 
+}
+
+.level8 {
+    content: url(picture/CricleLevel/CricleLevel8.png); 
+}
+
+.level9 {
+    content: url(picture/CricleLevel/CricleLevel9.png); 
+}
+
+.level10 {
+    content: url(picture/CricleLevel/CricleLevel10.png); 
+}
+
+#resource1-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource2-label{
+    position: absolute;
+    width: 5%;
+    left: 81%;
+    top: 15%;
+}
+
+#resource3-label{
+    position: absolute;
+    width: 5%;
+    left: 88%;
+    top: 47%;
+}
+
+#resource4-label{
+    position: absolute;
+    width: 5%;
+    left: 68%;
+    top: 73%;
+}
+
+#resource5-label{
+    position: absolute;
+    width: 5%;
+    left: 30%;
+    top: 75%;
+}
+
+#resource6-label{
+    position: absolute;
+    width: 5%;
+    left: 8%;
+    top: 52%;
+}
+
+#resource7-label{
+    position: absolute;
+    width: 5%;
+    left: 12%;
+    top: 17%;
+}
+
+#resource8-label{
+    position: absolute;
+    width: 5%;
+    left: 35%;
+    top: 2%;
+}
+
+#resource9-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource10-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource11-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource12-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource13-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource14-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource15-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
+
+#resource16-label{
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}

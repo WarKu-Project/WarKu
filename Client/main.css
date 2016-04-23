@@ -70,17 +70,7 @@ img {
     height: 20%;
     vertical-align: middle;
 }
-
-#resource1-label{
-    content: url(picture/logo.png); 
-    position: absolute;
-    width: 5%;
-    left: 60%;
-    top: 0%;
-}
-
-
-    
+   
 }
 
 

@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="iron.css">
         <link rel="stylesheet" href="tree.css">
         <link rel="stylesheet" href="crop.css">
+        <link rel="stylesheet" href="circlelevel.css">
         <script src="jquery-2.2.3.min.js"></script>
         <title>WarKu!</title>
     </head>
@@ -81,37 +82,91 @@
                 
                 <div class="resource-box1">
                   <image id="resource1"></image>
-                  <image id="resource1-label"></image>
+                  <image id="resource1-label" class="level1"></image>
                 </div>
-                <image id="resource2">
-                </image>
-                <div id="resource3">
+                
+                <div class="resource-box2">
+                  <image id="resource2">
+                  <image id="resource2-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource4">
+                
+                <div class="resource-box3">
+                  <image id="resource3">
+                  <image id="resource3-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource5">
+                
+                <div class="resource-box4">
+                  <image id="resource4">
+                  <image id="resource4-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource6">
+                
+                <div class="resource-box5">
+                  <image id="resource5">
+                  <image id="resource5-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource7">
+                
+                <div class="resource-box6">
+                  <image id="resource6">
+                  <image id="resource6-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource8">
-                </div>  
-                <div id="resource9">
+                
+                <div class="resource-box7">
+                  <image id="resource7">
+                  <image id="resource7-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource10">
+                
+                <div class="resource-box8">
+                  <image id="resource8">
+                  <image id="resource8-label" class="level1"></image>
+                  </image>
+                </div> 
+                
+                <div class="resource-box9">
+                  <image id="resource9">
+                  <image id="resource9-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource11">
+                
+                <div class="resource-box10">
+                  <image id="resource10">
+                  <image id="resource10-label" class="level1"></image>
+                  </image>
                 </div>
-                <div id="resource12">
+                
+                <div class="resource-box11">
+                  <image id="resource11"></image>
+                  <image id="resource11-label" class="level1"></image>
                 </div>
-                <div id="resource13">
+                
+                <div class="resource-box12">
+                  <image id="resource12"></image>
+                  <image id="resource12-label" class="level1"></image>
                 </div>
-                <div id="resource14">
+                
+                <div class="resource-box13">
+                  <image id="resource13"></image>
+                  <image id="resource13-label" class="level1"></image>
                 </div>
-                <div id="resource15">
+                
+                <div class="resource-box14">
+                  <image id="resource14"></image>
+                  <image id="resource14-label" class="level1"></image>
                 </div>
-                <div id="resource16">
+                
+                <div class="resource-box15">
+                  <image id="resource15"></image>
+                  <image id="resource15-label" class="level1"></image>
+                </div>
+                
+                <div class="resource-box16">
+                  <image id="resource16"></image>
+                  <image id="resource16-label" class="level1"></image>
                 </div>
                 
             </div>
@@ -190,7 +245,7 @@
                 $('#resource_container').show(); 
                 document.getElementById("resource1").className = "iron1";
                 document.getElementById("resource2").className = "clay2";
-                document.getElementById("resource3").className = "tree3";
+                document.getElementById("resource3").className = "iron3";
                 document.getElementById("resource4").className = "tree4";
                 document.getElementById("resource5").className = "crop5";
                 document.getElementById("resource6").className = "clay6";
@@ -203,7 +258,7 @@
                 document.getElementById("resource13").className = "clay13";
                 document.getElementById("resource14").className = "iron14";
                 document.getElementById("resource15").className = "crop15";
-                document.getElementById("resource16").className = "tree16";
+                document.getElementById("resource16").className = "clay16";
             }     
         
             function villageClick(){
