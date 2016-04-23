@@ -1,3 +1,7 @@
+.level0 {
+    content: url(picture/logo.png);
+}
+
 .level1 {
     content: url(picture/CricleLevel/CricleLevel1.png); 
 }

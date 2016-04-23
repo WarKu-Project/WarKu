@@ -79,25 +79,25 @@
 .iron11{
     content: url(picture/resource/iron11.png);
     position: absolute;
-    top: 34.5%;
+    top: 37%;
     left: 55.5%;
-    width: 45%;
+    width: 33%;
     
 }
 .iron12{
     content: url(picture/resource/iron12.png);
     position: absolute;
     top: 44%;
-    left: 46.5%;
-    width: 30%;
+    left: 47.8%;
+    width: 26%;
     
 }
 .iron13{
     content: url(picture/resource/iron13.png);
     position: absolute;
-    top: 43%;
+    top: 40.8%;
     left: 22%;
-    width: 31%;
+    width: 30%;
     
 }
 .iron14{

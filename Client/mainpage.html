@@ -14,6 +14,11 @@
         <title>WarKu!</title>
     </head>
     <body>
+        <!--Connect to socket.io -->
+            <script type="text/javascript">
+              var socket = io.connect('http://localhost:5555');
+            </script>
+        
         <!--menu-->
         <div class="menu-frame">
            <nav>
@@ -242,25 +247,17 @@
                 
             function resourceClick(){
                 init();
+                var resource;
                 $('#resource_container').show(); 
-                document.getElementById("resource1").className = "iron1";
-                document.getElementById("resource2").className = "clay2";
-                document.getElementById("resource3").className = "iron3";
-                document.getElementById("resource4").className = "tree4";
-                document.getElementById("resource5").className = "crop5";
-                document.getElementById("resource6").className = "clay6";
-                document.getElementById("resource7").className = "iron7";
-                document.getElementById("resource8").className = "crop8";
-                document.getElementById("resource9").className = "tree9";
-                document.getElementById("resource10").className = "iron10";
-                document.getElementById("resource11").className = "tree11";
-                document.getElementById("resource12").className = "crop12";
-                document.getElementById("resource13").className = "clay13";
-                document.getElementById("resource14").className = "iron14";
-                document.getElementById("resource15").className = "crop15";
-                document.getElementById("resource16").className = "clay16";
+                socket.emit('resource-request');
+                socket.on('resource-data',function(result){
+                    //console.log(result[0]["type"]);
+                     for(var i=0;i<16;i++){
+                        document.getElementById("resource"+(i+1)).className = result[i]["type"]+(i+1);
+                        document.getElementById("resource"+(i+1)+"-label").className = "level"+(result[i]["level"]);
+                     }
+                });
                 
-                document.getElementById("resource1-label").className = "level2";
             }     
         
             function villageClick(){
