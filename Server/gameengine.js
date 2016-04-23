@@ -184,7 +184,11 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
           }
           h += resource_info[type].time[level].hour;
           if (h>=24){
-            
+            d+=h/24;
+            h=h%24;
+          }
+          if (d>=(new Date(y,m,0)).getDate()){
+            m+=d/(new Date(y,m,0)).getDate()
           }
           callback(null,true,left_resource,sid,vid);
         }

@@ -117,6 +117,7 @@ io.on('connection',function(socket){
   })
   /** Function that client is disconnected **/
   socket.on('disconnect',function () {
+    delete online_user[socket.request.connection.remoteAddress];
     console.log('Bye Bye '+socket.request.connection.remoteAddress);
   })
 });
