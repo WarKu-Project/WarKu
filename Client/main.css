@@ -20,12 +20,6 @@ body  {
 
 nav ul li {
 		display: inline-block;
-		list-style-type: none;
-		-webkit-transition: all 0.2s;
-		-moz-transition: all 0.2s;
-		-ms-transition: all 0.2s;
-		-o-transition: all 0.2s;
-		transition: all 0.2s; 
 	}
 
 .menu {
@@ -77,6 +71,13 @@ img {
     vertical-align: middle;
 }
 
+#resource1-label{
+    content: url(picture/logo.png); 
+    position: absolute;
+    width: 5%;
+    left: 60%;
+    top: 0%;
+}
 
 
     
