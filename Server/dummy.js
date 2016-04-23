@@ -67,36 +67,40 @@ global.resource_list = ['wood','clay','iron','crop'];
 //   }
 // }
 //
-
+/*function checkExist(x,y,callback) {
+  return con.query('SELECT vid FROM villege WHERE x=? AND y=?',[i,j],function(err,result) {
+    if (err) callback(err,null);
+    if (result.length==0) return callback(null,false);
+    else return callback(null,true);
+  })
+}*/
 //Initialize villege
 for (var i = 0;i<100;i++){
   for (var j = 0;j<100;j++){
-        if (con.query('INSERT IGNORE INTO villege(x,y) values(?,?)',[i,j],function(err,result) {
+    //if (checkExist(i,j)) {
+      //if (err) console.log(err.toString());
+      // console.log('villege is existed');
+      //else {
+        con.query('INSERT IGNORE INTO villege(x,y) values(?,?)',[i,j],function(err,result) {
           if (err) console.log(err.toString());
-          else {
-            if (result.affectedRows>0) {
-              console.log('villege is created!');
-              return true;
-            }else {
-              console.log('villege is existed');
-              return false
-            }
-          }
-        })){
+        });
+
         for (var k = 1;k<=16;k++){
               con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {
                 if (err) console.log(err.toString());
                 else console.log('structure inserted!');
               });
               var resource = global.resource_list[Math.floor(Math.random()*4)];
-              con.query('INSERT INTO resource(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),?,?)',[i,resource],function(err) {
+              con.query('INSERT INTO resource(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),?,?)',[k,resource],function(err) {
                 if (err) console.log(err.toString());
                 else {
                   console.log('Natural Villege is created');
                 }
               });
         }
-      }
+      //}
+  //  }
+
   }
 }
 /** Initialize recentstatus tabke **/
@@ -110,9 +114,19 @@ con.query('CREATE TABLE building (sid int NOT NULL,pos int NOT NULL,type varchar
   else console.log('building is created to mysql');
 })
 /** Initialize Wall table **/
-con.query('CREATE TABLE wall (sid int NOT NULL,type varcahr(5) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
+con.query('CREATE TABLE wall (sid int NOT NULL,type varchar(5) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
   if (err) console.log(err.toString());
   else console.log('wall is created to mysql');
+})
+/** Initialize task table **/
+con.query('CREATE TABLE task (tid int NOT NULL AUTO_INCREMENT,endtime datetime NOT NULL,vid INT NOT NULL,PRIMARY KEY(tid),FOREIGN KEY(vid) REFERENCES villege(vid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('task is created to mysql');
+})
+/** Initialize structuringtask table **/
+con.query('CREATE TABLE structuringtask (tid int NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('structuringtask is created to mysql');
 })
 con.end(function(err) {
   // The connection is terminated gracefully

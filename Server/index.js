@@ -78,15 +78,45 @@ io.on('connection',function(socket){
       if (result) {
         //add player to online list
         online_user[socket.request.connection.remoteAddress] = info["username"];
-        engine.loadResource(info["username"],function (err,result) {
-          if (err) throw err;
-          socket.emit('resource-data',result);
-        })
         socket.emit('login-status',true);
       }else{
         socket.emit('login-status',false);
       }
     });
   });
+  /** Function to loadResource **/
+  socket.on('resource-request',function() {
+    console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.loadResource(online_user[socket.request.connection.remoteAddress],function(err,result) {
+      if (err) throw err;
+      socket.emit('resource-data',result);
+    })
+  });
+  /** Function to loadBuilding **/
+  socket.on('building-request',function() {
+    console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.loadBuilding(online_user[socket.request.connection.remoteAddress],function(err,result) {
+      if (err) throw err;
+      socket.emit('buildig-data',result);
+    })
+  });
+  /**Function to load wall **/
+  socket.on('wall-request',function() {
+    console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.loadWall(online_user[socket.request.connection.remoteAddress],function(err,result) {
+      if (err) throw err;
+      socket.emit('wall-data',result);
+    })
+  })
 
+  socket.on('upgrade-resource-status',function(pos) {
+    console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.getResourceUpgradeStatus(online_user[socket.request.connection.remoteAddress],pos,function (err,result) {
+      console.log(result);
+    });
+  })
+  /** Function that client is disconnected **/
+  socket.on('disconnect',function () {
+    console.log('Bye Bye '+socket.request.connection.remoteAddress);
+  })
 });

@@ -98,7 +98,7 @@ function saveStatus(pid,vid){
 function initFirstVillege(pid) {
   this.vid = 0;
   console.log(pid +" : "+vid);
-  con.query('SELECT vid FROM villege WHERE vid <=1000 AND pid = 1 ORDER BY RAND() LIMIT 1',function(err,rows) {
+  con.query('SELECT vid FROM villege WHERE pid = 1 ORDER BY RAND() LIMIT 1',function(err,rows) {
     if (err) throw err;
     console.log('Query Result : '+JSON.stringify(rows));
     this.vid = rows[0].vid;
@@ -120,9 +120,56 @@ function updateOwnerOfVillege(pid,vid) {
 /** Function to load resource **/
 exports.loadResource = function(username,callback){
   console.log("Received data " + username);
-  con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?))',username,function(err,rows) {
+  con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ? ))',username,function(err,rows) {
     if (err) callback(err,null);
     console.log("Query Result : "+JSON.stringify(rows));
     callback(null,rows);
   });
+}
+/** Function to load building **/
+exports.loadBuilding = function(username,callback) {
+  console.log("Received data "+username);
+  con.query('SELECT type,level,pos FROM structure JOIN building ON structure.sid = building.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ? ))',username,function(err,rows) {
+    if (err) callback(err,null);
+    console.log("Query Result : "+JSON.stringify(rows));
+    callback(null,rows);
+  });
+}
+/** Function to load wall **/
+exports.loadWall = function(username,callback) {
+  console.log("Received data "+username);
+  con.query('SELECT type,level FROM structure JOIN wall ON structure.sid = wall.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ? ))',username,function(err,rows) {
+    if (err) callback(err,null);
+    console.log("Query Result : "+JSON.stringify(rows));
+    callback(null,rows);
+  });
+}
+var resource_info = {"crop" : {cost : [[70,90,70,20],[115,150,115,35],[195,250,195,55],[325,420,325,95],[545,700,545,155],[910,1170,910,260],[1520,1950,1520,435],[2535,3260,2535,725],[4235,5445,4235,1210],[7070,9095,7070,2020]], consumption : [0,0,0,0,0,1,1,1,1,1],produce : [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0,min : 0,sec : 30},{hour : 0,min : 1,sec : 15},{hour : 0,min : 3,sec : 0},{hour : 0,min : 5,sec : 30},{hour : 0,min : 9,sec : 20},{hour : 0,min : 15,sec : 30},{hour : 0,min : 25,sec : 50},{hour : 0,min : 36,sec : 30},{hour : 1,min : 8,sec : 15},{hour : 1,min : 45,sec : 30}]},"iron" : {cost : [[100,80,30,60],[165,135,50,100],[280,225,85,165],[465,375,140,280],[780,620,235,465],[1300,1040,390,780],[2170,1735,650,1300],[3625,2900,1085,2175],[6050,4840,1815,3630],[10105,8080,3030,6060]],consumption : [3,2,2,2,2,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 1, sec : 5},{hour : 0, min : 3, sec : 0},{hour : 0, min : 5, sec : 30},{hour : 0, min : 9, sec : 35},{hour : 0, min : 16, sec : 0},{hour : 0, min : 26, sec : 30},{hour : 0, min : 42, sec : 35},{hour : 1, min : 8, sec : 0},{hour : 1, min : 49, sec : 5},{hour : 2, min : 58, sec : 30}]},"clay" : {cost : [[80,40,80,50],[135,65,135,85],[225,110,225,140],[375,185,375,235],[620,310,620,390],[1040,520,1040,650],[1735,870,1735,1085],[2900,1450,2900,1810],[4840,2420,4840,3025],[8080,4040,8080,5050]],consumption : [2,1,1,1,1,5,5,5,5,5],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 40},{hour : 0, min : 1, sec : 50},{hour : 0, min : 3, sec : 30},{hour : 0, min : 6, sec : 20},{hour : 0, min : 10, sec : 50},{hour : 0, min : 18, sec : 10},{hour : 0, min : 29, sec : 50},{hour : 0, min : 48, sec : 20},{hour : 1, min : 18, sec : 10},{hour : 2, min : 5, sec : 30}]},"wood" : {cost : [[40,100,50,60],[65,165,85,100],[110,280,140,165],[185,465,235,280],[310,780,390,465],[520,1300,650,780],[870,2170,1085,1300],[1450,3625,1810,2175],[2420,6050,3025,3630],[4040,10105,5050,6060]],consumption : [2,1,1,1,1,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 50},{hour : 0, min : 2, sec : 0},{hour : 0, min : 3, sec : 50},{hour : 0, min : 7, sec : 0},{hour : 0, min : 11, sec : 50},{hour : 0, min : 18, sec : 50},{hour : 0, min : 32, sec : 0},{hour : 1, min : 51, sec : 50},{hour : 1, min : 23, sec : 50},{hour : 2, min : 14, sec : 50}]}}
+/** Function to get upgrade status of resource**/
+exports.getResourceUpgradeStatus = function(username,pos,callback) {
+  con.query('SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function(err,result) {
+    if (err) callback(err,null);
+    console.log("Query Result : "+JSON.stringify(result));
+    var vid = result[0].vid;
+    con.query('SELECT level,type FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = ? AND pos = ?',[vid,pos],function(err,result) {
+      if (err) callback(err,null);
+      console.log("Query Result : "+JSON.stringify(result));
+      var level = result[0].level;
+      var type = result[0].type;
+      var require_resource = resource_info[type].cost[level];
+      console.log("Require : "+require_resource);
+      con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function(err,result) {
+        if (err) callback(err,null);
+        console.log("Query Result : "+JSON.stringify(result));
+        if (result[0].wood>require_resource[0]&&result[0].clay>require_resource[1]&&result[0].iron>require_resource[2]&&result[0].crop>require_resource[3]){
+          console.log('Can upgrade');
+          callback(null,true);
+        }
+        else {
+          console.log('Can\'t upgrade');
+          callback(null,false);
+        }
+      })
+    })
+  })
 }
