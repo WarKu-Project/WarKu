@@ -379,6 +379,9 @@
         
        <!-- Initialize -->
         <script type="text/javascript">
+            var resource  = null;
+            
+            
             function init(){
                 $('#resource_container').hide();
                 $('#village_container').hide();
@@ -390,11 +393,10 @@
                 
             function resourceClick(){
                 init();
-                var resource;
                 $('#resource_container').show(); 
                 socket.emit('resource-request');
                 socket.on('resource-data',function(result){
-                    //console.log(result[0]["type"]);
+                     resource =result;
                      for(var i=0;i<16;i++){
                         document.getElementById("resource"+(i+1)).className = result[i]["type"]+(i+1);
                         document.getElementById("resource"+(i+1)+"-label").className = "level"+(result[i]["level"]);
@@ -450,6 +452,7 @@
             /*Resource Listner*/
             $('#resource1-label').click(function(e) {
                 $('#upgrade-resourceModal').modal("show");
+                console.log(JSON.stringify(resource));
                 e.preventDefault();
             });
             
