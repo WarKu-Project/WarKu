@@ -1,0 +1,693 @@
+.map{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+div.arrow1 {
+    position: absolute;
+    background-color: red;
+    width: 5%;
+    height: 8%;
+    left: 0%;
+    top: 41%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+    /* Border widths: Top.px Right.px Bottom.px Left.px */
+}
+div.arrow2 {
+    position: absolute;
+    background-color: red;
+    width: 8%;
+    height: 5%;
+    left: 41%;
+    top: 0%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+    /* Border widths: Top.px Right.px Bottom.px Left.px */
+}
+div.arrow3 {
+    position: absolute;
+    background-color: red;
+    width: 5%;
+    height: 8%;
+    left: 85%;
+    top: 41%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+    /* Border widths: Top.px Right.px Bottom.px Left.px */
+}
+div.arrow4 {
+    position: absolute;
+    background-color: red;
+    width: 8%;
+    height: 5%;
+    left: 41%;
+    top: 85%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+    /* Border widths: Top.px Right.px Bottom.px Left.px */
+}
+div.box1 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+    /* Border widths: Top.px Right.px Bottom.px Left.px */
+}
+div.box2 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box3 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box4 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box5 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box6 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box7 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box8 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 5%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box9 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box10 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box11 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box12 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box13 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box14 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box15 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box16 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 15%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box17 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box18 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box19 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box20 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box21 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box22 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box23 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box24 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 25%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box25 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box26 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box27 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box28 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box29 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box30 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box31 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box32 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 35%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box33 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box34 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box35 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box36 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box37 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box38 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box39 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box40 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 45%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box41 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box42 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box43 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box44 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box45 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box46 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box47 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box48 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 55%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box49 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box50 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box51 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box52 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box53 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box54 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box55 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box56 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 65%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box57 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box58 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box59 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box60 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box61 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box62 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box63 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+div.box64 {
+    position: absolute;
+    background-color: white;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 75%;
+    border-style: solid;
+    border-width: 3% 3% 3% 3%;
+}
+
+
+
