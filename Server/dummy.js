@@ -40,7 +40,31 @@ con.query('CREATE TABLE resource (sid int NOT NULL ,pos int NOT NULL,type varcha
     if (err) console.log(err.toString());
     else console.log('Nature is born');
   })
-
+/** Initialize recentstatus tabke **/
+con.query('CREATE TABLE recentstatus (pid int NOT NULL,vid int NOT NULL,PRIMARY KEY(pid),lastvisitedtime datetime DEFAULT NOW(),FOREIGN KEY(pid) REFERENCES player(pid),FOREIGN KEY(vid) REFERENCES villege(vid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('recentstatus is created to mysql');
+})
+/** Initialize Building table **/
+con.query('CREATE TABLE building (sid int NOT NULL,pos int NOT NULL,type varchar(15) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('building is created to mysql');
+})
+/** Initialize Wall table **/
+con.query('CREATE TABLE wall (sid int NOT NULL,type varchar(5) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
+  if (err) console.log(err.toString());
+  else console.log('wall is created to mysql');
+})
+/** Initialize task table **/
+con.query('CREATE TABLE task (tid int NOT NULL AUTO_INCREMENT,endtime datetime NOT NULL,vid INT NOT NULL,PRIMARY KEY(tid),FOREIGN KEY(vid) REFERENCES villege(vid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('task is created to mysql');
+})
+/** Initialize structuringtask table **/
+con.query('CREATE TABLE structuringtask (tid int NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),level int NOT NULL,FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('structuringtask is created to mysql');
+})
 //Initialize starter villege
 global.resource_list = ['wood','clay','iron','crop'];
 // for (var j = 0;j<100;j++){
@@ -84,7 +108,16 @@ for (var i = 0;i<100;i++){
         con.query('INSERT IGNORE INTO villege(x,y) values(?,?)',[i,j],function(err,result) {
           if (err) console.log(err.toString());
         });
-
+        con.query('INSERT INTO structure(vid,level) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1),1)',function(err) {
+          if (err) console.log(err.toString());
+          else console.log('structure inserted!');
+        });
+        con.query('INSERT INTO building(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),1,\'villagehall\')',function(err) {
+            if (err) console.log(err.toString());
+            else {
+              console.log('villagehall is created');
+            }
+        })
         for (var k = 1;k<=16;k++){
               con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {
                 if (err) console.log(err.toString());
@@ -103,31 +136,7 @@ for (var i = 0;i<100;i++){
 
   }
 }
-/** Initialize recentstatus tabke **/
-con.query('CREATE TABLE recentstatus (pid int NOT NULL,vid int NOT NULL,PRIMARY KEY(pid),lastvisitedtime datetime DEFAULT NOW(),FOREIGN KEY(pid) REFERENCES player(pid),FOREIGN KEY(vid) REFERENCES villege(vid))',function (err) {
-  if (err) console.log(err.toString());
-  else console.log('recentstatus is created to mysql');
-})
-/** Initialize Building table **/
-con.query('CREATE TABLE building (sid int NOT NULL,pos int NOT NULL,type varchar(10) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
-  if (err) console.log(err.toString());
-  else console.log('building is created to mysql');
-})
-/** Initialize Wall table **/
-con.query('CREATE TABLE wall (sid int NOT NULL,type varchar(5) NOT NULL,PRIMARY KEY(sid),FOREIGN KEY(sid) REFERENCES structure(sid))',function(err) {
-  if (err) console.log(err.toString());
-  else console.log('wall is created to mysql');
-})
-/** Initialize task table **/
-con.query('CREATE TABLE task (tid int NOT NULL AUTO_INCREMENT,endtime datetime NOT NULL,vid INT NOT NULL,PRIMARY KEY(tid),FOREIGN KEY(vid) REFERENCES villege(vid))',function (err) {
-  if (err) console.log(err.toString());
-  else console.log('task is created to mysql');
-})
-/** Initialize structuringtask table **/
-con.query('CREATE TABLE structuringtask (tid int NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
-  if (err) console.log(err.toString());
-  else console.log('structuringtask is created to mysql');
-})
+
 con.end(function(err) {
   // The connection is terminated gracefully
   // Ensures all previously enqueued queries are still

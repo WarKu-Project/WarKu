@@ -108,12 +108,20 @@ io.on('connection',function(socket){
       socket.emit('wall-data',result);
     })
   })
-
-  socket.on('upgrade-resource-status',function(pos) {
+  /** Function to upgrade-resource-status **/
+  socket.on('upgrade-resource-status-request',function(pos) {
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
     engine.getResourceUpgradeStatus(online_user[socket.request.connection.remoteAddress],pos,function (err,result) {
       console.log(result);
+      socket.emit('upgrade-resource-status',result);
     });
+  })
+  /** Function to upgrade resource **/
+  socket.on('upgrade-resource-request',function(pos) {
+    console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.upgradeResource(online_user[socket.request.connection.remoteAddress],pos,function(err,status) {
+      console.log('Success');
+    })
   })
   /** Function that client is disconnected **/
   socket.on('disconnect',function () {
