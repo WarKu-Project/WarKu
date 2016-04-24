@@ -1,3 +1,27 @@
+input[type="text"] 
+{
+    width: 20%;
+    border: 1px solid #CCC;
+}
+
+.padtop{
+    height: 10px;
+}
+
+.cordinate-btn{
+    padding-left: 30px;
+}
+
+.col-cordinates{
+    display: flex;
+}
+
+.cordinate-text{
+    font-size: 25px;
+    padding-left: 30px;
+    padding-right: 10px
+}
+
 .map-center
 {
     display: inline-block;
