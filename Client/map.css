@@ -1,8 +1,14 @@
+.map-center
+{
+    display: inline-block;
+    height: 10%;
+    vertical-align: middle;
+}
 .map{
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    width: 80%;
+    width: 60%;
 }
 div.arrow1 {
     position: absolute;
