@@ -105,7 +105,7 @@ io.on('connection',function(socket){
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
     engine.loadWall(online_user[socket.request.connection.remoteAddress],function(err,result) {
       if (err) throw err;
-      socket.emit('wall-data',result);
+      socket.emit('wall-data',result[0]);
     })
   })
   /** Function to upgrade-resource-status **/
@@ -121,6 +121,13 @@ io.on('connection',function(socket){
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
     engine.upgradeResource(online_user[socket.request.connection.remoteAddress],pos,function(err,status) {
       console.log('Success');
+    })
+  })
+  /** Function to get resource from villege **/
+  socket.on('resource-value-request',function() {
+    engine.getResourceOfVillege(online_user[socket.request.connection.remoteAddress],function(err,resource) {
+      if (err) throw err;
+      socket.emit('resource-value-data',resource);
     })
   })
   /** Function that client is disconnected **/

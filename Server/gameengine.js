@@ -37,6 +37,7 @@ exports.verify = function(info,callback) {
       callback(null,false);
     }else {
       console.log('Player '+rows[0].username+' is verify.');
+      saveStatus(rows[0].username);
       callback(null,true);
     }
   });
@@ -85,9 +86,17 @@ function initStatus(pid,vid) {
   })
 }
 /** Function to save status **/
-function saveStatus(pid,vid){
-  con.query('UPDATE recentstatus SET vid = ? , lastvisitedtime = NOW() WHERE pid = ?)',[vid,pid],function(err,result) {
-      console.log("Query : "+JSON.stringify(result));
+function saveStatus(username,vid){
+  con.query('UPDATE recentstatus SET vid = ? , lastvisitedtime = NOW() WHERE pid = (SELECT pid FROM player WHERE username = ?)',[vid,username],function(err,result) {
+    console.log("Query : "+JSON.stringify(result));
+    //console.log('Changed ' + result.changedRows + ' rows');
+    console.log("Player "+username+" : Update recent status ");
+  });
+}
+/** Function to save status **/
+function saveStatus(username){
+  con.query('UPDATE recentstatus SET lastvisitedtime = NOW() WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function(err,result) {
+    console.log("Query : "+JSON.stringify(result));
     console.log('Changed ' + result.changedRows + ' rows');
     console.log("Player "+username+" : Update recent status ");
   });
@@ -123,6 +132,7 @@ exports.loadResource = function(username,callback){
   con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ? ))',username,function(err,rows) {
     if (err) callback(err,null);
     console.log("Query Result : "+JSON.stringify(rows));
+    saveStatus(username);
     callback(null,rows);
   });
 }
@@ -132,6 +142,7 @@ exports.loadBuilding = function(username,callback) {
   con.query('SELECT type,level,pos FROM structure JOIN building ON structure.sid = building.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ? ))',username,function(err,rows) {
     if (err) callback(err,null);
     console.log("Query Result : "+JSON.stringify(rows));
+    saveStatus(username);
     callback(null,rows);
   });
 }
@@ -141,6 +152,7 @@ exports.loadWall = function(username,callback) {
   con.query('SELECT type,level FROM structure JOIN wall ON structure.sid = wall.sid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ? ))',username,function(err,rows) {
     if (err) callback(err,null);
     console.log("Query Result : "+JSON.stringify(rows));
+    saveStatus(username);
     callback(null,rows);
   });
 }
@@ -157,7 +169,7 @@ function calculateFinishDate(time,ah,ami,as) {
   time.setMinutes(time.getMinutes()+ami);
   time.setSeconds(time.getSeconds()+as);
   console.log('End : '+time.toString());
-  return time.getUTCFullYear()+'-'+twoDigits(1+time.getUTCMonth())+'-'+twoDigits(time.getUTCDate())+" "+twoDigits(time.getUTCHours())+":"+twoDigits(time.getUTCMinutes())+":"+twoDigits(time.getUTCSeconds());
+  return time.getFullYear()+'-'+twoDigits(1+time.getMonth())+'-'+twoDigits(time.getDate())+" "+twoDigits(time.getHours())+":"+twoDigits(time.getUTCMinutes())+":"+twoDigits(time.getSeconds());
 }
 var resource_info = {"crop" : {cost : [[70,90,70,20],[115,150,115,35],[195,250,195,55],[325,420,325,95],[545,700,545,155],[910,1170,910,260],[1520,1950,1520,435],[2535,3260,2535,725],[4235,5445,4235,1210],[7070,9095,7070,2020]], consumption : [0,0,0,0,0,1,1,1,1,1],produce : [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0,min : 0,sec : 30},{hour : 0,min : 1,sec : 15},{hour : 0,min : 3,sec : 0},{hour : 0,min : 5,sec : 30},{hour : 0,min : 9,sec : 20},{hour : 0,min : 15,sec : 30},{hour : 0,min : 25,sec : 50},{hour : 0,min : 36,sec : 30},{hour : 1,min : 8,sec : 15},{hour : 1,min : 45,sec : 30}]},"iron" : {cost : [[100,80,30,60],[165,135,50,100],[280,225,85,165],[465,375,140,280],[780,620,235,465],[1300,1040,390,780],[2170,1735,650,1300],[3625,2900,1085,2175],[6050,4840,1815,3630],[10105,8080,3030,6060]],consumption : [3,2,2,2,2,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 1, sec : 5},{hour : 0, min : 3, sec : 0},{hour : 0, min : 5, sec : 30},{hour : 0, min : 9, sec : 35},{hour : 0, min : 16, sec : 0},{hour : 0, min : 26, sec : 30},{hour : 0, min : 42, sec : 35},{hour : 1, min : 8, sec : 0},{hour : 1, min : 49, sec : 5},{hour : 2, min : 58, sec : 30}]},"clay" : {cost : [[80,40,80,50],[135,65,135,85],[225,110,225,140],[375,185,375,235],[620,310,620,390],[1040,520,1040,650],[1735,870,1735,1085],[2900,1450,2900,1810],[4840,2420,4840,3025],[8080,4040,8080,5050]],consumption : [2,1,1,1,1,5,5,5,5,5],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 40},{hour : 0, min : 1, sec : 50},{hour : 0, min : 3, sec : 30},{hour : 0, min : 6, sec : 20},{hour : 0, min : 10, sec : 50},{hour : 0, min : 18, sec : 10},{hour : 0, min : 29, sec : 50},{hour : 0, min : 48, sec : 20},{hour : 1, min : 18, sec : 10},{hour : 2, min : 5, sec : 30}]},"wood" : {cost : [[40,100,50,60],[65,165,85,100],[110,280,140,165],[185,465,235,280],[310,780,390,465],[520,1300,650,780],[870,2170,1085,1300],[1450,3625,1810,2175],[2420,6050,3025,3630],[4040,10105,5050,6060]],consumption : [2,1,1,1,1,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 50},{hour : 0, min : 2, sec : 0},{hour : 0, min : 3, sec : 50},{hour : 0, min : 7, sec : 0},{hour : 0, min : 11, sec : 50},{hour : 0, min : 18, sec : 50},{hour : 0, min : 32, sec : 0},{hour : 1, min : 51, sec : 50},{hour : 1, min : 23, sec : 50},{hour : 2, min : 14, sec : 50}]}}
 function checkAvailableTask(username,callback) {
@@ -165,10 +177,11 @@ function checkAvailableTask(username,callback) {
     if (err) callback(err,null,null);
     console.log('Query Result : '+JSON.stringify(result));
     var vid  = result[0].vid;
-    con.query('SELECT COUNT(*) AS numtask FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = ?',vid,function(err,result) {
+    con.query('SELECT COUNT(*) AS numtask FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = ? ',vid,function(err,result) {
       if (err) callback(err,null,null);
       console.log('Query Result : '+JSON.stringify(result));
       var num = result[0].numtask;
+      var endtime = result[0].endtime;
       con.query('SELECT level FROM building JOIN structure ON structure.sid = building.sid WHERE vid = ? and type = \'villagehall\'',vid,function(err,result) {
         if (err) callback(err,null,null);
         console.log('Query Result : '+JSON.stringify(result));
@@ -176,10 +189,12 @@ function checkAvailableTask(username,callback) {
         if (num<num_worker) {
           var available_worker = num_worker-num;
           console.log('Can update task');
+          saveStatus(username);
           callback(null,true,vid,available_worker);
         }
         else {
           console.log('All worker are busy');
+          saveStatus(username);
           callback(null,false,null,null);
         }
       })
@@ -202,7 +217,7 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
         var sid = result[0].sid;
         var level = result[0].level+1;
         var type = result[0].type;
-        con.query('SELECT level,endTime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE sid = ? ORDER BY endtime DESC LIMIT 1',sid,function (err,result) {
+        con.query('SELECT level,endTime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE sid = ? ORDER BY structuringtask.tid DESC LIMIT 1',sid,function (err,result) {
           if (err) callback(err);
           console.log('Query Result : '+JSON.stringify(result));
           var startTime = new Date();
@@ -225,6 +240,10 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
                 var left_resource = { wood : (result[0].wood-require_resource[0]) , clay : (result[0].clay-require_resource[1]), iron : (result[0].iron-require_resource[2]) , crop : (result[0].crop-require_resource[3])};
                 callback(null,true,left_resource,sid,vid,endTime,level)
               }
+              else {
+                console.log('Can\'t Upgrade');
+              }
+              saveStatus(username);
             })
           }
         })
@@ -249,10 +268,20 @@ exports.upgradeResource = function(username,pos,callback){
         con.query('INSERT INTO structuringtask(tid,sid,level) values(?,?,?)',[tid,sid,level],function(err) {
           if (err) callback(err,null);
           console.log('Success update structuringtask');
+          saveStatus(username);
           callback(err,true);
         })
       })
     }
   })
 }
-var building_info ={  "villagehall" : {  cost : [[70,40,60,20],[90,50,75,25],[115,65,100,35],[145,85,125,40],[190,105,160,55],[240,135,205,70],[310,175,265,90],[395,225,340,115],[505,290,430,145],[645,370,555,185]],  consumption : [2,1,1,1,1,2,2,2,2,2],  time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}]  },  "market" : {  cost : [  [80,70,120,70],[100,90,155,90],[130,115,195,115],[170,145,250,145],[215,190,320,190],[275,240,410,240],[350,310,530,310],[450,395,675,395],[575,505,865,505],[740,645,1105,645]  ],  consumption : [4,2,2,2,2,3,3,3,3,3],  time : [ {hour:0,min:06,sec:00},{hour:0,min:07,sec:58},{hour:0,min:10,sec:14},{hour:0,min:12,sec:52},{hour:0,min:15,sec:56},{hour:0,min:19,sec:28},{hour:0,min:23,sec:36},{hour:0,min:28,sec:22},{hour:0,min:33,sec:54},{hour:0,min:40,sec:20}]  },  "ballack" : {  cost : [  [210,140,260,120]	,[270,180,335,155]	,[345,230,425,195]	,[440,295,545,250]	,[565,375,700,320]	,[720,480,895,410]	,[925,615,1145,530],	[1180,790,1465,675]	,[1515,1010,1875,865],[1935,1290,2400,1105]	  ],  consumption : [4,2,2,2,2,3,3,3,3,3],  time : [  {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}  ]  },  "academy" : {  cost:[[220,160,90,40],[280,205,115,50],[360,260,145,65],[460,335,190,85],[590,430,240,105],[755,550,310,135],[970,705,395,175],[1240,900,505,225],[1585,1155,650,290],[2030,1475,830,370]],  consumption : [4,2,2,2,2,3,3,3,3,3],    time : [  {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}  ]  },  "stable" : {  cost : [[260,140,220,100],[335,180,280,130],[425,230,360,165],[545,295,460,210],[700,375,590,270],[895,480,755,345],[1145,615,970,440],[1465,790,1240,565],[1875,1010,1585,720],[2400,1290,2030,920]],  consumption : [5,3,3,3,3,3,3,3,3,3],  time : [{hour:0,min:07,sec:20},{hour:0,min:09,sec:30},{hour:0,min:12,sec:02},{hour:0,min:14,sec:58},{hour:0,min:18,sec:20},{hour:0,min:22,sec:16},{hour:0,min:26,sec:50},{hour:0,min:32,sec:08},{hour:0,min:38,sec:16},{hour:0,min:45,sec:24}]  },  "headquarter" : {  cost : [[700,670,700,240],[930,890,930,320],[1240,1185,1240,425],[1645,1575,1645,565],[2190,2095,2190,750],[2915,2790,2915,1000],[3875,3710,3875,1330],[5155,4930,5155,1765],[6855,6560,6855,2350],[9115,8725,9115,3125]],  consumption : [2,1,1,1,1,2,2,2,2,2],  time : [  {hour:0,min:07,sec:40},{hour:0,min:08,sec:54},{hour:0,min:10,sec:18},{hour:0,min:11,sec:58},{hour:0,min:13,sec:52},{hour:0,min:16,sec:06},{hour:0,min:18,sec:40},{hour:0,min:21,sec:40},{hour:0,min:25,sec:08},{hour:0,min:29,sec:10}]},"workshop" : {cost : [[460,510,600,320],[590,655,770,410],[755,835,985,525],[965,1070,1260,670],[1235,1370,1610,860],[1580,1750,2060,1100],[2025,2245,2640,1405],[2590,2870,3380,1800],[3315,3675,4325,2305],[4245,4705,5535,2950]],consumption : [3,2,2,2,2,2,2,2,2,2],time : [{hour:0,min:10,sec:00},{hour:0,min:12,sec:36},{hour:0,min:15,sec:36},{hour:0,min:19,sec:06},{hour:0,min:23,sec:10},{hour:0,min:27,sec:52},{hour:0,min:33,sec:20},{hour:0,min:39,sec:40},{hour:0,min:47,sec:02},{hour:0,min:55,sec:32}]},"smithy":{cost : [[180,250,500,160],[230,320,640,205],[295,410,820,260],[375,525,1050,335],[485,670,1340,430],[620,860,1720,550],[790,1100,2200,705],[1015,1405,2815,900],[1295,1800,3605,1155],[1660,2305,4610,1475]],consumption : [4,2,2,2,2,3,3,3,3,3],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}]}}
+var building_info ={  "villagehall" : {  cost : [[70,40,60,20],[90,50,75,25],[115,65,100,35],[145,85,125,40],[190,105,160,55],[240,135,205,70],[310,175,265,90],[395,225,340,115],[505,290,430,145],[645,370,555,185]],  consumption : [2,1,1,1,1,2,2,2,2,2],  time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}]  },  "market" : {  cost : [  [80,70,120,70],[100,90,155,90],[130,115,195,115],[170,145,250,145],[215,190,320,190],[275,240,410,240],[350,310,530,310],[450,395,675,395],[575,505,865,505],[740,645,1105,645]  ],  consumption : [4,2,2,2,2,3,3,3,3,3],  time : [ {hour:0,min:06,sec:00},{hour:0,min:07,sec:58},{hour:0,min:10,sec:14},{hour:0,min:12,sec:52},{hour:0,min:15,sec:56},{hour:0,min:19,sec:28},{hour:0,min:23,sec:36},{hour:0,min:28,sec:22},{hour:0,min:33,sec:54},{hour:0,min:40,sec:20}]  },  "ballack" : {  cost : [  [210,140,260,120]	,[270,180,335,155]	,[345,230,425,195]	,[440,295,545,250]	,[565,375,700,320]	,[720,480,895,410]	,[925,615,1145,530],	[1180,790,1465,675]	,[1515,1010,1875,865],[1935,1290,2400,1105]	  ],  consumption : [4,2,2,2,2,3,3,3,3,3],  time : [  {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}  ]  },  "academy" : {  cost:[[220,160,90,40],[280,205,115,50],[360,260,145,65],[460,335,190,85],[590,430,240,105],[755,550,310,135],[970,705,395,175],[1240,900,505,225],[1585,1155,650,290],[2030,1475,830,370]],  consumption : [4,2,2,2,2,3,3,3,3,3],    time : [  {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}  ]  },  "stable" : {  cost : [[260,140,220,100],[335,180,280,130],[425,230,360,165],[545,295,460,210],[700,375,590,270],[895,480,755,345],[1145,615,970,440],[1465,790,1240,565],[1875,1010,1585,720],[2400,1290,2030,920]],  consumption : [5,3,3,3,3,3,3,3,3,3],  time : [{hour:0,min:07,sec:20},{hour:0,min:09,sec:30},{hour:0,min:12,sec:02},{hour:0,min:14,sec:58},{hour:0,min:18,sec:20},{hour:0,min:22,sec:16},{hour:0,min:26,sec:50},{hour:0,min:32,sec:08},{hour:0,min:38,sec:16},{hour:0,min:45,sec:24}]  },  "headquarter" : {  cost : [[700,670,700,240],[930,890,930,320],[1240,1185,1240,425],[1645,1575,1645,565],[2190,2095,2190,750],[2915,2790,2915,1000],[3875,3710,3875,1330],[5155,4930,5155,1765],[6855,6560,6855,2350],[9115,8725,9115,3125]],  consumption : [2,1,1,1,1,2,2,2,2,2],  time : [  {hour:0,min:07,sec:40},{hour:0,min:08,sec:54},{hour:0,min:10,sec:18},{hour:0,min:11,sec:58},{hour:0,min:13,sec:52},{hour:0,min:16,sec:06},{hour:0,min:18,sec:40},{hour:0,min:21,sec:40},{hour:0,min:25,sec:08},{hour:0,min:29,sec:10}]},"workshop" : {cost : [[460,510,600,320],[590,655,770,410],[755,835,985,525],[965,1070,1260,670],[1235,1370,1610,860],[1580,1750,2060,1100],[2025,2245,2640,1405],[2590,2870,3380,1800],[3315,3675,4325,2305],[4245,4705,5535,2950]],consumption : [3,2,2,2,2,2,2,2,2,2],time : [{hour:0,min:10,sec:00},{hour:0,min:12,sec:36},{hour:0,min:15,sec:36},{hour:0,min:19,sec:06},{hour:0,min:23,sec:10},{hour:0,min:27,sec:52},{hour:0,min:33,sec:20},{hour:0,min:39,sec:40},{hour:0,min:47,sec:02},{hour:0,min:55,sec:32}]},"smithy":{cost : [[180,250,500,160],[230,320,640,205],[295,410,820,260],[375,525,1050,335],[485,670,1340,430],[620,860,1720,550],[790,1100,2200,705],[1015,1405,2815,900],[1295,1800,3605,1155],[1660,2305,4610,1475]],consumption : [4,2,2,2,2,3,3,3,3,3],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}]}, "granary" : {cost : [[80,100,70,20],[100,130,90,25],[130,165,115,35],[170,210,145,40],[215,270,190,55],[275,345,240,70],[350,440,310,90],[450,565,395,115],[575,720,505,145],[740,920,645,185]],consumption : [1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:05,sec:20},{hour:0,min:07,sec:12},{hour:0,min:09,sec:20},{hour:0,min:11,sec:50},{hour:0,min:14,sec:44},{hour:0,min:18,sec:04},{hour:0,min:21,sec:58},{hour:0,min:26,sec:30},{hour:0,min:31,sec:44},{hour:0,min:37,sec:48}]},"warehouse" : {cost : [[130,160,90,40],[165,205,115,50],[215,260,145,65],[275,335,190,85],[350,430,240,105],[445,550,310,135],[570,705,395,175],[730,900,505,225],[935,1155,650,290],[1200,1475,830,370]],consumption:[1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}]}}/** Function to get how many resource left in villege **/
+/** Function to get resource left from villege **/
+exports.getResourceOfVillege = function(username,callback) {
+  con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?))',username,function(err,result) {
+    if (err) callback(err);
+    console.log('Query Result : '+JSON.stringify(result));
+    saveStatus(username);
+    callback(null,result[0]);
+  })
+}
