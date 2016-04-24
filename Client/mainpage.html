@@ -104,94 +104,41 @@
                 
                   <!--resource 1-16-->  
                 
-                <div class="resource-box1">
-                  <image id="resource1"></image>
-                  <image id="resource1-label" class="level1"></image>
-                </div>
+                <div class="resource-box1"><image id="resource1"></image></div>
+                <div class="resource-box2"><image id="resource2"></image></div>
+                <div class="resource-box8"><image id="resource8"></image></div> 
+                <div class="resource-box9"><image id="resource9"></image></div>
+                <div class="resource-box16"><image id="resource16"></image></div>
+                <div class="resource-box10"><image id="resource10"></image></div>
+                <div class="resource-box15"><image id="resource15"></image></div> 
+                <div class="resource-box14"><image id="resource14"></image></div>
+                <div class="resource-box11"><image id="resource11"></image></div>
+                <div class="resource-box12"><image id="resource12"></image></div>
+                <div class="resource-box13"><image id="resource13"></image></div>
+                <div class="resource-box3"><image id="resource3"></image></div>
+                <div class="resource-box7"><image id="resource7"></image></div>  
+                <div class="resource-box6"><image id="resource6"></image></div>
+                <div class="resource-box5"><image id="resource5"></image></div>
+                <div class="resource-box4"><image id="resource4"></image></div>
                 
-                <div class="resource-box2">
-                  <image id="resource2">
-                  <image id="resource2-label" class="level1"></image>
-                  </image>
+                <div>
+                    <image id="resource1-label"></image>
+                    <image id="resource2-label"></image>
+                    <image id="resource8-label"></image>
+                    <image id="resource9-label"></image>
+                    <image id="resource16-label"></image>
+                    <image id="resource10-label"></image>
+                    <image id="resource15-label"></image>
+                    <image id="resource14-label"></image>
+                    <image id="resource11-label"></image>
+                    <image id="resource12-label"></image>
+                    <image id="resource13-label"></image>
+                    <image id="resource3-label"></image>
+                    <image id="resource7-label"></image>
+                    <image id="resource6-label"></image>
+                    <image id="resource5-label"></image>
+                    <image id="resource4-label"></image> 
                 </div>
-                
-                <div class="resource-box8">
-                    <image id="resource8">
-                        <image id="resource8-label" class="level1"></image>
-                    </image>
-                </div> 
-
-                <div class="resource-box9">
-                    <image id="resource9">
-                        <image id="resource9-label" class="level1"></image>
-                    </image>
-                </div>
-                
-                <div class="resource-box16">
-                    <image id="resource16"></image>
-                    <image id="resource16-label" class="level1"></image>
-                </div>
-                
-                <div class="resource-box10">
-                    <image id="resource10">
-                        <image id="resource10-label" class="level1"></image>
-                    </image>
-                </div>
-                
-                <div class="resource-box15">
-                    <image id="resource15"></image>
-                    <image id="resource15-label" class="level1"></image>
-                </div>
-                
-                <div class="resource-box14">
-                    <image id="resource14"></image>
-                    <image id="resource14-label" class="level1"></image>
-                </div>
-                
-                <div class="resource-box11">
-                    <image id="resource11"></image>
-                    <image id="resource11-label" class="level1"></image>
-                </div>
-
-                <div class="resource-box12">
-                    <image id="resource12"></image>
-                    <image id="resource12-label" class="level1"></image>
-                </div>
-
-                <div class="resource-box13">
-                    <image id="resource13"></image>
-                    <image id="resource13-label" class="level1"></image>
-                </div>
-
-                <div class="resource-box3">
-                  <image id="resource3">
-                  <image id="resource3-label" class="level1"></image>
-                  </image>
-                </div>
-                
-                <div class="resource-box7">
-                    <image id="resource7">
-                        <image id="resource7-label" class="level1"></image>
-                    </image>
-                </div>  
-                
-                <div class="resource-box6">
-                    <image id="resource6">
-                        <image id="resource6-label" class="level1"></image>
-                    </image>
-                </div>
-                
-                <div class="resource-box5">
-                    <image id="resource5">
-                        <image id="resource5-label" class="level1"></image>
-                    </image>
-                </div>
-
-                <div class="resource-box4">
-                  <image id="resource4">
-                  <image id="resource4-label" class="level1"></image>
-                  </image>
-                </div>                      
                 
             </div>
             
@@ -202,10 +149,13 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" id="modal-header-title"></h4>
+                            <h4 class="modal-title" id="modalupgrade-header-title"></h4>
                         </div>
-                        <div class="modal-body" id="modal-body">
-                            <p></p>
+                        <div class="modal-body">
+                            Rate of production : <span id="productIn-Time"></span> hr</p>
+                            Rate of production LV <span id="productNext-Level"></span> : <span id="productNext-Time"></span> hr</p>
+                            Requirment</p>
+                            Wood : <span></span> Clay : <span></span> Iron : <span></span> Crop : <span></span></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -435,6 +385,17 @@
                 //TODO remove user from server
             }
             
+            function upgradeResource(index){
+                //var index = eiei;
+                return function(event){
+                console.log("fail");
+                $('#upgrade-resourceModal').modal("show");
+                console.log(JSON.stringify(resource));
+                $('#modalupgrade-header-title').text(resource[index]["type"]+" level "+resource[index]["level"]);
+                //$('#modalupgrade-body').text("Rate of production : ");
+                }
+            }
+            
             init();
             
             /*Menu Listener*/
@@ -450,11 +411,15 @@
             $('#logout-btn').click(logout);
             
             /*Resource Listner*/
-            $('#resource1-label').click(function(e) {
-                $('#upgrade-resourceModal').modal("show");
-                console.log(JSON.stringify(resource));
-                e.preventDefault();
-            });
+           
+            //$('#resource1-label').on('click',upgradeResource(0)); 
+            //$('#resource2-label').on('click',upgradeResource(1)); 
+            for( var i=0 ; i< 16 ;i++){
+                $('#resource'+(i+1)+'-label').click(upgradeResource(i));
+            }
+            
+            
+            
             
             
         </script>
