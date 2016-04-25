@@ -13,18 +13,19 @@
         <link rel="stylesheet" href="crop.css">
         <link rel="stylesheet" href="circlelevel.css">
         <link rel="stylesheet" href="map.css">
+        <link rel="stylesheet" href="mail.css">
         <title>WarKu!</title>
     </head>
     <body>
         <!--Connect to socket.io -->
-            <script type="text/javascript">
-              var socket = io.connect('http://localhost:5555');
-            </script>
-        
+        <script type="text/javascript">
+            var socket = io.connect('http://localhost:5555');
+        </script>
+
         <!--Navbar menu-->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                
+
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -36,74 +37,74 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        
+
         <div class="menu-padding"></div>
         <!--menu-->
         <div class="menu-frame">
-           <nav>
-              <ul class="row-centered">
-                <!--menu resource-->
-                <li class="menu-li"><div class="menu" id="resource_menu">
-                    <a href="#">
-                    <img class="menu_img" src="picture/resource.png">
-                    </a>
-                    </div>
-                </li>
-                <!--menu village-->
-                <li class="menu-li"><div class="menu" id="village_menu">
-                    <a href="#">
-                    <img class="menu_img" src="picture/village.png">
-                    </a>
-                    </div>
-                </li>
-                <!--menu map-->
-                <li class="menu-li"><div class="menu" id="map_menu">
-                    <a href="#">
-                    <img class="menu_img" src="picture/map.png">
-                    </a>
-                    </div>
-                </li>
-                <!--menu report-->
-                <li><div class="menu" id="report_menu">
-                    <a href="#">
-                    <img class="menu_img" src="picture/report.png">
-                    </a>
-                    </div>
-                </li>
-                <!--menu mail-->
-                <li class="menu-li"><div class="menu" id="mail_menu">
-                    <a href="#">
-                    <img class="menu_img" src="picture/mail.png">
-                    </a>
-                    </div>
-                </li>
-               </ul>
+            <nav>
+                <ul class="row-centered">
+                    <!--menu resource-->
+                    <li class="menu-li"><div class="menu" id="resource_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/resource.png">
+                        </a>
+                        </div>
+                    </li>
+                    <!--menu village-->
+                    <li class="menu-li"><div class="menu" id="village_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/village.png">
+                        </a>
+                        </div>
+                    </li>
+                    <!--menu map-->
+                    <li class="menu-li"><div class="menu" id="map_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/map.png">
+                        </a>
+                        </div>
+                    </li>
+                    <!--menu report-->
+                    <li><div class="menu" id="report_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/report.png">
+                        </a>
+                        </div>
+                    </li>
+                    <!--menu mail-->
+                    <li class="menu-li"><div class="menu" id="mail_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/mail.png">
+                        </a>
+                        </div>
+                    </li>
+                </ul>
             </nav>
         </div>
         <div class="menu-frame">
-        <nav>
-            <ul class="row-centered">
-                <!--menu mail-->
-                <li class="menu-li"><div class="menu" id="statistic_menu">
-                    <a href="#">
-                    <img class="menu_img" src="picture/statistic.png">
-                    </a>
-                    </div>
-                </li>
-               
-            </ul>
-        </nav>
+            <nav>
+                <ul class="row-centered">
+                    <!--menu mail-->
+                    <li class="menu-li"><div class="menu" id="statistic_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/statistic.png">
+                        </a>
+                        </div>
+                    </li>
+
+                </ul>
+            </nav>
         </div>
         <!--resource container-->
         <div class ="container" id="resource_container">
             <span class="Centerer"></span>
             <div class="resoucre">
-                
-                
-            <image src="picture/resource-structure-test.png"></image>
-                
-                  <!--resource 1-16-->  
-                
+
+
+                <image src="picture/resource-structure-test.png"></image>
+
+                <!--resource 1-16-->  
+
                 <div class="resource-box1"><image id="resource1"></image></div>
                 <div class="resource-box2"><image id="resource2"></image></div>
                 <div class="resource-box8"><image id="resource8"></image></div> 
@@ -120,7 +121,7 @@
                 <div class="resource-box6"><image id="resource6"></image></div>
                 <div class="resource-box5"><image id="resource5"></image></div>
                 <div class="resource-box4"><image id="resource4"></image></div>
-                
+
                 <div>
                     <image id="resource1-label"></image>
                     <image id="resource2-label"></image>
@@ -139,9 +140,9 @@
                     <image id="resource5-label"></image>
                     <image id="resource4-label"></image> 
                 </div>
-                
+
             </div>
-            
+
             <!-- Upgrade resource Modal -->
             <div class="modal fade" id="upgrade-resourceModal" role="dialog">
                 <div class="modal-dialog">
@@ -152,313 +153,330 @@
                             <h4 class="modal-title" id="modalupgrade-header-title"></h4>
                         </div>
                         <div class="modal-body">
-                        Rate of production : <span id="productIn-time"></span> hr</p>
-<!--                        <span id="rateProduction"Rate of production LV </span>-->
+                            Rate of production : <span id="productIn-time"></span> hr</p>
+                        <!--                        <span id="rateProduction"Rate of production LV </span>-->
                         <span id="productNext-level"></span> : 
                         <span id="productNext-time"></span> hr</p>
-                            Requirment</p>
-                            Wood : <span id="setWood"></span> Clay : <span id="setClay"></span> Iron : <span id="setIron"></span> Crop : <span id="setCrop"></span></p>
-                            Upgrade time : <span id="upgrade-time"></span>
-                            <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal">Upgrade</button>
-                        </div>
-<!--
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+                    Requirment</p>
+                Wood : <span id="setWood"></span> Clay : <span id="setClay"></span> Iron : <span id="setIron"></span> Crop : <span id="setCrop"></span></p>
+            Upgrade time : <span id="upgrade-time"></span>
+            <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal">Upgrade</button>
+        </div>
+        <!--
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
 -->
-                    </div>
-                </div>
-            </div>
-            
         </div>
-        
-        <!--village container-->
-        <div class ="container" id="village_container">
-            <span class="Centerer"></span>
-            <div class="village">
-                <image src="picture/village.png"></image>
-            </div>
-            <div class="resource1">
-                <image id="resource_pos1"></image>
-            </div>
-        </div>
-        
-        <!--map container-->
-        <div class ="container" id="map_container">
-            <span class="map-center"></span>
-            
-            <div class="map">
-                <!-- map 8*8 -->
-                <image src="picture/map-test.png"></image>
-                <div id="map-posY1" class="posY1"></div>
-                <div id="map-posY2" class="posY2"></div>
-                <div id="map-posY3" class="posY3"></div>
-                <div id="map-posY4" class="posY4"></div>
-                <div id="map-posY5" class="posY5"></div>
-                <div id="map-posY6" class="posY6"></div>
-                <div id="map-posY7" class="posY7"></div>
-                <div id="map-posY8" class="posY8"></div>
-                <div id="map-posY9" class="posY9"></div>
-                <div id="map-posX1" class="posX1"></div>
-                <div id="map-posX2" class="posX2"></div>
-                <div id="map-posX3" class="posX3"></div>
-                <div id="map-posX4" class="posX4"></div>
-                <div id="map-posX5" class="posX5"></div>
-                <div id="map-posX6" class="posX6"></div>
-                <div id="map-posX7" class="posX7"></div>
-                <div id="map-posX8" class="posX8"></div>
-                <div id="map-posX1" class="posX9"></div>
-                <div id="map-free" class="free"></div>
-                <div id="map-box1" class="box1"></div>
-                <div id="map-box2" class="box2"></div>
-                <div id="map-box3" class="box3"></div>
-                <div id="map-box4" class="box4"></div>
-                <div id="map-box5" class="box5"></div>
-                <div id="map-box6" class="box6"></div>
-                <div id="map-box7" class="box7"></div>
-                <div id="map-box8" class="box8"></div>
-                <div id="map-box9" class="box9"></div>
-                <div id="map-box10" class="box10"></div>
-                <div id="map-box11" class="box11"></div>
-                <div id="map-box12" class="box12"></div>
-                <div id="map-box13" class="box13"></div>
-                <div id="map-box14" class="box14"></div>
-                <div id="map-box15" class="box15"></div>
-                <div id="map-box16" class="box16"></div>
-                <div id="map-box17" class="box17"></div>
-                <div id="map-box18" class="box18"></div>
-                <div id="map-box19" class="box19"></div>
-                <div id="map-box20" class="box20"></div>
-                <div id="map-box21" class="box21"></div>
-                <div id="map-box22" class="box22"></div>
-                <div id="map-box23" class="box23"></div>
-                <div id="map-box24" class="box24"></div>
-                <div id="map-box25" class="box25"></div>
-                <div id="map-box26" class="box26"></div>
-                <div id="map-box27" class="box27"></div>
-                <div id="map-box28" class="box28"></div>
-                <div id="map-box29" class="box29"></div>
-                <div id="map-box30" class="box30"></div>
-                <div id="map-box31" class="box31"></div>
-                <div id="map-box32" class="box32"></div>
-                <div id="map-box33" class="box33"></div>
-                <div id="map-box34" class="box34"></div>
-                <div id="map-box35" class="box35"></div>
-                <div id="map-box36" class="box36"></div>
-                <div id="map-box37" class="box37"></div>
-                <div id="map-box38" class="box38"></div>
-                <div id="map-box39" class="box39"></div>
-                <div id="map-box40" class="box40"></div>
-                <div id="map-box41" class="box41"></div>
-                <div id="map-box42" class="box42"></div>
-                <div id="map-box43" class="box43"></div>
-                <div id="map-box44" class="box44"></div>
-                <div id="map-box45" class="box45"></div>
-                <div id="map-box46" class="box46"></div>
-                <div id="map-box47" class="box47"></div>
-                <div id="map-box48" class="box48"></div>
-                <div id="map-box49" class="box49"></div>
-                <div id="map-box50" class="box50"></div>
-                <div id="map-box51" class="box51"></div>
-                <div id="map-box52" class="box52"></div>
-                <div id="map-box53" class="box53"></div>
-                <div id="map-box54" class="box54"></div>
-                <div id="map-box55" class="box55"></div>
-                <div id="map-box56" class="box56"></div>
-                <div id="map-box57" class="box57"></div>
-                <div id="map-box58" class="box58"></div>
-                <div id="map-box59" class="box59"></div>
-                <div id="map-box60" class="box60"></div>
-                <div id="map-box61" class="box61"></div>
-                <div id="map-box62" class="box62"></div>
-                <div id="map-box63" class="box63"></div>
-                <div id="map-box64" class="box64"></div>
-                <div id="map-box65" class="box65"></div>
-                <div id="map-box66" class="box66"></div>
-                <div id="map-box67" class="box67"></div>
-                <div id="map-box68" class="box68"></div>
-                <div id="map-box69" class="box69"></div>
-                <div id="map-box70" class="box70"></div>
-                <div id="map-box71" class="box71"></div>
-                <div id="map-box72" class="box72"></div>
-                <div id="map-box73" class="box73"></div>
-                <div id="map-box74" class="box74"></div>
-                <div id="map-box75" class="box75"></div>
-                <div id="map-box76" class="box76"></div>
-                <div id="map-box77" class="box77"></div>
-                <div id="map-box78" class="box78"></div>
-                <div id="map-box79" class="box79"></div>
-                <div id="map-box80" class="box80"></div>
-                <div id="map-box81" class="box81"></div>
-                <div id="map-arrow1" class="arrow1"></div>
-                <div id="map-arrow2" class="arrow2"></div>
-                <div id="map-arrow3" class="arrow3"></div>
-                <div id="map-arrow4" class="arrow4"></div>
-            </div>
-            
-            <!-- coordinates -->
+    </div>
+</div>
 
-            <div class="cordinates">
-                <div class="row padtop"></div>
-                <div class="row">
-                    <div class="col-md-8"></div>
-                    <div class="col-md-4 col-cordinates">
-                        <div class="cordinate-text">x</div>
-                        <input type="text" class="form-control" id="x-cordinate">
-                        <div class="cordinate-text">y</div>
-                        <input type="text" class="form-control" id="y-cordinate">
-                        <div class="cordinate-btn"></div>
-                        <button class="btn btn-primary" type="button">GO</button>
-                    </div>
+</div>
+
+<!--village container-->
+<div class ="container" id="village_container">
+    <span class="Centerer"></span>
+    <div class="village">
+        <image src="picture/village.png"></image>
+    </div>
+    <div class="resource1">
+        <image id="resource_pos1"></image>
+    </div>
+</div>
+
+<!--map container-->
+<div class ="container" id="map_container">
+    <span class="map-center"></span>
+
+    <div class="map">
+        <!-- map 8*8 -->
+        <image src="picture/map-test.png"></image>
+        <div id="map-posY1" class="posY1"></div>
+        <div id="map-posY2" class="posY2"></div>
+        <div id="map-posY3" class="posY3"></div>
+        <div id="map-posY4" class="posY4"></div>
+        <div id="map-posY5" class="posY5"></div>
+        <div id="map-posY6" class="posY6"></div>
+        <div id="map-posY7" class="posY7"></div>
+        <div id="map-posY8" class="posY8"></div>
+        <div id="map-posY9" class="posY9"></div>
+        <div id="map-posX1" class="posX1"></div>
+        <div id="map-posX2" class="posX2"></div>
+        <div id="map-posX3" class="posX3"></div>
+        <div id="map-posX4" class="posX4"></div>
+        <div id="map-posX5" class="posX5"></div>
+        <div id="map-posX6" class="posX6"></div>
+        <div id="map-posX7" class="posX7"></div>
+        <div id="map-posX8" class="posX8"></div>
+        <div id="map-posX1" class="posX9"></div>
+        <div id="map-free" class="free"></div>
+        <div id="map-box1" class="box1"></div>
+        <div id="map-box2" class="box2"></div>
+        <div id="map-box3" class="box3"></div>
+        <div id="map-box4" class="box4"></div>
+        <div id="map-box5" class="box5"></div>
+        <div id="map-box6" class="box6"></div>
+        <div id="map-box7" class="box7"></div>
+        <div id="map-box8" class="box8"></div>
+        <div id="map-box9" class="box9"></div>
+        <div id="map-box10" class="box10"></div>
+        <div id="map-box11" class="box11"></div>
+        <div id="map-box12" class="box12"></div>
+        <div id="map-box13" class="box13"></div>
+        <div id="map-box14" class="box14"></div>
+        <div id="map-box15" class="box15"></div>
+        <div id="map-box16" class="box16"></div>
+        <div id="map-box17" class="box17"></div>
+        <div id="map-box18" class="box18"></div>
+        <div id="map-box19" class="box19"></div>
+        <div id="map-box20" class="box20"></div>
+        <div id="map-box21" class="box21"></div>
+        <div id="map-box22" class="box22"></div>
+        <div id="map-box23" class="box23"></div>
+        <div id="map-box24" class="box24"></div>
+        <div id="map-box25" class="box25"></div>
+        <div id="map-box26" class="box26"></div>
+        <div id="map-box27" class="box27"></div>
+        <div id="map-box28" class="box28"></div>
+        <div id="map-box29" class="box29"></div>
+        <div id="map-box30" class="box30"></div>
+        <div id="map-box31" class="box31"></div>
+        <div id="map-box32" class="box32"></div>
+        <div id="map-box33" class="box33"></div>
+        <div id="map-box34" class="box34"></div>
+        <div id="map-box35" class="box35"></div>
+        <div id="map-box36" class="box36"></div>
+        <div id="map-box37" class="box37"></div>
+        <div id="map-box38" class="box38"></div>
+        <div id="map-box39" class="box39"></div>
+        <div id="map-box40" class="box40"></div>
+        <div id="map-box41" class="box41"></div>
+        <div id="map-box42" class="box42"></div>
+        <div id="map-box43" class="box43"></div>
+        <div id="map-box44" class="box44"></div>
+        <div id="map-box45" class="box45"></div>
+        <div id="map-box46" class="box46"></div>
+        <div id="map-box47" class="box47"></div>
+        <div id="map-box48" class="box48"></div>
+        <div id="map-box49" class="box49"></div>
+        <div id="map-box50" class="box50"></div>
+        <div id="map-box51" class="box51"></div>
+        <div id="map-box52" class="box52"></div>
+        <div id="map-box53" class="box53"></div>
+        <div id="map-box54" class="box54"></div>
+        <div id="map-box55" class="box55"></div>
+        <div id="map-box56" class="box56"></div>
+        <div id="map-box57" class="box57"></div>
+        <div id="map-box58" class="box58"></div>
+        <div id="map-box59" class="box59"></div>
+        <div id="map-box60" class="box60"></div>
+        <div id="map-box61" class="box61"></div>
+        <div id="map-box62" class="box62"></div>
+        <div id="map-box63" class="box63"></div>
+        <div id="map-box64" class="box64"></div>
+        <div id="map-box65" class="box65"></div>
+        <div id="map-box66" class="box66"></div>
+        <div id="map-box67" class="box67"></div>
+        <div id="map-box68" class="box68"></div>
+        <div id="map-box69" class="box69"></div>
+        <div id="map-box70" class="box70"></div>
+        <div id="map-box71" class="box71"></div>
+        <div id="map-box72" class="box72"></div>
+        <div id="map-box73" class="box73"></div>
+        <div id="map-box74" class="box74"></div>
+        <div id="map-box75" class="box75"></div>
+        <div id="map-box76" class="box76"></div>
+        <div id="map-box77" class="box77"></div>
+        <div id="map-box78" class="box78"></div>
+        <div id="map-box79" class="box79"></div>
+        <div id="map-box80" class="box80"></div>
+        <div id="map-box81" class="box81"></div>
+        <div id="map-arrow1" class="arrow1"></div>
+        <div id="map-arrow2" class="arrow2"></div>
+        <div id="map-arrow3" class="arrow3"></div>
+        <div id="map-arrow4" class="arrow4"></div>
+    </div>
+
+    <!-- coordinates -->
+
+    <div class="cordinates">
+        <div class="row padtop"></div>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4 col-cordinates">
+                <div class="cordinate-text">x</div>
+                <input type="text" class="form-control" id="x-cordinate">
+                <div class="cordinate-text">y</div>
+                <input type="text" class="form-control" id="y-cordinate">
+                <div class="cordinate-btn"></div>
+                <button class="btn btn-primary" type="button">GO</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--village container-->
+<div class ="container" id="report_container">
+    <span class="Centerer"></span>
+    <div class="village">
+        <image src="picture/report.png"></image>
+    </div>
+    <div class="resource1">
+        <image id="resource_pos1"></image>
+    </div>
+</div>
+
+<!--mail container-->
+<div class ="container" id="mail_container">
+    <span class="Centerer"></span>
+    <div class="jumbotron">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
+            <li class=""><a href="#compose" data-toggle="tab">Compose</a></li>
+            <li class=""><a href="#sendbox" data-toggle="tab">Sendbox</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="inbox">
+                <div class="jumbotron inbox-container">
+                    inbox
                 </div>
             </div>
-            
-        </div>
-        
-        <!--village container-->
-        <div class ="container" id="report_container">
-            <span class="Centerer"></span>
-            <div class="village">
-                <image src="picture/report.png"></image>
+            <div class="tab-pane fade" id="compose">
+                profile tab!
             </div>
-            <div class="resource1">
-                <image id="resource_pos1"></image>
+            <div class="tab-pane fade" id="sendbox">
+                profile tab!
             </div>
         </div>
-        
-        <!--village container-->
-        <div class ="container" id="mail_container">
-            <span class="Centerer"></span>
-            <div class="village">
-                <image src="picture/mail.png"></image>
-            </div>
-            <div class="resource1">
-                <image id="resource_pos1"></image>
-            </div>
-        </div>
-        
-        <!--village container-->
-        <div class ="container" id="statistic_container">
-            <span class="Centerer"></span>
-            <div class="village">
-                <image src="picture/statistic.png"></image>
-            </div>
-            <div class="resource1">
-                <image id="resource_pos1"></image>
-            </div>
-        </div>
-        
-        
-       <!-- Initialize -->
-        <script type="text/javascript">
-            var resource  = null;
-            var resource_info = {"crop" : {cost : [[70,90,70,20],[115,150,115,35],[195,250,195,55],[325,420,325,95],[545,700,545,155],[910,1170,910,260],[1520,1950,1520,435],[2535,3260,2535,725],[4235,5445,4235,1210],[7070,9095,7070,2020]], consumption : [0,0,0,0,0,1,1,1,1,1],produce : [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0,min : 0,sec : 30},{hour : 0,min : 1,sec : 15},{hour : 0,min : 3,sec : 0},{hour : 0,min : 5,sec : 30},{hour : 0,min : 9,sec : 20},{hour : 0,min : 15,sec : 30},{hour : 0,min : 25,sec : 50},{hour : 0,min : 36,sec : 30},{hour : 1,min : 8,sec : 15},{hour : 1,min : 45,sec : 30}]},"iron" : {cost : [[100,80,30,60],[165,135,50,100],[280,225,85,165],[465,375,140,280],[780,620,235,465],[1300,1040,390,780],[2170,1735,650,1300],[3625,2900,1085,2175],[6050,4840,1815,3630],[10105,8080,3030,6060]],consumption : [3,2,2,2,2,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 1, sec : 5},{hour : 0, min : 3, sec : 0},{hour : 0, min : 5, sec : 30},{hour : 0, min : 9, sec : 35},{hour : 0, min : 16, sec : 0},{hour : 0, min : 26, sec : 30},{hour : 0, min : 42, sec : 35},{hour : 1, min : 8, sec : 0},{hour : 1, min : 49, sec : 5},{hour : 2, min : 58, sec : 30}]},"clay" : {cost : [[80,40,80,50],[135,65,135,85],[225,110,225,140],[375,185,375,235],[620,310,620,390],[1040,520,1040,650],[1735,870,1735,1085],[2900,1450,2900,1810],[4840,2420,4840,3025],[8080,4040,8080,5050]],consumption : [2,1,1,1,1,5,5,5,5,5],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 40},{hour : 0, min : 1, sec : 50},{hour : 0, min : 3, sec : 30},{hour : 0, min : 6, sec : 20},{hour : 0, min : 10, sec : 50},{hour : 0, min : 18, sec : 10},{hour : 0, min : 29, sec : 50},{hour : 0, min : 48, sec : 20},{hour : 1, min : 18, sec : 10},{hour : 2, min : 5, sec : 30}]},"wood" : {cost : [[40,100,50,60],[65,165,85,100],[110,280,140,165],[185,465,235,280],[310,780,390,465],[520,1300,650,780],[870,2170,1085,1300],[1450,3625,1810,2175],[2420,6050,3025,3630],[4040,10105,5050,6060]],consumption : [2,1,1,1,1,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 50},{hour : 0, min : 2, sec : 0},{hour : 0, min : 3, sec : 50},{hour : 0, min : 7, sec : 0},{hour : 0, min : 11, sec : 50},{hour : 0, min : 18, sec : 50},{hour : 0, min : 32, sec : 0},{hour : 1, min : 51, sec : 50},{hour : 1, min : 23, sec : 50},{hour : 2, min : 14, sec : 50}]}};
-            
-            function init(){
-                $('#resource_container').hide();
-                $('#village_container').hide();
-                $('#map_container').hide();
-                $('#report_container').hide();
-                $('#mail_container').hide();
-                $('#statistic_container').hide();
+    </div>
+    <div class="resource1">
+        <image id="resource_pos1"></image>
+    </div>
+</div>
+
+<!--village container-->
+<div class ="container" id="statistic_container">
+    <span class="Centerer"></span>
+    <div class="village">
+        <image src="picture/statistic.png"></image>
+    </div>
+    <div class="resource1">
+        <image id="resource_pos1"></image>
+    </div>
+</div>
+
+
+<!-- Initialize -->
+<script type="text/javascript">
+    var resource  = null;
+    var resource_info = {"crop" : {cost : [[70,90,70,20],[115,150,115,35],[195,250,195,55],[325,420,325,95],[545,700,545,155],[910,1170,910,260],[1520,1950,1520,435],[2535,3260,2535,725],[4235,5445,4235,1210],[7070,9095,7070,2020]], consumption : [0,0,0,0,0,1,1,1,1,1],produce : [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0,min : 0,sec : 30},{hour : 0,min : 1,sec : 15},{hour : 0,min : 3,sec : 0},{hour : 0,min : 5,sec : 30},{hour : 0,min : 9,sec : 20},{hour : 0,min : 15,sec : 30},{hour : 0,min : 25,sec : 50},{hour : 0,min : 36,sec : 30},{hour : 1,min : 8,sec : 15},{hour : 1,min : 45,sec : 30}]},"iron" : {cost : [[100,80,30,60],[165,135,50,100],[280,225,85,165],[465,375,140,280],[780,620,235,465],[1300,1040,390,780],[2170,1735,650,1300],[3625,2900,1085,2175],[6050,4840,1815,3630],[10105,8080,3030,6060]],consumption : [3,2,2,2,2,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 1, sec : 5},{hour : 0, min : 3, sec : 0},{hour : 0, min : 5, sec : 30},{hour : 0, min : 9, sec : 35},{hour : 0, min : 16, sec : 0},{hour : 0, min : 26, sec : 30},{hour : 0, min : 42, sec : 35},{hour : 1, min : 8, sec : 0},{hour : 1, min : 49, sec : 5},{hour : 2, min : 58, sec : 30}]},"clay" : {cost : [[80,40,80,50],[135,65,135,85],[225,110,225,140],[375,185,375,235],[620,310,620,390],[1040,520,1040,650],[1735,870,1735,1085],[2900,1450,2900,1810],[4840,2420,4840,3025],[8080,4040,8080,5050]],consumption : [2,1,1,1,1,5,5,5,5,5],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 40},{hour : 0, min : 1, sec : 50},{hour : 0, min : 3, sec : 30},{hour : 0, min : 6, sec : 20},{hour : 0, min : 10, sec : 50},{hour : 0, min : 18, sec : 10},{hour : 0, min : 29, sec : 50},{hour : 0, min : 48, sec : 20},{hour : 1, min : 18, sec : 10},{hour : 2, min : 5, sec : 30}]},"wood" : {cost : [[40,100,50,60],[65,165,85,100],[110,280,140,165],[185,465,235,280],[310,780,390,465],[520,1300,650,780],[870,2170,1085,1300],[1450,3625,1810,2175],[2420,6050,3025,3630],[4040,10105,5050,6060]],consumption : [2,1,1,1,1,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 50},{hour : 0, min : 2, sec : 0},{hour : 0, min : 3, sec : 50},{hour : 0, min : 7, sec : 0},{hour : 0, min : 11, sec : 50},{hour : 0, min : 18, sec : 50},{hour : 0, min : 32, sec : 0},{hour : 1, min : 51, sec : 50},{hour : 1, min : 23, sec : 50},{hour : 2, min : 14, sec : 50}]}};
+
+    function init(){
+        $('#resource_container').hide();
+        $('#village_container').hide();
+        $('#map_container').hide();
+        $('#report_container').hide();
+        $('#mail_container').hide();
+        $('#statistic_container').hide();
+    }
+
+    function resourceClick(){
+        init();
+        $('#resource_container').show(); 
+        socket.emit('resource-request');
+        socket.on('resource-data',function(result){
+            resource = result;
+            for(var i=0;i<16;i++){
+                document.getElementById("resource"+(i+1)).className = result[i]["type"]+(i+1);
+                document.getElementById("resource"+(i+1)+"-label").className = "level"+(result[i]["level"]);
             }
-                
-            function resourceClick(){
-                init();
-                $('#resource_container').show(); 
-                socket.emit('resource-request');
-                socket.on('resource-data',function(result){
-                     resource = result;
-                     for(var i=0;i<16;i++){
-                        document.getElementById("resource"+(i+1)).className = result[i]["type"]+(i+1);
-                        document.getElementById("resource"+(i+1)+"-label").className = "level"+(result[i]["level"]);
-                     }
-                });
-                
-            }     
-        
-            function villageClick(){
-                init();
-                $('#village_container').show(); 
+        });
+
+    }     
+
+    function villageClick(){
+        init();
+        $('#village_container').show(); 
+    }
+
+    function mapClick(){
+        init();
+        $('#map_container').show(); 
+    }
+
+    function reportClick(){
+        init();
+        $('#report_container').show(); 
+    }
+
+    function mailClick(){
+        init();
+        $('#mail_container').show(); 
+    }
+
+    function statisticClick(){
+        init();
+        $('#statistic_container').show(); 
+    }
+
+    function logout(){
+        location.assign("http:/Client/index.html");
+        //TODO remove user from server
+    }
+    function upgradeResource(index){
+        //var index = eiei;
+        var upgradeTime = "";
+        return function(event){
+            console.log("fail");
+            $('#upgrade-resourceModal').modal("show");
+            console.log(JSON.stringify(resource));
+            $('#modalupgrade-header-title').text(resource[index]["type"]+" level "+resource[index]["level"]);
+            $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
+            if(resource[index]["level"] < 10){
+                $('#productNext-level').text("Rate of production LV "+(resource[index]["level"]+1));
+                $('#productNext-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]+1]);   
             }
-            
-            function mapClick(){
-                init();
-                $('#map_container').show(); 
-            }
-            
-            function reportClick(){
-                init();
-                $('#report_container').show(); 
-            }
-            
-            function mailClick(){
-                init();
-                $('#mail_container').show(); 
-            }
-            
-            function statisticClick(){
-                init();
-                $('#statistic_container').show(); 
-            }
-            
-            function logout(){
-                location.assign("http:/Client/index.html");
-                //TODO remove user from server
-            }
-            function upgradeResource(index){
-                //var index = eiei;
-                var upgradeTime = "";
-                return function(event){
-                console.log("fail");
-                $('#upgrade-resourceModal').modal("show");
-                console.log(JSON.stringify(resource));
-                $('#modalupgrade-header-title').text(resource[index]["type"]+" level "+resource[index]["level"]);
-                $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
-                if(resource[index]["level"] < 10){
-                    $('#productNext-level').text("Rate of production LV "+(resource[index]["level"]+1));
-                    $('#productNext-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]+1]);   
-                }
-                $('#setWood').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][0]);
-                $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
-                $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
-                $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
-                
-                upgradeTime = resource_info[resource[index]["type"]].time[resource[index]["level"]].hour+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].min+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].sec ;
-                $('#upgrade-time').text(upgradeTime);
-        
-                }
-                
-            }
-            
-            init();
-            
-            /*Menu Listener*/
-            resourceClick();
-            $('#resource_menu').click(resourceClick);
-            $('#village_menu').click(villageClick);
-            $('#map_menu').click(mapClick);
-            $('#report_menu').click(reportClick);
-            $('#mail_menu').click(mailClick);
-            $('#statistic_menu').click(statisticClick);
-            
-            /*Navbar Listener*/
-            $('#logout-btn').click(logout);
-            
-            /*Resource Listner*/
-           
-            //$('#resource1-label').on('click',upgradeResource(0)); 
-            //$('#resource2-label').on('click',upgradeResource(1)); 
-            for( var i=0 ; i< 16 ;i++){
-                $('#resource'+(i+1)+'-label').click(upgradeResource(i));
-            }
-            
-            
-            
-            
-            
-        </script>
-        
-        
-    </body>
+            $('#setWood').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][0]);
+            $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
+            $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
+            $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
+
+            upgradeTime = resource_info[resource[index]["type"]].time[resource[index]["level"]].hour+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].min+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].sec ;
+            $('#upgrade-time').text(upgradeTime);
+
+        }
+
+    }
+
+    init();
+
+    /*Menu Listener*/
+    resourceClick();
+    $('#resource_menu').click(resourceClick);
+    $('#village_menu').click(villageClick);
+    $('#map_menu').click(mapClick);
+    $('#report_menu').click(reportClick);
+    $('#mail_menu').click(mailClick);
+    $('#statistic_menu').click(statisticClick);
+
+    /*Navbar Listener*/
+    $('#logout-btn').click(logout);
+
+    /*Resource Listner*/
+
+    //$('#resource1-label').on('click',upgradeResource(0)); 
+    //$('#resource2-label').on('click',upgradeResource(1)); 
+    for( var i=0 ; i< 16 ;i++){
+        $('#resource'+(i+1)+'-label').click(upgradeResource(i));
+    }
+
+
+
+
+
+</script>
+
+
+</body>
 </html>
