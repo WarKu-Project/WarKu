@@ -187,10 +187,10 @@ function checkAvailableTask(username,callback) {
         console.log('Query Result : '+JSON.stringify(result));
         var num_worker = result[0].level;
         if (num<num_worker) {
-          var available_worker = num_worker-num;
+          //var available_worker = num_worker-num;
           console.log('Can update task');
           saveStatus(username);
-          callback(null,true,vid,available_worker);
+          callback(null,true,vid);
         }
         else {
           console.log('All worker are busy');
@@ -204,9 +204,9 @@ function checkAvailableTask(username,callback) {
 /** Function to get upgrade status of resource**/
 exports.getResourceUpgradeStatus = function(username,pos,callback) {
   console.log('Received Data username = '+username+" pos = "+pos);
-  checkAvailableTask(username,function(err,status,vid,worker) {
+  checkAvailableTask(username,function(err,status,vid) {
     if (err) callback(err);
-    console.log('Received Data status = '+status+" vid = "+vid+" worker = "+worker);
+    console.log('Received Data status = '+status+" vid = "+vid);
     if (!status) {
       console.log('Can\'t upgrade');
       callback(null,false)
@@ -284,4 +284,8 @@ exports.getResourceOfVillege = function(username,callback) {
     saveStatus(username);
     callback(null,result[0]);
   })
+}
+/** Function to create building **/
+exports.createBuilding = function(username,pos,callback) {
+
 }
