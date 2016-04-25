@@ -81,20 +81,40 @@
                 </ul>
             </nav>
         </div>
-        <div class="menu-frame">
-            <nav>
-                <ul class="row-centered">
-                    <!--menu mail-->
-                    <li class="menu-li"><div class="menu" id="statistic_menu">
-                        <a href="#">
-                            <img class="menu_img" src="picture/statistic.png">
-                        </a>
-                        </div>
-                    </li>
 
-                </ul>
-            </nav>
+        <!--
+<div class="menu-frame">
+<nav>
+<ul class="row-centered">
+<li class="menu-li"><div class="menu" id="statistic_menu">
+<a href="#">
+<img class="menu_img" src="picture/statistic.png">
+</a>
+</div>
+</li>
+
+</ul>
+</nav>
+</div>
+-->
+
+        <!-- Stockbar -->
+        <div class="row">
+            <div class="container">
+                <div class="jumbotron stockbar">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3">Wood&nbsp;&nbsp;<span id="woodnum">0</span></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">Clay&nbsp;&nbsp;<span id="claynum">0</span></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">Iron&nbsp;&nbsp;<span id="ironnum">0</span></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">Crop&nbsp;&nbsp;<span id="cropnum">0</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+
+
         <!--resource container-->
         <div class ="container" id="resource_container">
             <span class="Centerer"></span>
@@ -302,8 +322,8 @@
     <div class="cordinates">
         <div class="row padtop"></div>
         <div class="row">
-            <div class="col-md-8"></div>
-            <div class="col-md-4 col-cordinates">
+            <div class="col-md-8 col-sm-8 col-xs-8"></div>
+            <div class="col-md-4 col-sm-4 col-xs-4 col-cordinates">
                 <div class="cordinate-text">x</div>
                 <input type="text" class="form-control" id="x-cordinate">
                 <div class="cordinate-text">y</div>
@@ -356,21 +376,24 @@
 </div>
 
 <!--village container-->
+<!--
 <div class ="container" id="statistic_container">
-    <span class="Centerer"></span>
-    <div class="village">
-        <image src="picture/statistic.png"></image>
-    </div>
-    <div class="resource1">
-        <image id="resource_pos1"></image>
-    </div>
+<span class="Centerer"></span>
+<div class="village">
+<image src="picture/statistic.png"></image>
 </div>
+<div class="resource1">
+<image id="resource_pos1"></image>
+</div>
+</div>-->
 
 
 <!-- Initialize -->
 <script type="text/javascript">
     var resource  = null;
     var resource_info = {"crop" : {cost : [[70,90,70,20],[115,150,115,35],[195,250,195,55],[325,420,325,95],[545,700,545,155],[910,1170,910,260],[1520,1950,1520,435],[2535,3260,2535,725],[4235,5445,4235,1210],[7070,9095,7070,2020]], consumption : [0,0,0,0,0,1,1,1,1,1],produce : [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0,min : 0,sec : 30},{hour : 0,min : 1,sec : 15},{hour : 0,min : 3,sec : 0},{hour : 0,min : 5,sec : 30},{hour : 0,min : 9,sec : 20},{hour : 0,min : 15,sec : 30},{hour : 0,min : 25,sec : 50},{hour : 0,min : 36,sec : 30},{hour : 1,min : 8,sec : 15},{hour : 1,min : 45,sec : 30}]},"iron" : {cost : [[100,80,30,60],[165,135,50,100],[280,225,85,165],[465,375,140,280],[780,620,235,465],[1300,1040,390,780],[2170,1735,650,1300],[3625,2900,1085,2175],[6050,4840,1815,3630],[10105,8080,3030,6060]],consumption : [3,2,2,2,2,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 1, sec : 5},{hour : 0, min : 3, sec : 0},{hour : 0, min : 5, sec : 30},{hour : 0, min : 9, sec : 35},{hour : 0, min : 16, sec : 0},{hour : 0, min : 26, sec : 30},{hour : 0, min : 42, sec : 35},{hour : 1, min : 8, sec : 0},{hour : 1, min : 49, sec : 5},{hour : 2, min : 58, sec : 30}]},"clay" : {cost : [[80,40,80,50],[135,65,135,85],[225,110,225,140],[375,185,375,235],[620,310,620,390],[1040,520,1040,650],[1735,870,1735,1085],[2900,1450,2900,1810],[4840,2420,4840,3025],[8080,4040,8080,5050]],consumption : [2,1,1,1,1,5,5,5,5,5],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 40},{hour : 0, min : 1, sec : 50},{hour : 0, min : 3, sec : 30},{hour : 0, min : 6, sec : 20},{hour : 0, min : 10, sec : 50},{hour : 0, min : 18, sec : 10},{hour : 0, min : 29, sec : 50},{hour : 0, min : 48, sec : 20},{hour : 1, min : 18, sec : 10},{hour : 2, min : 5, sec : 30}]},"wood" : {cost : [[40,100,50,60],[65,165,85,100],[110,280,140,165],[185,465,235,280],[310,780,390,465],[520,1300,650,780],[870,2170,1085,1300],[1450,3625,1810,2175],[2420,6050,3025,3630],[4040,10105,5050,6060]],consumption : [2,1,1,1,1,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 50},{hour : 0, min : 2, sec : 0},{hour : 0, min : 3, sec : 50},{hour : 0, min : 7, sec : 0},{hour : 0, min : 11, sec : 50},{hour : 0, min : 18, sec : 50},{hour : 0, min : 32, sec : 0},{hour : 1, min : 51, sec : 50},{hour : 1, min : 23, sec : 50},{hour : 2, min : 14, sec : 50}]}};
+    var resource_value =null;
+
 
     function init(){
         $('#resource_container').hide();
@@ -379,6 +402,7 @@
         $('#report_container').hide();
         $('#mail_container').hide();
         $('#statistic_container').hide();
+        getResourceValue();
     }
 
     function resourceClick(){
@@ -424,17 +448,6 @@
         location.assign("http:/Client/index.html");
         //TODO remove user from server
     }
-    /** Function to format to two digit**/
-    function twoDigits(d) {
-        if(0 <= d && d < 10) return "0" + d.toString();
-        if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-        return d.toString();
-    }
-    function upgradeResourceLevel(index){
-        return  function(event){
-                    socket.emit('upgrade-resource-request',index);
-                }
-    }
     function upgradeResource(index){
         //var index = eiei;
         var upgradeTime = "";
@@ -453,12 +466,31 @@
             $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
             $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
 
-            upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour)+":"+twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min)+":"+twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec) ;
+            upgradeTime = resource_info[resource[index]["type"]].time[resource[index]["level"]].hour+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].min+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].sec ;
             $('#upgrade-time').text(upgradeTime);
-            $('#buttonUpgrade').click(upgradeResourceLevel(index));
 
         }
 
+    }
+
+    function updateResource(){
+        for(var i=0;i<16;i++){
+            if(resource[i]["type"] == "wood") resource_value.wood += (resource_info["wood"].produce[resource[i]["level"]])/3600;
+            else if(resource[i]["type"] == "clay") resource_value.clay += (resource_info["clay"].produce[resource[i]["level"]])/3600;
+            else if(resource[i]["type"] == "iron") resource_value.iron += (resource_info["iron"].produce[resource[i]["level"]])/3600;
+            else resource_value.crop += (resource_info["crop"].produce[resource[i]["level"]])/3600;
+        }
+        $('#woodnum').text(parseInt(resource_value.wood));
+        $('#claynum').text(parseInt(resource_value.clay));
+        $('#ironnum').text(parseInt(resource_value.iron));
+        $('#cropnum').text(parseInt(resource_value.crop));
+    }
+
+    function getResourceValue(){
+        socket.emit('resource-value-request');
+        socket.on('resource-value-data',function(result){
+            resource_value = result;
+        });
     }
 
     init();
@@ -483,7 +515,8 @@
         $('#resource'+(i+1)+'-label').click(upgradeResource(i));
     }
 
-
+    /*Stockbar*/
+    setInterval(updateResource, 1000);
 
 
 
