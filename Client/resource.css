@@ -1,0 +1,29 @@
+#resource_container{
+    position: relative;
+    height: 700px;
+}
+
+.resoucre{
+    margin-left: auto;
+    margin-right: 100%;
+    width: 70%;
+    position: relative;
+}
+
+#produce_container{
+    position: absolute;
+    top: 70%;
+    left: 73%;
+    width: 25%;
+    border: 2px solid #000;
+    border-radius: 10px;
+    height: 150px;
+}
+
+.paddingrow{
+    padding-left: 10%;
+}
+
+.toTop{
+  margin-top: -10%;
+}

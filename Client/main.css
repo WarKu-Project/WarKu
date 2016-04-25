@@ -52,18 +52,6 @@ img {
     height:auto;
 }
 
-#resource_container{
-    position: relative;
-    height: 700px;
-}
-
-.resoucre{
-    margin-left: auto;
-    margin-right: 100%;
-    width: 70%;
-    position: relative;
-}
-
 .Centerer
 {
     display: inline-block;
@@ -72,7 +60,7 @@ img {
 }
    
 .modal-body{
-    
+  
 }
 
 .modal-header{
@@ -93,6 +81,7 @@ img {
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
+    border: 2px solid #000;
 }
 
 
