@@ -152,14 +152,20 @@
                             <h4 class="modal-title" id="modalupgrade-header-title"></h4>
                         </div>
                         <div class="modal-body">
-                            Rate of production : <span id="productIn-Time"></span> hr</p>
-                            Rate of production LV <span id="productNext-Level"></span> : <span id="productNext-Time"></span> hr</p>
+                        Rate of production : <span id="productIn-time"></span> hr</p>
+<!--                        <span id="rateProduction"Rate of production LV </span>-->
+                        <span id="productNext-level"></span> : 
+                        <span id="productNext-time"></span> hr</p>
                             Requirment</p>
-                            Wood : <span></span> Clay : <span></span> Iron : <span></span> Crop : <span></span></p>
+                            Wood : <span id="setWood"></span> Clay : <span id="setClay"></span> Iron : <span id="setIron"></span> Crop : <span id="setCrop"></span></p>
+                            Upgrade time : <span id="upgrade-time"></span>
+                            <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal">Upgrade</button>
                         </div>
+<!--
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
+-->
                     </div>
                 </div>
             </div>
@@ -346,7 +352,7 @@
        <!-- Initialize -->
         <script type="text/javascript">
             var resource  = null;
-            
+            var resource_info = {"crop" : {cost : [[70,90,70,20],[115,150,115,35],[195,250,195,55],[325,420,325,95],[545,700,545,155],[910,1170,910,260],[1520,1950,1520,435],[2535,3260,2535,725],[4235,5445,4235,1210],[7070,9095,7070,2020]], consumption : [0,0,0,0,0,1,1,1,1,1],produce : [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0,min : 0,sec : 30},{hour : 0,min : 1,sec : 15},{hour : 0,min : 3,sec : 0},{hour : 0,min : 5,sec : 30},{hour : 0,min : 9,sec : 20},{hour : 0,min : 15,sec : 30},{hour : 0,min : 25,sec : 50},{hour : 0,min : 36,sec : 30},{hour : 1,min : 8,sec : 15},{hour : 1,min : 45,sec : 30}]},"iron" : {cost : [[100,80,30,60],[165,135,50,100],[280,225,85,165],[465,375,140,280],[780,620,235,465],[1300,1040,390,780],[2170,1735,650,1300],[3625,2900,1085,2175],[6050,4840,1815,3630],[10105,8080,3030,6060]],consumption : [3,2,2,2,2,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 1, sec : 5},{hour : 0, min : 3, sec : 0},{hour : 0, min : 5, sec : 30},{hour : 0, min : 9, sec : 35},{hour : 0, min : 16, sec : 0},{hour : 0, min : 26, sec : 30},{hour : 0, min : 42, sec : 35},{hour : 1, min : 8, sec : 0},{hour : 1, min : 49, sec : 5},{hour : 2, min : 58, sec : 30}]},"clay" : {cost : [[80,40,80,50],[135,65,135,85],[225,110,225,140],[375,185,375,235],[620,310,620,390],[1040,520,1040,650],[1735,870,1735,1085],[2900,1450,2900,1810],[4840,2420,4840,3025],[8080,4040,8080,5050]],consumption : [2,1,1,1,1,5,5,5,5,5],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 40},{hour : 0, min : 1, sec : 50},{hour : 0, min : 3, sec : 30},{hour : 0, min : 6, sec : 20},{hour : 0, min : 10, sec : 50},{hour : 0, min : 18, sec : 10},{hour : 0, min : 29, sec : 50},{hour : 0, min : 48, sec : 20},{hour : 1, min : 18, sec : 10},{hour : 2, min : 5, sec : 30}]},"wood" : {cost : [[40,100,50,60],[65,165,85,100],[110,280,140,165],[185,465,235,280],[310,780,390,465],[520,1300,650,780],[870,2170,1085,1300],[1450,3625,1810,2175],[2420,6050,3025,3630],[4040,10105,5050,6060]],consumption : [2,1,1,1,1,2,2,2,2,2],produce: [15,25,45,75,125,155,255,355,505,725,1500],time : [{hour : 0, min : 0, sec : 50},{hour : 0, min : 2, sec : 0},{hour : 0, min : 3, sec : 50},{hour : 0, min : 7, sec : 0},{hour : 0, min : 11, sec : 50},{hour : 0, min : 18, sec : 50},{hour : 0, min : 32, sec : 0},{hour : 1, min : 51, sec : 50},{hour : 1, min : 23, sec : 50},{hour : 2, min : 14, sec : 50}]}};
             
             function init(){
                 $('#resource_container').hide();
@@ -362,7 +368,7 @@
                 $('#resource_container').show(); 
                 socket.emit('resource-request');
                 socket.on('resource-data',function(result){
-                     resource =result;
+                     resource = result;
                      for(var i=0;i<16;i++){
                         document.getElementById("resource"+(i+1)).className = result[i]["type"]+(i+1);
                         document.getElementById("resource"+(i+1)+"-label").className = "level"+(result[i]["level"]);
@@ -400,16 +406,29 @@
                 location.assign("http:/Client/index.html");
                 //TODO remove user from server
             }
-            
             function upgradeResource(index){
                 //var index = eiei;
+                var upgradeTime = "";
                 return function(event){
                 console.log("fail");
                 $('#upgrade-resourceModal').modal("show");
                 console.log(JSON.stringify(resource));
                 $('#modalupgrade-header-title').text(resource[index]["type"]+" level "+resource[index]["level"]);
-                //$('#modalupgrade-body').text("Rate of production : ");
+                $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
+                if(resource[index]["level"] < 10){
+                    $('#productNext-level').text("Rate of production LV "+(resource[index]["level"]+1));
+                    $('#productNext-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]+1]);   
                 }
+                $('#setWood').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][0]);
+                $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
+                $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
+                $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
+                
+                upgradeTime = resource_info[resource[index]["type"]].time[resource[index]["level"]].hour+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].min+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].sec ;
+                $('#upgrade-time').text(upgradeTime);
+        
+                }
+                
             }
             
             init();
