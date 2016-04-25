@@ -402,7 +402,7 @@
         $('#report_container').hide();
         $('#mail_container').hide();
         $('#statistic_container').hide();
-        getResourceValue();
+        setResourceValue();
     }
 
     function resourceClick(){
@@ -448,6 +448,21 @@
         location.assign("http:/Client/index.html");
         //TODO remove user from server
     }
+    
+     /** Function to format to two digit**/
+    function twoDigits(d) {
+        if(0 <= d && d < 10) return "0" + d.toString();
+        if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+        return d.toString();
+    }
+    
+    function upgradeResourceLevel(index){
+        return  function(event){
+                    socket.emit('upgrade-resource-request',index);
+                    setResourceValue();
+                }
+    }
+    
     function upgradeResource(index){
         //var index = eiei;
         var upgradeTime = "";
@@ -466,13 +481,12 @@
             $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
             $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
 
-            upgradeTime = resource_info[resource[index]["type"]].time[resource[index]["level"]].hour+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].min+":"+resource_info[resource[index]["type"]].time[resource[index]["level"]].sec ;
+            upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour)+":"+twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min)+":"+twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec) ;
             $('#upgrade-time').text(upgradeTime);
-
+            $('#buttonUpgrade').click(upgradeResourceLevel(index));
         }
 
     }
-
     function updateResource(){
         for(var i=0;i<16;i++){
             if(resource[i]["type"] == "wood") resource_value.wood += (resource_info["wood"].produce[resource[i]["level"]])/3600;
@@ -485,13 +499,14 @@
         $('#ironnum').text(parseInt(resource_value.iron));
         $('#cropnum').text(parseInt(resource_value.crop));
     }
-
-    function getResourceValue(){
+    function setResourceValue(){
+        console.log('update');
         socket.emit('resource-value-request');
         socket.on('resource-value-data',function(result){
             resource_value = result;
         });
     }
+    
 
     init();
 
