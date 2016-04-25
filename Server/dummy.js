@@ -18,7 +18,7 @@ con.query('CREATE TABLE player (pid int NOT NULL AUTO_INCREMENT,username varchar
 });
 
 /** Initialize villege table **/
-con.query('CREATE TABLE villege (vid int  NOT NULL AUTO_INCREMENT,name varchar(30) DEFAULT \'New Villege\',x int NOT NULL,y int NOT NULL,wood int DEFAULT 750 , clay int DEFAULT 750,iron int DEFAULT 750, crop int DEFAULT 750,pid int DEFAULT 1,PRIMARY KEY(vid),FOREIGN KEY(pid) REFERENCES player(pid),CONSTRAINT coordinates UNIQUE(x,y))',function(err) {
+con.query('CREATE TABLE villege (vid int  NOT NULL AUTO_INCREMENT,name varchar(30) DEFAULT \'New Villege\',x int NOT NULL,y int NOT NULL,wood float DEFAULT 750 , clay float DEFAULT 750,iron float DEFAULT 750, crop float DEFAULT 750,pid int DEFAULT 1,PRIMARY KEY(vid),FOREIGN KEY(pid) REFERENCES player(pid),CONSTRAINT coordinates UNIQUE(x,y))',function(err) {
   if (err) console.log(err.toString());
   else console.log('Create villege table to mysql !!');
 });
@@ -64,6 +64,11 @@ con.query('CREATE TABLE task (tid int NOT NULL AUTO_INCREMENT,endtime datetime N
 con.query('CREATE TABLE structuringtask (tid int NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),level int NOT NULL,FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
   if (err) console.log(err.toString());
   else console.log('structuringtask is created to mysql');
+})
+/** Initialize recentvillegestatus table **/
+con.query('CREATE TABLE recentvillegestatus(vid int NOT NULL,lastvisitedtime datetime NOT NULL,PRIMARY KEY(vid),FOREIGN KEY(vid) REFERENCES villege(vid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('recentvillegestatus is created to mysql');
 })
 //Initialize starter villege
 global.resource_list = ['wood','clay','iron','crop'];

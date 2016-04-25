@@ -84,6 +84,17 @@ function initStatus(pid,vid) {
     console.log('Query : '+JSON.stringify(result));
     console.log('Init new status');
   })
+  con.query('INSERT INTO recentvillegestatus(vid,lastvisitedtime) values(?,NOW())',vid,function(err,result) {
+    if (err) throw err;
+    console.log('Query : '+JSON.stringify(result));
+    console.log('Init new villege status');
+  })
+}
+/** Function to save villege status **/
+function saveVillegeStatus(vid) {
+  con.query('UPDATE recentvillegestatus SET lastvisitedtime = NOW() WHERE vid = ? ',vid,function (err) {
+    if (err) throw err;
+  })
 }
 /** Function to save status **/
 function saveStatus(username,vid){
@@ -92,6 +103,7 @@ function saveStatus(username,vid){
     //console.log('Changed ' + result.changedRows + ' rows');
     console.log("Player "+username+" : Update recent status ");
   });
+  saveVillegeStatus(vid);
 }
 /** Function to save status **/
 function saveStatus(username){
@@ -100,6 +112,10 @@ function saveStatus(username){
     console.log('Changed ' + result.changedRows + ' rows');
     console.log("Player "+username+" : Update recent status ");
   });
+  con.query('SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function(err,result) {
+    if (err) throw err;
+    saveVillegeStatus(result[0].vid);
+  })
 }
 
 /** VILLEGE PART **/
@@ -456,7 +472,97 @@ exports.upgradeBuilding = function(username,pos,callback){
     }
   })
 }
-
-exports.update = function(username) {
-
+/** Function to convert datetime to Date() **/
+function covertToDate(datetime) {
+  var datetime_arr = datetime.split('T');
+  var date = datetime_arr[0].split('-');
+  var time = (datetime_arr[1].split('.'))[0].split(':');
+  return new Date(date[0],date[1],date[2],time[0],time[1],time[2]);
+}
+/** Function to calculate added resource **/
+function calculateresource(lastvisit,resource,info) {
+  console.log("Recieved data lastvisit : "+lastvisit.toString()+" resource : "+JSON.stringify(resource)+" info "+JSON.stringify(info));
+  var produce_rate = [0,0,0,0];
+  for (var i = 0;i<info.length;i++){
+    if (info[i].type=="wood") produce_rate[0] += resource_info[info[i].type].produce[info[i].level];
+    if (info[i].type=="clay") produce_rate[1] += resource_info[info[i].type].produce[info[i].level];
+    if (info[i].type=="iron") produce_rate[2] += resource_info[info[i].type].produce[info[i].level];
+    if (info[i].type=="crop") produce_rate[3] += resource_info[info[i].type].produce[info[i].level];
+  }
+  console.log('produce rate :' +produce_rate );
+  var date_in_sec = lastvisit.getHours()*3600+lastvisit.getMinutes()*60+lastvisit.getSeconds();
+  var now = new Date();
+  var now_in_sec = now.getHours()*3600+now.getMinutes()*60+now.getSeconds();
+  var diff_time = now_in_sec-date_in_sec;
+  for (var i = 0;i<4;i++){
+    resource[i]+=produce_rate[i]*diff_time/3600;
+  }
+  console.log(JSON.stringify(resource));
+  return resource;
+}
+/** Function to get Capacity of granary and warehouse **/
+function getCapacity(vid) {
+  var capacity = [1700,3100,5000,7800,11800,17600,25900,37900,55100,80000];
+}
+/** Function to update resource **/
+function updateResource(username) {
+  console.log('Updating');
+  con.query('SELECT recentvillegestatus.lastvisitedtime AS lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = recentstatus.vid WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+    console.log('Query Result : '+JSON.stringify(result));
+    if (err) throw err;
+    var datetime = result[0].lastvisitedtime;
+    var vid = result[0].vid;
+    exports.getResourceOfVillege(username,function (err,result) {
+      console.log('Query Result : '+JSON.stringify(result));
+      if (err) throw err;
+      var resource = [result["wood"],result["clay"],result["iron"],result["crop"]];
+      exports.loadResource(username,function (err,result) {
+          console.log('Query Result : '+JSON.stringify(result));
+          if (err) throw err;
+          var now_resource = calculateresource(datetime,resource,result);
+          console.log("Now Resouce : "+now_resource);
+          con.query('UPDATE villege SET wood = ? ,clay = ? ,iron = ? ,crop = ? WHERE vid = ?',[now_resource[0],now_resource[1],now_resource[2],now_resource[3],vid],function (err) {
+            if (err) throw err;
+            console.log('Update resource');
+          })
+      })
+    })
+  });
+}
+/** Function to update structuringtask **/
+function updateStructure(username) {
+  console.log('Updating');
+  con.query('SELECT recentvillegestatus.lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = recentstatus.vid WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+    console.log('Query Result : '+JSON.stringify(result));
+    if (err) throw err;
+    var datetime = result[0].lastvisitedtime;
+    var vid = result[0].vid;
+    con.query('SELECT endtime,sid,level,structuringtask.tid FROM task JOIN structuringtask ON task.tid = structuringtask.tid WHERE vid = ?',vid,function (err,result) {
+      console.log('Query Result : '+JSON.stringify(result));
+      if (err) throw err;
+      var sid = [];
+      for (var i = 0;i<result.length;i++){
+        var now = new Date();
+        if (result[i].endtime<=now) {
+          var tid = result[i].tid;
+          con.query('UPDATE structure SET level = ? WHERE sid = ?',[result[i].level,result[i].sid],function(err) {
+            if (err) throw err;
+            console.log('Success');
+            con.query('DELETE FROM task WHERE tid = ?',tid,function (err) {
+              if (err) throw err;
+              console.log('Success delete');
+            })
+            con.query('DELETE FROM structuringtask WHERE tid = ? ',tid,function (err) {
+              if (err) throw err;
+              console.log('Success Delete');
+            })
+          });
+        }
+      }
+    })
+  })
+}
+exports.update = function(username){
+  updateResource(username);
+  updateStructure(username);
 }

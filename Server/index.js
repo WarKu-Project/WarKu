@@ -87,6 +87,7 @@ io.on('connection',function(socket){
   /** Function to loadResource **/
   socket.on('resource-request',function() {
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.loadResource(online_user[socket.request.connection.remoteAddress],function(err,result) {
       if (err) throw err;
       socket.emit('resource-data',result);
@@ -95,6 +96,7 @@ io.on('connection',function(socket){
   /** Function to loadBuilding **/
   socket.on('building-request',function() {
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.loadBuilding(online_user[socket.request.connection.remoteAddress],function(err,result) {
       if (err) throw err;
       socket.emit('buildig-data',result);
@@ -103,6 +105,7 @@ io.on('connection',function(socket){
   /**Function to load wall **/
   socket.on('wall-request',function() {
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.loadWall(online_user[socket.request.connection.remoteAddress],function(err,result) {
       if (err) throw err;
       socket.emit('wall-data',result[0]);
@@ -111,6 +114,7 @@ io.on('connection',function(socket){
   /** Function to upgrade-resource-status **/
   socket.on('upgrade-resource-status-request',function(pos) {
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.getResourceUpgradeStatus(online_user[socket.request.connection.remoteAddress],pos,function (err,result) {
       console.log(result);
       socket.emit('upgrade-resource-status',result);
@@ -119,12 +123,14 @@ io.on('connection',function(socket){
   /** Function to upgrade resource **/
   socket.on('upgrade-resource-request',function(pos) {
     console.log("Current user : "+online_user[socket.request.connection.remoteAddress]);
+    engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.upgradeResource(online_user[socket.request.connection.remoteAddress],pos,function(err,status) {
       console.log('Success');
     })
   })
   /** Function to get resource from villege **/
   socket.on('resource-value-request',function() {
+    engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.getResourceOfVillege(online_user[socket.request.connection.remoteAddress],function(err,resource) {
       if (err) throw err;
       socket.emit('resource-value-data',resource);
@@ -132,18 +138,21 @@ io.on('connection',function(socket){
   })
   /** Function to create building **/
   socket.on('createBuilding-request',function(pos,type) {
+    engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.createBuilding(online_user[socket.request.connection.remoteAddress],pos,type,function(err,status) {
       console.log('Success');
     })
   })
     /** Function to upgrade building **/
     socket.on('upgrade-building-request',function(pos,type) {
+      engine.update(online_user[socket.request.connection.remoteAddress]);
       engine.upgradeBuilding(online_user[socket.request.connection.remoteAddress],pos,function(err,status) {
         console.log('Success');
       })
     })
   /** Function that client is disconnected **/
   socket.on('disconnect',function () {
+    //engine.update(online_user[socket.request.connection.remoteAddress]);
     //delete online_user[socket.request.connection.remoteAddress];
     console.log('Bye Bye '+socket.request.connection.remoteAddress);
   })
