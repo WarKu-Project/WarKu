@@ -1,0 +1,1 @@
+market : " WHERE 1 <= (SELECT level FROM structure JOIN building ON structure.sid = building.sid WHERE AND vid = ? type = \'warehouse\') AND "

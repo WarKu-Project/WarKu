@@ -130,6 +130,18 @@ io.on('connection',function(socket){
       socket.emit('resource-value-data',resource);
     })
   })
+  /** Function to create building **/
+  socket.on('createBuilding-request',function(pos,type) {
+    engine.createBuilding(online_user[socket.request.connection.remoteAddress],pos,type,function(err,status) {
+      console.log('Success');
+    })
+  })
+    /** Function to upgrade building **/
+    socket.on('upgrade-building-request',function(pos,type) {
+      engine.upgradeBuilding(online_user[socket.request.connection.remoteAddress],pos,function(err,status) {
+        console.log('Success');
+      })
+    })
   /** Function that client is disconnected **/
   socket.on('disconnect',function () {
     //delete online_user[socket.request.connection.remoteAddress];
