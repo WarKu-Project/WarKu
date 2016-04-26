@@ -700,15 +700,18 @@
         function upgradeResourceLevel(index) {
             return function (event) {
                 socket.emit('upgrade-resource-request', index + 1);
+                /*
+                socket.on('upgrade-resource-request',function(result){
+                    
+                });*/
+                resourceClick();
                 setResourceValue();
             }
         }
 
         function upgradeResource(index) {
-            //var index = eiei;
             var upgradeTime = "";
             return function (event) {
-                console.log("fail");
                 $('#upgrade-resourceModal').modal("show");
                 console.log(JSON.stringify(resource));
                 $('#modalupgrade-header-title').text(resource[index]["type"] + " level " + resource[index]["level"]);
@@ -724,7 +727,18 @@
 
                 upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec);
                 $('#upgrade-time').text(upgradeTime);
-                $('#buttonUpgrade').click(upgradeResourceLevel(index));
+                socket.emit('upgrade-resource-status-request',index+1);
+                socket.on('upgrade-resource-status',function(result){
+                    if(result) {
+                        console.log('can upgrade');
+                        $('#buttonUpgrade').prop("disabled", false);
+                        $('#buttonUpgrade').click(upgradeResourceLevel(index));
+                    }
+                    else {
+                        console.log('can not upgrade');
+                        $('#buttonUpgrade').prop("disabled", true);
+                    }
+                });              
             }
 
         }
@@ -741,6 +755,7 @@
             $('#ironnum').text(parseInt(resource_value.iron));
             $('#cropnum').text(parseInt(resource_value.crop));
             setProduceRate();
+            console.log(resource_value);
         }
 
         function setResourceValue() {
@@ -749,6 +764,7 @@
             socket.on('resource-value-data', function (result) {
                 resource_value = result;
             });
+            console.log(resource_value);
 
         }
 
