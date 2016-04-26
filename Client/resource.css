@@ -1,16 +1,16 @@
-#resource_container{
+#resource_container {
     position: relative;
     height: 700px;
 }
 
-.resoucre{
+.resoucre {
     margin-left: auto;
     margin-right: 100%;
     width: 70%;
     position: relative;
 }
 
-#produce_container{
+#produce_container {
     position: absolute;
     top: 70%;
     left: 73%;
@@ -20,10 +20,10 @@
     height: 150px;
 }
 
-.paddingrow{
+.paddingrow {
     padding-left: 10%;
 }
 
-.toTop{
-  margin-top: -10%;
+.toTop {
+    margin-top: -10%;
 }
