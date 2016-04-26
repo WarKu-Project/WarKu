@@ -182,22 +182,22 @@
             </div>
 
             <div>
-                <image id="resource1-label"></image>
-                <image id="resource2-label"></image>
-                <image id="resource8-label"></image>
-                <image id="resource9-label"></image>
-                <image id="resource16-label"></image>
-                <image id="resource10-label"></image>
-                <image id="resource15-label"></image>
-                <image id="resource14-label"></image>
-                <image id="resource11-label"></image>
-                <image id="resource12-label"></image>
-                <image id="resource13-label"></image>
-                <image id="resource3-label"></image>
-                <image id="resource7-label"></image>
-                <image id="resource6-label"></image>
-                <image id="resource5-label"></image>
-                <image id="resource4-label"></image>
+                <image id="resource1-label" index="0" class="resource-level"></image>
+                <image id="resource2-label" index="1" class="resource-level"></image>
+                <image id="resource8-label" index="7" class="resource-level"></image>
+                <image id="resource9-label" index="8" class="resource-level"></image>
+                <image id="resource16-label" index="15" class="resource-level"></image>
+                <image id="resource10-label" index="9" class="resource-level"></image>
+                <image id="resource15-label" index="14" class="resource-level"></image>
+                <image id="resource14-label" index="13" class="resource-level"></image>
+                <image id="resource11-label" index="10" class="resource-level"></image>
+                <image id="resource12-label" index="11" class="resource-level"></image>
+                <image id="resource13-label" index="12" class="resource-level"></image>
+                <image id="resource3-label" index="2" class="resource-level"></image>
+                <image id="resource7-label" index="6" class="resource-level"></image>
+                <image id="resource6-label" index="5" class="resource-level"></image>
+                <image id="resource5-label" index="4" class="resource-level"></image>
+                <image id="resource4-label" index="3" class="resource-level"></image>
             </div>
 
         </div>
@@ -236,7 +236,7 @@
                     Requirment</p>
                     Wood : <span id="setWood"></span> Clay : <span id="setClay"></span> Iron : <span id="setIron"></span> Crop : <span id="setCrop"></span></p>
                     Upgrade time : <span id="upgrade-time"></span>
-                    <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal">Upgrade</button>
+                    <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
                 </div>
 
 
@@ -637,7 +637,7 @@
         };
         var resource_value = null;
         var resource_produce_rate = [0, 0, 0, 0];
-
+        var status;
 
         function init() {
             $('#resource_container').hide();
@@ -700,22 +700,26 @@
             return d.toString();
         }
 
-        function upgradeResourceLevel(index) {
-            return function (event) {
+        function upgradeResourceLevel(e) {
+                var index = parseInt($(this).attr("value"));
                 socket.emit('upgrade-resource-request', index + 1);
                 /*
                 socket.on('upgrade-resource-request',function(result){
                     
                 });*/
+                document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"])+"-red";
+                console.log('upgrade law na kub'+(index+1))
                 setTimeout(setResourceValue, 1000);
-            }
         }
 
-        function upgradeResource(index) {
+        function upgradeResource(e) {
+            //var x = e.target;
+            var index = parseInt($(this).attr("index"));
+            console.log("index"+index);
             var upgradeTime = "";
-            return function (event) {
+            
                 $('#upgrade-resourceModal').modal("show");
-                console.log(JSON.stringify(resource));
+                //console.log(JSON.stringify(resource));
                 $('#modalupgrade-header-title').text(resource[index]["type"] + " level " + resource[index]["level"]);
                 $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
                 if (resource[index]["level"] < 10) {
@@ -726,24 +730,47 @@
                 $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
                 $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
                 $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
-
                 upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec);
                 $('#upgrade-time').text(upgradeTime);
+                
                 socket.emit('upgrade-resource-status-request',index+1);
                 socket.on('upgrade-resource-status',function(result){
-                    if(result) {
+                    status = result;
+                   // console.log("status1"+JSON.stringify(status));
+                    console.log("in socket "+index);
+                    if(status=="true") {
                         console.log('can upgrade');
+                        $('#buttonUpgrade').attr("value",index+"");
                         $('#buttonUpgrade').prop("disabled", false);
-                        $('#buttonUpgrade').one("click",upgradeResourceLevel(index));
+                        $('#buttonUpgrade').click(upgradeResourceLevel);
                     }
                     else {
                         console.log('can not upgrade');
                         $('#buttonUpgrade').prop("disabled", true);
                     }
-                });              
-            }
+                    //console.log('kakkkkkpaiiii');
+                });    
+                
+               // setTimeout(upgradeResourceDelay(index), 1000);
+            
 
         }
+        
+//        function upgradeResourceDelay(index){
+//            return function () {
+//            console.log(status);
+//            if(status=="true") {
+//                console.log('can upgrade');
+//                $('#buttonUpgrade').prop("disabled", false);
+//                $('#buttonUpgrade').on("click",upgradeResourceLevel(index));
+//            }
+//            else {
+//                console.log('can not upgrade');
+//                $('#buttonUpgrade').prop("disabled", true);
+//            }
+//            console.log('kakkkkkpaiiii');
+//            }
+//        }
 
         function updateResource() {
             for (var i = 0; i < 16; i++) {
@@ -757,7 +784,7 @@
             $('#ironnum').text(parseInt(resource_value.iron));
             $('#cropnum').text(parseInt(resource_value.crop));
             setProduceRate();
-            console.log(resource_value);
+            //console.log(resource_value);
         }
 
         function setResourceValue() {
@@ -766,7 +793,7 @@
             socket.on('resource-value-data', function (result) {
                 resource_value = result;
             });
-            console.log(resource_value);
+            //console.log(resource_value);
 
         }
 
@@ -802,10 +829,27 @@
 
         //$('#resource1-label').on('click',upgradeResource(0)); 
         //$('#resource2-label').on('click',upgradeResource(1)); 
-        for (var i = 0; i < 16; i++) {
-            $('#resource' + (i + 1) + '-label').on("click",(upgradeResource(i)));
-        }
+//        for (var i = 0; i < 16; i++) {
+//            $('#resource' + (i + 1) + '-label').on("click",(upgradeResource(i)));
+//        }
+//        $('#resource1-label').on("click",upgradeResource);
+//        $('#resource2-label').on("click",upgradeResource);
+//        $('#resource3-label').on("click",(upgradeResource(2)));
+//        $('#resource4-label').on("click",(upgradeResource(3)));
+//        $('#resource5-label').on("click",(upgradeResource(4)));
+//        $('#resource6-label').on("click",(upgradeResource(5)));
+//        $('#resource7-label').on("click",(upgradeResource(6)));
+//        $('#resource8-label').on("click",(upgradeResource(7)));
+//        $('#resource9-label').on("click",(upgradeResource(8)));
+//        $('#resource10-label').on("click",(upgradeResource(9)));
+//        $('#resource11-label').on("click",(upgradeResource(10)));
+//        $('#resource12-label').on("click",(upgradeResource(11)));
+//        $('#resource13-label').on("click",(upgradeResource(12)));
+//        $('#resource14-label').on("click",(upgradeResource(13)));
+//        $('#resource15-label').on("click",(upgradeResource(14)));
+//        $('#resource16-label').on("click",(upgradeResource(15)));
 
+        $('.resource-level').click(upgradeResource);
         /*Stockbar*/
         setInterval(updateResource, 1000);
     </script>
