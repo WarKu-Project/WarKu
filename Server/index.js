@@ -146,6 +146,7 @@ io.on('connection',function(socket){
     /** Function to upgrade building **/
     socket.on('upgrade-building-request',function(pos,type) {
       engine.update(online_user[socket.request.connection.remoteAddress]);
+      console.log('Request!');
       engine.upgradeBuilding(online_user[socket.request.connection.remoteAddress],pos,function(err,status) {
         console.log('Success');
       })
