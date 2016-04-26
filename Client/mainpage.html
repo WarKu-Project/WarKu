@@ -638,6 +638,7 @@
         var resource_value = null;
         var resource_produce_rate = [0, 0, 0, 0];
         var status;
+        var index;
 
         function init() {
             $('#resource_container').hide();
@@ -701,20 +702,21 @@
         }
 
         function upgradeResourceLevel(e) {
-                var index = parseInt($(this).attr("value"));
+                //var index = parseInt($(this).attr("value"));
+                console.log('upgrade law na kub'+(index+1))
                 socket.emit('upgrade-resource-request', index + 1);
                 /*
                 socket.on('upgrade-resource-request',function(result){
                     
                 });*/
                 document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"])+"-red";
-                console.log('upgrade law na kub'+(index+1))
+                
                 setTimeout(setResourceValue, 1000);
         }
 
         function upgradeResource(e) {
             //var x = e.target;
-            var index = parseInt($(this).attr("index"));
+            index = parseInt($(this).attr("index"));
             console.log("index"+index);
             var upgradeTime = "";
             
@@ -738,39 +740,37 @@
                     status = result;
                    // console.log("status1"+JSON.stringify(status));
                     console.log("in socket "+index);
-                    if(status=="true") {
-                        console.log('can upgrade');
-                        $('#buttonUpgrade').attr("value",index+"");
-                        $('#buttonUpgrade').prop("disabled", false);
-                        $('#buttonUpgrade').click(upgradeResourceLevel);
-                    }
-                    else {
-                        console.log('can not upgrade');
-                        $('#buttonUpgrade').prop("disabled", true);
-                    }
+//                    if(status=="true") {
+//                        console.log('can upgrade');
+//                        $('#buttonUpgrade').attr("value",index+"");
+//                        $('#buttonUpgrade').prop("disabled", false);
+//                        $('#buttonUpgrade').click(upgradeResourceLevel);
+//                    }
+//                    else {
+//                        console.log('can not upgrade');
+//                        $('#buttonUpgrade').prop("disabled", true);
+//                    }
                     //console.log('kakkkkkpaiiii');
                 });    
                 
-               // setTimeout(upgradeResourceDelay(index), 1000);
+                setTimeout(upgradeResourceDelay, 1000);
             
 
         }
         
-//        function upgradeResourceDelay(index){
-//            return function () {
-//            console.log(status);
-//            if(status=="true") {
-//                console.log('can upgrade');
-//                $('#buttonUpgrade').prop("disabled", false);
-//                $('#buttonUpgrade').on("click",upgradeResourceLevel(index));
-//            }
-//            else {
-//                console.log('can not upgrade');
-//                $('#buttonUpgrade').prop("disabled", true);
-//            }
-//            console.log('kakkkkkpaiiii');
-//            }
-//        }
+        function upgradeResourceDelay(){
+            console.log(status);
+            if(status=="true") {
+                console.log('can upgrade');
+                $('#buttonUpgrade').prop("disabled", false);
+                $('#buttonUpgrade').click(upgradeResourceLevel);
+            }
+            else {
+                console.log('can not upgrade');
+                $('#buttonUpgrade').prop("disabled", true);
+            }
+            console.log('kakkkkkpaiiii');
+        }
 
         function updateResource() {
             for (var i = 0; i < 16; i++) {
