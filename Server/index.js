@@ -117,7 +117,7 @@ io.on('connection',function(socket){
     engine.update(online_user[socket.request.connection.remoteAddress]);
     engine.getResourceUpgradeStatus(online_user[socket.request.connection.remoteAddress],pos,function (err,result) {
       console.log(result);
-      socket.emit('upgrade-resource-status',result);
+      socket.emit('upgrade-resource-status'+pos,result);
     });
   })
   /** Function to upgrade resource **/

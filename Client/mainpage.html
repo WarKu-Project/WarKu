@@ -734,7 +734,7 @@
                 $('#upgrade-time').text(upgradeTime);
                 
                 socket.emit('upgrade-resource-status-request',index+1);
-                socket.on('upgrade-resource-status',function(result){
+                socket.on('upgrade-resource-status'+(index+1),function(result){
                     status = result;
                    // console.log("status1"+JSON.stringify(status));
                     console.log("in socket "+index);
