@@ -161,6 +161,13 @@ io.on('connection',function(socket){
           socket.emit('structuringtask-value',result);
       })
   })
+  /** Function to get capacity of granry and warehouse **/
+  socket.on('getCapacity-request',function() {
+    engine.getCapacity(online_user[socket.request.connection.remoteAddress],function (err,result) {
+      if (err) throw err;
+      socket.emit('capacity-value',result);
+    })
+  })
   /** Function that client is disconnected **/
   socket.on('disconnect',function () {
     //engine.update(online_user[socket.request.connection.remoteAddress]);

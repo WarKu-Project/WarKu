@@ -507,10 +507,12 @@ function calculateresource(lastvisit,resource,info,capacity) {
   console.log(JSON.stringify(resource));
   return resource;
 }
+/** capacity by level **/
+var capacity = [1700,3100,5000,7800,11800,17600,25900,37900,55100,80000];
 /** Function to get Capacity of granary and warehouse **/
-exports.getCapacity = function(vid,callback) {
-  var capacity = [1700,3100,5000,7800,11800,17600,25900,37900,55100,80000];
+function getCapacity(vid,callback) {
   con.query('SELECT level,type FROM structure JOIN building ON structure.sid = building.sid WHERE type IN (\'granary\',\'warehouse\')',function(err,result) {
+    console.log('Query Result : '+JSON.stringify(result));
     if (err) callback(err);
     var sumcapacity = {"granary" : 0, "warehouse" : 0};
     if (result.length == 0) callback(null,{"granary" : 800, "warehouse" : 800});
@@ -522,6 +524,18 @@ exports.getCapacity = function(vid,callback) {
     }
   })
 }
+/** Function to get Capacity of granary and warehouse By username **/
+exports.getCapacity = function (vid,callback) {
+  con.query('SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM username = ?)',username,function(err,result) {
+    console.log('Query Result : '+JSON.stringify(result));
+    if (err) callback(err);
+    var vid = result[0].vid;
+    getCapacity(vid,function(err,capacity) {
+      if (err) callback(err);
+      callback(null,capacity);
+    })
+  })
+}
 /** Function to update resource **/
 function updateResource(username) {
   console.log('Updating');
@@ -530,7 +544,7 @@ function updateResource(username) {
     if (err) throw err;
     var datetime = result[0].lastvisitedtime;
     var vid = result[0].vid;
-    exports.getCapacity(vid,function(err,sumcapacity) {
+    getCapacity(vid,function(err,sumcapacity) {
       if (err) throw err;
       var capacity = sumcapacity;
       exports.getResourceOfVillege(username,function (err,result) {
