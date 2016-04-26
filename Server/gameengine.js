@@ -231,14 +231,14 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
         if (err) callback(err);
         console.log('Query Result : '+JSON.stringify(result[0]));
         var sid = result[0].sid;
-        var level = result[0].level;
+        var level = result[0].level+1;
         var type = result[0].type;
         con.query('SELECT level,endTime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE sid = ? ORDER BY structuringtask.tid DESC LIMIT 1',sid,function (err,result) {
           if (err) callback(err);
           console.log('Query Result : '+JSON.stringify(result));
           var startTime = new Date();
           if (result.length>0) {
-            level = result[0].level;
+            level = result[0].level+1;
             startTime = result[0].endTime;
           }
           if (level >= 10) {
@@ -247,8 +247,8 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
             con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function (err,result) {
               if (err) callback(err);
               console.log('Query Result : '+JSON.stringify(result));
-              var require_resource = resource_info[type].cost[level];
-              var timeuse = resource_info[type].time[level];
+              var require_resource = resource_info[type].cost[level-1];
+              var timeuse = resource_info[type].time[level-1];
               console.log(JSON.stringify(timeuse));
               if (result[0].wood>=require_resource[0]&&result[0].clay>=require_resource[1]&&result[0].iron>=require_resource[2]&&result[0].crop>=require_resource[3]){
                 console.log('Can upgrade');
