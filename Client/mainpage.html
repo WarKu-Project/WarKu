@@ -467,7 +467,7 @@
     
     function upgradeResourceLevel(index){
         return  function(event){
-                    socket.emit('upgrade-resource-request',index);
+                    socket.emit('upgrade-resource-request',index+1);
                     setResourceValue();
                 }
     }
