@@ -1,39 +1,39 @@
-input[type="text"] 
-{
+input[type="text"] {
     width: 50px;
     border: 1px solid #CCC;
 }
 
-.padtop{
+.padtop {
     height: 10px;
 }
 
-.cordinate-btn{
+.cordinate-btn {
     padding-left: 30px;
 }
 
-.col-cordinates{
+.col-cordinates {
     display: flex;
 }
 
-.cordinate-text{
+.cordinate-text {
     font-size: 25px;
     padding-left: 30px;
     padding-right: 10px
 }
 
-.map-center
-{
+.map-center {
     display: inline-block;
     height: 10%;
     vertical-align: middle;
 }
-.map{
+
+.map {
     margin-left: auto;
     margin-right: auto;
     position: relative;
     width: 60%;
 }
+
 div.arrow1 {
     position: absolute;
     background-color: red;
@@ -45,6 +45,7 @@ div.arrow1 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.arrow2 {
     position: absolute;
     background-color: red;
@@ -56,6 +57,7 @@ div.arrow2 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.arrow3 {
     position: absolute;
     background-color: red;
@@ -67,6 +69,7 @@ div.arrow3 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.arrow4 {
     position: absolute;
     background-color: red;
@@ -78,6 +81,7 @@ div.arrow4 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.posY1 {
     position: absolute;
     background-color: white;
@@ -88,6 +92,7 @@ div.posY1 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY2 {
     position: absolute;
     background-color: white;
@@ -98,6 +103,7 @@ div.posY2 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY3 {
     position: absolute;
     background-color: white;
@@ -108,6 +114,7 @@ div.posY3 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY4 {
     position: absolute;
     background-color: white;
@@ -118,6 +125,7 @@ div.posY4 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY5 {
     position: absolute;
     background-color: white;
@@ -128,6 +136,7 @@ div.posY5 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY6 {
     position: absolute;
     background-color: white;
@@ -138,6 +147,7 @@ div.posY6 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY7 {
     position: absolute;
     background-color: white;
@@ -148,6 +158,7 @@ div.posY7 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY8 {
     position: absolute;
     background-color: white;
@@ -158,6 +169,7 @@ div.posY8 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posY9 {
     position: absolute;
     background-color: white;
@@ -168,6 +180,7 @@ div.posY9 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX1 {
     position: absolute;
     background-color: white;
@@ -178,6 +191,7 @@ div.posX1 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX2 {
     position: absolute;
     background-color: white;
@@ -188,6 +202,7 @@ div.posX2 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX3 {
     position: absolute;
     background-color: white;
@@ -198,6 +213,7 @@ div.posX3 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX4 {
     position: absolute;
     background-color: white;
@@ -208,6 +224,7 @@ div.posX4 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX5 {
     position: absolute;
     background-color: white;
@@ -218,6 +235,7 @@ div.posX5 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX6 {
     position: absolute;
     background-color: white;
@@ -228,6 +246,7 @@ div.posX6 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX7 {
     position: absolute;
     background-color: white;
@@ -238,6 +257,7 @@ div.posX7 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX8 {
     position: absolute;
     background-color: white;
@@ -248,6 +268,7 @@ div.posX8 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.posX9 {
     position: absolute;
     background-color: white;
@@ -258,6 +279,7 @@ div.posX9 {
     border-style: solid;
     border-width: 1% 1% 1% 1%;
 }
+
 div.free {
     position: absolute;
     background-color: white;
@@ -280,6 +302,7 @@ div.box1 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.box2 {
     position: absolute;
     background-color: green;
@@ -290,6 +313,7 @@ div.box2 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box3 {
     position: absolute;
     background-color: green;
@@ -300,6 +324,7 @@ div.box3 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box4 {
     position: absolute;
     background-color: green;
@@ -310,6 +335,7 @@ div.box4 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box5 {
     position: absolute;
     background-color: green;
@@ -320,6 +346,7 @@ div.box5 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box6 {
     position: absolute;
     background-color: green;
@@ -330,6 +357,7 @@ div.box6 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box7 {
     position: absolute;
     background-color: green;
@@ -340,6 +368,7 @@ div.box7 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box8 {
     position: absolute;
     background-color: green;
@@ -350,6 +379,7 @@ div.box8 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box9 {
     position: absolute;
     background-color: green;
@@ -361,6 +391,7 @@ div.box9 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.box10 {
     position: absolute;
     background-color: green;
@@ -371,6 +402,7 @@ div.box10 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box11 {
     position: absolute;
     background-color: green;
@@ -381,6 +413,7 @@ div.box11 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box12 {
     position: absolute;
     background-color: green;
@@ -391,6 +424,7 @@ div.box12 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box13 {
     position: absolute;
     background-color: green;
@@ -401,6 +435,7 @@ div.box13 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box14 {
     position: absolute;
     background-color: green;
@@ -411,6 +446,7 @@ div.box14 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box15 {
     position: absolute;
     background-color: green;
@@ -421,6 +457,7 @@ div.box15 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box16 {
     position: absolute;
     background-color: green;
@@ -431,6 +468,7 @@ div.box16 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box17 {
     position: absolute;
     background-color: green;
@@ -441,6 +479,7 @@ div.box17 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box18 {
     position: absolute;
     background-color: green;
@@ -451,6 +490,7 @@ div.box18 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box19 {
     position: absolute;
     background-color: green;
@@ -461,6 +501,7 @@ div.box19 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box20 {
     position: absolute;
     background-color: green;
@@ -471,6 +512,7 @@ div.box20 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box21 {
     position: absolute;
     background-color: green;
@@ -481,6 +523,7 @@ div.box21 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box22 {
     position: absolute;
     background-color: green;
@@ -491,6 +534,7 @@ div.box22 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box23 {
     position: absolute;
     background-color: green;
@@ -501,6 +545,7 @@ div.box23 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box24 {
     position: absolute;
     background-color: green;
@@ -511,6 +556,7 @@ div.box24 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box25 {
     position: absolute;
     background-color: green;
@@ -521,6 +567,7 @@ div.box25 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box26 {
     position: absolute;
     background-color: green;
@@ -531,6 +578,7 @@ div.box26 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box27 {
     position: absolute;
     background-color: green;
@@ -541,6 +589,7 @@ div.box27 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box28 {
     position: absolute;
     background-color: green;
@@ -551,6 +600,7 @@ div.box28 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box29 {
     position: absolute;
     background-color: green;
@@ -561,6 +611,7 @@ div.box29 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box30 {
     position: absolute;
     background-color: green;
@@ -571,6 +622,7 @@ div.box30 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box31 {
     position: absolute;
     background-color: green;
@@ -581,6 +633,7 @@ div.box31 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box32 {
     position: absolute;
     background-color: green;
@@ -591,6 +644,7 @@ div.box32 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box33 {
     position: absolute;
     background-color: green;
@@ -601,6 +655,7 @@ div.box33 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box34 {
     position: absolute;
     background-color: green;
@@ -611,6 +666,7 @@ div.box34 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box35 {
     position: absolute;
     background-color: green;
@@ -621,6 +677,7 @@ div.box35 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box36 {
     position: absolute;
     background-color: green;
@@ -632,6 +689,7 @@ div.box36 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.box37 {
     position: absolute;
     background-color: green;
@@ -642,6 +700,7 @@ div.box37 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box38 {
     position: absolute;
     background-color: green;
@@ -652,6 +711,7 @@ div.box38 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box39 {
     position: absolute;
     background-color: green;
@@ -662,6 +722,7 @@ div.box39 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box40 {
     position: absolute;
     background-color: green;
@@ -672,6 +733,7 @@ div.box40 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box41 {
     position: absolute;
     background-color: green;
@@ -682,6 +744,7 @@ div.box41 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box42 {
     position: absolute;
     background-color: green;
@@ -692,6 +755,7 @@ div.box42 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box43 {
     position: absolute;
     background-color: green;
@@ -702,6 +766,7 @@ div.box43 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box44 {
     position: absolute;
     background-color: green;
@@ -712,6 +777,7 @@ div.box44 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box45 {
     position: absolute;
     background-color: green;
@@ -723,6 +789,7 @@ div.box45 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.box46 {
     position: absolute;
     background-color: green;
@@ -733,6 +800,7 @@ div.box46 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box47 {
     position: absolute;
     background-color: green;
@@ -743,6 +811,7 @@ div.box47 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box48 {
     position: absolute;
     background-color: green;
@@ -753,6 +822,7 @@ div.box48 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box49 {
     position: absolute;
     background-color: green;
@@ -763,6 +833,7 @@ div.box49 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box50 {
     position: absolute;
     background-color: green;
@@ -773,6 +844,7 @@ div.box50 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box51 {
     position: absolute;
     background-color: green;
@@ -783,6 +855,7 @@ div.box51 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box52 {
     position: absolute;
     background-color: green;
@@ -793,6 +866,7 @@ div.box52 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box53 {
     position: absolute;
     background-color: green;
@@ -803,6 +877,7 @@ div.box53 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box54 {
     position: absolute;
     background-color: green;
@@ -814,6 +889,7 @@ div.box54 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.box55 {
     position: absolute;
     background-color: green;
@@ -824,6 +900,7 @@ div.box55 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box56 {
     position: absolute;
     background-color: green;
@@ -834,6 +911,7 @@ div.box56 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box57 {
     position: absolute;
     background-color: green;
@@ -844,6 +922,7 @@ div.box57 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box58 {
     position: absolute;
     background-color: green;
@@ -854,6 +933,7 @@ div.box58 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box59 {
     position: absolute;
     background-color: green;
@@ -864,6 +944,7 @@ div.box59 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box60 {
     position: absolute;
     background-color: green;
@@ -874,6 +955,7 @@ div.box60 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box61 {
     position: absolute;
     background-color: green;
@@ -884,6 +966,7 @@ div.box61 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box62 {
     position: absolute;
     background-color: green;
@@ -894,6 +977,7 @@ div.box62 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box63 {
     position: absolute;
     background-color: green;
@@ -905,6 +989,7 @@ div.box63 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.box64 {
     position: absolute;
     background-color: green;
@@ -915,6 +1000,7 @@ div.box64 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box65 {
     position: absolute;
     background-color: green;
@@ -925,6 +1011,7 @@ div.box65 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box66 {
     position: absolute;
     background-color: green;
@@ -935,6 +1022,7 @@ div.box66 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box67 {
     position: absolute;
     background-color: green;
@@ -945,6 +1033,7 @@ div.box67 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box68 {
     position: absolute;
     background-color: green;
@@ -955,6 +1044,7 @@ div.box68 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box69 {
     position: absolute;
     background-color: green;
@@ -965,6 +1055,7 @@ div.box69 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box70 {
     position: absolute;
     background-color: green;
@@ -975,6 +1066,7 @@ div.box70 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box71 {
     position: absolute;
     background-color: green;
@@ -985,6 +1077,7 @@ div.box71 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box72 {
     position: absolute;
     background-color: green;
@@ -996,6 +1089,7 @@ div.box72 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
+
 div.box73 {
     position: absolute;
     background-color: green;
@@ -1006,6 +1100,7 @@ div.box73 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box74 {
     position: absolute;
     background-color: green;
@@ -1016,6 +1111,7 @@ div.box74 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box75 {
     position: absolute;
     background-color: green;
@@ -1026,6 +1122,7 @@ div.box75 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box76 {
     position: absolute;
     background-color: green;
@@ -1036,6 +1133,7 @@ div.box76 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box77 {
     position: absolute;
     background-color: green;
@@ -1046,6 +1144,7 @@ div.box77 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box78 {
     position: absolute;
     background-color: green;
@@ -1056,6 +1155,7 @@ div.box78 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box79 {
     position: absolute;
     background-color: green;
@@ -1066,6 +1166,7 @@ div.box79 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box80 {
     position: absolute;
     background-color: green;
@@ -1076,6 +1177,7 @@ div.box80 {
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
+
 div.box81 {
     position: absolute;
     background-color: green;
@@ -1087,6 +1189,3 @@ div.box81 {
     border-width: 1% 1% 1% 1%;
     /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
-
-
-

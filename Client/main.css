@@ -3,43 +3,43 @@
 }
 
 .col-centered {
-    display:inline-block;
-    float:none;
-    text-align:left;
-    margin-right:-4px;
+    display: inline-block;
+    float: none;
+    text-align: left;
+    margin-right: -4px;
     padding-top: 20px;
 }
 
-body  {
-  background-image: url("picture/BG.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
+body {
+    background-image: url("picture/BG.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 nav ul li {
-		display: inline-block;
-	}
+    display: inline-block;
+}
 
 .menu {
     width: 100%;
     height: 100%;
 }
 
-.menu-frame{
+.menu-frame {
     position: relative;
     height: 15%;
 }
 
 .menu_img {
-    height:100%;
+    height: 100%;
     max-width: 100%;
 }
 
-.menu-li{
-   height: 100%;
-   width: 10%;
+.menu-li {
+    height: 100%;
+    width: 10%;
 }
 
 .menu {
@@ -48,34 +48,27 @@ nav ul li {
 }
 
 img {
-    width:100%;
-    height:auto;
+    width: 100%;
+    height: auto;
 }
 
-.Centerer
-{
+.Centerer {
     display: inline-block;
     height: 20%;
     vertical-align: middle;
 }
-   
-.modal-body{
-  
-}
 
-.modal-header{
-    
-}
+.modal-body {}
 
-.modal-footer{
-    
-}
+.modal-header {}
 
-.menu-padding{
+.modal-footer {}
+
+.menu-padding {
     height: 10%;
 }
 
-.stockbar{
+.stockbar {
     height: 5%;
     width: 70%;
     margin-left: auto;
@@ -84,4 +77,10 @@ img {
     border: 2px solid #000;
 }
 
-
+.bottombar {
+    height: 5%;
+    width: 55%;
+    margin-left: 10%;
+    margin-right: auto;
+    border: 2px solid #000;
+}

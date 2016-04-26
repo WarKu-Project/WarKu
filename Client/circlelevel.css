@@ -3,151 +3,151 @@
 }
 
 .level1 {
-    content: url(picture/CricleLevel/CricleLevel1.png); 
+    content: url(picture/CricleLevel/CricleLevel1.png);
 }
 
 .level2 {
-    content: url(picture/CricleLevel/CricleLevel2.png); 
+    content: url(picture/CricleLevel/CricleLevel2.png);
 }
 
 .level3 {
-    content: url(picture/CricleLevel/CricleLevel3.png); 
+    content: url(picture/CricleLevel/CricleLevel3.png);
 }
 
 .level4 {
-    content: url(picture/CricleLevel/CricleLevel4.png); 
+    content: url(picture/CricleLevel/CricleLevel4.png);
 }
 
 .level5 {
-    content: url(picture/CricleLevel/CricleLevel5.png); 
+    content: url(picture/CricleLevel/CricleLevel5.png);
 }
 
 .level6 {
-    content: url(picture/CricleLevel/CricleLevel6.png); 
+    content: url(picture/CricleLevel/CricleLevel6.png);
 }
 
 .level7 {
-    content: url(picture/CricleLevel/CricleLevel7.png); 
+    content: url(picture/CricleLevel/CricleLevel7.png);
 }
 
 .level8 {
-    content: url(picture/CricleLevel/CricleLevel8.png); 
+    content: url(picture/CricleLevel/CricleLevel8.png);
 }
 
 .level9 {
-    content: url(picture/CricleLevel/CricleLevel9.png); 
+    content: url(picture/CricleLevel/CricleLevel9.png);
 }
 
 .level10 {
-    content: url(picture/CricleLevel/CricleLevel10.png); 
+    content: url(picture/CricleLevel/CricleLevel10.png);
 }
 
-#resource1-label{
+#resource1-label {
     position: absolute;
     width: 8%;
     left: 60%;
     top: 0%;
 }
 
-#resource2-label{
+#resource2-label {
     position: absolute;
     width: 8%;
     left: 81%;
     top: 15%;
 }
 
-#resource3-label{
+#resource3-label {
     position: absolute;
     width: 8%;
     left: 88%;
     top: 47%;
 }
 
-#resource4-label{
+#resource4-label {
     position: absolute;
     width: 8%;
     left: 68%;
     top: 73%;
 }
 
-#resource5-label{
+#resource5-label {
     position: absolute;
     width: 8%;
     left: 30%;
     top: 75%;
 }
 
-#resource6-label{
+#resource6-label {
     position: absolute;
     width: 8%;
     left: 8%;
     top: 52%;
 }
 
-#resource7-label{
+#resource7-label {
     position: absolute;
     width: 8%;
     left: 12%;
     top: 17%;
 }
 
-#resource8-label{
+#resource8-label {
     position: absolute;
     width: 8%;
     left: 35%;
     top: 2%;
 }
 
-#resource9-label{
+#resource9-label {
     position: absolute;
     width: 8%;
     left: 55%;
     top: 15%;
 }
 
-#resource10-label{
+#resource10-label {
     position: absolute;
     width: 8%;
     left: 70%;
     top: 25%;
 }
 
-#resource11-label{
+#resource11-label {
     position: absolute;
     width: 8%;
     left: 70%;
     top: 42%;
 }
 
-#resource12-label{
+#resource12-label {
     position: absolute;
     width: 8%;
     left: 55%;
     top: 57%;
 }
 
-#resource13-label{
+#resource13-label {
     position: absolute;
     width: 8%;
     left: 38%;
     top: 55%;
 }
 
-#resource14-label{
+#resource14-label {
     position: absolute;
     width: 8%;
     left: 25%;
     top: 42%;
 }
 
-#resource15-label{
+#resource15-label {
     position: absolute;
     width: 8%;
     left: 28%;
     top: 25%;
 }
 
-#resource16-label{
+#resource16-label {
     position: absolute;
     width: 8%;
     left: 40%;
