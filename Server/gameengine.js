@@ -565,7 +565,7 @@ function updateStructure(username) {
       var sid = [];
       for (var i = 0;i<result.length;i++){
         var now = new Date();
-        if (result[i].endtime<=now) {
+        if ((new Date(result[i].endtime.toString()))<=now) {
           var tid = result[i].tid;
           con.query('UPDATE structure SET level = ? WHERE sid = ?',[result[i].level,result[i].sid],function(err) {
             if (err) throw err;
@@ -591,7 +591,7 @@ exports.update = function(username){
 }
 /** Function tov check what structing task is doing **/
 exports.getStructingTask = function(username,callback) {
-  console.log('Get Structing Task');
+  console.log('Get Structing ');
   con.query('SELECT type,sid,endtime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?))',username,function (err,result) {
     console.log('Query Result : '+JSON.stringify(result));
     if (err) callback(err);
