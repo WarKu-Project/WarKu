@@ -150,6 +150,16 @@ io.on('connection',function(socket){
         console.log('Success');
       })
     })
+  /** Function to get working structuringtask **/
+  socket.on('get-structingtask-request',function() {
+      engine.update(online_user[socket.request.connection.remoteAddress]);
+      console.log('ST R');
+      engine.getStructingTask(online_user[socket.request.connection.remoteAddress],function (err,result) {
+        if (err) throw err;
+        console.log('Structing task :' +JSON.stringify(result));
+          socket.emit('structuringtask-value',result);
+      })
+  })
   /** Function that client is disconnected **/
   socket.on('disconnect',function () {
     //engine.update(online_user[socket.request.connection.remoteAddress]);

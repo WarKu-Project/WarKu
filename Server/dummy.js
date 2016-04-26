@@ -61,7 +61,7 @@ con.query('CREATE TABLE task (tid int NOT NULL AUTO_INCREMENT,endtime datetime N
   else console.log('task is created to mysql');
 })
 /** Initialize structuringtask table **/
-con.query('CREATE TABLE structuringtask (tid int NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),level int NOT NULL,FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
+con.query('CREATE TABLE structuringtask (tid int NOT NULL,type varchar(15) NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),level int NOT NULL,FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
   if (err) console.log(err.toString());
   else console.log('structuringtask is created to mysql');
 })
