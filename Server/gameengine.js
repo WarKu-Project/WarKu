@@ -201,7 +201,7 @@ function checkAvailableTask(username,callback) {
       con.query('SELECT level FROM building JOIN structure ON structure.sid = building.sid WHERE vid = ? and type = \'villagehall\'',vid,function(err,result) {
         if (err) callback(err,null,null);
         console.log('Query Result : '+JSON.stringify(result));
-        var num_worker = result[0].level;
+        var num_worker = result[0].level+1;
         if (num<num_worker) {
           //var available_worker = num_worker-num;
           console.log('Can update task');
@@ -227,18 +227,18 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
       console.log('Can\'t upgrade');
       callback(null,false)
     }else {
-      con.query('SELECT structure.sid,type,level FROM resource JOIN structure ON resource.sid = structure.sid WHERE vid = ? AND pos=?',[vid,pos],function (err,result) {
+      con.query('SELECT structure.sid AS sid,type,level FROM resource JOIN structure ON resource.sid = structure.sid WHERE vid = ? AND pos=?',[vid,pos],function (err,result) {
         if (err) callback(err);
         console.log('Query Result : '+JSON.stringify(result[0]));
         var sid = result[0].sid;
-        var level = result[0].level+1;
+        var level = result[0].level;
         var type = result[0].type;
         con.query('SELECT level,endTime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE sid = ? ORDER BY structuringtask.tid DESC LIMIT 1',sid,function (err,result) {
           if (err) callback(err);
           console.log('Query Result : '+JSON.stringify(result));
           var startTime = new Date();
           if (result.length>0) {
-            level = result[0].level+1;
+            level = result[0].level;
             startTime = result[0].endTime;
           }
           if (level >= 10) {
@@ -247,8 +247,8 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
             con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function (err,result) {
               if (err) callback(err);
               console.log('Query Result : '+JSON.stringify(result));
-              var require_resource = resource_info[type].cost[level-1];
-              var timeuse = resource_info[type].time[level-1];
+              var require_resource = resource_info[type].cost[level];
+              var timeuse = resource_info[type].time[level];
               console.log(JSON.stringify(timeuse));
               if (result[0].wood>=require_resource[0]&&result[0].clay>=require_resource[1]&&result[0].iron>=require_resource[2]&&result[0].crop>=require_resource[3]){
                 console.log('Can upgrade');
@@ -480,7 +480,7 @@ function covertToDate(datetime) {
   return new Date(date[0],date[1],date[2],time[0],time[1],time[2]);
 }
 /** Function to calculate added resource **/
-function calculateresource(lastvisit,resource,info) {
+function calculateresource(lastvisit,resource,info,capacity) {
   console.log("Recieved data lastvisit : "+lastvisit.toString()+" resource : "+JSON.stringify(resource)+" info "+JSON.stringify(info));
   var produce_rate = [0,0,0,0];
   for (var i = 0;i<info.length;i++){
@@ -495,14 +495,32 @@ function calculateresource(lastvisit,resource,info) {
   var now_in_sec = now.getHours()*3600+now.getMinutes()*60+now.getSeconds();
   var diff_time = now_in_sec-date_in_sec;
   for (var i = 0;i<4;i++){
-    resource[i]+=produce_rate[i]*diff_time/3600;
+    if (i<3){
+      if (resource[i]+produce_rate[i]*diff_time/3600<=capacity["warehouse"])
+        resource[i]+=produce_rate[i]*diff_time/3600;
+    }
+    else {
+      if (resource[i]+produce_rate[i]*diff_time/3600<=capacity["granary"])
+        resource[i]+=produce_rate[i]*diff_time/3600;
+    }
   }
   console.log(JSON.stringify(resource));
   return resource;
 }
 /** Function to get Capacity of granary and warehouse **/
-function getCapacity(vid) {
+exports.getCapacity = function(vid,callback) {
   var capacity = [1700,3100,5000,7800,11800,17600,25900,37900,55100,80000];
+  con.query('SELECT level,type FROM structure JOIN building ON structure.sid = building.sid WHERE type IN (\'granary\',\'warehouse\')',function(err,result) {
+    if (err) callback(err);
+    var sumcapacity = {"granary" : 0, "warehouse" : 0};
+    if (result.length == 0) callback(null,{"granary" : 800, "warehouse" : 800});
+    else {
+      for (var i = 0;i<result.length;i++){
+        sumcapacity[result[i].type]+=capacity[result[i].level-1];
+      }
+      callback(null,sumcapacity);
+    }
+  })
 }
 /** Function to update resource **/
 function updateResource(username) {
@@ -512,19 +530,23 @@ function updateResource(username) {
     if (err) throw err;
     var datetime = result[0].lastvisitedtime;
     var vid = result[0].vid;
-    exports.getResourceOfVillege(username,function (err,result) {
-      console.log('Query Result : '+JSON.stringify(result));
+    exports.getCapacity(vid,function(err,sumcapacity) {
       if (err) throw err;
-      var resource = [result["wood"],result["clay"],result["iron"],result["crop"]];
-      exports.loadResource(username,function (err,result) {
-          console.log('Query Result : '+JSON.stringify(result));
-          if (err) throw err;
-          var now_resource = calculateresource(datetime,resource,result);
-          console.log("Now Resouce : "+now_resource);
-          con.query('UPDATE villege SET wood = ? ,clay = ? ,iron = ? ,crop = ? WHERE vid = ?',[now_resource[0],now_resource[1],now_resource[2],now_resource[3],vid],function (err) {
+      var capacity = sumcapacity;
+      exports.getResourceOfVillege(username,function (err,result) {
+        console.log('Query Result : '+JSON.stringify(result));
+        if (err) throw err;
+        var resource = [result["wood"],result["clay"],result["iron"],result["crop"]];
+        exports.loadResource(username,function (err,result) {
+            console.log('Query Result : '+JSON.stringify(result));
             if (err) throw err;
-            console.log('Update resource');
-          })
+            var now_resource = calculateresource(datetime,resource,result,capacity);
+            console.log("Now Resouce : "+now_resource);
+            con.query('UPDATE villege SET wood = ? ,clay = ? ,iron = ? ,crop = ? WHERE vid = ?',[now_resource[0],now_resource[1],now_resource[2],now_resource[3],vid],function (err) {
+              if (err) throw err;
+              console.log('Update resource');
+            })
+        })
       })
     })
   });
@@ -562,7 +584,12 @@ function updateStructure(username) {
     })
   })
 }
+/** Update **/
 exports.update = function(username){
   updateResource(username);
   updateStructure(username);
+}
+/** Function tov check what structing task is doing **/
+exports.getStructingTask = function(username) {
+  con.query('SELECT sid,level,endtime FROM task JOIN structuringtask ON task.tid = structuringtask.tid WHERE vid=(SELECT FROM )')
 }
