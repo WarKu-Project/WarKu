@@ -206,6 +206,18 @@
 
             </div>
         </div>
+        
+        <!-- Resource produce rate -->
+        <div class="jumbotron" id="produce_container">
+            <div class="toTop">
+                <div class="row row-centered">Rate of production per hour</div>
+                <div class="row paddingrow">Wood : &nbsp;<span id="wood_produce_rate"></span></div>
+                <div class="row paddingrow">Clay : &nbsp;<span id="clay_produce_rate"></span></div>
+                <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
+                <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
+            </div>
+        </div>
+        
     </div>
     <!-- Upgrade resource Modal -->
     <div class="modal fade" id="upgrade-resourceModal" role="dialog">
@@ -231,16 +243,7 @@
             </div>
         </div>
     </div>
-    <!-- Resource produce rate -->
-    <div class="jumbotron" id="produce_container">
-        <div class="container toTop">
-            <div class="row row-centered">Rate of production per hour</div>
-            <div class="row paddingrow">Wood : &nbsp;<span id="wood_produce_rate"></span></div>
-            <div class="row paddingrow">Clay : &nbsp;<span id="clay_produce_rate"></span></div>
-            <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
-            <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
-        </div>
-    </div>
+    
 
 
 
@@ -731,7 +734,7 @@
                     if(result) {
                         console.log('can upgrade');
                         $('#buttonUpgrade').prop("disabled", false);
-                        $('#buttonUpgrade').click(upgradeResourceLevel(index));
+                        $('#buttonUpgrade').one("click",upgradeResourceLevel(index));
                     }
                     else {
                         console.log('can not upgrade');
@@ -800,7 +803,7 @@
         //$('#resource1-label').on('click',upgradeResource(0)); 
         //$('#resource2-label').on('click',upgradeResource(1)); 
         for (var i = 0; i < 16; i++) {
-            $('#resource' + (i + 1) + '-label').click(upgradeResource(i));
+            $('#resource' + (i + 1) + '-label').on("click",(upgradeResource(i)));
         }
 
         /*Stockbar*/

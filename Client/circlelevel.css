@@ -42,6 +42,50 @@
     content: url(picture/CricleLevel/CricleLevel10.png);
 }
 
+.level0-red {
+    content: url(picture/CricleLevel/CricleLevel0-red.png);
+}
+
+.level1-red {
+    content: url(picture/CricleLevel/CricleLevel1-red.png);
+}
+
+.level2-red {
+    content: url(picture/CricleLevel/CricleLevel2-red.png);
+}
+
+.level3-red {
+    content: url(picture/CricleLevel/CricleLevel3-red.png);
+}
+
+.level4-red {
+    content: url(picture/CricleLevel/CricleLevel4-red.png);
+}
+
+.level5-red {
+    content: url(picture/CricleLevel/CricleLevel5-red.png);
+}
+
+.level6-red {
+    content: url(picture/CricleLevel/CricleLevel6-red.png);
+}
+
+.level7-red {
+    content: url(picture/CricleLevel/CricleLevel7-red.png);
+}
+
+.level8-red {
+    content: url(picture/CricleLevel/CricleLevel8-red.png);
+}
+
+.level9-red {
+    content: url(picture/CricleLevel/CricleLevel9-red.png);
+}
+
+.level10-red {
+    content: url(picture/CricleLevel/CricleLevel10-red.png);
+}
+
 #resource1-label {
     position: absolute;
     width: 8%;

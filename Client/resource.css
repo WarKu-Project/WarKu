@@ -12,7 +12,7 @@
 
 #produce_container {
     position: absolute;
-    top: 70%;
+    top: 20%;
     left: 73%;
     width: 25%;
     border: 2px solid #000;
@@ -21,9 +21,12 @@
 }
 
 .paddingrow {
-    padding-left: 10%;
+    padding-left: 0%;
 }
 
 .toTop {
-    margin-top: -10%;
+    margin-top: -20%;
+    height: 20%;
+    top:20%;
+    
 }
