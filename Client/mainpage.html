@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="resource.css">
     <link rel="stylesheet" href="map.css">
     <link rel="stylesheet" href="mail.css">
+    <link rel="stylesheet" href="village.css">
     <title>WarKu!</title>
 </head>
 
@@ -504,7 +505,7 @@ The great horse stables allows you to build large military units simultaneously 
 
     </div>
 
-    <!--village container-->
+    <!--report container-->
     <div class="container" id="report_container">
         <span class="Centerer"></span>
         <div class="village">
@@ -762,6 +763,11 @@ The great horse stables allows you to build large military units simultaneously 
                     document.getElementById("resource" + (i + 1) + "-label").className = "level" + (result[i]["level"]);
                 }
             });
+            
+            for (var i = 0; i < 14; i++) {
+                //document.getElementById("resource" + (i + 1)).className = result[i]["type"] + (i + 1);
+                document.getElementById("village" + (i + 1) + "-label").className = "level"+0;
+            }
 
         }
 
