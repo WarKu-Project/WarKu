@@ -162,7 +162,7 @@ io.on('connection',function(socket){
       })
   })
   /** Function to get capacity of granry and warehouse **/
-  socket.on('getCapacity-request',function() {
+  socket.on('getcapacity-request',function() {
     engine.getCapacity(online_user[socket.request.connection.remoteAddress],function (err,result) {
       if (err) throw err;
       socket.emit('capacity-value',result);

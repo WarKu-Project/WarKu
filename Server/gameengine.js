@@ -526,8 +526,8 @@ function getCapacity(vid,callback) {
   })
 }
 /** Function to get Capacity of granary and warehouse By username **/
-exports.getCapacity = function (vid,callback) {
-  con.query('SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM username = ?)',username,function(err,result) {
+exports.getCapacity = function (username,callback) {
+    con.query('SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ? )',username,function(err,result) {
     console.log('Query Result : '+JSON.stringify(result));
     if (err) callback(err);
     var vid = result[0].vid;
