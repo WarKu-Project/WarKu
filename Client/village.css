@@ -1,0 +1,236 @@
+div.village {
+    margin-left: auto;
+    margin-right: 100%;
+    width: 100%;
+    position: relative;
+}
+
+div.village1 {
+    /*content: url(picture/village/5.png);*/
+    position: absolute;
+    width: 20%;
+    left: 40%;
+    top: 20%;
+}
+div.village2 {
+    /*content: url(picture/village/6.png);*/
+    position: absolute;
+    width: 20%;
+    left: 23%;
+    top: -4.5%;
+}
+div.village3 {
+    /*content: url(picture/village/7.png);*/
+    position: absolute;
+    width: 20%;
+    left: 57%;
+    top: -4.5%;
+}
+div.village4 {
+    /*content: url(picture/village/8.png);*/
+    position: absolute;
+    width: 20%;
+    left: 5.5%;
+    top: 9%;
+}
+div.village5 {
+    /*content: url(picture/village/9.png);*/
+    position: absolute;
+    width: 20%;
+    left: 75%;
+    top: 9%;
+}
+div.village6 {
+    /*content: url(picture/village/1.png);*/
+    position: absolute;
+    width: 20%;
+    left: 5.5%;
+    top: 30%;
+}
+div.village7 {
+    /*content: url(picture/village/2.png);*/
+    position: absolute;
+    width: 20%;
+    left: 23%;
+    top: 30%;
+}
+div.village8 {
+    /*content: url(picture/village/3.png);*/
+    position: absolute;
+    width: 20%;
+    left:57%;
+    top: 30%;
+}
+div.village9 {
+    /*content: url(picture/village/4.png);*/
+    position: absolute;
+    width: 20%;
+    left: 75%;
+    top: 30%;
+}
+div.village10 {
+    /*content: url(picture/village/5.png);*/
+    position: absolute;
+    width: 20%;
+    left: 5.5%;
+    top: 48%;
+}
+div.village11 {
+    /*content: url(picture/village/6.png);*/
+    position: absolute;
+    width: 20%;
+    left: 75%;
+    top: 48%;
+}
+div.village12 {
+    /*content: url(picture/village/7.png);*/
+    position: absolute;
+    width: 20%;
+    left: 40%;
+    top: 55%;
+}
+div.village13 {
+    /*content: url(picture/village/8.png);*/
+    position: absolute;
+    width: 20%;
+    left: 23.5%;
+    top: 65%;
+}
+div.village14 {
+    /*content: url(picture/village/9.png);*/
+    position: absolute;
+    width: 20%;
+    left: 57%;
+    top: 65%;
+}
+.building1 {
+    content: url(picture/village/mainbuilding.png);
+}
+.building2 {
+    content: url(picture/village/warehouse.png);
+}
+.building3 {
+    content: url(picture/village/barn.png);
+}
+.building4 {
+    content: url(picture/village/blacksmith.png);
+}
+.building5 {
+    content: url(picture/village/embassies.png);
+}
+.building6 {
+    content: url(picture/village/barracks.png);
+}
+.building7 {
+    content: url(picture/village/stables.png);
+}
+.building8 {
+    content: url(picture/village/workshop.png);
+}
+.building9 {
+    content: url(picture/village/academy.png);
+}
+.building10 {
+    content: url(picture/village/heromansion.png);
+}
+.building11 {
+    content: url(picture/village/market.png);
+}
+#village1-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 46.5%;
+    top: 30%;
+}
+#village2-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 30%;
+    top: 5%;
+}
+#village3-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 64%;
+    top: 5%;
+}
+#village4-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 12%;
+    top: 20%;
+}
+#village5-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 82%;
+    top: 20%;
+}
+#village6-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width:6%;
+    left: 12%;
+    top: 40%;
+}
+#village7-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 30%;
+    top: 40%;
+}
+#village8-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 64%;
+    top: 40%;
+}
+#village9-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 82%;
+    top: 40%;
+}
+#village10-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 12%;
+    top: 60%;
+}
+#village11-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 82%;
+    top: 60%;
+}
+#village12-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 46.5%;
+    top: 67%;
+}
+#village13-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 30%;
+    top: 76%;
+}
+#village14-label {
+    /*content: url(picture/CricleLevel/CricleLevel0.png);*/
+    position: absolute;
+    width: 6%;
+    left: 64%;
+    top: 76%;
+}

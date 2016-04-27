@@ -17,11 +17,14 @@
     width: 25%;
     border: 2px solid #000;
     border-radius: 10px;
-    height: 150px;
+    height: 25%;
+    background-color: aquamarine;
 }
 
 .paddingrow {
     padding-left: 0%;
+    
+    font-size: 18px;
 }
 
 .toTop {
@@ -29,4 +32,13 @@
     height: 20%;
     top:20%;
     
+}
+
+.jumbotronwidth{
+    max-width:100%;
+}
+
+.titlerow{
+    font-size: 18px;
+    font-weight: bold;
 }

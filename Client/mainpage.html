@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="resource.css">
     <link rel="stylesheet" href="map.css">
     <link rel="stylesheet" href="mail.css">
+    <link rel="stylesheet" href="village.css">
     <title>WarKu!</title>
 </head>
 
@@ -31,12 +32,12 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">WarKu!</a>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="main-nav">
-                
+
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Account</a></li>
                     <li><a href="#">Setting</a></li>
@@ -210,18 +211,18 @@
 
             </div>
         </div>
-        
+
         <!-- Resource produce rate -->
         <div class="jumbotron" id="produce_container">
-            <div class="toTop">
-                <div class="row row-centered">Rate of production per hour</div>
+            <div class="toTop jumbotronwidth">
+                <div class="row row-centered titlerow">Rate of production per hour</div>
                 <div class="row paddingrow">Wood : &nbsp;<span id="wood_produce_rate"></span></div>
                 <div class="row paddingrow">Clay : &nbsp;<span id="clay_produce_rate"></span></div>
                 <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
                 <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
             </div>
         </div>
-        
+
     </div>
     <!-- Upgrade resource Modal -->
     <div class="modal fade" id="upgrade-resourceModal" role="dialog">
@@ -247,22 +248,128 @@
             </div>
         </div>
     </div>
-    
-
-
-
-
-
 
 
     <!--village container-->
     <div class="container" id="village_container">
         <span class="Centerer"></span>
         <div class="village">
-            <image src="picture/village.png"></image>
+            <image src="picture/building-structure.jpg"></image>
+
+            <div class="village1-box">
+                <image id="village1">
+            </div>
+            <div class="village2-box">
+                <image id="village2">
+            </div>
+            <div class="village3-box">
+                <image id="village3">
+            </div>
+            <div class="village4-box">
+                <image id="village4">
+            </div>
+            <div class="village5-box">
+                <image id="village5">
+            </div>
+            <div class="village6-box">
+                <image id="village6">
+            </div>
+            <div class="village7-box">
+                <image id="village7">
+            </div>
+            <div class="village8-box">
+                <image id="village8">
+            </div>
+            <div class="village9-box">
+                <image id="village9">
+            </div>
+            <div class="village10-box">
+                <image id="village10">
+            </div>
+            <div class="village11-box">
+                <image id="village11">
+            </div>
+            <div class="village12-box">
+                <image id="village12">
+            </div>
+            <div class="village13-box">
+                <image id="village13">
+            </div>
+            <div class="village14-box">
+                <image id="village14">
+            </div>
+
+            <image id="village1-label" index="0" class="village-level"></image>
+            <image id="village2-label" index="1" class="village-level"></image>
+            <image id="village3-label" index="2" class="village-level"></image>
+            <image id="village4-label" index="3" class="village-level"></image>
+            <image id="village5-label" index="4" class="village-level"></image>
+            <image id="village6-label" index="5" class="village-level"></image>
+            <image id="village7-label" index="6" class="village-level"></image>
+            <image id="village8-label" index="7" class="village-level"></image>
+            <image id="village9-label" index="8" class="village-level"></image>
+            <image id="village10-label" index="9" class="village-level"></image>
+            <image id="village11-label" index="10" class="village-level"></image>
+            <image id="village12-label" index="11" class="village-level"></image>
+            <image id="village13-label" index="12" class="village-level"></image>
+            <image id="village14-label" index="13" class="village-level"></image>
+
         </div>
-        <div class="resource1">
-            <image id="resource_pos1"></image>
+    </div>
+
+    <div class="modal fade" id="upgrade-villageModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalvillage-header-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <!--
+                    Rate of production : <span id="productIn-time"></span> hr</p>
+                    <span id="productNext-level"></span> :
+                    <span id="productNext-time"></span> hr</p>
+                    Requirment</p>
+                    Wood : <span id="setWood"></span> Clay : <span id="setClay"></span> Iron : <span id="setIron"></span> Crop : <span id="setCrop"></span></p>
+                    Upgrade time : <span id="upgrade-time"></span>
+                    <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+
+
+embassy
+The embassy is a place for diplomats . The level of embassies, very much. The king would then have a choice diplomatic greater.
+
+bran
+Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe .
+
+warehouse
+Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe .
+
+Hero's Mansion
+The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised .
+
+academy
+Education New Forces types being researched at this school. Add school level to study the forces that are even more effective .
+After research, the military unit that you want done . You can train soldiers in this village.
+
+
+Blacksmith
+Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy.
+
+workshop
+Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster .
+
+
+barracks
+A large military barracks allows you to build more troops at the same time . But resources are three times normal .
+
+Stables
+The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price.
+
+-->
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -398,7 +505,7 @@
 
     </div>
 
-    <!--village container-->
+    <!--report container-->
     <div class="container" id="report_container">
         <span class="Centerer"></span>
         <div class="village">
@@ -436,18 +543,6 @@
             <image id="resource_pos1"></image>
         </div>
     </div>
-
-    <!--village container-->
-    <!--
-<div class ="container" id="statistic_container">
-<span class="Centerer"></span>
-<div class="village">
-<image src="picture/statistic.png"></image>
-</div>
-<div class="resource1">
-<image id="resource_pos1"></image>
-</div>
-</div>-->
 
 
     <!-- Initialize -->
@@ -641,8 +736,11 @@
         };
         var resource_value = null;
         var resource_produce_rate = [0, 0, 0, 0];
+        var resource_capacity = new Array;
         var status;
         var index;
+        var task = new Array;
+        var tasktime, taskindex;
 
         function init() {
             $('#resource_container').hide();
@@ -665,6 +763,11 @@
                     document.getElementById("resource" + (i + 1) + "-label").className = "level" + (result[i]["level"]);
                 }
             });
+            
+            for (var i = 0; i < 14; i++) {
+                //document.getElementById("resource" + (i + 1)).className = result[i]["type"] + (i + 1);
+                document.getElementById("village" + (i + 1) + "-label").className = "level"+0;
+            }
 
         }
 
@@ -706,79 +809,69 @@
         }
 
         function upgradeResourceLevel(e) {
-                //var index = parseInt($(this).attr("value"));
-                console.log('upgrade law na kub'+(index+1))
-                socket.emit('upgrade-resource-request', index + 1);
-                /*
-                socket.on('upgrade-resource-request',function(result){
-                    
-                });*/
-                document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"])+"-red";
-                
-                setTimeout(setResourceValue, 1000);
+            console.log('upgrade law na kub' + (index + 1))
+            socket.emit('upgrade-resource-request', index + 1);
+            //document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"])+"-red";
+            setTimeout(setResourceValue, 1000);
         }
 
+        function upgradeVillage(e){
+            
+        }
         function upgradeResource(e) {
             //var x = e.target;
             index = parseInt($(this).attr("index"));
-            console.log("index"+index);
+            console.log("index" + index);
             var upgradeTime = "";
-            
-                $('#upgrade-resourceModal').modal("show");
-                //console.log(JSON.stringify(resource));
-                $('#modalupgrade-header-title').text(resource[index]["type"] + " level " + resource[index]["level"]);
-                $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
-                if (resource[index]["level"] < 10) {
-                    $('#productNext-level').text("Rate of production LV " + (resource[index]["level"] + 1));
-                    $('#productNext-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"] + 1]);
-                }
-                $('#setWood').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][0]);
-                $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
-                $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
-                $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
-                upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec);
-                $('#upgrade-time').text(upgradeTime);
-                //console.log("kuymodal");
-                
-                $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
-                    //$('#upgrade-resourceModal').modal( 'hide' ).data( 'bs.modal', null );
-                    //$('#upgrade-resourceModal').removeData('bs.modal');
-                    console.log("close");
-                    location.reload();
-                })
-                
-                
-                socket.emit('upgrade-resource-status-request',index+1);
-                socket.on('upgrade-resource-status'+(index+1),function(result){
-                    status = result;
-                   // console.log("status1"+JSON.stringify(status));
-                    console.log("in socket "+index);
-//                    if(status=="true") {
-//                        console.log('can upgrade');
-//                        $('#buttonUpgrade').attr("value",index+"");
-//                        $('#buttonUpgrade').prop("disabled", false);
-//                        $('#buttonUpgrade').click(upgradeResourceLevel);
-//                    }
-//                    else {
-//                        console.log('can not upgrade');
-//                        $('#buttonUpgrade').prop("disabled", true);
-//                    }
-                    //console.log('kakkkkkpaiiii');
-                });    
-                //upgradeResourceDelay();
-                setTimeout(upgradeResourceDelay, 100);
-            
+
+            $('#upgrade-resourceModal').modal("show");
+            //console.log(JSON.stringify(resource));
+            $('#modalupgrade-header-title').text(resource[index]["type"] + " level " + resource[index]["level"]);
+            $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
+            if (resource[index]["level"] < 10) {
+                $('#productNext-level').text("Rate of production LV " + (resource[index]["level"] + 1));
+                $('#productNext-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"] + 1]);
+            }
+            $('#setWood').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][0]);
+            $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
+            $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
+            $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
+            upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec);
+            $('#upgrade-time').text(upgradeTime);
+            $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
+                console.log("close");
+                location.reload();
+            })
+
+
+            socket.emit('upgrade-resource-status-request', index + 1);
+            socket.on('upgrade-resource-status' + (index + 1), function (result) {
+                status = result;
+                // console.log("status1"+JSON.stringify(status));
+                console.log("in socket " + index);
+                //                    if(status=="true") {
+                //                        console.log('can upgrade');
+                //                        $('#buttonUpgrade').attr("value",index+"");
+                //                        $('#buttonUpgrade').prop("disabled", false);
+                //                        $('#buttonUpgrade').click(upgradeResourceLevel);
+                //                    }
+                //                    else {
+                //                        console.log('can not upgrade');
+                //                        $('#buttonUpgrade').prop("disabled", true);
+                //                    }
+            });
+            setTimeout(upgradeResourceDelay, 100);
+
 
         }
-        
-        function upgradeResourceDelay(){
+
+        function upgradeResourceDelay() {
             console.log(status);
-            if(status=="true") {
+            if (status == "true") {
                 console.log('can upgrade');
                 $('#buttonUpgrade').prop("disabled", false);
                 $('#buttonUpgrade').click(upgradeResourceLevel);
-            }
-            else {
+            } else {
                 console.log('can not upgrade');
                 $('#buttonUpgrade').prop("disabled", true);
             }
@@ -787,10 +880,19 @@
 
         function updateResource() {
             for (var i = 0; i < 16; i++) {
-                if (resource[i]["type"] == "wood") resource_value.wood += (resource_info["wood"].produce[resource[i]["level"]]) / 3600;
-                else if (resource[i]["type"] == "clay") resource_value.clay += (resource_info["clay"].produce[resource[i]["level"]]) / 3600;
-                else if (resource[i]["type"] == "iron") resource_value.iron += (resource_info["iron"].produce[resource[i]["level"]]) / 3600;
-                else resource_value.crop += (resource_info["crop"].produce[resource[i]["level"]]) / 3600;
+                if (resource[i]["type"] == "wood") {
+                    resource_value.wood += (resource_info["wood"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.wood >= resource_capacity[1]) resource_value.wood = resource_capacity[1];
+                } else if (resource[i]["type"] == "clay") {
+                    resource_value.clay += (resource_info["clay"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.clay >= resource_capacity[1]) resource_value.clay = resource_capacity[1];
+                } else if (resource[i]["type"] == "iron") {
+                    resource_value.iron += (resource_info["iron"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.iron >= resource_capacity[1]) resource_value.iron = resource_capacity[1];
+                } else {
+                    resource_value.crop += (resource_info["crop"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.crop >= resource_capacity[0]) resource_value.crop = resource_capacity[0];
+                }
             }
             $('#woodnum').text(parseInt(resource_value.wood));
             $('#claynum').text(parseInt(resource_value.clay));
@@ -800,14 +902,58 @@
             //console.log(resource_value);
         }
 
+        function updateTask() {
+            socket.emit('get-structingtask-request');
+            socket.on('structuringtask-value', function (result) {
+                //console.log(JSON.stringify(result));
+                task = result;
+            });
+            var date = new Date();
+            var currentsecconds = date.getTime() / 1000;
+            for (var i = 0; i < task.length; i++) {
+                tasktime = task[i]["endtime"];
+                taskindex = task[i]["pos"];
+                var tasktime_arr = tasktime.split('T');
+                var date = tasktime_arr[0].split('-');
+                var time = (tasktime_arr[1].split('.'))[0].split(':');
+                var d = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
+                //console.log("resource Time "+d);
+                var seconds = (d.getTime() / 1000) + (7 * 60 * 60);
+                //console.log("resource "+taskindex+" end: "+seconds);
+                if (currentsecconds < seconds) {
+                    //console.log("Upgrading");
+                    document.getElementById("resource" + (taskindex) + "-label").className = "level" + (resource[taskindex - 1]["level"]) + "-red";
+                } else {
+                    //console.log("End Upgraded");
+                    document.getElementById("resource" + (taskindex) + "-label").className = "level" + (resource[taskindex - 1]["level"]);
+                    location.reload();
+                }
+
+            }
+
+            //console.log("Time: "+time);
+            //console.log("Date: "+date);
+        }
+
+        function delay() {
+            document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"]);
+        }
+
         function setResourceValue() {
             console.log('update');
             socket.emit('resource-value-request');
             socket.on('resource-value-data', function (result) {
                 resource_value = result;
             });
-            //console.log(resource_value);
+            setCapacity();
+        }
 
+        function setCapacity() {
+            socket.emit('getcapacity-request');
+            socket.on('capacity-value', function (result) {
+                resource_capacity[0] = result.granary;
+                resource_capacity[1] = result.warehouse;
+            });
         }
 
         function setProduceRate() {
@@ -839,32 +985,11 @@
         $('#logout-btn').click(logout);
 
         /*Resource Listner*/
-
-        //$('#resource1-label').on('click',upgradeResource(0)); 
-        //$('#resource2-label').on('click',upgradeResource(1)); 
-//        for (var i = 0; i < 16; i++) {
-//            $('#resource' + (i + 1) + '-label').on("click",(upgradeResource(i)));
-//        }
-//        $('#resource1-label').on("click",upgradeResource);
-//        $('#resource2-label').on("click",upgradeResource);
-//        $('#resource3-label').on("click",(upgradeResource(2)));
-//        $('#resource4-label').on("click",(upgradeResource(3)));
-//        $('#resource5-label').on("click",(upgradeResource(4)));
-//        $('#resource6-label').on("click",(upgradeResource(5)));
-//        $('#resource7-label').on("click",(upgradeResource(6)));
-//        $('#resource8-label').on("click",(upgradeResource(7)));
-//        $('#resource9-label').on("click",(upgradeResource(8)));
-//        $('#resource10-label').on("click",(upgradeResource(9)));
-//        $('#resource11-label').on("click",(upgradeResource(10)));
-//        $('#resource12-label').on("click",(upgradeResource(11)));
-//        $('#resource13-label').on("click",(upgradeResource(12)));
-//        $('#resource14-label').on("click",(upgradeResource(13)));
-//        $('#resource15-label').on("click",(upgradeResource(14)));
-//        $('#resource16-label').on("click",(upgradeResource(15)));
-
         $('.resource-level').click(upgradeResource);
+
         /*Stockbar*/
         setInterval(updateResource, 100);
+        setInterval(updateTask, 1000);
     </script>
 
 

@@ -16,6 +16,7 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+    font-family: monospace;
 }
 
 nav ul li {
@@ -54,27 +55,23 @@ img {
 
 .Centerer {
     display: inline-block;
-    height: 20%;
+    height: 10%;
     vertical-align: middle;
 }
-
-.modal-body {}
-
-.modal-header {}
-
-.modal-footer {}
 
 .menu-padding {
     height: 10%;
 }
 
 .stockbar {
-    height: 5%;
+    height: 18%;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
     border: 2px solid #000;
+    font-size: 25px;
+    background-color: darksalmon;
 }
 
 .bottombar {
