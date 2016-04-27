@@ -61,7 +61,7 @@ con.query('CREATE TABLE task (tid int NOT NULL AUTO_INCREMENT,endtime datetime N
   else console.log('task is created to mysql');
 })
 /** Initialize structuringtask table **/
-con.query('CREATE TABLE structuringtask (tid int NOT NULL,type varchar(15) NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),level int NOT NULL,FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
+con.query('CREATE TABLE structuringtask (tid int NOT NULL,type varchar(15) NOT NULL,sid int NOT NULL,PRIMARY KEY(tid),level int NOT NULL,pos int NOT NULL,FOREIGN KEY(tid) REFERENCES task(tid),FOREIGN KEY(sid) REFERENCES structure(sid))',function (err) {
   if (err) console.log(err.toString());
   else console.log('structuringtask is created to mysql');
 })
@@ -122,6 +122,10 @@ for (var i = 0;i<100;i++){
             else {
               console.log('villagehall is created');
             }
+        })
+        con.query('INSERT INTO recentvillegestatus(vid,lastvisitedtime) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1),NOW())',function (err) {
+            if (err) console.log(err.toString());
+            else console.log('villege status inserted!');
         })
         for (var k = 1;k<=16;k++){
               con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {

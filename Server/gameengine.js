@@ -227,12 +227,13 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
       console.log('Can\'t upgrade');
       callback(null,false)
     }else {
-      con.query('SELECT structure.sid AS sid,type,level FROM resource JOIN structure ON resource.sid = structure.sid WHERE vid = ? AND pos=?',[vid,pos],function (err,result) {
+      con.query('SELECT structure.sid AS sid,type,level,pos FROM resource JOIN structure ON resource.sid = structure.sid WHERE vid = ? AND pos=?',[vid,pos],function (err,result) {
         if (err) callback(err);
         console.log('Query Result : '+JSON.stringify(result[0]));
         var sid = result[0].sid;
         var level = result[0].level+1;
         var type = result[0].type;
+        var pos = result[0].pos;
         con.query('SELECT level,endTime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE sid = ? ORDER BY structuringtask.tid DESC LIMIT 1',sid,function (err,result) {
           if (err) callback(err);
           console.log('Query Result : '+JSON.stringify(result));
@@ -254,7 +255,7 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
                 console.log('Can upgrade');
                 var endTime = calculateFinishDate(startTime,timeuse.hour,timeuse.min,timeuse.sec);
                 var left_resource = { wood : (result[0].wood-require_resource[0]) , clay : (result[0].clay-require_resource[1]), iron : (result[0].iron-require_resource[2]) , crop : (result[0].crop-require_resource[3])};
-                callback(null,true,left_resource,sid,vid,endTime,level,type)
+                callback(null,true,left_resource,sid,vid,endTime,level,type,pos)
               }
               else {
                 console.log('Can\'t Upgrade');
@@ -270,7 +271,7 @@ exports.getResourceUpgradeStatus = function(username,pos,callback) {
 }
 /** Function to upgrade resource **/
 exports.upgradeResource = function(username,pos,callback){
-  exports.getResourceUpgradeStatus(username,pos,function(err,status,left_resource,sid,vid,finishDate,level,type) {
+  exports.getResourceUpgradeStatus(username,pos,function(err,status,left_resource,sid,vid,finishDate,level,type,pos) {
     if (err) throw err;
     if (status){
       console.log('Receive data | left_resource : '+left_resource+' sid : '+sid + ' vid  :'+vid);
@@ -282,7 +283,7 @@ exports.upgradeResource = function(username,pos,callback){
         if (err) callback(err,null);
         var tid = result.insertId;
         console.log('Success update task');
-        con.query('INSERT INTO structuringtask(tid,sid,level,type) values(?,?,?,?)',[tid,sid,level,type],function(err) {
+        con.query('INSERT INTO structuringtask(tid,sid,level,type,pos) values(?,?,?,?,?)',[tid,sid,level,type,pos],function(err) {
           if (err) callback(err,null);
           console.log('Success update structuringtask');
           saveStatus(username);
@@ -348,7 +349,7 @@ exports.getCreateBuildingStatus = function(username,pos,type,callback) {
               console.log('Can create');
               var endTime = calculateFinishDate(startTime,timeuse.hour,timeuse.min,timeuse.sec);
               var left_resource = { wood : (result[0].wood-require_resource[0]) , clay : (result[0].clay-require_resource[1]), iron : (result[0].iron-require_resource[2]) , crop : (result[0].crop-require_resource[3])};
-              callback(null,true,vid,endTime,left_resource,type);
+              callback(null,true,vid,endTime,left_resource,type,pos);
             }
             else {
               console.log('Can\'t create');
@@ -369,7 +370,7 @@ exports.getCreateBuildingStatus = function(username,pos,type,callback) {
 /** Function to Crate Buildign **/
 exports.createBuilding = function(username,pos,type,callback) {
   console.log('CREATING');
-  exports.getCreateBuildingStatus(username,pos,type,function(err,status,vid,endtime,left_resource) {
+  exports.getCreateBuildingStatus(username,pos,type,function(err,status,vid,endtime,left_resource,pos) {
     con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,vid],function(err) {
       if (err) callback(err,null);
       console.log('Success update resource in villege');
@@ -385,7 +386,7 @@ exports.createBuilding = function(username,pos,type,callback) {
             if (err) callback(err,null);
             var tid = result.insertId;
             console.log('Success update task');
-            con.query('INSERT INTO structuringtask(tid,sid,level,type) values(?,?,?,?)',[tid,sid,0,type],function(err) {
+            con.query('INSERT INTO structuringtask(tid,sid,level,type,pos) values(?,?,?,?,?)',[tid,sid,0,type,pos],function(err) {
               if (err) callback(err,null);
               console.log('Success update structuringtask');
               saveStatus(username);
@@ -434,7 +435,7 @@ exports.getBuildingUpgradeStatus = function(username,pos,callback) {
                 console.log('Can upgrade');
                 var endTime = calculateFinishDate(startTime,timeuse.hour,timeuse.min,timeuse.sec);
                 var left_resource = { wood : (result[0].wood-require_resource[0]) , clay : (result[0].clay-require_resource[1]), iron : (result[0].iron-require_resource[2]) , crop : (result[0].crop-require_resource[3])};
-                callback(null,true,left_resource,sid,vid,endTime,level,type)
+                callback(null,true,left_resource,sid,vid,endTime,level,type,pos)
               }
               else {
                 console.log('Can\'t Upgrade');
@@ -462,7 +463,7 @@ exports.upgradeBuilding = function(username,pos,callback){
         if (err) callback(err,null);
         var tid = result.insertId;
         console.log('Success update task');
-        con.query('INSERT INTO structuringtask(tid,sid,level,type) values(?,?,?,?)',[tid,sid,level,type],function(err) {
+        con.query('INSERT INTO structuringtask(tid,sid,level,type,pos) values(?,?,?,?,?)',[tid,sid,level,type,pos],function(err) {
           if (err) callback(err,null);
           console.log('Success update structuringtask');
           saveStatus(username);
@@ -606,7 +607,7 @@ exports.update = function(username){
 /** Function tov check what structing task is doing **/
 exports.getStructingTask = function(username,callback) {
   console.log('Get Structing ');
-  con.query('SELECT type,sid,endtime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?))',username,function (err,result) {
+  con.query('SELECT type,sid,endtime,pos FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = (SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?))',username,function (err,result) {
     console.log('Query Result : '+JSON.stringify(result));
     if (err) callback(err);
     callback(null,result);
