@@ -26,12 +26,17 @@
     </script>
 
     <!--Navbar menu-->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-
-
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand" href="#">WarKu!</a>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="main-nav">
+                
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Account</a></li>
                     <li><a href="#">Setting</a></li>
@@ -43,7 +48,6 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <div class="menu-padding"></div>
     <!--menu-->
     <div class="menu-frame">
         <nav>
@@ -734,6 +738,15 @@
                 $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
                 upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec);
                 $('#upgrade-time').text(upgradeTime);
+                //console.log("kuymodal");
+                
+                $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
+                    //$('#upgrade-resourceModal').modal( 'hide' ).data( 'bs.modal', null );
+                    //$('#upgrade-resourceModal').removeData('bs.modal');
+                    console.log("close");
+                    location.reload();
+                })
+                
                 
                 socket.emit('upgrade-resource-status-request',index+1);
                 socket.on('upgrade-resource-status'+(index+1),function(result){
@@ -752,8 +765,8 @@
 //                    }
                     //console.log('kakkkkkpaiiii');
                 });    
-                
-                setTimeout(upgradeResourceDelay, 1000);
+                //upgradeResourceDelay();
+                setTimeout(upgradeResourceDelay, 100);
             
 
         }
@@ -851,7 +864,7 @@
 
         $('.resource-level').click(upgradeResource);
         /*Stockbar*/
-        setInterval(updateResource, 1000);
+        setInterval(updateResource, 100);
     </script>
 
 
