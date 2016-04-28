@@ -13,7 +13,7 @@
 #produce_container {
     position: absolute;
     top: 20%;
-    left: 73%;
+    left: 79%;
     width: 25%;
     border: 2px solid #000;
     border-radius: 10px;
@@ -23,8 +23,9 @@
 
 .paddingrow {
     padding-left: 0%;
-    
     font-size: 18px;
+    font-size: 1.1em;
+    font-size: 1.3vw;
 }
 
 .toTop {
@@ -41,4 +42,6 @@
 .titlerow{
     font-size: 18px;
     font-weight: bold;
+    font-size: 1.1em;
+    font-size: 1.3vw;
 }

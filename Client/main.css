@@ -63,6 +63,15 @@ img {
     height: 10%;
 }
 
+@media (max-width: @screen-xs) {
+    .stockbar{font-size: 10px;}
+}
+
+@media (max-width: @screen-sm) {
+    .stockbar{font-size: 14px;}
+}
+
+
 .stockbar {
     height: 18%;
     width: 70%;
@@ -70,7 +79,8 @@ img {
     margin-right: auto;
     margin-top: 2%;
     border: 2px solid #000;
-    font-size: 25px;
+    font-size: 1.5em;
+    font-size: 2vw;
     background-color: darksalmon;
 }
 

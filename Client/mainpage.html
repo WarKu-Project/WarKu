@@ -6,7 +6,9 @@
     <script src="socket.io-client/socket.io.js"></script>
     <script src="jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="jquery-ui-1.11.4/jquery-ui.min.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="clay.css">
     <link rel="stylesheet" href="iron.css">
@@ -206,13 +208,10 @@
             </div>
 
         </div>
-        <div class="container">
-            <div class="jumbotron bottombar">
-
-            </div>
-        </div>
+        
 
         <!-- Resource produce rate -->
+        <div class = "container-fluid">
         <div class="jumbotron" id="produce_container">
             <div class="toTop jumbotronwidth">
                 <div class="row row-centered titlerow">Rate of production per hour</div>
@@ -221,6 +220,7 @@
                 <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
                 <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
             </div>
+        </div>
         </div>
 
     </div>
@@ -255,7 +255,8 @@
         <span class="Centerer"></span>
         <div class="village">
             <image src="picture/building-structure.jpg"></image>
-
+            
+            <!-- village pic -->
             <div class="village1-box">
                 <image id="village1">
             </div>
@@ -298,7 +299,8 @@
             <div class="village14-box">
                 <image id="village14">
             </div>
-
+            
+            <!-- village level pic -->
             <image id="village1-label" index="0" class="village-level"></image>
             <image id="village2-label" index="1" class="village-level"></image>
             <image id="village3-label" index="2" class="village-level"></image>
@@ -317,61 +319,126 @@
         </div>
     </div>
 
-    <div class="modal fade" id="upgrade-villageModal" role="dialog">
+    <!--Create new Construction Modal -->
+    <div class="modal fade" id="create-villageModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="modalvillage-header-title"></h4>
+                    <h3 class="modal-title" id="modalvillage-header-title">New building</h3>
                 </div>
                 <div class="modal-body">
-                    <!--
-                    Rate of production : <span id="productIn-time"></span> hr</p>
-                    <span id="productNext-level"></span> :
-                    <span id="productNext-time"></span> hr</p>
+                    <h4>Villagehall</h4></p>
+                Building leaders live in the main building. The much higher level The new building will be completed faster.</p>
+                    <div class="villagehall-model"></div>
                     Requirment</p>
-                    Wood : <span id="setWood"></span> Clay : <span id="setClay"></span> Iron : <span id="setIron"></span> Crop : <span id="setCrop"></span></p>
-                    Upgrade time : <span id="upgrade-time"></span>
-                    <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
-
-
-embassy
-The embassy is a place for diplomats . The level of embassies, very much. The king would then have a choice diplomatic greater.
-
-bran
-Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe .
-
-warehouse
-Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe .
-
-Hero's Mansion
-The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised .
-
-academy
-Education New Forces types being researched at this school. Add school level to study the forces that are even more effective .
-After research, the military unit that you want done . You can train soldiers in this village.
-
-
-Blacksmith
-Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy.
-
-workshop
-Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster .
-
-
-barracks
-A large military barracks allows you to build more troops at the same time . But resources are three times normal .
-
-Stables
-The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price.
-
--->
-
+                    Wood : 70 Clay : 40 Iron : 60 Crop : 20</p>
+                    Contructing time : 00:06:40
+                    <button id="villagehall-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Granary</h4></p>
+                    Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe.
+                    <div class="granary-model"></div>
+                    Requirment</p>
+                    Wood : 80 Clay : 100 Iron : 70 Crop : 20</p>
+                    Contructing time : 00:05:20
+                    <button id="granary-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Warehouse</h4></p>
+                    Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe .
+                    <div class="warehouse-model"></div>
+                    Requirment</p>
+                    Wood : 130 Clay : 160 Iron : 90 Crop : 40</p>
+                    Contructing time : 00:06:40
+                    <button id="warehouse-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Market</h4></p>
+                    The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously .
+                    <div class="market-model"></div>
+                    Requirment</p>
+                    Wood : 80 Clay : 70 Iron : 120 Crop : 70</p>
+                    Contructing time : 00:06:00
+                    <button id="market-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Ballacks</h4></p>
+                    A large military barracks allows you to build more troops at the same time . But resources are three times normal .
+                    <div class="ballacks-model"></div>
+                    Requirment</p>
+                    Wood : 210 Clay : 140 Iron : 260 Crop : 120</p>
+                    Contructing time : 00:06:40
+                    <button id="ballacks-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Academy</h4></p>
+                    Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village.
+                    <div class="academy-model"></div>
+                    Requirment</p>
+                    Wood : 220 Clay : 160 Iron : 90 Crop : 40</p>
+                    Contructing time : 00:06:40
+                    <button id="academy-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Stable</h4></p>
+                   The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price.
+                    <div class="stable-model"></div>
+                    Requirment</p>
+                    Wood : 260 Clay : 140 Iron : 220 Crop : 100</p>
+                    Contructing time : 00:07:20
+                    <button id="stable-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Headquarter</h4></p>
+                    The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised .
+                    <div class="headquarter-model"></div>
+                    Requirment</p>
+                    Wood : 700 Clay : 670 Iron : 700 Crop : 240</p>
+                    Contructing time : 00:07:40
+                    <button id="headquarter-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Smithy</h4></p>
+                    Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy.
+                    <div class="smithy-model"></div>
+                    Requirment</p>
+                    Wood : 180 Clay : 250 Iron : 500 Crop : 160</p>
+                    Contructing time : 00:06:40
+                    <button id="buttonCreate9" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Workshop</h4></p>
+                    Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster .
+                    <div class="workshop-model"></div>
+                    Requirment</p>
+                    Wood : 460 Clay : 510 Iron : 600 Crop : 320</p>
+                    Contructing time : 00:10:00
+                    <button id="workshop-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
             </div>
         </div>
     </div>
+
+<!-- Upgrade village Modal -->
+<div class="modal fade" id="upgrade-villageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modalupgradevillage-title"></h4>
+            </div>
+            <div class="modal-body">
+</div>
+
+
+</div>
+</div>
+</div>
+
 
     <!--map container-->
     <div class="container" id="map_container">
@@ -547,6 +614,7 @@ The great horse stables allows you to build large military units simultaneously 
 
     <!-- Initialize -->
     <script type="text/javascript">
+        /* resource attribute*/
         var resource = null;
         var resource_info = {
             "crop": {
@@ -737,11 +805,12 @@ The great horse stables allows you to build large military units simultaneously 
         var resource_value = null;
         var resource_produce_rate = [0, 0, 0, 0];
         var resource_capacity = new Array;
-        var status;
-        var index;
-        var task = new Array;
-        var tasktime, taskindex;
+        var status_resource;
+        var index_resource;
+        var task_resource = new Array;
+        var tasktime_resource, taskindex_resource;
 
+        /* initial function */
         function init() {
             $('#resource_container').hide();
             $('#village_container').hide();
@@ -749,94 +818,54 @@ The great horse stables allows you to build large military units simultaneously 
             $('#report_container').hide();
             $('#mail_container').hide();
             $('#statistic_container').hide();
-            setResourceValue();
         }
-
+        
+        /*Resource function*/
+        
         function resourceClick() {
             init();
             $('#resource_container').show();
             socket.emit('resource-request');
             socket.on('resource-data', function (result) {
                 resource = result;
-                for (var i = 0; i < 16; i++) {
-                    document.getElementById("resource" + (i + 1)).className = result[i]["type"] + (i + 1);
-                    document.getElementById("resource" + (i + 1) + "-label").className = "level" + (result[i]["level"]);
-                }
             });
-            
-            for (var i = 0; i < 14; i++) {
-                //document.getElementById("resource" + (i + 1)).className = result[i]["type"] + (i + 1);
-                document.getElementById("village" + (i + 1) + "-label").className = "level"+0;
+            setTimeout(generateResource,100);  
+        }
+        
+        function generateResource(){
+            setResourceValue();
+            for (var i = 0; i < 16; i++) {
+                document.getElementById("resource" + (i + 1)).className = resource[i]["type"] + (i + 1);
+                document.getElementById("resource" + (i + 1) + "-label").className = "level" + (resource[i]["level"]);
+                $("#resource" + (i+1) + "-label").prop('title', resource[i]["type"]);
             }
-
-        }
-
-        function villageClick() {
-            init();
-            $('#village_container').show();
-        }
-
-        function mapClick() {
-            init();
-            $('#map_container').show();
-        }
-
-        function reportClick() {
-            init();
-            $('#report_container').show();
-        }
-
-        function mailClick() {
-            init();
-            $('#mail_container').show();
-        }
-
-        function statisticClick() {
-            init();
-            $('#statistic_container').show();
-        }
-
-        function logout() {
-            location.assign("http:/Client/index.html");
-            //TODO remove user from server
-        }
-
-        /** Function to format to two digit**/
-        function twoDigits(d) {
-            if (0 <= d && d < 10) return "0" + d.toString();
-            if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
-            return d.toString();
         }
 
         function upgradeResourceLevel(e) {
-            console.log('upgrade law na kub' + (index + 1))
-            socket.emit('upgrade-resource-request', index + 1);
-            //document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"])+"-red";
+            console.log('upgrade law na kub' + (index_resource + 1))
+            socket.emit('upgrade-resource-request', index_resource + 1);
             setTimeout(setResourceValue, 1000);
         }
-
-        function upgradeVillage(e){
-            
-        }
+        
         function upgradeResource(e) {
             //var x = e.target;
-            index = parseInt($(this).attr("index"));
-            console.log("index" + index);
+            index_resource = parseInt($(this).attr("index"));
+            console.log("index" + index_resource);
             var upgradeTime = "";
 
             $('#upgrade-resourceModal').modal("show");
             //console.log(JSON.stringify(resource));
-            $('#modalupgrade-header-title').text(resource[index]["type"] + " level " + resource[index]["level"]);
-            $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
-            if (resource[index]["level"] < 10) {
-                $('#productNext-level').text("Rate of production LV " + (resource[index]["level"] + 1));
-                $('#productNext-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"] + 1]);
+            $('#modalupgrade-header-title').text(resource[index_resource]["type"] + " level " + resource[index_resource]["level"]);
+            $('#productIn-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"]]);
+            if (resource[index_resource]["level"] < 10) {
+                $('#productNext-level').text("Rate of production LV " + (resource[index_resource]["level"] + 1));
+                $('#productNext-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"] + 1]);
             }
-            $('#setWood').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][0]);
-            $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
-            $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
-            $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
-            upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec);
+            $('#setWood').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][0]);
+            $('#setClay').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][1]);
+            $('#setIron').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][2]);
+            $('#setCrop').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][3]);
+            upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
             $('#upgrade-time').text(upgradeTime);
             $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
                 console.log("close");
@@ -844,21 +873,11 @@ The great horse stables allows you to build large military units simultaneously 
             })
 
 
-            socket.emit('upgrade-resource-status-request', index + 1);
-            socket.on('upgrade-resource-status' + (index + 1), function (result) {
-                status = result;
-                // console.log("status1"+JSON.stringify(status));
-                console.log("in socket " + index);
-                //                    if(status=="true") {
-                //                        console.log('can upgrade');
-                //                        $('#buttonUpgrade').attr("value",index+"");
-                //                        $('#buttonUpgrade').prop("disabled", false);
-                //                        $('#buttonUpgrade').click(upgradeResourceLevel);
-                //                    }
-                //                    else {
-                //                        console.log('can not upgrade');
-                //                        $('#buttonUpgrade').prop("disabled", true);
-                //                    }
+            socket.emit('upgrade-resource-status-request', index_resource + 1);
+            socket.on('upgrade-resource-status' + (index_resource + 1), function (result) {
+                status_resource = result;
+                // console.log("status_resource1"+JSON.stringify(status_resource));
+                console.log("in socket " + index_resource);
             });
             setTimeout(upgradeResourceDelay, 100);
 
@@ -866,8 +885,8 @@ The great horse stables allows you to build large military units simultaneously 
         }
 
         function upgradeResourceDelay() {
-            console.log(status);
-            if (status == "true") {
+            console.log(status_resource);
+            if (status_resource) {
                 console.log('can upgrade');
                 $('#buttonUpgrade').prop("disabled", false);
                 $('#buttonUpgrade').click(upgradeResourceLevel);
@@ -901,43 +920,46 @@ The great horse stables allows you to build large military units simultaneously 
             setProduceRate();
             //console.log(resource_value);
         }
-
+        
+        /* updateResourceTask */
         function updateTask() {
             socket.emit('get-structingtask-request');
             socket.on('structuringtask-value', function (result) {
                 //console.log(JSON.stringify(result));
-                task = result;
+                task_resource = result;
             });
             var date = new Date();
             var currentsecconds = date.getTime() / 1000;
-            for (var i = 0; i < task.length; i++) {
-                tasktime = task[i]["endtime"];
-                taskindex = task[i]["pos"];
-                var tasktime_arr = tasktime.split('T');
-                var date = tasktime_arr[0].split('-');
-                var time = (tasktime_arr[1].split('.'))[0].split(':');
+            for (var i = 0; i < task_resource.length; i++) {
+                tasktime_resource = task_resource[i]["endtime"];
+                taskindex_resource = task_resource[i]["pos"];
+                var tasktime_resource_arr = tasktime_resource.split('T');
+                var date = tasktime_resource_arr[0].split('-');
+                var time = (tasktime_resource_arr[1].split('.'))[0].split(':');
                 var d = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
                 //console.log("resource Time "+d);
                 var seconds = (d.getTime() / 1000) + (7 * 60 * 60);
-                //console.log("resource "+taskindex+" end: "+seconds);
+                //console.log("resource "+taskindex_resource+" end: "+seconds);
                 if (currentsecconds < seconds) {
-                    //console.log("Upgrading");
-                    document.getElementById("resource" + (taskindex) + "-label").className = "level" + (resource[taskindex - 1]["level"]) + "-red";
+                    var remainingtime = parseInt(seconds-currentsecconds);
+                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]) + "-red";
+                    $("#resource" + (taskindex_resource) + "-label").removeData("title");
+                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content",resource[taskindex_resource - 1]["type"]+" upgrading remain: "+remainingtime+" sec");
+                    $('body').click(function(){
+                        $("#resource" + (taskindex_resource) + "-label").tooltip('close');
+                    });
+                    console.log("remain: "+remainingtime);
                 } else {
-                    //console.log("End Upgraded");
-                    document.getElementById("resource" + (taskindex) + "-label").className = "level" + (resource[taskindex - 1]["level"]);
+                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
                     location.reload();
                 }
-
             }
-
-            //console.log("Time: "+time);
-            //console.log("Date: "+date);
         }
-
+        
+        /*
         function delay() {
-            document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"]);
-        }
+            document.getElementById("resource" + (index_resource + 1) + "-label").className = "level" + (resource[index_resource]["level"]);
+        }*/
 
         function setResourceValue() {
             console.log('update');
@@ -970,6 +992,133 @@ The great horse stables allows you to build large military units simultaneously 
             $('#crop_produce_rate').text(resource_produce_rate[3]);
         }
 
+        /*Village attribute*/
+        var building = null;
+        var index_village;
+        
+        /* Village function */
+        
+        function villageClick() {
+            init();
+            $('#village_container').show();
+            socket.emit('building-request');
+            socket.on('buildig-data', function(result) {
+                console.log(JSON.stringify(result)) 
+                building = result;
+            });
+            setTimeout(generateVillage,100);            
+        }
+
+        function generateVillage(){
+            var buildingposlists = new Array;
+            for (var i = 0; i < building.length; i++) {
+                $("#village" + building[i]["pos"] + "-label").addClass("level"+building[i]["level"]);
+                document.getElementById("village" + (i + 1)).className = building[i]["type"] ;
+                buildingposlists[i] = building[i]["pos"];
+            }
+            for (var i = 0; i < 14; i++) {
+                if($.inArray(i+1, buildingposlists)==-1){
+                    $("#village" + (i+1) + "-label").addClass("level"+0);
+                }
+            }
+        }
+        
+        function upgradeVillage(e){
+            index_village = parseInt($(this).attr("index"));
+            var villagelevel = $("#village" + (index_village+1) + "-label").attr('class').split(' ')[1];
+            if(villagelevel == 'level0'){
+                createNewVillage();
+            }
+            else{
+                upgradeVillageLevel();
+            }
+            
+        }
+
+        function createNewVillage(){
+            $('#create-villageModal').modal("show");
+            $('#villagehall-create').one( "click", function(){
+                console.log('villagehall-create');
+            });
+            $('#granary-create').one( "click", function(){
+                console.log('granary-create');
+            });
+            $('#warehouse-create').one( "click", function(){
+                console.log('warehouse-create');
+            });
+            $('#market-create').one( "click", function(){
+                console.log('market-create');
+            });
+            $('#ballacks-create').one( "click", function(){
+                console.log('ballacks-create');
+            });
+            $('#academy-create').one( "click", function(){
+                console.log('academy-create');
+            }); 
+            $('#stable-create').one( "click", function(){
+                console.log('stable-create');
+            });
+            $('#headquarter-create').one( "click", function(){
+                console.log('headquarter-create');
+            });
+            $('#smithy-create').one( "click", function(){
+                console.log('smithy-create');
+            });
+            $('#workshop-create').one( "click", function(){
+                console.log('workshop-create');
+            });
+        }
+
+        function upgradeVillageLevel(){
+            $('#upgrade-villageModal').modal("show");
+            var index_building;
+            for(var i=0;i<building.length;i++){
+                if(building[i]["pos"]==index_village+1){
+                    index_building = i;
+                    break;
+                }
+            }
+            $('#modalupgradevillage-title').text(building[index_building]["type"] + " level " + building[index_building]["level"]);
+        }
+        
+        
+        /* Other function */
+        
+        /** Function to format to two digit**/
+        function twoDigits(d) {
+            if (0 <= d && d < 10) return "0" + d.toString();
+            if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
+            return d.toString();
+        }
+
+        function mapClick() {
+            init();
+            $('#map_container').show();
+        }
+
+        function reportClick() {
+            init();
+            $('#report_container').show();
+        }
+
+        function mailClick() {
+            init();
+            $('#mail_container').show();
+        }
+
+        function statisticClick() {
+            init();
+            $('#statistic_container').show();
+        }
+
+        function logout() {
+            location.assign("http:/Client/index.html");
+            //TODO remove user from server
+        }
+        
+        
+        
+        /* Initial */
         init();
 
         /*Menu Listener*/
@@ -986,7 +1135,10 @@ The great horse stables allows you to build large military units simultaneously 
 
         /*Resource Listner*/
         $('.resource-level').click(upgradeResource);
-
+        $('.resource-level').tooltip();
+        
+        /*Village Listener*/
+        $('.village-level').click(upgradeVillage);
         /*Stockbar*/
         setInterval(updateResource, 100);
         setInterval(updateTask, 1000);
