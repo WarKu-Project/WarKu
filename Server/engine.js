@@ -13,11 +13,11 @@ var con = mysql.createConnection({
 //Player part
 /** Function to verify player **/
 exports.verify = function(username,password,callback) {
-  console.log('Engine Receive From Server : username = '+username+' password = '+password);
+  console.log('Engine Receive verify From Server : username = '+username+' password = '+password);
   //Get username by SQL with username and password from player table.
   con.query('SELECT username FROM player WHERE username=? AND password=?',[username,password],function(err,result){
-    //Log SQL result
-    console.log('SQL Result : '+JSON.stringify(result));
+
+
     if (err) callback(err);
     else {
         //If SQL result is empty, this mean no player which has matched this username and this password.
@@ -37,11 +37,11 @@ exports.verify = function(username,password,callback) {
 }
 /** Function to check that player is existing in Database **/
 exports.exist = function(username,email,callback) {
-  console.log('Engine Receive From Server : username = '+username+' email = '+email);
+  console.log('Engine Receive exist From Server : username = '+username+' email = '+email);
   //Get username by SQL with username or email from player table.
   con.query('SELECT username FROM player WHERE username = ? OR email = ?',[username,email],function(err,result) {
-    //Log SQL result
-    console.log('SQL Result : '+JSON.stringify(result));
+
+
     if (err) callback(err);
     else {
         //If SQL result is empty, this mean no player which has this username or this email.
@@ -60,11 +60,11 @@ exports.exist = function(username,email,callback) {
 }
 /** Function to create new player **/
 exports.createPlayer = function(username,password,email,callback) {
-  console.log('Engine Receive From Server : username = '+username+' password = '+password+' email = '+email);
+  console.log('Engine Receive createPlayer From Server : username = '+username+' password = '+password+' email = '+email);
   //INSERT NEW PLAYER TO SQL table player
   con.query('INSERT INTO player(username,password,email) values(?,?,?)',[username,password,email],function(err,result) {
-    //Log SQL result
-    console.log('SQL Result : '+JSON.stringify(result));
+
+
     if (err) callback(err);
     else {
       //Receive latest pid
@@ -77,76 +77,56 @@ exports.createPlayer = function(username,password,email,callback) {
           if (err) callback(err);
           else {
             //Initilize player and villege status
-            initStatus(pid,vid,function(err) {
-              if (err) callback(err);
-              else {
-                //Initilize villege status
-                saveVillegeStatus(vid,function(err) {
-                  if (err) callback(err);
-                  else {
-                    console.log('Success! New Player with pid = '+pid+' is Created!!!');
-                    callback(null,username);
-                  }
-                });
-              }
-            });
+            initStatus(pid,vid);
+            saveVillegeStatus(vid);
           }
         });
       });
+      callback(null,username)
     }
   });
 }
 
 /** Status PART **/
 /** Function to init status **/
-function initStatus(pid,vid,callback) {
+function initStatus(pid,vid) {
   console.log('initStatus with : pid = '+pid+' vid = '+vid);
   //Initilize recentstatus for player
   con.query('INSERT INTO recentstatus(pid,vid,lastvisitedtime) values(?,?,NOW())',[pid,vid],function(err,result) {
-    //Log SQL Result
-    console.log('SQL Result : '+JSON.stringify(result));
-    if (err) callback(err);
+
+
+    if (err) console.log(err);
     else{
         console.log('Init recent status with pid = '+pid+" vid = "+vid);
-        //Return null because it doesn't error
-        callback(null);
-    }
+        //Return null because it doesn't error    }
+      }
   })
 }
 /** Function to save villege status **/
-function saveVillegeStatus(vid,callback) {
+function saveVillegeStatus(vid) {
   console.log('initVillegeStatus with : vid = '+vid);
   //save recentvillegestatus for villege
   con.query('UPDATE recentvillegestatus SET lastvisitedtime  = NOW() WHERE vid = ?',vid,function(err,result) {
-    //Log SQL Result
-    console.log('SQL Result : '+JSON.stringify(result));
-    if (err) callback(err);
+
+
+    if (err) console.log(err);
     else {
       console.log('Init new villege status with vid ='+vid);
-      //Return null because it doesn't error
-      callback(null)
     }
   })
 }
 /** Function to save status **/
-function saveStatus(username,vid,callback){
+function saveStatus(username,vid){
   console.log('saveStatus with : username = '+username+' vid = '+vid);
   //save recentstatus by update recent villege
   con.query('UPDATE recentstatus SET vid = ? , lastvisitedtime = NOW() WHERE pid = (SELECT pid FROM player WHERE username = ?)',[vid,username],function(err,result) {
-    //Log SQL Result
-    console.log('SQL Result : '+JSON.stringify(result));
-    if (err) callback(err);
+
+
+    if (err) console.log(err);
     else {
       console.log("Update recentstatus with username = "+username+" vid = "+vid);
       //save villege status
-      saveVillegeStatus(vid,function(err) {
-        if (err) callback(err);
-        else {
-          console.log('Success update status of username = '+username+' vid = '+vid);
-          //Return null because it doesn't error
-          callback(null);
-        }
-      });
+      saveVillegeStatus(vid);
     }
   });
 }
@@ -155,8 +135,8 @@ function saveStatus(username){
   console.log('saveStatus with : username = '+username);
   //save recentstatus by update current villege
   con.query('UPDATE recentstatus SET lastvisitedtime = NOW() WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function(err,result) {
-    //Log SQL Result
-    console.log('SQL Result : '+JSON.stringify(result));
+
+
     if (err) callback(err);
     else {
       console.log("Update recentstatus with username = "+username);
@@ -164,14 +144,7 @@ function saveStatus(username){
       getCurrentVillege(username,function (err,vid) {
         if (err) callback(err);
         else {
-          saveVillegeStatus(vid,function (err) {
-            if (err) callback(err);
-            else {
-              console.log('Success update Status of username = '+username);
-              //Return null because it doesn't error
-              callback(null);
-            }
-          })
+          saveVillegeStatus(vid);
         }
       })
     }
@@ -184,8 +157,8 @@ function initFirstVillege(pid,callback) {
   console.log("initialFirstVillege with pid = "+ pid);
   //Randomly SELECT vid From SQL table villege
   con.query('SELECT vid FROM villege WHERE pid = 1 ORDER BY RAND() LIMIT 1',function(err,result) {
-    //Log SQL Result
-    console.log('SQL Result : '+JSON.stringify(result));
+
+
     if (err) callback(err);
     else {
       //SELECT vid from sql
@@ -201,8 +174,8 @@ function updateOwnerOfVillege(pid,vid,callback) {
   console.log('UpdateOwnerOfVillege with : pid = '+pid+' vid = '+vid);
   //Assign villege to player in SQL
   con.query('UPDATE villege SET pid = ? WHERE vid = ?',[pid,vid],function(err,result) {
-    //Log SQL Result
-    console.log("SQL Result : "+JSON.stringify(result));
+
+     ;
     if (err) callback(err);
     else {
       console.log("Player "+pid+" assign to Villege "+vid);
@@ -216,8 +189,8 @@ function getCurrentVillege(username,callback){
   console.log('getCurrentVillege with username = '+username);
   //SELECT vid FROM recentstatus
   con.query('SELECT vid FROM recentstatus WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
-    //Log SQL Result
-    console.log("SQL Result : "+JSON.stringify(result));
+
+     ;
     if (err) callback(err);
     else {
       var vid = result[0].vid;
@@ -231,27 +204,23 @@ function getCurrentVillege(username,callback){
 /**- LOAD PART -**/
 /** Function to Load List of Resource with type **/
 exports.loadResource = function(username,callback){
-  console.log("Engine Receive From Server username =  " + username);
+  console.log("Engine Receive loadResource From Server username =  " + username);
   //get Current Villege
   getCurrentVillege(username,function(err,vid) {
     if (err) callback(err);
     else {
       //Select list of resource of current villege
-      con.query('SELECT type,level FROM structure JOIN resouce ON structure.sid = resource.sid WHERE vid = ?',vid,function(err,result) {
-        //Log SQL Result
-        console.log("SQL Result : "+JSON.stringify(result));
+      con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = ?',vid,function(err,result) {
+
+         ;
         if(err) callback(err);
         else {
           var list_of_resource = result;
           console.log("Resource of "+vid+" is "+JSON.stringify(list_of_resource));
+          // Return list of resource
+          callback(null,list_of_resource);
           //save status
-          saveStatus(username,function(err) {
-            if (err) callback(err);
-            else {
-              // Return list of resource
-              callback(null,list_of_resource);
-            }
-          })
+          saveStatus(username);
         }
       })
     }
@@ -259,27 +228,20 @@ exports.loadResource = function(username,callback){
 }
 /** Function to Load list of building **/
 exports.loadBuilding = function(username,callback) {
-  console.log("Engine Receive From Server username =  " + username);
+  console.log("Engine Receive loadBuilding From Server username =  " + username);
   //get Current Villege
   getCurrentVillege(username,function (err,vid) {
     if (err) callback(err);
     else {
         //Select list of building of current villege
-        con.query('SELECT type,level,pos FROM structure JOIN building ON structure.sid = building.sid WHERE vid = ?)',vid,function(err,result) {
-          //Log SQL Result
-          console.log("SQL Result : "+JSON.stringify(result));
+        con.query('SELECT type,level,pos FROM structure JOIN building ON structure.sid = building.sid WHERE vid = ?',vid,function(err,result) {
           if (err) callback(err);
           else {
               var list_of_building = result;
               console.log("Building of "+vid+" is "+JSON.stringify(list_of_building));
               //save status
-              saveStatus(username,function(err) {
-                if (err) callback(err);
-                else {
-                  //Return list of building
-                  callback(null,list_of_building);
-                }
-              })
+              saveStatus(username);
+              callback(null,list_of_building);
           }
         });
     }
@@ -287,25 +249,20 @@ exports.loadBuilding = function(username,callback) {
 }
 /** Function to load wall **/
 exports.loadWall = function(username,callback) {
-  console.log("Engine Receive From Server username =  " + username);
+  console.log("Engine Receive loadWall From Server username =  " + username);
   //get Current Villege
   getCurrentVillege(username,function (err,vid) {
     //SELECT wall from current villege
     con.query('SELECT type,level FROM structure JOIN wall ON structure.sid = wall.sid WHERE vid = ?)',vid,function(err,result) {
-        //Log SQL Result
-        console.log("SQL Result : "+JSON.stringify(result));
+
+         ;
         if (err) callback(err);
         else {
             var wall = result[0];
             console.log("Wall of "+vid+" is "+JSON.stringify(wall));
             //save status
-            saveStatus(username,function(err) {
-              if (err) callback(err);
-              else {
-                //Return list of wall
-                callback(null,wall);
-              }
-            })
+            saveStatus(username);
+            callback(null,wall);
         }
     });
   })
@@ -363,8 +320,8 @@ function checkAvailableStructingTask(username,callback) {
     else {
       //Count number of task which are working in current villege
       con.query('SELECT COUNT(*) AS numtask FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = ? ',vid,function(err,result) {
-        //Log SQL Result
-        console.log("SQL Result : "+JSON.stringify(result));
+
+         ;
         if (err) callback(err);
         else {
           //number of active task
@@ -372,8 +329,8 @@ function checkAvailableStructingTask(username,callback) {
           console.log('Villege '+vid + " has "+numtask+" working structuring task.");
           //Select level of villagehall and calculate number of non-working worker
           con.query('SELECT level FROM building JOIN structure ON structure.sid = building.sid WHERE vid = ? and type = \'villagehall\'',vid,function(err,result) {
-            //Log SQL Result
-            console.log("SQL Result : "+JSON.stringify(result));
+
+             ;
             if (err) callback(err);
             else {
               //total number of worker
@@ -383,25 +340,14 @@ function checkAvailableStructingTask(username,callback) {
               if (numtask<num_worker){
                 console.log('Villege '+vid+" can upgrade task.");
                 //saveStatus
-                saveStatus(username,function(err) {
-                  if (err) callback(err);
-                  else{
-                    console.log('vid = '+vid+' has available worker');
-                    //Return true and vid that can upgrade
-                    callback(null,true,vid);
-                  }
-                })
+                saveStatus(username)
+                callback(null,true,vid);
               }
               else {
                 console.log('All workeer in villege '+vid +" are busy");
                 //saveStatus
-                saveStatus(username,function(err) {
-                  if (err) callback(err);
-                  else{
-                    //Return true and vid that can upgrade
-                    callback(null,false);
-                  }
-                })
+                saveStatus(username);
+                callback(null,false);
               }
             }
           })
@@ -413,7 +359,7 @@ function checkAvailableStructingTask(username,callback) {
 
 /** Upgrade Part **/
 /** Function to check can I upgrade resource**/
-exports.canUpgradeResource = function(username,pos) {
+exports.canUpgradeResource = function(username,pos,callback) {
   console.log('canUpgradeResource username = '+username+' pos = '+pos);
   //Check avaiable structuringtask
   checkAvailableStructingTask(username,function (err,avaiable,vid) {
@@ -422,8 +368,8 @@ exports.canUpgradeResource = function(username,pos) {
       if (avaiable){
         //Select sid type level from pos from resource join structure on
         con.query('SELECT structure.sid AS sid,type,level,pos FROM resource JOIN structure ON resource.sid = structure.sid WHERE vid = ? AND pos=?',[vid,pos],function (err,result) {
-          //Log SQL Result
-          console.log("SQL Result : "+JSON.stringify(result));
+
+           ;
           if (err) callback(err);
           else {
             var sid = result[0].sid;
@@ -433,13 +379,13 @@ exports.canUpgradeResource = function(username,pos) {
             console.log('Resource detail at pos '+ pos+ " : sid ="+sid+" level = "+level+" type = "+type+" pos = "+pos);
             //Select endtime and level of latest upgrading resource at this pos (same sid)
             con.query('SELECT level,endTime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE sid = ? ORDER BY structuringtask.tid DESC LIMIT 1',sid,function (err,result) {
-              //Log SQL Result
-              console.log("SQL Result : "+JSON.stringify(result));
+
+               ;
               if (err) callback(err);
               else {
                 //initialize now time
                 var startTime = new Date();
-                console.log("Now : "+startTime;
+                console.log("Now : "+startTime);
                 //check are there any upgrading task at this sid
                 if (result.length>0) {
                   //update level to upgrade
@@ -454,8 +400,8 @@ exports.canUpgradeResource = function(username,pos) {
                 }else {
                   //Select resource from villege to check can we upgrade
                   con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function (err,result) {
-                    //Log SQL Result
-                    console.log("SQL Result : "+JSON.stringify(result));
+
+                     ;
                     if (err) callback(err);
                     else {
                       //get require_resource from resource_info
@@ -475,43 +421,27 @@ exports.canUpgradeResource = function(username,pos) {
                           crop : (result[0].crop-require_resource[3])
                         };
                         console.log('Can upgrade '+sid+" with left resource = "+left_resource);
-                        saveStatus(username,function(err) {
-                          if (err) callback(err);
-                          else {
-                            console.log('Can upgrade ' +sid);
-                            //Return requre info for upgrade
-                            callback(null,true,left_resource,sid,vid,endTime,level,type,pos);
-                          }
-                        })
+                        saveStatus(username);
+                        callback(null,true,left_resource,sid,vid,endTime,level,type,pos);
                       }
                       else {
                         console.log('Can\'t upgrade '+sid);
-                        saveStatus(username,function (err) {
-                          if (err) callback(err);
-                          else {
-                            //return false because can't upgrade
-                            callback(null,false)
-                          }
-                        })
+                        saveStatus(username);
+                        callback(null,false)
                       }
                     }
                   })
                 }
               }
-            }
+            })
           }
         })
       }
       else {
         console.log('Vid = '+vid+" Can't upgrade resource at pos = "+pos);
         //save status
-        saveStatus(username,function(err) {
-          if (err) callback(err);
-          else {
-              //return false because can't upgrade
-              callback(null,false);
-          }
-        })
+        saveStatus(username);
+        callback(null,false);
       }
     }
   })
@@ -527,15 +457,15 @@ exports.upgradeResource = function(username,pos,callback){
         console.log('Can upgrade with left_resource = '+left_resource+" sid = "+sid+" vid = "+vid+" finishDate = "+finishDate+" level = "+level+" type "+type+" pos "+pos);
         //Update resource of villege
         con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,vid],function(err,result) {
-          //Log SQL Result
-          console.log("SQL Result : "+JSON.stringify(result));
+
+           ;
           if (err) callback(err);
           else {
             console.log('Successful to update resource at '+vid);
             //INSERT new task
             con.query('INSERT INTO task(vid,endtime) values(?,?)',[vid,finishDate],function(err,result) {
-              //Log SQL Result
-              console.log("SQL Result : "+JSON.stringify(result));
+
+               ;
               if (err) callback(err);
               else {
                 console.log('Success Update task with vid = '+finishDate+' vid = '+vid);
@@ -544,19 +474,14 @@ exports.upgradeResource = function(username,pos,callback){
                 console.log('Task id  = '+tid);
                 //Insert new structuringtask
                 con.query('INSERT INTO structuringtask(tid,sid,level,type,pos) values(?,?,?,?,?)',[tid,sid,level,type,pos],function(err,result) {
-                  //Log SQL Result
-                  console.log("SQL Result : "+JSON.stringify(result));
+
+                   ;
                   if (err) callback(err)
                   else {
                     console.log('Success Update task with tid = '+tid+" sid = "+sid+" level = "+level+" type = "+type+" pos "+pos);
                     //saveStatus
-                    saveStatus(username,function(err) {
-                      if (err) callback(err);
-                      else {
-                        console.log('Success upgrade sid = '+sid);
-                        callback(null,true);
-                      }
-                    })
+                    saveStatus(username)
+                    callback(null,true);
                   }
                 })
               }
@@ -566,13 +491,8 @@ exports.upgradeResource = function(username,pos,callback){
       }
       else {
         //save status
-        saveStatus(username,function (err) {
-          if (err) callback(err);
-          else{
-              //return false because can't upgrade
-              callback(err,false);
-          }
-        })
+        saveStatus(username);
+        callback(err,false);
       }
     }
   })
@@ -586,20 +506,15 @@ exports.getResourceOfVillege = function(username,callback) {
     else {
       /** select resource from sql **/
       con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function(err,result) {
-        //Log SQL Result
-        console.log("SQL Result : "+JSON.stringify(result));
+
+         ;
         if (err) callback(err);
         else {
-          var resource = result;
+          var resource = result[0];
           console.log('Villege vid = '+vid+" has "+JSON.stringify(resource));
           //saveStatus
-          saveStatus(username,function (err) {
-            if (err) callback(err);
-            else {
-              //return resource
-              callback(null,resource);
-            }
-          })
+          saveStatus(username)
+          callback(null,resource);
         }
       })
     }
@@ -677,8 +592,8 @@ exports.canUpgradeBuilding = function(username,pos,callback) {
       if (avaiable){
         //Select sid type level sid from pos from building
         con.query('SELECT structure.sid,type,level FROM building JOIN structure ON building.sid = structure.sid WHERE vid = ? AND pos=?',[vid,pos],function (err,result) {
-          //Log SQL Result
-          console.log("SQL Result : "+JSON.stringify(result))
+
+
           if (err) callback(err);
           else {
             var sid = result[0].sid;
@@ -687,13 +602,13 @@ exports.canUpgradeBuilding = function(username,pos,callback) {
             console.log('Building detail at pos '+ pos+ " : sid ="+sid+" level = "+level+" type = "+type+" pos = "+pos);
             //Select endtime and level of latest upgrading buidling at this pos (same sid)
             con.query('SELECT level,endTime FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE sid = ? ORDER BY structuringtask.tid DESC LIMIT 1',sid,function (err,result) {
-              //Log SQL Result
-              console.log("SQL Result : "+JSON.stringify(result))
+
+
               if (err) callback(err);
               else {
                 //initialize now time
                 var startTime = new Date();
-                console.log("Now : "+startTime;
+                console.log("Now : "+startTime);
                 //check are there any upgrading task at this sid
                 if (result.length>0) {
                   //update level to upgrade
@@ -708,8 +623,8 @@ exports.canUpgradeBuilding = function(username,pos,callback) {
                 }else {
                   //Select resource from villege to check can we upgrade
                   con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function (err,result) {
-                    //Log SQL Result
-                    console.log("SQL Result : "+JSON.stringify(result));
+
+                     ;
                     if (err) callback(err);
                     else {
                         //get require_resource from resource_info
@@ -729,24 +644,13 @@ exports.canUpgradeBuilding = function(username,pos,callback) {
                             crop : (result[0].crop-require_resource[3])
                           };
                           console.log('Can upgrade '+sid+" with left resource = "+left_resource);
-                          saveStatus(username,function(err) {
-                            if (err) callback(err);
-                            else {
-                              console.log('Can upgrade '+sid);
-                              //Return requre info for upgrade
-                              callback(null,true,left_resource,vid,endTime,type,pos,level,sid);
-                            }
-                          })
+                          saveStatus(username);
+                          callback(null,true,left_resource,vid,endTime,type,pos,level,sid);
                         }
                         else {
                           console.log('Can\'t upgrade '+sid);
-                          saveStatus(username,function (err) {
-                            if (err) callback(err);
-                            else {
-                              //return false because can't upgrade
-                              callback(null,false)
-                            }
-                          })
+                          saveStatus(username);
+                          callback(null,false)
                         }
                     }
                   })
@@ -758,13 +662,8 @@ exports.canUpgradeBuilding = function(username,pos,callback) {
       }
       else {
         console.log('Vid = '+vid+" Can't upgrade building at pos = "+pos);
-        saveStatus(username,function (err) {
-          if (err) callback(err)
-          else {
-              //return false because can't upgrade
-              callback(null,false);
-          }
-        })
+        saveStatus(username);
+        callback(null,false);
       }
     }
   })
@@ -792,8 +691,8 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
       if (status){
         //Check this villege requirement by select vid and check on condition
         con.query('SELECT vid FROM villege WHERE vid = ?'+generateSQLBuildingRequirement(type,vid),vid,function (err,result) {
-          //Log SQL Result
-          console.log("SQL Result : "+JSON.stringify(result));
+
+           ;
           if (err) callback(err);
           else {
             if (result.length==1){
@@ -801,8 +700,8 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
               var startTime = new Date();
               //check resource of villege
               con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function(err,result) {
-                //Log SQL Result
-                console.log("SQL Result : "+JSON.stringify(result));
+
+                 ;
                 if (err) callback(err);
                 else {
                   var require_resource = building_info[type].cost[0];
@@ -817,13 +716,8 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
                       iron : (result[0].iron-require_resource[2]) ,
                       crop : (result[0].crop-require_resource[3])
                     };
-                    saveStatus(username,function(err) {
-                      if (err) callback(err);
-                      else {
-                          console.log("Can create "+type+" at "+pos+" in "+vid+" end at "+endTime.toString()+" resource left : "+left_resource);
-                          callback(null,true,left_resource,vid,endtime,type,pos);
-                      }
-                    })
+                    saveStatus(username);
+                    callback(null,true,left_resource,vid,endtime,type,pos);
                   }
                   else {
                     console.log('Requirement of '+vid+' not pass!');
@@ -836,22 +730,14 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
             }
             else {
               console.log('Requirement of '+vid+' not pass!');
-              saveStatus(username,function (err) {
-                if (err) callback(err);
-                else {
-                  callback(null,false);
-                }
-              })
+              saveStatus(username);
+              callback(null,false);
             }
           }
         })
       }else{
-        saveStatus(username,function (err) {
-          if (err) callback(err);
-          else {
-              callback(null,false);
-          }
-        })
+        saveStatus(username)
+        callback(null,false);
       }
     }
   })
@@ -866,48 +752,44 @@ exports.createBuilding = function(username,pos,type,callback) {
       if (status){
         //Update resource in villege
         con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,vid],function(err,result) {
-          //Log SQL Result
-          console.log("SQL Result : "+JSON.stringify(result))
+
+
           if (err) callback(err);
           else {
             console.log('Successful to update resource at '+vid);
             //Insert new structure
             con.query('INSERT INTO structure(level,vid) values(?,?)',[1,vid],function(err,result) {
-              //Log SQL Result
-              console.log("SQL Result : "+JSON.stringify(result));
+
+               ;
               if (err) callback(err);
               else {
                 var sid = result.insertId;
                 console.log('Structure '+sid+' is created!');
                 //Insert new buidling
                 con.query('INSERT INTO building(sid,pos,type) values(?,?,?)',[sid,pos,type],function(err,result) {
-                  //Log SQL Result
-                  console.log("SQL Result : "+JSON.stringify(result));
+
+                   ;
                   if(err) callback(err);
                   else {
                     console.log(type+' sid = '+sid+' at pos = '+pos+' is created');
                     //insert new task
                     con.query('INSERT INTO task(vid,endtime) values(?,?)',[vid,endtime],function(err,result) {
-                      //Log SQL Result
-                      console.log("SQL Result : "+JSON.stringify(result));
+
+                       ;
                       if(err) callback(err);
                       else {
                         var tid = result.insertId;
                         console.log('Task '+tid+' is created! vid = '+vid+" endtime = "+endtime);
                         //insert new structuringtask
                         con.query('INSERT INTO structuringtask(tid,sid,level,type,pos) values(?,?,?,?,?)',[tid,sid,1,type,pos],function(err,result) {
-                          //Log SQL Result
-                          console.log("SQL Result : "+JSON.stringify(result));
+
+                           ;
                           if (err) callback(err);
                           else {
                             console.log('New structuringtask tid = '+tid+" vid = "+vid+" sid = "+sid+" level = "+level+" type = "+type+" pos = "+pos);
                             //saveStatus
-                            saveStatus(username,function(err) {
-                              if (err) callback(err);
-                              else {
-                                callback(null,true);
-                              }
-                            })
+                            saveStatus(username)
+                            callback(null,true);
                           }
                         })
                       }
@@ -919,13 +801,8 @@ exports.createBuilding = function(username,pos,type,callback) {
           }
         })
       }else {
-        saveStatus(username,function(err) {
-          if (err) callback(err);
-          else {
-              //return false because can't upgrade
-              callback(null,false);
-          }
-        })
+        saveStatus(username)
+        callback(null,false);
       }
     }
   })
@@ -940,49 +817,40 @@ exports.upgradeBuilding = function(username,pos,callback){
       if (status){
         //update resource of villege
         con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,vid],function(err,result) {
-          //Log SQL Result
-          console.log("SQL Result : "+JSON.stringify(result))
+
+
           if (err) callback(err);
           else {
             console.log('Successful update villege '+vid+' which resource is '+left_resource);
             //insert task
             con.query('INSERT INTO task(vid,endtime) values(?,?)',[vid,finishDate],function(err,result) {
-              //Log SQL Result
-              console.log("SQL Result : "+JSON.stringify(result))
+
+
               if (err) callback(err);
               else {
                 var tid = result.insertId;
                 console.log('Task tid = '+tid+' inserted');
                 //insert structuringtask
                 con.query('INSERT INTO structuringtask(tid,sid,level,type,pos) values(?,?,?,?,?)',[tid,sid,level,type,pos],function(err) {
-                  //Log SQL Result
-                  console.log("SQL Result : "+JSON.stringify(result))
+
+
                   if (err) callback(err);
                   else {
                     console.log('New structuringtask tid = '+tid+" vid = "+vid+" sid = "+sid+" level = "+level+" type = "+type+" pos = "+pos);
                     //saveStatus
-                    saveStatus(username,function(err) {
-                      if (err) callback(err);
-                      else {
-                        console.log('Success upgrade sid = '+sid);
-                        callback(null,true);
-                      }
-                    })
+                    saveStatus(username)
+                    callback(null,true);
                   }
                 })
               }
             })
           }
-        }
+        })
       }
       else {
         //return false because can't upgrade
-        saveStatus(username,function(err) {
-          if (err) callback(err);
-          else {
-              callback(null,false);
-          }
-        })
+        saveStatus(username)
+        callback(null,false);
       }
     }
   })
@@ -1020,7 +888,7 @@ function calculateresource(lastvisit,resource,info,capacity) {
         resource[i]+=produce_rate[i]*diff_time/3600;
     }
   }
-  console.log(JSON.stringify(resource));
+  console.log('Resource = '+JSON.stringify(resource));
   return resource;
 }
 /** capacity by level **/
@@ -1030,7 +898,7 @@ function getCapacity(vid,callback) {
   console.log('getCapacity vid = '+vid);
   //get level of granary and warehouse
   con.query('SELECT level,type FROM structure JOIN building ON structure.sid = building.sid WHERE type IN (\'granary\',\'warehouse\')',function(err,result) {
-    console.log('Query Result : '+JSON.stringify(result));
+
     if (err) callback(err);
     else {
         var sumcapacity = {"granary" : 0, "warehouse" : 0};
@@ -1059,173 +927,92 @@ exports.getCapacity = function (username,callback) {
       getCapacity(vid,function(err,capacity) {
         if (err) callback(err)
         else {
-          saveStatus(username,function(err) {
-            if (err) callback(err);
-            else {
-                callback(null,capacity);
-            }
-          })
+          saveStatus(username);
+          callback(null,capacity);
         }
       })
     }
   })
 }
 /** Function to update resource **/
-function updateResource(username,callback) {
-  console.log('updateResource username = '+username);
-  //get current vid
-  getCurrentVillege(username,function (err,vid) {
-    if (err) callback(err);
-    else {
-      //select last visit time
-      con.query('SELECT lastvisitedtime FROM recentvillegestatus WHERE vid = ?',vid,function(err,result) {
-        //Log SQL Result
-        console.log("SQL Result : "+JSON.stringify(result)
-        if (err) callback(err);
-        else {
-          var lastvisitedtime = result[0].lastvisitedtime;
-          console.log('Villege '+vid+" last visit time is "+lastvisitedtime.toString());
-          //get Capacity
-          getCapacity(vid,function(err,capacity) {
-            if (err) callback(err);
-            else {
-              console.log('Villege '+vid+' capacity = '+capacity);
-              //get resource of villege
-              exports.getResourceOfVillege(username,function (err,resource) {
-                if (err) callback(err)
-                else {
-                  console.log('Villge '+vid +' resource = '+resource);
-                  //get resource info of villege
-                  exports.loadResource(username,function(err,resource_info) {
-                    if (err) callback(err)
-                    else {
-                      console.log('Villege '+vid +' resource_info = '+resource_info);
-                      //calculate now resource
-                      var now_resource = calculateresource(datetime,resource,resource_info,capacity);
-                      console.log('Villege '+vid+' has '+JSON.stringify(now_resource));
-                      //Update villege resource
-                      con.query('UPDATE villege SET wood = ? ,clay = ? ,iron = ? ,crop = ? WHERE vid = ?',[now_resource[0],now_resource[1],now_resource[2],now_resource[3],vid],function (err,result) {
-                        //Log SQL Result
-                        console.log("SQL Result : "+JSON.stringify(result)
-                        if (err) callback(err);
-                        else {
-                          //saveStatus
-                          saveStatus(username,function(err) {
-                            if (err) callback(err);
-                            else {
-                                console.log('Success upgrade resource at villege '+vid);
-                                callback(null);
-                            }
-                          })
-                        }
-                      }
-                    }
-                  })
-                }
-              })
-            }
-          })
-        }
+function updateResource(username) {
+  console.log('Updating Resource');
+  con.query('SELECT recentvillegestatus.lastvisitedtime AS lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = recentstatus.vid WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+    console.log('Query Result : '+JSON.stringify(result));
+    if (err) throw err;
+    var datetime = result[0].lastvisitedtime;
+    var vid = result[0].vid;
+    getCapacity(vid,function(err,sumcapacity) {
+      if (err) throw err;
+      var capacity = sumcapacity;
+      exports.getResourceOfVillege(username,function (err,result) {
+        console.log('Query Result : '+JSON.stringify(result));
+        if (err) throw err;
+        var resource = [result["wood"],result["clay"],result["iron"],result["crop"]];
+        exports.loadResource(username,function (err,result) {
+            console.log('Query Result : '+JSON.stringify(result));
+            if (err) throw err;
+            var now_resource = calculateresource(datetime,resource,result,capacity);
+            console.log("Now Resouce : "+now_resource);
+            con.query('UPDATE villege SET wood = ? ,clay = ? ,iron = ? ,crop = ? WHERE vid = ?',[now_resource[0],now_resource[1],now_resource[2],now_resource[3],vid],function (err) {
+              if (err) throw err;
+              console.log('Update resource');
+            })
+        })
       })
-    }
-  })
+    })
+  });
 }
 /** Function to update structuringtask **/
-function updateStructure(username,callback) {
-  console.log('updateStructure username = '+username);
-  //get current villege vid
-  getCurrentVillege(username,function (err,vid) {
-    if (err) callback(err);
-    else {
-      console.log('Current villege vid = '+vid);
-      //get last visit time
-      con.query('SELECT lastvisitedtime FROM recentvillegestatus WHERE vid = ?',vid,function(err,result) {
-        //Log SQL Result
-        console.log("SQL Result : "+JSON.stringify(result)
-        if (err) callback(err)
-        else {
-          var lastvisitedtime = result[0].lastvisitedtime;
-          console.log('Villege vid '+vid+' lastvisitedtime = '+lastvisitedtime.toString());
-          con.query('SELECT endtime,sid,level,structuringtask.tid FROM task JOIN structuringtask ON task.tid = structuringtask.tid WHERE vid = ?',vid,function (err,result) {
-            //Log SQL Result
-            console.log("SQL Result : "+JSON.stringify(result)
-            if(err) callback(err)
-            else {
-              //Update task
-              for (var i = 0;i<result.length;i++){
-                //get now date
-                var now = new Date();
-                var tid = result[i].tid;
-                console.log('Villege '+vid+' now = '+now.toString()+' task id = '+tid);
-                if ((new Date(result[i].endtime.toString()))<=now) {
-                  //Update structure
-                  con.query('UPDATE structure SET level = ? WHERE sid = ?',[result[i].level,result[i].sid],function(err) {
-                    //Log SQL Result
-                    console.log("SQL Result : "+JSON.stringify(result)
-                    if (err) callback(err);
-                    else {
-                      console.log('Villege '+vid+' success update structure '+result[i].sid);
-                      //DELETE task
-                      con.query('DELETE FROM task WHERE tid = ?',tid,function (err,result) {
-                        //Log SQL Result
-                        console.log("SQL Result : "+JSON.stringify(result)
-                        if (err) callback(err);
-                        else {
-                          console.log('Success delete task '+tid);
-                          con.query('DELETE FROM structuringtask WHERE tid = ? ',tid,function (err,result) {
-                            //Log SQL Result
-                            console.log("SQL Result : "+JSON.stringify(result)
-                            if (err) callback(err);
-                            else {
-                              console.log('Success delete structuringtask '+tid);
-                            }
-                          })
-                        }
-                      })
-                    }
-                  })
-                }
-              }
-              saveStatus(username,function (err) {
-                if (err) callback(err);
-                else callback(null);
-              })
-            }
-          })
+function updateStructure(username) {
+  console.log('Updating Structure');
+  con.query('SELECT recentvillegestatus.lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = recentstatus.vid WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+    console.log('Query Result : '+JSON.stringify(result));
+    if (err) throw err;
+    var datetime = result[0].lastvisitedtime;
+    var vid = result[0].vid;
+    con.query('SELECT endtime,sid,level,structuringtask.tid FROM task JOIN structuringtask ON task.tid = structuringtask.tid WHERE vid = ?',vid,function (err,result) {
+      console.log('Query Result : '+JSON.stringify(result));
+      if (err) throw err;
+      var sid = [];
+      for (var i = 0;i<result.length;i++){
+        var now = new Date();
+        if ((new Date(result[i].endtime.toString()))<=now) {
+          var tid = result[i].tid;
+          con.query('UPDATE structure SET level = ? WHERE sid = ?',[result[i].level,result[i].sid],function(err) {
+            if (err) throw err;
+            console.log('Success');
+            con.query('DELETE FROM task WHERE tid = ?',tid,function (err) {
+              if (err) throw err;
+              console.log('Success delete');
+            })
+            con.query('DELETE FROM structuringtask WHERE tid = ? ',tid,function (err) {
+              if (err) throw err;
+              console.log('Success Delete');
+            })
+          });
         }
-      })
-    }
+      }
+    })
   })
 }
 /** Update **/
-exports.update = function(username,callback){
+exports.update = function(username){
   console.log('update username= '+username);
-  updateResource(username,function (err) {
-    if (err) callback(err);
-    else callback(null);
-  });
-  updateStructure(username,function (err) {
-    if(err) callback(err);
-    else callback(null);
-  });
+  updateResource(username);
+  updateStructure(username);
 }
 /** Function tov check what structing task is doing **/
 exports.getStructingTask = function(username,callback) {
   console.log('getStructingTask username = '+username);
   //get vid of current villege
   getCurrentVillege(username,function(err,vid) {
-    con.query('SELECT type,sid,endtime,pos FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = ?)',vid,function (err,result) {
-      //Log SQL Result
-      console.log("SQL Result : "+JSON.stringify(result)
+    con.query('SELECT type,sid,endtime,pos FROM structuringtask JOIN task ON structuringtask.tid = task.tid WHERE vid = ?',vid,function (err,result) {
       if (err) callback(err);
       else {
         console.log('Villege vid working structuringtask = '+JSON.stringify(result));
-        saveStatus(username,function (err) {
-          if(err) callback(err);
-          else {
-              callback(null,result);
-          }
-        })
+        saveStatus(username);
+        callback(null,result);
       }
     })
   })

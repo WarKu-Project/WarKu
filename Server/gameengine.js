@@ -12,24 +12,10 @@ var con = mysql.createConnection({
 });
 
 /** PLAYER PART **/
-
-//number of player counter
-global.player_counter = 0;
-/** Function to update number of player **/
-function updateNumberPlayer(){
-  con.query('SELECT COUNT(pid) AS num_player FROM player',function(err,rows) {
-    if (err) throw err;
-    console.log('Query result : '+JSON.stringify(rows));
-    global.num_player = rows[0].num_player;
-    console.log('Number of player is updated! = '+global.num_player);
-  });
-}
-//Update Number of player from database for first time
-updateNumberPlayer();
 /** Function to verify player **/
-exports.verify = function(info,callback) {
-  console.log('Received Data = '+JSON.stringify(info));
-  con.query('SELECT username FROM player WHERE username=? AND password=?',[info['username'],info['password']],function(err,rows){
+exports.verify = function(username,password,callback) {
+  console.log('Verify');
+  con.query('SELECT username FROM player WHERE username=? AND password=?',[username,password],function(err,rows){
     if (err) callback(err,null);
     console.log('Query result'+JSON.stringify(rows));
     if (rows.length==0) {
@@ -43,7 +29,7 @@ exports.verify = function(info,callback) {
   });
 }
 /** Function to check that player is existing in Database **/
-exports.exist = function(info,callback) {
+exports.exist = function(username,password,callback) {
   con.query('SELECT username FROM player WHERE username = ? OR email = ?',[info['username'],[info['email']]],function(err,rows) {
     if (err) callback(err,null);
     console.log('Query result'+JSON.stringify(rows));
@@ -64,8 +50,6 @@ exports.createPlayer = function(info) {
   con.query('INSERT INTO player SET ?',player,function(err) {
     if (err) throw err;
     console.log('Success! New Player Created!!!');
-    //Update Number of player to the server
-    updateNumberPlayer();
   });
   this.pid = 1;
   con.query('SELECT pid FROM player ORDER BY pid DESC LIMIT 1',function(err,rows) {

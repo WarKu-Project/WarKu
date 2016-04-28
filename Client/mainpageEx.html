@@ -1,0 +1,1210 @@
+<!DOCTYE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="socket.io-client/socket.io.js"></script>
+    <script src="jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="jquery-ui-1.11.4/jquery-ui.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="clay.css">
+    <link rel="stylesheet" href="iron.css">
+    <link rel="stylesheet" href="tree.css">
+    <link rel="stylesheet" href="crop.css">
+    <link rel="stylesheet" href="circlelevel.css">
+    <link rel="stylesheet" href="resource.css">
+    <link rel="stylesheet" href="map.css">
+    <link rel="stylesheet" href="mail.css">
+    <link rel="stylesheet" href="village.css">
+    <title>WarKu!</title>
+</head>
+
+<body>
+
+
+    <!--Navbar menu-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">WarKu!</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="main-nav">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">Setting</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!--menu-->
+    <div class="menu-frame">
+        <nav>
+            <ul class="row-centered">
+                <!--menu resource-->
+                <li class="menu-li">
+                    <div class="menu" id="resource_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/resource.png">
+                        </a>
+                    </div>
+                </li>
+                <!--menu village-->
+                <li class="menu-li">
+                    <div class="menu" id="village_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/village.png">
+                        </a>
+                    </div>
+                </li>
+                <!--menu map-->
+                <li class="menu-li">
+                    <div class="menu" id="map_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/map.png">
+                        </a>
+                    </div>
+                </li>
+                <!--menu report-->
+                <li>
+                    <div class="menu" id="report_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/report.png">
+                        </a>
+                    </div>
+                </li>
+                <!--menu mail-->
+                <li class="menu-li">
+                    <div class="menu" id="mail_menu">
+                        <a href="#">
+                            <img class="menu_img" src="picture/mail.png">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!--
+<div class="menu-frame">
+<nav>
+<ul class="row-centered">
+<li class="menu-li"><div class="menu" id="statistic_menu">
+<a href="#">
+<img class="menu_img" src="picture/statistic.png">
+</a>
+</div>
+</li>
+
+</ul>
+</nav>
+</div>
+-->
+
+    <!-- Stockbar -->
+    <div class="row">
+        <div class="container">
+            <div class="jumbotron stockbar">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">Wood&nbsp;&nbsp;<span id="woodnum">0</span></div>
+                    <div class="col-md-3 col-sm-3 col-xs-3">Clay&nbsp;&nbsp;<span id="claynum">0</span></div>
+                    <div class="col-md-3 col-sm-3 col-xs-3">Iron&nbsp;&nbsp;<span id="ironnum">0</span></div>
+                    <div class="col-md-3 col-sm-3 col-xs-3">Crop&nbsp;&nbsp;<span id="cropnum">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--resource container-->
+    <div class="container" id="resource_container">
+        <span class="Centerer"></span>
+        <div class="resoucre">
+
+
+            <image src="picture/resource-structure-test.png"></image>
+
+            <!--resource 1-16-->
+
+            <div class="resource-box1">
+                <image id="resource1"></image>
+            </div>
+            <div class="resource-box2">
+                <image id="resource2"></image>
+            </div>
+            <div class="resource-box8">
+                <image id="resource8"></image>
+            </div>
+            <div class="resource-box9">
+                <image id="resource9"></image>
+            </div>
+            <div class="resource-box16">
+                <image id="resource16"></image>
+            </div>
+            <div class="resource-box10">
+                <image id="resource10"></image>
+            </div>
+            <div class="resource-box15">
+                <image id="resource15"></image>
+            </div>
+            <div class="resource-box14">
+                <image id="resource14"></image>
+            </div>
+            <div class="resource-box11">
+                <image id="resource11"></image>
+            </div>
+            <div class="resource-box12">
+                <image id="resource12"></image>
+            </div>
+            <div class="resource-box13">
+                <image id="resource13"></image>
+            </div>
+            <div class="resource-box3">
+                <image id="resource3"></image>
+            </div>
+            <div class="resource-box7">
+                <image id="resource7"></image>
+            </div>
+            <div class="resource-box6">
+                <image id="resource6"></image>
+            </div>
+            <div class="resource-box5">
+                <image id="resource5"></image>
+            </div>
+            <div class="resource-box4">
+                <image id="resource4"></image>
+            </div>
+
+            <div>
+                <image id="resource1-label" index="0" class="resource-level"></image>
+                <image id="resource2-label" index="1" class="resource-level"></image>
+                <image id="resource8-label" index="7" class="resource-level"></image>
+                <image id="resource9-label" index="8" class="resource-level"></image>
+                <image id="resource16-label" index="15" class="resource-level"></image>
+                <image id="resource10-label" index="9" class="resource-level"></image>
+                <image id="resource15-label" index="14" class="resource-level"></image>
+                <image id="resource14-label" index="13" class="resource-level"></image>
+                <image id="resource11-label" index="10" class="resource-level"></image>
+                <image id="resource12-label" index="11" class="resource-level"></image>
+                <image id="resource13-label" index="12" class="resource-level"></image>
+                <image id="resource3-label" index="2" class="resource-level"></image>
+                <image id="resource7-label" index="6" class="resource-level"></image>
+                <image id="resource6-label" index="5" class="resource-level"></image>
+                <image id="resource5-label" index="4" class="resource-level"></image>
+                <image id="resource4-label" index="3" class="resource-level"></image>
+            </div>
+
+        </div>
+
+
+        <!-- Resource produce rate -->
+        <div class = "container-fluid">
+        <div class="jumbotron" id="produce_container">
+            <div class="toTop jumbotronwidth">
+                <div class="row row-centered titlerow">Rate of production per hour</div>
+                <div class="row paddingrow">Wood : &nbsp;<span id="wood_produce_rate"></span></div>
+                <div class="row paddingrow">Clay : &nbsp;<span id="clay_produce_rate"></span></div>
+                <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
+                <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    <!-- Upgrade resource Modal -->
+    <div class="modal fade" id="upgrade-resourceModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalupgrade-header-title"></h4>
+                </div>
+                <div class="modal-body">
+                    Rate of production : <span id="productIn-time"></span> hr</p>
+                    <!--                        <span id="rateProduction"Rate of production LV </span>-->
+                    <span id="productNext-level"></span> :
+                    <span id="productNext-time"></span> hr</p>
+                    Requirment</p>
+                    Wood : <span id="setWood"></span> Clay : <span id="setClay"></span> Iron : <span id="setIron"></span> Crop : <span id="setCrop"></span></p>
+                    Upgrade time : <span id="upgrade-time"></span>
+                    <button id="buttonUpgrade" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--village container-->
+    <div class="container" id="village_container">
+        <span class="Centerer"></span>
+        <div class="village">
+            <image src="picture/building-structure.jpg"></image>
+
+            <!-- village pic -->
+            <div class="village1-box">
+                <image id="village1">
+            </div>
+            <div class="village2-box">
+                <image id="village2">
+            </div>
+            <div class="village3-box">
+                <image id="village3">
+            </div>
+            <div class="village4-box">
+                <image id="village4">
+            </div>
+            <div class="village5-box">
+                <image id="village5">
+            </div>
+            <div class="village6-box">
+                <image id="village6">
+            </div>
+            <div class="village7-box">
+                <image id="village7">
+            </div>
+            <div class="village8-box">
+                <image id="village8">
+            </div>
+            <div class="village9-box">
+                <image id="village9">
+            </div>
+            <div class="village10-box">
+                <image id="village10">
+            </div>
+            <div class="village11-box">
+                <image id="village11">
+            </div>
+            <div class="village12-box">
+                <image id="village12">
+            </div>
+            <div class="village13-box">
+                <image id="village13">
+            </div>
+            <div class="village14-box">
+                <image id="village14">
+            </div>
+
+            <!-- village level pic -->
+            <image id="village1-label" index="0" class="village-level"></image>
+            <image id="village2-label" index="1" class="village-level"></image>
+            <image id="village3-label" index="2" class="village-level"></image>
+            <image id="village4-label" index="3" class="village-level"></image>
+            <image id="village5-label" index="4" class="village-level"></image>
+            <image id="village6-label" index="5" class="village-level"></image>
+            <image id="village7-label" index="6" class="village-level"></image>
+            <image id="village8-label" index="7" class="village-level"></image>
+            <image id="village9-label" index="8" class="village-level"></image>
+            <image id="village10-label" index="9" class="village-level"></image>
+            <image id="village11-label" index="10" class="village-level"></image>
+            <image id="village12-label" index="11" class="village-level"></image>
+            <image id="village13-label" index="12" class="village-level"></image>
+            <image id="village14-label" index="13" class="village-level"></image>
+
+        </div>
+    </div>
+
+    <!--Create new Construction Modal -->
+    <div class="modal fade" id="create-villageModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" id="modalvillage-header-title">New building</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Villagehall</h4></p>
+                Building leaders live in the main building. The much higher level The new building will be completed faster.</p>
+                    <div class="villagehall-model"></div>
+                    Requirment</p>
+                    Wood : 70 Clay : 40 Iron : 60 Crop : 20</p>
+                    Contructing time : 00:06:40
+                    <button id="villagehall-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Granary</h4></p>
+                    Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe.
+                    <div class="granary-model"></div>
+                    Requirment</p>
+                    Wood : 80 Clay : 100 Iron : 70 Crop : 20</p>
+                    Contructing time : 00:05:20
+                    <button id="granary-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Warehouse</h4></p>
+                    Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe .
+                    <div class="warehouse-model"></div>
+                    Requirment</p>
+                    Wood : 130 Clay : 160 Iron : 90 Crop : 40</p>
+                    Contructing time : 00:06:40
+                    <button id="warehouse-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Market</h4></p>
+                    The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously .
+                    <div class="market-model"></div>
+                    Requirment</p>
+                    Wood : 80 Clay : 70 Iron : 120 Crop : 70</p>
+                    Contructing time : 00:06:00
+                    <button id="market-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Ballacks</h4></p>
+                    A large military barracks allows you to build more troops at the same time . But resources are three times normal .
+                    <div class="ballacks-model"></div>
+                    Requirment</p>
+                    Wood : 210 Clay : 140 Iron : 260 Crop : 120</p>
+                    Contructing time : 00:06:40
+                    <button id="ballacks-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Academy</h4></p>
+                    Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village.
+                    <div class="academy-model"></div>
+                    Requirment</p>
+                    Wood : 220 Clay : 160 Iron : 90 Crop : 40</p>
+                    Contructing time : 00:06:40
+                    <button id="academy-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Stable</h4></p>
+                   The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price.
+                    <div class="stable-model"></div>
+                    Requirment</p>
+                    Wood : 260 Clay : 140 Iron : 220 Crop : 100</p>
+                    Contructing time : 00:07:20
+                    <button id="stable-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Headquarter</h4></p>
+                    The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised .
+                    <div class="headquarter-model"></div>
+                    Requirment</p>
+                    Wood : 700 Clay : 670 Iron : 700 Crop : 240</p>
+                    Contructing time : 00:07:40
+                    <button id="headquarter-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Smithy</h4></p>
+                    Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy.
+                    <div class="smithy-model"></div>
+                    Requirment</p>
+                    Wood : 180 Clay : 250 Iron : 500 Crop : 160</p>
+                    Contructing time : 00:06:40
+                    <button id="buttonCreate9" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Workshop</h4></p>
+                    Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster .
+                    <div class="workshop-model"></div>
+                    Requirment</p>
+                    Wood : 460 Clay : 510 Iron : 600 Crop : 320</p>
+                    Contructing time : 00:10:00
+                    <button id="workshop-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" role="dialog">
+      <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" id="modal-header-title"></h4>
+              </div>
+              <div class="modal-body" id="modal-body">
+                  <p></p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+<!-- Upgrade village Modal -->
+<div class="modal fade" id="upgrade-villageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modalupgradevillage-title"></h4>
+            </div>
+            <div class="modal-body">
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+    <!--map container-->
+    <div class="container" id="map_container">
+        <span class="map-center"></span>
+
+        <div class="map">
+            <!-- map 8*8 -->
+            <image src="picture/map-test.png"></image>
+            <div id="map-posY1" class="posY1"></div>
+            <div id="map-posY2" class="posY2"></div>
+            <div id="map-posY3" class="posY3"></div>
+            <div id="map-posY4" class="posY4"></div>
+            <div id="map-posY5" class="posY5"></div>
+            <div id="map-posY6" class="posY6"></div>
+            <div id="map-posY7" class="posY7"></div>
+            <div id="map-posY8" class="posY8"></div>
+            <div id="map-posY9" class="posY9"></div>
+            <div id="map-posX1" class="posX1"></div>
+            <div id="map-posX2" class="posX2"></div>
+            <div id="map-posX3" class="posX3"></div>
+            <div id="map-posX4" class="posX4"></div>
+            <div id="map-posX5" class="posX5"></div>
+            <div id="map-posX6" class="posX6"></div>
+            <div id="map-posX7" class="posX7"></div>
+            <div id="map-posX8" class="posX8"></div>
+            <div id="map-posX1" class="posX9"></div>
+            <div id="map-free" class="free"></div>
+            <div id="map-box1" class="box1"></div>
+            <div id="map-box2" class="box2"></div>
+            <div id="map-box3" class="box3"></div>
+            <div id="map-box4" class="box4"></div>
+            <div id="map-box5" class="box5"></div>
+            <div id="map-box6" class="box6"></div>
+            <div id="map-box7" class="box7"></div>
+            <div id="map-box8" class="box8"></div>
+            <div id="map-box9" class="box9"></div>
+            <div id="map-box10" class="box10"></div>
+            <div id="map-box11" class="box11"></div>
+            <div id="map-box12" class="box12"></div>
+            <div id="map-box13" class="box13"></div>
+            <div id="map-box14" class="box14"></div>
+            <div id="map-box15" class="box15"></div>
+            <div id="map-box16" class="box16"></div>
+            <div id="map-box17" class="box17"></div>
+            <div id="map-box18" class="box18"></div>
+            <div id="map-box19" class="box19"></div>
+            <div id="map-box20" class="box20"></div>
+            <div id="map-box21" class="box21"></div>
+            <div id="map-box22" class="box22"></div>
+            <div id="map-box23" class="box23"></div>
+            <div id="map-box24" class="box24"></div>
+            <div id="map-box25" class="box25"></div>
+            <div id="map-box26" class="box26"></div>
+            <div id="map-box27" class="box27"></div>
+            <div id="map-box28" class="box28"></div>
+            <div id="map-box29" class="box29"></div>
+            <div id="map-box30" class="box30"></div>
+            <div id="map-box31" class="box31"></div>
+            <div id="map-box32" class="box32"></div>
+            <div id="map-box33" class="box33"></div>
+            <div id="map-box34" class="box34"></div>
+            <div id="map-box35" class="box35"></div>
+            <div id="map-box36" class="box36"></div>
+            <div id="map-box37" class="box37"></div>
+            <div id="map-box38" class="box38"></div>
+            <div id="map-box39" class="box39"></div>
+            <div id="map-box40" class="box40"></div>
+            <div id="map-box41" class="box41"></div>
+            <div id="map-box42" class="box42"></div>
+            <div id="map-box43" class="box43"></div>
+            <div id="map-box44" class="box44"></div>
+            <div id="map-box45" class="box45"></div>
+            <div id="map-box46" class="box46"></div>
+            <div id="map-box47" class="box47"></div>
+            <div id="map-box48" class="box48"></div>
+            <div id="map-box49" class="box49"></div>
+            <div id="map-box50" class="box50"></div>
+            <div id="map-box51" class="box51"></div>
+            <div id="map-box52" class="box52"></div>
+            <div id="map-box53" class="box53"></div>
+            <div id="map-box54" class="box54"></div>
+            <div id="map-box55" class="box55"></div>
+            <div id="map-box56" class="box56"></div>
+            <div id="map-box57" class="box57"></div>
+            <div id="map-box58" class="box58"></div>
+            <div id="map-box59" class="box59"></div>
+            <div id="map-box60" class="box60"></div>
+            <div id="map-box61" class="box61"></div>
+            <div id="map-box62" class="box62"></div>
+            <div id="map-box63" class="box63"></div>
+            <div id="map-box64" class="box64"></div>
+            <div id="map-box65" class="box65"></div>
+            <div id="map-box66" class="box66"></div>
+            <div id="map-box67" class="box67"></div>
+            <div id="map-box68" class="box68"></div>
+            <div id="map-box69" class="box69"></div>
+            <div id="map-box70" class="box70"></div>
+            <div id="map-box71" class="box71"></div>
+            <div id="map-box72" class="box72"></div>
+            <div id="map-box73" class="box73"></div>
+            <div id="map-box74" class="box74"></div>
+            <div id="map-box75" class="box75"></div>
+            <div id="map-box76" class="box76"></div>
+            <div id="map-box77" class="box77"></div>
+            <div id="map-box78" class="box78"></div>
+            <div id="map-box79" class="box79"></div>
+            <div id="map-box80" class="box80"></div>
+            <div id="map-box81" class="box81"></div>
+            <div id="map-arrow1" class="arrow1"></div>
+            <div id="map-arrow2" class="arrow2"></div>
+            <div id="map-arrow3" class="arrow3"></div>
+            <div id="map-arrow4" class="arrow4"></div>
+        </div>
+
+        <!-- coordinates -->
+
+        <div class="cordinates">
+            <div class="row padtop"></div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-8"></div>
+                <div class="col-md-4 col-sm-4 col-xs-4 col-cordinates">
+                    <div class="cordinate-text">x</div>
+                    <input type="text" class="form-control" id="x-cordinate">
+                    <div class="cordinate-text">y</div>
+                    <input type="text" class="form-control" id="y-cordinate">
+                    <div class="cordinate-btn"></div>
+                    <button class="btn btn-primary" type="button">GO</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--report container-->
+    <div class="container" id="report_container">
+        <span class="Centerer"></span>
+        <div class="village">
+            <image src="picture/report.png"></image>
+        </div>
+        <div class="resource1">
+            <image id="resource_pos1"></image>
+        </div>
+    </div>
+
+    <!--mail container-->
+    <div class="container" id="mail_container">
+        <span class="Centerer"></span>
+        <div class="jumbotron">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
+                <li class=""><a href="#compose" data-toggle="tab">Compose</a></li>
+                <li class=""><a href="#sendbox" data-toggle="tab">Sendbox</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="inbox">
+                    <div class="jumbotron inbox-container">
+                        inbox
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="compose">
+                    profile tab!
+                </div>
+                <div class="tab-pane fade" id="sendbox">
+                    profile tab!
+                </div>
+            </div>
+        </div>
+        <div class="resource1">
+            <image id="resource_pos1"></image>
+        </div>
+    </div>
+
+
+    <!-- Initialize -->
+    <script type="text/javascript">
+        /* resource attribute*/
+        var resource = null;
+        var resource_info = {
+            "crop": {
+                cost: [[70, 90, 70, 20], [115, 150, 115, 35], [195, 250, 195, 55], [325, 420, 325, 95], [545, 700, 545, 155], [910, 1170, 910, 260], [1520, 1950, 1520, 435], [2535, 3260, 2535, 725], [4235, 5445, 4235, 1210], [7070, 9095, 7070, 2020]]
+                , consumption: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
+                , time: [{
+                    hour: 0
+                    , min: 0
+                    , sec: 30
+                }, {
+                    hour: 0
+                    , min: 1
+                    , sec: 15
+                }, {
+                    hour: 0
+                    , min: 3
+                    , sec: 0
+                }, {
+                    hour: 0
+                    , min: 5
+                    , sec: 30
+                }, {
+                    hour: 0
+                    , min: 9
+                    , sec: 20
+                }, {
+                    hour: 0
+                    , min: 15
+                    , sec: 30
+                }, {
+                    hour: 0
+                    , min: 25
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 36
+                    , sec: 30
+                }, {
+                    hour: 1
+                    , min: 8
+                    , sec: 15
+                }, {
+                    hour: 1
+                    , min: 45
+                    , sec: 30
+                }]
+            }
+            , "iron": {
+                cost: [[100, 80, 30, 60], [165, 135, 50, 100], [280, 225, 85, 165], [465, 375, 140, 280], [780, 620, 235, 465], [1300, 1040, 390, 780], [2170, 1735, 650, 1300], [3625, 2900, 1085, 2175], [6050, 4840, 1815, 3630], [10105, 8080, 3030, 6060]]
+                , consumption: [3, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
+                , time: [{
+                    hour: 0
+                    , min: 1
+                    , sec: 5
+                }, {
+                    hour: 0
+                    , min: 3
+                    , sec: 0
+                }, {
+                    hour: 0
+                    , min: 5
+                    , sec: 30
+                }, {
+                    hour: 0
+                    , min: 9
+                    , sec: 35
+                }, {
+                    hour: 0
+                    , min: 16
+                    , sec: 0
+                }, {
+                    hour: 0
+                    , min: 26
+                    , sec: 30
+                }, {
+                    hour: 0
+                    , min: 42
+                    , sec: 35
+                }, {
+                    hour: 1
+                    , min: 8
+                    , sec: 0
+                }, {
+                    hour: 1
+                    , min: 49
+                    , sec: 5
+                }, {
+                    hour: 2
+                    , min: 58
+                    , sec: 30
+                }]
+            }
+            , "clay": {
+                cost: [[80, 40, 80, 50], [135, 65, 135, 85], [225, 110, 225, 140], [375, 185, 375, 235], [620, 310, 620, 390], [1040, 520, 1040, 650], [1735, 870, 1735, 1085], [2900, 1450, 2900, 1810], [4840, 2420, 4840, 3025], [8080, 4040, 8080, 5050]]
+                , consumption: [2, 1, 1, 1, 1, 5, 5, 5, 5, 5]
+                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
+                , time: [{
+                    hour: 0
+                    , min: 0
+                    , sec: 40
+                }, {
+                    hour: 0
+                    , min: 1
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 3
+                    , sec: 30
+                }, {
+                    hour: 0
+                    , min: 6
+                    , sec: 20
+                }, {
+                    hour: 0
+                    , min: 10
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 18
+                    , sec: 10
+                }, {
+                    hour: 0
+                    , min: 29
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 48
+                    , sec: 20
+                }, {
+                    hour: 1
+                    , min: 18
+                    , sec: 10
+                }, {
+                    hour: 2
+                    , min: 5
+                    , sec: 30
+                }]
+            }
+            , "wood": {
+                cost: [[40, 100, 50, 60], [65, 165, 85, 100], [110, 280, 140, 165], [185, 465, 235, 280], [310, 780, 390, 465], [520, 1300, 650, 780], [870, 2170, 1085, 1300], [1450, 3625, 1810, 2175], [2420, 6050, 3025, 3630], [4040, 10105, 5050, 6060]]
+                , consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
+                , time: [{
+                    hour: 0
+                    , min: 0
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 2
+                    , sec: 0
+                }, {
+                    hour: 0
+                    , min: 3
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 7
+                    , sec: 0
+                }, {
+                    hour: 0
+                    , min: 11
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 18
+                    , sec: 50
+                }, {
+                    hour: 0
+                    , min: 32
+                    , sec: 0
+                }, {
+                    hour: 1
+                    , min: 51
+                    , sec: 50
+                }, {
+                    hour: 1
+                    , min: 23
+                    , sec: 50
+                }, {
+                    hour: 2
+                    , min: 14
+                    , sec: 50
+                }]
+            }
+        };
+        var resource_value = null;
+        var resource_produce_rate = [0, 0, 0, 0];
+        var resource_capacity = new Array;
+        var status_resource;
+        var index_resource;
+        var task_resource = new Array;
+        var tasktime_resource, taskindex_resource;
+
+        /* initial function */
+        function init() {
+            $('#resource_container').hide();
+            $('#village_container').hide();
+            $('#map_container').hide();
+            $('#report_container').hide();
+            $('#mail_container').hide();
+            $('#statistic_container').hide();
+            setResourceValue();
+        }
+
+        /*Resource function*/
+        function resourceClick() {
+            init();
+            $('#resource_container').show();
+            console.log('Resource');
+            $.post("http://localhost:5555/loadresource",{}, function(data){
+              if (data=="Something wrong on our server :( Try Again~"){
+                $("#modal-header-title").text('Error !');
+                //Update and Show modal if error is occur
+                $("#modal-body").text(data);
+                $("#loginModal").modal("show");
+              }
+              else{
+                resource = JSON.parse(data);
+                console.log(resource);
+              }
+            })
+            setTimeout(generateResource,500);
+        }
+
+        function generateResource(){
+            setResourceValue();
+            for (var i = 0; i < 16; i++) {
+                document.getElementById("resource" + (i + 1)).className = resource[i]["type"] + (i + 1);
+                document.getElementById("resource" + (i + 1) + "-label").className = "level" + (resource[i]["level"]);
+                $("#resource" + (i+1) + "-label").prop('title', resource[i]["type"]);
+            }
+        }
+
+        function upgradeResourceLevel(e) {
+            console.log('upgrade law na kub' + (index_resource + 1))
+            $.post("http://localhost:5555/upgradeResource",{pos : (index_resource + 1)}, function(data){
+              if (data=="Something wrong on our server :( Try Again~"){
+                $("#modal-header-title").text('Error !');
+                //Update and Show modal if error is occur
+                $("#modal-body").text(data);
+                $("#loginModal").modal("show");
+              }
+            })
+            setTimeout(setResourceValue, 1000);
+        }
+
+        function upgradeResource(e) {
+            //var x = e.target;
+            index_resource = parseInt($(this).attr("index"));
+            console.log("index" + index_resource);
+            var upgradeTime = "";
+
+            $('#upgrade-resourceModal').modal("show");
+            //console.log(JSON.stringify(resource));
+            $('#modalupgrade-header-title').text(resource[index_resource]["type"] + " level " + resource[index_resource]["level"]);
+            $('#productIn-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"]]);
+            if (resource[index_resource]["level"] < 10) {
+                $('#productNext-level').text("Rate of production LV " + (resource[index_resource]["level"] + 1));
+                $('#productNext-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"] + 1]);
+            }
+            $('#setWood').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][0]);
+            $('#setClay').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][1]);
+            $('#setIron').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][2]);
+            $('#setCrop').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][3]);
+            upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
+            $('#upgrade-time').text(upgradeTime);
+            $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
+                console.log("close");
+              //  location.reload();
+            })
+
+            $.post("http://localhost:5555/canUpgradeResource",{pos : (index_resource + 1)} ,function(data){
+              if (data=="Something wrong on our server :( Try Again~"){
+                $("#modal-header-title").text('Error !');
+                //Update and Show modal if error is occur
+                $("#modal-body").text(data);
+                $("#loginModal").modal("show");
+              }else {
+                status_resource = data;
+              }
+            })
+            setTimeout(upgradeResourceDelay, 100);
+
+
+        }
+
+        function upgradeResourceDelay() {
+            console.log(status_resource);
+            if (status_resource) {
+                console.log('can upgrade');
+                $('#buttonUpgrade').prop("disabled", false);
+                $('#buttonUpgrade').click(upgradeResourceLevel);
+            } else {
+                console.log('can not upgrade');
+                $('#buttonUpgrade').prop("disabled", true);
+            }
+            console.log('kakkkkkpaiiii');
+        }
+
+        function updateResource() {
+            for (var i = 0; i < 16; i++) {
+                if (resource[i]["type"] == "wood") {
+                    resource_value.wood += (resource_info["wood"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.wood >= resource_capacity[1]) resource_value.wood = resource_capacity[1];
+                } else if (resource[i]["type"] == "clay") {
+                    resource_value.clay += (resource_info["clay"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.clay >= resource_capacity[1]) resource_value.clay = resource_capacity[1];
+                } else if (resource[i]["type"] == "iron") {
+                    resource_value.iron += (resource_info["iron"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.iron >= resource_capacity[1]) resource_value.iron = resource_capacity[1];
+                } else if (resource[i]["type"] == "crop") {
+                    resource_value.crop += (resource_info["crop"].produce[resource[i]["level"]]) / 36000;
+                    if (resource_value.crop >= resource_capacity[0]) resource_value.crop = resource_capacity[0];
+                }
+            }
+            $('#woodnum').text(parseInt(resource_value.wood));
+            $('#claynum').text(parseInt(resource_value.clay));
+            $('#ironnum').text(parseInt(resource_value.iron));
+            $('#cropnum').text(parseInt(resource_value.crop));
+            setProduceRate();
+            //console.log(resource_value);
+        }
+
+        /* updateResourceTask */
+        function updateTask() {
+            $.post("http://localhost:5555/getStructingTask", function(data){
+              if (data=="Something wrong on our server :( Try Again~"){
+                $("#modal-header-title").text('Error !');
+                //Update and Show modal if error is occur
+                $("#modal-body").text(data);
+                $("#loginModal").modal("show");
+              }else {
+                task_resource = JSON.parse(data);
+              }
+            })
+            var date = new Date();
+            var currentsecconds = date.getTime() / 1000;
+            for (var i = 0; i < task_resource.length; i++) {
+                tasktime_resource = task_resource[i]["endtime"];
+                taskindex_resource = task_resource[i]["pos"];
+                console.log(taskindex_resource);
+                // var tasktime_resource_arr = tasktime_resource.split('T');
+                // var date = tasktime_resource_arr[0].split('-');
+                // var time = (tasktime_resource_arr[1].split('.'))[0].split(':');
+                // var d = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
+                var d = new Date(tasktime_resource)
+                //console.log("resource Time "+d);
+                var seconds = (d.getTime() / 1000) + (7 * 60 * 60);
+                console.log('resource : '+JSON.stringify(resource));
+                //console.log("resource "+taskindex_resource+" end: "+seconds);
+                if (currentsecconds < seconds) {
+                    var remainingtime = parseInt(seconds-currentsecconds);
+                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]) + "-red";
+                    $("#resource" + (taskindex_resource) + "-label").removeData("title");
+                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content",resource[taskindex_resource - 1]["type"]+" upgrading remain: "+remainingtime+" sec");
+                    $('body').click(function(){
+                        $("#resource" + (taskindex_resource) + "-label").tooltip('close');
+                    });
+                    console.log("remain: "+remainingtime);
+                } else {
+                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
+                    //location.reload();
+                }
+            }
+        }
+
+        /*
+        function delay() {
+            document.getElementById("resource" + (index_resource + 1) + "-label").className = "level" + (resource[index_resource]["level"]);
+        }*/
+
+        function setResourceValue() {
+            console.log('update');
+            $.post("http://localhost:5555/getResource",{}, function(data){
+              if (data=="Something wrong on our server :( Try Again~"){
+                $("#modal-header-title").text('Error !');
+                //Update and Show modal if error is occur
+                $("#modal-body").text(data);
+                $("#loginModal").modal("show");
+              }else {
+                resource_value = JSON.parse(data);
+              }
+            })
+            setCapacity();
+        }
+
+        function setCapacity() {
+            $.post("http://localhost:5555/getCapacity", function(data){
+              if (data=="Something wrong on our server :( Try Again~"){
+                $("#modal-header-title").text('Error !');
+                //Update and Show modal if error is occur
+                $("#modal-body").text(data);
+                $("#loginModal").modal("show");
+              }else {
+                data = JSON.parse(data);
+                resource_capacity[0] = data.granary;
+                resource_capacity[1] = data.warehouse;
+              }
+            })
+        }
+
+        function setProduceRate() {
+            resource_produce_rate = [0, 0, 0, 0];
+            for (var i = 0; i < 16; i++) {
+                if (resource[i]["type"] == "wood") resource_produce_rate[0] += (resource_info["wood"].produce[resource[i]["level"]]);
+                else if (resource[i]["type"] == "clay") resource_produce_rate[1] += (resource_info["clay"].produce[resource[i]["level"]]);
+                else if (resource[i]["type"] == "iron") resource_produce_rate[2] += (resource_info["iron"].produce[resource[i]["level"]]);
+                else resource_produce_rate[3] += (resource_info["crop"].produce[resource[i]["level"]]);
+            }
+            $('#wood_produce_rate').text(resource_produce_rate[0]);
+            $('#clay_produce_rate').text(resource_produce_rate[1]);
+            $('#iron_produce_rate').text(resource_produce_rate[2]);
+            $('#crop_produce_rate').text(resource_produce_rate[3]);
+        }
+
+        /*Village attribute*/
+        var building = null;
+        var index_village;
+
+        /* Village function */
+
+        function villageClick() {
+            init();
+            $('#village_container').show();
+            $.post("http://localhost:5555/loadbuilding", function(data){
+              if (data=="Something wrong on our server :( Try Again~"){
+                $("#modal-header-title").text('Error !');
+                //Update and Show modal if error is occur
+                $("#modal-body").text(data);
+                $("#loginModal").modal("show");
+              }else {
+                building = JSON.parse(data);
+              }
+            })
+            setTimeout(generateVillage,100);
+        }
+
+        function generateVillage(){
+            var buildingposlists = new Array;
+            for (var i = 0; i < building.length; i++) {
+                $("#village" + building[i]["pos"] + "-label").addClass("level"+building[i]["level"]);
+                document.getElementById("village" + (i + 1)).className = building[i]["type"] ;
+                buildingposlists[i] = building[i]["pos"];
+            }
+            for (var i = 0; i < 14; i++) {
+                if($.inArray(i+1, buildingposlists)==-1){
+                    $("#village" + (i+1) + "-label").addClass("level"+0);
+                }
+            }
+        }
+
+        function upgradeVillage(e){
+            index_village = parseInt($(this).attr("index"));
+            var villagelevel = $("#village" + (index_village+1) + "-label").attr('class').split(' ')[1];
+            if(villagelevel == 'level0'){
+                createNewVillage();
+            }
+            else{
+                upgradeVillageLevel();
+            }
+
+        }
+
+        function createNewVillage(){
+            $('#create-villageModal').modal("show");
+            $('#villagehall-create').one( "click", function(){
+                console.log('villagehall-create');
+            });
+            $('#granary-create').one( "click", function(){
+                console.log('granary-create');
+            });
+            $('#warehouse-create').one( "click", function(){
+                console.log('warehouse-create');
+            });
+            $('#market-create').one( "click", function(){
+                console.log('market-create');
+            });
+            $('#ballacks-create').one( "click", function(){
+                console.log('ballacks-create');
+            });
+            $('#academy-create').one( "click", function(){
+                console.log('academy-create');
+            });
+            $('#stable-create').one( "click", function(){
+                console.log('stable-create');
+            });
+            $('#headquarter-create').one( "click", function(){
+                console.log('headquarter-create');
+            });
+            $('#smithy-create').one( "click", function(){
+                console.log('smithy-create');
+            });
+            $('#workshop-create').one( "click", function(){
+                console.log('workshop-create');
+            });
+        }
+
+        function upgradeVillageLevel(){
+            $('#upgrade-villageModal').modal("show");
+            var index_building;
+            for(var i=0;i<building.length;i++){
+                if(building[i]["pos"]==index_village+1){
+                    index_building = i;
+                    break;
+                }
+            }
+            $('#modalupgradevillage-title').text(building[index_building]["type"] + " level " + building[index_building]["level"]);
+        }
+
+
+        /* Other function */
+
+        /** Function to format to two digit**/
+        function twoDigits(d) {
+            if (0 <= d && d < 10) return "0" + d.toString();
+            if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
+            return d.toString();
+        }
+
+        function mapClick() {
+            init();
+            $('#map_container').show();
+        }
+
+        function reportClick() {
+            init();
+            $('#report_container').show();
+        }
+
+        function mailClick() {
+            init();
+            $('#mail_container').show();
+        }
+
+        function statisticClick() {
+            init();
+            $('#statistic_container').show();
+        }
+
+        function logout() {
+            location.assign("http:/warku/Client/indexEx.html");
+            //TODO remove user from server
+        }
+
+
+
+        /* Initial */
+        init();
+
+        /*Menu Listener*/
+        resourceClick();
+        $('#resource_menu').click(resourceClick);
+        $('#village_menu').click(villageClick);
+        $('#map_menu').click(mapClick);
+        $('#report_menu').click(reportClick);
+        $('#mail_menu').click(mailClick);
+        $('#statistic_menu').click(statisticClick);
+
+        /*Navbar Listener*/
+        $('#logout-btn').click(logout);
+
+        /*Resource Listner*/
+        $('.resource-level').click(upgradeResource);
+        $('.resource-level').tooltip();
+
+        /*Village Listener*/
+        $('.village-level').click(upgradeVillage);
+        /*Stockbar*/
+        setInterval(updateResource, 100);
+        setInterval(updateTask, 1000);
+    </script>
+
+
+</body>
+
+</html>
