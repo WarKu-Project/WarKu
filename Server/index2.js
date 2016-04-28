@@ -67,7 +67,7 @@ app.post('/register',function(req,res) {
           if (err) {
             //Return error message to client
             console.log("Server Recieve From Engine : "+err.toString());
-            res.end("Something wrong on out server :( Try Again~");
+            res.end("Something wrong on our server :( Try Again~");
           }
           else {
             //Return Success message to Client
@@ -82,12 +82,16 @@ app.post('/register',function(req,res) {
 app.post('/loadresource',function (req,res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
   console.log('Server Recieve loadresource From Client');
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
   engine.loadResource(online_user[ip],function(err,resource) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
       //Return error message to client
-      res.end("Something wrong on out server :( Try Again~");
+      res.end("Something wrong on our server :( Try Again~");
     }
     else{
       console.log("Server Recieve From Engine : resource = "+resource);
@@ -100,12 +104,16 @@ app.post('/loadresource',function (req,res) {
 app.post('/loadbuilding',function (req,res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
   console.log('Server Recieve loadbuilding From Client');
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
   engine.loadBuilding(online_user[ip],function (err,building) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
       //Return error message to client
-      res.end("Something wrong on out server :( Try Again~");
+      res.end("Something wrong on our server :( Try Again~");
     }
     else{
       console.log("Server Recieve From Engine : buidling = "+JSON.stringify(building));
@@ -119,16 +127,189 @@ app.post('/loadwall',function (req,res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("\nCurrent IP : "+ip);
   console.log('Server Recieve loadbuilding From Client');
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
   engine.loadWall(online_user[ip],function (err,wall) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
       //Return error message to client
-      res.end("Something wrong on out server :( Try Again~");
+      res.end("Something wrong on our server :( Try Again~");
     }
     else{
       console.log("Server Recieve From Engine : buidling = "+JSON.stringify(wall));
       //Return wall to client
       res.end(wall);
+    }
+  })
+})
+app.post('/canUpgradeResource',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var pos = req.body.pos;
+  console.log('Server Recieve canUpgradeResource From Client : pos = '+pos);
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
+  engine.canUpgradeResource(online_user[ip],pos,function (err,status) {
+    if(err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+status);
+      res.end(status);
+    }
+  })
+})
+app.post('/upgradeResource',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var pos = req.body.pos;
+  console.log('Server Recieve upgradeResource From Client : pos = '+pos);
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
+  engine.upgradeResource(online_user[ip],pos,function(err,status) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+status);
+      res.end(status);
+    }
+  })
+})
+app.post('/getResource',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  console.log('Server Recieve getResource From Client');
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
+  engine.getResourceOfVillege(online_user[ip],function(err,resource) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+JSON.stringify(resource));
+      res.end(resource);
+    }
+  })
+})
+app.post('/canUpgradeBuilding',function(req,res) {
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log("\nCurrent IP : "+ip);
+    console.log("Current User : "+online_user[ip]);
+    var pos = req.body.pos;
+    console.log('Server Recieve canUpgradeBuilding From Client : pos = '+pos);
+    engine.update(online_user[ip]){
+      if (err) console.log("Server Recieve From Engine : "+err.toString());
+    }
+    engine.canUpgradeBuilding(online_user[ip],pos,function(err,status) {
+        if (err) {
+          console.log("Server Recieve From Engine : "+err.toString());
+          res.end("Something wrong on our server :( Try Again~");
+        }else {
+          console.log("Server Recieve From Engine : "+status);
+          res.end(status);
+        }
+    })
+})
+app.post('/canCreateBuilding',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var pos = req.body.pos;
+  var type = req.body.type;
+  console.log('Server Recieve canCreateBuilding From Client : pos = '+pos+' type = '+type);
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
+  engine.canCreateBuilding(online_user[ip],pos,type,function (err,status) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+status);
+      res.end(status);
+    }
+  })
+})
+app.post('/createBuilding',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var pos = req.body.pos;
+  var type = req.body.type;
+  console.log('Server Recieve createBuilding From Client : pos = '+pos+' type = '+type);
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
+  engine.createBuilding(online_user[ip],pos,type,function (err,status) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+status);
+      res.end(status);
+    }
+  })
+})
+app.post('/upgradeBuilding',function(req,res) {
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log("\nCurrent IP : "+ip);
+    console.log("Current User : "+online_user[ip]);
+    var pos = req.body.pos;
+    console.log('Server Recieve upgradeBuilding From Client : pos = '+pos);
+    engine.update(online_user[ip]){
+      if (err) console.log("Server Recieve From Engine : "+err.toString());
+    }
+    engine.upgradeBuilding(online_user[ip],pos,function(err,status) {
+        if (err) {
+          console.log("Server Recieve From Engine : "+err.toString());
+          res.end("Something wrong on our server :( Try Again~");
+        }else {
+          console.log("Server Recieve From Engine : "+status);
+          res.end(status);
+        }
+    })
+})
+app.post('/getCapacity',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  console.log('Server Recieve getCapacity From Client');
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
+  engine.getCapacity(online_user[ip],function(err,capacity) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+JSON.stringify(capacity));
+      res.end(capacity);
+    }
+  })
+})
+app.post('/getStructingTask',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  console.log('Server Recieve getStructingTask From Client');
+  engine.update(online_user[ip]){
+    if (err) console.log("Server Recieve From Engine : "+err.toString());
+  }
+  engine.getStructingTask(online_user[ip],function(err,task) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+JSON.stringify(task));
+      res.end(task);
     }
   })
 })
