@@ -320,7 +320,7 @@
     </div>
 
     <!--Create new Construction Modal -->
-    <div class="modal fade" id="upgrade-villageModal" role="dialog">
+    <div class="modal fade" id="create-villageModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -421,6 +421,23 @@
             </div>
         </div>
     </div>
+
+<!-- Upgrade village Modal -->
+<div class="modal fade" id="upgrade-villageModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modalupgradevillage-title"></h4>
+            </div>
+            <div class="modal-body">
+</div>
+
+
+</div>
+</div>
+</div>
 
 
     <!--map container-->
@@ -792,10 +809,8 @@
         var index_resource;
         var task_resource = new Array;
         var tasktime_resource, taskindex_resource;
-        
-        /*village attribute*/
-        var village = null;
 
+        /* initial function */
         function init() {
             $('#resource_container').hide();
             $('#village_container').hide();
@@ -804,7 +819,9 @@
             $('#mail_container').hide();
             $('#statistic_container').hide();
         }
-
+        
+        /*Resource function*/
+        
         function resourceClick() {
             init();
             $('#resource_container').show();
@@ -824,71 +841,10 @@
             }
         }
 
-        function villageClick() {
-            init();
-            $('#village_container').show();
-            socket.emit('building-request');
-            socket.on('buildig-data', function(result) {
-                console.log(JSON.stringify(result)) 
-                village = result;
-            });
-            setTimeout(generateVillage,100);            
-        }
-        
-        function generateVillage(){
-            var villageposlists = new Array;
-            for (var i = 0; i < village.length; i++) {
-                $("#village" + village[i]["pos"] + "-label").addClass("level"+village[i]["level"]);
-                document.getElementById("village" + (i + 1)).className = village[i]["type"] ;
-                villageposlists[i] = village[i]["pos"];
-            }
-            for (var i = 0; i < 14; i++) {
-                if($.inArray(i+1, villageposlists)==-1){
-                    $("#village" + (i+1) + "-label").addClass("level"+0);
-                }
-            }
-        }
-
-        function mapClick() {
-            init();
-            $('#map_container').show();
-        }
-
-        function reportClick() {
-            init();
-            $('#report_container').show();
-        }
-
-        function mailClick() {
-            init();
-            $('#mail_container').show();
-        }
-
-        function statisticClick() {
-            init();
-            $('#statistic_container').show();
-        }
-
-        function logout() {
-            location.assign("http:/Client/index.html");
-            //TODO remove user from server
-        }
-
-        /** Function to format to two digit**/
-        function twoDigits(d) {
-            if (0 <= d && d < 10) return "0" + d.toString();
-            if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
-            return d.toString();
-        }
-
         function upgradeResourceLevel(e) {
             console.log('upgrade law na kub' + (index_resource + 1))
             socket.emit('upgrade-resource-request', index_resource + 1);
             setTimeout(setResourceValue, 1000);
-        }
-
-        function upgradeVillage(e){
-            $('#upgrade-villageModal').modal("show");
         }
         
         function upgradeResource(e) {
@@ -999,10 +955,11 @@
                 }
             }
         }
-
+        
+        /*
         function delay() {
             document.getElementById("resource" + (index_resource + 1) + "-label").className = "level" + (resource[index_resource]["level"]);
-        }
+        }*/
 
         function setResourceValue() {
             console.log('update');
@@ -1035,6 +992,103 @@
             $('#crop_produce_rate').text(resource_produce_rate[3]);
         }
 
+        /*Village attribute*/
+        var building = null;
+        var index_village;
+        
+        /* Village function */
+        
+        function villageClick() {
+            init();
+            $('#village_container').show();
+            socket.emit('building-request');
+            socket.on('buildig-data', function(result) {
+                console.log(JSON.stringify(result)) 
+                building = result;
+            });
+            setTimeout(generateVillage,100);            
+        }
+
+        function generateVillage(){
+            var buildingposlists = new Array;
+            for (var i = 0; i < building.length; i++) {
+                $("#village" + building[i]["pos"] + "-label").addClass("level"+building[i]["level"]);
+                document.getElementById("village" + (i + 1)).className = building[i]["type"] ;
+                buildingposlists[i] = building[i]["pos"];
+            }
+            for (var i = 0; i < 14; i++) {
+                if($.inArray(i+1, buildingposlists)==-1){
+                    $("#village" + (i+1) + "-label").addClass("level"+0);
+                }
+            }
+        }
+        
+        function upgradeVillage(e){
+            index_village = parseInt($(this).attr("index"));
+            var villagelevel = $("#village" + (index_village+1) + "-label").attr('class').split(' ')[1];
+            if(villagelevel == 'level0'){
+                createNewVillage();
+            }
+            else{
+                upgradeVillageLevel();
+            }
+            
+        }
+
+        function createNewVillage(){
+            $('#create-villageModal').modal("show");
+        }
+
+        function upgradeVillageLevel(){
+            $('#upgrade-villageModal').modal("show");
+            var index_building;
+            for(var i=0;i<building.length;i++){
+                if(building[i]["pos"]==index_village+1){
+                    index_building = i;
+                    break;
+                }
+            }
+            $('#modalupgradevillage-title').text(building[index_building]["type"] + " level " + building[index_building]["level"]);
+        }
+        
+        
+        /* Other function */
+        
+        /** Function to format to two digit**/
+        function twoDigits(d) {
+            if (0 <= d && d < 10) return "0" + d.toString();
+            if (-10 < d && d < 0) return "-0" + (-1 * d).toString();
+            return d.toString();
+        }
+
+        function mapClick() {
+            init();
+            $('#map_container').show();
+        }
+
+        function reportClick() {
+            init();
+            $('#report_container').show();
+        }
+
+        function mailClick() {
+            init();
+            $('#mail_container').show();
+        }
+
+        function statisticClick() {
+            init();
+            $('#statistic_container').show();
+        }
+
+        function logout() {
+            location.assign("http:/Client/index.html");
+            //TODO remove user from server
+        }
+        
+        
+        
+        /* Initial */
         init();
 
         /*Menu Listener*/
