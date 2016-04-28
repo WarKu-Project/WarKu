@@ -231,61 +231,61 @@ div.village10 {
     left: 64%;
     top: 76%;
 }
-.building1-model {
+.villagehall-model {
     content: url(picture/village/villagehall-1.png);
     position: absolute;
     top: 35%;
     left: 70%;
 }
-.building2-model {
+.granary-model {
     content: url(picture/village/granary-1.png);
     position: absolute;
     top: 43%;
     left: 70%;
 }
-.building3-model {
+.warehouse-model {
     content: url(picture/village/warehouse-1.png);
     position: absolute;
     top: 43%;
     left: 70%;
 }
-.building4-model {
+.market-model {
     content: url(picture/village/market-1.png);
     position: absolute;
     top: 48%;
     left: 70%;
 }
-.building5-model {
+.ballacks-model {
     content: url(picture/village/ballacks-1.png);
     position: absolute;
     top: 48%;
     left: 70%;
 }
-.building6-model {
+.academy-model {
     content: url(picture/village/academy-1.png);
     position: absolute;
     top: 50%;
     left: 70%;
 }
-.building7-model {
+.stable-model {
     content: url(picture/village/stable-1.png);
     position: absolute;
     top: 40%;
     left: 70%;
 }
-.building8-model {
+.headquarter-model {
     content: url(picture/village/headquarter-1.png);
     position: absolute;
     top: 45%;
     left: 70%;
 }
-.building9-model {
+.smithy-model {
     content: url(picture/village/smithy-1.png);
     position: absolute;
     top: 40%;
     left: 70%;
 }
-.building10-model {
+.workshop-model {
     content: url(picture/village/workshop-1.png);
     position: absolute;
     top: 40%;
