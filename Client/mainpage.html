@@ -211,6 +211,7 @@
         
 
         <!-- Resource produce rate -->
+        <div class = "container-fluid">
         <div class="jumbotron" id="produce_container">
             <div class="toTop jumbotronwidth">
                 <div class="row row-centered titlerow">Rate of production per hour</div>
@@ -219,6 +220,7 @@
                 <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
                 <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
             </div>
+        </div>
         </div>
 
     </div>
@@ -253,7 +255,8 @@
         <span class="Centerer"></span>
         <div class="village">
             <image src="picture/building-structure.jpg"></image>
-
+            
+            <!-- village pic -->
             <div class="village1-box">
                 <image id="village1">
             </div>
@@ -296,7 +299,8 @@
             <div class="village14-box">
                 <image id="village14">
             </div>
-
+            
+            <!-- village level pic -->
             <image id="village1-label" index="0" class="village-level"></image>
             <image id="village2-label" index="1" class="village-level"></image>
             <image id="village3-label" index="2" class="village-level"></image>
@@ -315,6 +319,7 @@
         </div>
     </div>
 
+    <!--Create new Construction Modal -->
     <div class="modal fade" id="upgrade-villageModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -329,7 +334,7 @@
                     <div class="building1-model"></div>
                     Requirment</p>
                     Wood : 70 Clay : 40 Iron : 60 Crop : 20</p>
-                    Contracting time : 00:06:40
+                    Contructing time : 00:06:40
                     <button id="buttonCreate1" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -338,7 +343,7 @@
                     <div class="building2-model"></div>
                     Requirment</p>
                     Wood : 80 Clay : 100 Iron : 70 Crop : 20</p>
-                    Contracting time : 00:05:20
+                    Contructing time : 00:05:20
                     <button id="buttonCreate2" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -347,7 +352,7 @@
                     <div class="building3-model"></div>
                     Requirment</p>
                     Wood : 130 Clay : 160 Iron : 90 Crop : 40</p>
-                    Contracting time : 00:06:40
+                    Contructing time : 00:06:40
                     <button id="buttonCreate3" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -356,7 +361,7 @@
                     <div class="building4-model"></div>
                     Requirment</p>
                     Wood : 80 Clay : 70 Iron : 120 Crop : 70</p>
-                    Contracting time : 00:06:00
+                    Contructing time : 00:06:00
                     <button id="buttonCreate4" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -365,7 +370,7 @@
                     <div class="building5-model"></div>
                     Requirment</p>
                     Wood : 210 Clay : 140 Iron : 260 Crop : 120</p>
-                    Contracting time : 00:06:40
+                    Contructing time : 00:06:40
                     <button id="buttonCreate5" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -374,7 +379,7 @@
                     <div class="building6-model"></div>
                     Requirment</p>
                     Wood : 220 Clay : 160 Iron : 90 Crop : 40</p>
-                    Contracting time : 00:06:40
+                    Contructing time : 00:06:40
                     <button id="buttonCreate6" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -383,7 +388,7 @@
                     <div class="building7-model"></div>
                     Requirment</p>
                     Wood : 260 Clay : 140 Iron : 220 Crop : 100</p>
-                    Contracting time : 00:07:20
+                    Contructing time : 00:07:20
                     <button id="buttonCreate7" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -392,7 +397,7 @@
                     <div class="building8-model"></div>
                     Requirment</p>
                     Wood : 700 Clay : 670 Iron : 700 Crop : 240</p>
-                    Contracting time : 00:07:40
+                    Contructing time : 00:07:40
                     <button id="buttonCreate8" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -401,7 +406,7 @@
                     <div class="building9-model"></div>
                     Requirment</p>
                     Wood : 180 Clay : 250 Iron : 500 Crop : 160</p>
-                    Contracting time : 00:06:40
+                    Contructing time : 00:06:40
                     <button id="buttonCreate9" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
                 <div class="modal-body">
@@ -410,7 +415,7 @@
                     <div class="building10-model"></div>
                     Requirment</p>
                     Wood : 460 Clay : 510 Iron : 600 Crop : 320</p>
-                    Contracting time : 00:10:00
+                    Contructing time : 00:10:00
                     <button id="buttonCreate10" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
                 </div>
             </div>
@@ -592,6 +597,7 @@
 
     <!-- Initialize -->
     <script type="text/javascript">
+        /* resource attribute*/
         var resource = null;
         var resource_info = {
             "crop": {
@@ -782,10 +788,13 @@
         var resource_value = null;
         var resource_produce_rate = [0, 0, 0, 0];
         var resource_capacity = new Array;
-        var status;
-        var index;
-        var task = new Array;
-        var tasktime, taskindex;
+        var status_resource;
+        var index_resource;
+        var task_resource = new Array;
+        var tasktime_resource, taskindex_resource;
+        
+        /*village attribute*/
+        var village = null;
 
         function init() {
             $('#resource_container').hide();
@@ -794,7 +803,6 @@
             $('#report_container').hide();
             $('#mail_container').hide();
             $('#statistic_container').hide();
-            setResourceValue();
         }
 
         function resourceClick() {
@@ -803,24 +811,42 @@
             socket.emit('resource-request');
             socket.on('resource-data', function (result) {
                 resource = result;
-                for (var i = 0; i < 16; i++) {
-                    document.getElementById("resource" + (i + 1)).className = result[i]["type"] + (i + 1);
-                    document.getElementById("resource" + (i + 1) + "-label").className = "level" + (result[i]["level"]);
-                    $("#resource" + (i+1) + "-label").prop('title', resource[i]["type"]);
-                }
             });
-            
-            for (var i = 0; i < 14; i++) {
-                //document.getElementById("resource" + (i + 1)).className = result[i]["type"] + (i + 1);
-                //document.getElementById("village" + (i + 1) + "-label").className = "level"+0;
-                $("#village" + (i+1) + "-label").addClass("level0");
+            setTimeout(generateResource,100);  
+        }
+        
+        function generateResource(){
+            setResourceValue();
+            for (var i = 0; i < 16; i++) {
+                document.getElementById("resource" + (i + 1)).className = resource[i]["type"] + (i + 1);
+                document.getElementById("resource" + (i + 1) + "-label").className = "level" + (resource[i]["level"]);
+                $("#resource" + (i+1) + "-label").prop('title', resource[i]["type"]);
             }
-
         }
 
         function villageClick() {
             init();
             $('#village_container').show();
+            socket.emit('building-request');
+            socket.on('buildig-data', function(result) {
+                console.log(JSON.stringify(result)) 
+                village = result;
+            });
+            setTimeout(generateVillage,100);            
+        }
+        
+        function generateVillage(){
+            var villageposlists = new Array;
+            for (var i = 0; i < village.length; i++) {
+                $("#village" + village[i]["pos"] + "-label").addClass("level"+village[i]["level"]);
+                document.getElementById("village" + (i + 1)).className = village[i]["type"] ;
+                villageposlists[i] = village[i]["pos"];
+            }
+            for (var i = 0; i < 14; i++) {
+                if($.inArray(i+1, villageposlists)==-1){
+                    $("#village" + (i+1) + "-label").addClass("level"+0);
+                }
+            }
         }
 
         function mapClick() {
@@ -856,33 +882,34 @@
         }
 
         function upgradeResourceLevel(e) {
-            console.log('upgrade law na kub' + (index + 1))
-            socket.emit('upgrade-resource-request', index + 1);
+            console.log('upgrade law na kub' + (index_resource + 1))
+            socket.emit('upgrade-resource-request', index_resource + 1);
             setTimeout(setResourceValue, 1000);
         }
 
         function upgradeVillage(e){
             $('#upgrade-villageModal').modal("show");
         }
+        
         function upgradeResource(e) {
             //var x = e.target;
-            index = parseInt($(this).attr("index"));
-            console.log("index" + index);
+            index_resource = parseInt($(this).attr("index"));
+            console.log("index" + index_resource);
             var upgradeTime = "";
 
             $('#upgrade-resourceModal').modal("show");
             //console.log(JSON.stringify(resource));
-            $('#modalupgrade-header-title').text(resource[index]["type"] + " level " + resource[index]["level"]);
-            $('#productIn-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"]]);
-            if (resource[index]["level"] < 10) {
-                $('#productNext-level').text("Rate of production LV " + (resource[index]["level"] + 1));
-                $('#productNext-time').text(resource_info[resource[index]["type"]].produce[resource[index]["level"] + 1]);
+            $('#modalupgrade-header-title').text(resource[index_resource]["type"] + " level " + resource[index_resource]["level"]);
+            $('#productIn-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"]]);
+            if (resource[index_resource]["level"] < 10) {
+                $('#productNext-level').text("Rate of production LV " + (resource[index_resource]["level"] + 1));
+                $('#productNext-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"] + 1]);
             }
-            $('#setWood').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][0]);
-            $('#setClay').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][1]);
-            $('#setIron').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][2]);
-            $('#setCrop').text(resource_info[resource[index]["type"]].cost[resource[index]["level"]][3]);
-            upgradeTime = twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].hour) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].min) + ":" + twoDigits(resource_info[resource[index]["type"]].time[resource[index]["level"]].sec);
+            $('#setWood').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][0]);
+            $('#setClay').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][1]);
+            $('#setIron').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][2]);
+            $('#setCrop').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][3]);
+            upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
             $('#upgrade-time').text(upgradeTime);
             $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
                 console.log("close");
@@ -890,11 +917,11 @@
             })
 
 
-            socket.emit('upgrade-resource-status-request', index + 1);
-            socket.on('upgrade-resource-status' + (index + 1), function (result) {
-                status = result;
-                // console.log("status1"+JSON.stringify(status));
-                console.log("in socket " + index);
+            socket.emit('upgrade-resource-status-request', index_resource + 1);
+            socket.on('upgrade-resource-status' + (index_resource + 1), function (result) {
+                status_resource = result;
+                // console.log("status_resource1"+JSON.stringify(status_resource));
+                console.log("in socket " + index_resource);
             });
             setTimeout(upgradeResourceDelay, 100);
 
@@ -902,8 +929,8 @@
         }
 
         function upgradeResourceDelay() {
-            console.log(status);
-            if (status == "true") {
+            console.log(status_resource);
+            if (status_resource) {
                 console.log('can upgrade');
                 $('#buttonUpgrade').prop("disabled", false);
                 $('#buttonUpgrade').click(upgradeResourceLevel);
@@ -937,40 +964,44 @@
             setProduceRate();
             //console.log(resource_value);
         }
-
+        
+        /* updateResourceTask */
         function updateTask() {
             socket.emit('get-structingtask-request');
             socket.on('structuringtask-value', function (result) {
                 //console.log(JSON.stringify(result));
-                task = result;
+                task_resource = result;
             });
             var date = new Date();
             var currentsecconds = date.getTime() / 1000;
-            for (var i = 0; i < task.length; i++) {
-                tasktime = task[i]["endtime"];
-                taskindex = task[i]["pos"];
-                var tasktime_arr = tasktime.split('T');
-                var date = tasktime_arr[0].split('-');
-                var time = (tasktime_arr[1].split('.'))[0].split(':');
+            for (var i = 0; i < task_resource.length; i++) {
+                tasktime_resource = task_resource[i]["endtime"];
+                taskindex_resource = task_resource[i]["pos"];
+                var tasktime_resource_arr = tasktime_resource.split('T');
+                var date = tasktime_resource_arr[0].split('-');
+                var time = (tasktime_resource_arr[1].split('.'))[0].split(':');
                 var d = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
                 //console.log("resource Time "+d);
                 var seconds = (d.getTime() / 1000) + (7 * 60 * 60);
-                //console.log("resource "+taskindex+" end: "+seconds);
+                //console.log("resource "+taskindex_resource+" end: "+seconds);
                 if (currentsecconds < seconds) {
                     var remainingtime = parseInt(seconds-currentsecconds);
-                    document.getElementById("resource" + (taskindex) + "-label").className = "level" + (resource[taskindex - 1]["level"]) + "-red";
-                    $("#resource" + (taskindex) + "-label").removeData("title");
-                    $("#resource" + (taskindex) + "-label").tooltip("option", "content",resource[taskindex - 1]["type"]+" upgrading remain: "+remainingtime+" sec");
+                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]) + "-red";
+                    $("#resource" + (taskindex_resource) + "-label").removeData("title");
+                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content",resource[taskindex_resource - 1]["type"]+" upgrading remain: "+remainingtime+" sec");
+                    $('body').click(function(){
+                        $("#resource" + (taskindex_resource) + "-label").tooltip('close');
+                    });
                     console.log("remain: "+remainingtime);
                 } else {
-                    document.getElementById("resource" + (taskindex) + "-label").className = "level" + (resource[taskindex - 1]["level"]);
+                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
                     location.reload();
                 }
             }
         }
 
         function delay() {
-            document.getElementById("resource" + (index + 1) + "-label").className = "level" + (resource[index]["level"]);
+            document.getElementById("resource" + (index_resource + 1) + "-label").className = "level" + (resource[index_resource]["level"]);
         }
 
         function setResourceValue() {

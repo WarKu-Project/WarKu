@@ -5,21 +5,21 @@ div.village {
     position: relative;
 }
 
-div.village1 {
+#village1 {
     /*content: url(picture/village/5.png);*/
     position: absolute;
     width: 20%;
     left: 40%;
     top: 20%;
 }
-div.village2 {
+#village2 {
     /*content: url(picture/village/6.png);*/
     position: absolute;
     width: 20%;
     left: 23%;
     top: -4.5%;
 }
-div.village3 {
+#village3 {
     /*content: url(picture/village/7.png);*/
     position: absolute;
     width: 20%;
@@ -33,14 +33,14 @@ div.village4 {
     left: 5.5%;
     top: 9%;
 }
-div.village5 {
+#village5 {
     /*content: url(picture/village/9.png);*/
     position: absolute;
     width: 20%;
     left: 75%;
     top: 9%;
 }
-div.village6 {
+#village6 {
     /*content: url(picture/village/1.png);*/
     position: absolute;
     width: 20%;
@@ -54,14 +54,14 @@ div.village7 {
     left: 23%;
     top: 30%;
 }
-div.village8 {
+#village8 {
     /*content: url(picture/village/3.png);*/
     position: absolute;
     width: 20%;
     left:57%;
     top: 30%;
 }
-div.village9 {
+#village9 {
     /*content: url(picture/village/4.png);*/
     position: absolute;
     width: 20%;
@@ -75,62 +75,62 @@ div.village10 {
     left: 5.5%;
     top: 48%;
 }
-div.village11 {
+#village11 {
     /*content: url(picture/village/6.png);*/
     position: absolute;
     width: 20%;
     left: 75%;
     top: 48%;
 }
-div.village12 {
+#village12 {
     /*content: url(picture/village/7.png);*/
     position: absolute;
     width: 20%;
     left: 40%;
     top: 55%;
 }
-div.village13 {
+#village13 {
     /*content: url(picture/village/8.png);*/
     position: absolute;
     width: 20%;
     left: 23.5%;
     top: 65%;
 }
-div.village14 {
+#village14 {
     /*content: url(picture/village/9.png);*/
     position: absolute;
     width: 20%;
     left: 57%;
     top: 65%;
 }
-.building1 {
+.villagehall {
     content: url(picture/village/villagehall.png);
 }
-.building2 {
+.granary {
     content: url(picture/village/granary.png);
 }
-.building3 {
+.warehouse {
     content: url(picture/village/warehouse.png);
 }
-.building4 {
+.market {
     content: url(picture/village/market.png);
 }
-.building5 {
+.ballacks {
     content: url(picture/village/ballacks.png);
 }
-.building6 {
+.academy {
     content: url(picture/village/academy.png);
 }
-.building7 {
+.stable {
     content: url(picture/village/stable.png);
 }
-.building8 {
+.headquarter {
     content: url(picture/village/headquarter.png);
 }
-.building9 {
+.smithy {
     content: url(picture/village/smithy.png);
 }
-.building10 {
+.workshop {
     content: url(picture/village/workshop.png);
 }
 #village1-label {
