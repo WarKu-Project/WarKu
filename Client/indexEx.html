@@ -68,10 +68,10 @@
                                         <input type="text" name="username" id="regis-username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="regis-password" tabindex="2" class="form-control" placeholder="Password">
+                                        <input type="password" name="password" id="regis-password" tabindex="1" class="form-control" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="confirm-password" id="regis-confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                        <input type="password" name="confirm-password" id="regis-confirm-password" tabindex="1" class="form-control" placeholder="Confirm Password">
                                     </div>
                                     <div class="form-group">
                                         <input type="email" name="email" id="regis-email" tabindex="1" class="form-control" placeholder="Email Address" value="">
@@ -79,7 +79,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-sm-offset-3">
-                                                <input name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now" readonly="readonly">
+                                                <input name="register-submit" id="register-submit" tabindex="2" class="form-control btn btn-register" value="Register Now" readonly="readonly">
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
                 $("#modal-header-title").text('Login success');
                 $("#modal-body").text(data);
                 $("#loginModal").modal("show");
-                location.assign("http:/warku/Client/mainpageEx.html");
+                location.assign("http:/Client/mainpageEx.html");
               }else {
                 //Update and show if login is failed
                 $("#modal-header-title").text('Login not success');
@@ -206,6 +206,18 @@
             $('#login-heading').removeClass('active-panel-heading');
             e.preventDefault();
         });
+        
+        //regis tabselect
+//        $('#register-submit').tabs({
+//            activate: function(event ,ui){
+//                $(document).keypress(function(e) {
+//                    if(e.which == 13) {
+//                        regis();
+//                    }
+//                });
+//            }
+//        });
+        
     </script>
 </body>
 
