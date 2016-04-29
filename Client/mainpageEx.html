@@ -38,8 +38,8 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Account</a></li>
-                    <li><a href="#">Setting</a></li>
+                    <li><a href="#" id="account-btn">Account</a></li>
+                    <li><a href="#" id="setting-btn">Setting</a></li>
                     <li><a href="#" id="logout-btn">Logout</a></li>
                 </ul>
             </div>
@@ -47,6 +47,37 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+    <!--Account-->
+    <div class="modal fade col2" id="button-account" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Account</h3>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Setting-->
+    <div class="modal fade" id="button-setting" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Setting</h3>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!--menu-->
     <div class="menu-frame">
@@ -95,22 +126,6 @@
             </ul>
         </nav>
     </div>
-
-    <!--
-<div class="menu-frame">
-<nav>
-<ul class="row-centered">
-<li class="menu-li"><div class="menu" id="statistic_menu">
-<a href="#">
-<img class="menu_img" src="picture/statistic.png">
-</a>
-</div>
-</li>
-
-</ul>
-</nav>
-</div>
--->
 
     <!-- Stockbar -->
     <div class="row">
@@ -208,16 +223,16 @@
 
 
         <!-- Resource produce rate -->
-        <div class = "container-fluid">
-        <div class="jumbotron" id="produce_container">
-            <div class="toTop jumbotronwidth">
-                <div class="row row-centered titlerow">Rate of production per hour</div>
-                <div class="row paddingrow">Wood : &nbsp;<span id="wood_produce_rate"></span></div>
-                <div class="row paddingrow">Clay : &nbsp;<span id="clay_produce_rate"></span></div>
-                <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
-                <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
+        <div class="container-fluid">
+            <div class="jumbotron" id="produce_container">
+                <div class="toTop jumbotronwidth">
+                    <div class="row row-centered titlerow">Rate of production per hour</div>
+                    <div class="row paddingrow">Wood : &nbsp;<span id="wood_produce_rate"></span></div>
+                    <div class="row paddingrow">Clay : &nbsp;<span id="clay_produce_rate"></span></div>
+                    <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
+                    <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
+                </div>
             </div>
-        </div>
         </div>
 
     </div>
@@ -327,12 +342,12 @@
                 </div>
                 <div class="modal-body">
                     <h4>Villagehall</h4></p>
-                Building leaders live in the main building. The much higher level The new building will be completed faster.</p>
+                    Building leaders live in the main building. The much higher level The new building will be completed faster.</p>
                     <div class="villagehall-model"></div>
                     Requirment</p>
                     Wood : 70 Clay : 40 Iron : 60 Crop : 20</p>
                     Contructing time : 00:06:40
-                <button id="villagehall-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="villagehall">Create</button>
+                    <button id="villagehall-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="villagehall">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Granary</h4></p>
@@ -341,7 +356,7 @@
                     Requirment</p>
                     Wood : 80 Clay : 100 Iron : 70 Crop : 20</p>
                     Contructing time : 00:05:20
-                <button id="granary-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="granary">Create</button>
+                    <button id="granary-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="granary">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Warehouse</h4></p>
@@ -350,7 +365,7 @@
                     Requirment</p>
                     Wood : 130 Clay : 160 Iron : 90 Crop : 40</p>
                     Contructing time : 00:06:40
-                <button id="warehouse-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="warehouse">Create</button>
+                    <button id="warehouse-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="warehouse">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Market</h4></p>
@@ -359,7 +374,7 @@
                     Requirment</p>
                     Wood : 80 Clay : 70 Iron : 120 Crop : 70</p>
                     Contructing time : 00:06:00
-            <button id="market-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="market">Create</button>
+                    <button id="market-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="market">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Barracks</h4></p>
@@ -368,7 +383,7 @@
                     Requirment</p>
                     Wood : 210 Clay : 140 Iron : 260 Crop : 120</p>
                     Contructing time : 00:06:40
-<button id="barracks-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="barracks">Create</button>
+                    <button id="barracks-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="barracks">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Academy</h4></p>
@@ -377,16 +392,16 @@
                     Requirment</p>
                     Wood : 220 Clay : 160 Iron : 90 Crop : 40</p>
                     Contructing time : 00:06:40
-<button id="academy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="academy">Create</button>
+                    <button id="academy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="academy">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Stable</h4></p>
-                   The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price.</p>
+                    The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price.</p>
                     <div class="stable-model"></div>
                     Requirment</p>
                     Wood : 260 Clay : 140 Iron : 220 Crop : 100</p>
                     Contructing time : 00:07:20
-<button id="stable-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="stable">Create</button>
+                    <button id="stable-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="stable">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Headquarter</h4></p>
@@ -395,7 +410,7 @@
                     Requirment</p>
                     Wood : 700 Clay : 670 Iron : 700 Crop : 240</p>
                     Contructing time : 00:07:40
-<button id="headquarter-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="headquarter">Create</button>
+                    <button id="headquarter-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="headquarter">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Smithy</h4></p>
@@ -404,7 +419,7 @@
                     Requirment</p>
                     Wood : 180 Clay : 250 Iron : 500 Crop : 160</p>
                     Contructing time : 00:06:40
-<button id="smithy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="smithy">Create</button>
+                    <button id="smithy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="smithy">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Workshop</h4></p>
@@ -413,46 +428,247 @@
                     Requirment</p>
                     Wood : 460 Clay : 510 Iron : 600 Crop : 320</p>
                     Contructing time : 00:10:00
-<button id="workshop-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="workshop">Create</button>
+                    <button id="workshop-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="workshop">Create</button>
                 </div>
             </div>
         </div>
     </div>
-  <!-- Login Modal -->
-  <div class="modal fade" id="loginModal" role="dialog">
-      <div class="modal-dialog">
-
-          <!-- Modal content-->
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" id="modal-header-title"></h4>
-              </div>
-              <div class="modal-body" id="modal-body">
-                  <p></p>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-          </div>
-      </div>
-  </div>
-<!-- Upgrade village Modal -->
-<div class="modal fade" id="upgrade-villageModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="modalupgradevillage-title"></h4>
+    <!--Upgrade Villagehall-->
+    <div class="modal fade" id="upgrade-villagehall" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Villagehall</h3>
+                </div>
+                <div class="modal-body">
+                    Building leaders live in the main building. The much higher level The new building will be completed faster.</p>
+                    <div class="villagehall-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Villagehall"></span> Clay : <span id="setClay-Villagehall"></span> Iron : <span id="setIron-Villagehall"></span> Crop : <span id="setCrop-Villagehall"></span></p>
+                    Upgrade time : <span id="upgrade-time-Villagehall"></span>
+                    <button id="buttonUpgrade-Villagehall" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
             </div>
-            <div class="modal-body">
-</div>
+        </div>
+    </div>
+    <!--Upgrade Granary-->
+    <div class="modal fade" id="upgrade-granary" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Granary</h3>
+                </div>
+                <div class="modal-body">
+                    Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe.</p>
+                    <div class="granary-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Granary"></span> Clay : <span id="setClay-Granary"></span> Iron : <span id="setIron-Granary"></span> Crop : <span id="setCrop-Granary"></span></p>
+                    Upgrade time : <span id="upgrade-time-Granary"></span>
+                    <button id="buttonUpgrade-Granary" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Warehouse-->
+    <div class="modal fade" id="upgrade-warehouse" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Warehouse</h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="warehouse-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Warehouse"></span> Clay : <span id="setClay-Warehouse"></span> Iron : <span id="setIron-Warehouse"></span> Crop : <span id="setCrop-Warehouse"></span></p>
+                    Upgrade time : <span id="upgrade-time-Warehouse"></span>
+                    <button id="buttonUpgrade-Warehouse" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Market-->
+    <div class="modal fade" id="upgrade-market" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Market</h3>
+                </div>
+                <div class="modal-body">
+                    The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously .</p>
+                    <div class="market-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Market"></span> Clay : <span id="setClay-Market"></span> Iron : <span id="setIron-Market"></span> Crop : <span id="setCrop-Market"></span></p>
+                    Upgrade time : <span id="upgrade-time-Market"></span>
+                    <button id="buttonUpgrade-Market" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Barracks-->
+    <div class="modal fade" id="upgrade-barracks" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Barracks</h3>
+                </div>
+                <div class="modal-body">
+                    A large military barracks allows you to build more troops at the same time . But resources are three times normal .</p>
+                    <div class="barracks-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Barracks"></span> Clay : <span id="setClay-Barracks"></span> Iron : <span id="setIron-Barracks"></span> Crop : <span id="setCrop-Barracks"></span></p>
+                    Upgrade time : <span id="upgrade-time-Barracks"></span>
+                    <button id="buttonUpgrade-Barracks" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Academy-->
+    <div class="modal fade" id="upgrade-academy" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Academy</h3>
+                </div>
+                <div class="modal-body">
+                    Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village.</p>
+                    <div class="academy-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Academy"></span> Clay : <span id="setClay-Academy"></span> Iron : <span id="setIron-Academy"></span> Crop : <span id="setCrop-Academy"></span></p>
+                    Upgrade time : <span id="upgrade-time-Academy"></span>
+                    <button id="buttonUpgrade-Academy" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Stable-->
+    <div class="modal fade" id="upgrade-stable" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Stable</h3>
+                </div>
+                <div class="modal-body">
+                    The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price.</p>
+                    <div class="stable-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Stable"></span> Clay : <span id="setClay-Stable"></span> Iron : <span id="setIron-Stable"></span> Crop : <span id="setCrop-Stable"></span></p>
+                    Upgrade time : <span id="upgrade-time-Stable"></span>
+                    <button id="buttonUpgrade-Stable" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Headquarter-->
+    <div class="modal fade" id="upgrade-headquarter" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Headquarter</h3>
+                </div>
+                <div class="modal-body">
+                    The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised .</p>
+                    <div class="headquarter-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Headquarter"></span> Clay : <span id="setClay-Headquarter"></span> Iron : <span id="setIron-Headquarter"></span> Crop : <span id="setCrop-Headquarter"></span></p>
+                    Upgrade time : <span id="upgrade-time-Headquarter"></span>
+                    <button id="buttonUpgrade-Headquarter" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Smithy-->
+    <div class="modal fade" id="upgrade-smithy" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Smithy</h3>
+                </div>
+                <div class="modal-body">
+                    Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy.</p>
+                    <div class="smithy-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Smithy"></span> Clay : <span id="setClay-Smithy"></span> Iron : <span id="setIron-Smithy"></span> Crop : <span id="setCrop-Smithy"></span></p>
+                    Upgrade time : <span id="upgrade-time-Smithy"></span>
+                    <button id="buttonUpgrade-Smithy" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Upgrade Workshop-->
+    <div class="modal fade" id="upgrade-workshop" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Workshop</h3>
+                </div>
+                <div class="modal-body">
+                    Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster .</p>
+                    <div class="workshop-model"></div>
+                    Requirment</p>
+                    Wood : <span id="setWood-Workshop"></span> Clay : <span id="setClay-Workshop"></span> Iron : <span id="setIron-Workshop"></span> Crop : <span id="setCrop-Workshop"></span></p>
+                    Upgrade time : <span id="upgrade-time-Workshop"></span>
+                    <button id="buttonUpgrade-Workshop" type="button" class="btn btn-default" data-dismiss="modal" value="">Upgrade</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modal-header-title"></h4>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Upgrade village Modal -->
+    <div class="modal fade" id="upgrade-villageModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="modalupgradevillage-title"></h4>
+                </div>
+                <div class="modal-body">
+                </div>
 
 
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 
 
     <!--map container-->
@@ -842,27 +1058,26 @@
             init();
             $('#resource_container').show();
             console.log('Resource');
-            $.post("http://localhost:5555/loadresource",{}, function(data){
-              if (data=="Something wrong on our server :( Try Again~"){
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#loginModal").modal("show");
-              }
-              else{
-                resource = JSON.parse(data);
-                console.log(resource);
-              }
+            $.post("http://localhost:5555/loadresource", {}, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                } else {
+                    resource = JSON.parse(data);
+                    console.log(resource);
+                }
             })
-            setTimeout(generateResource,500);
+            setTimeout(generateResource, 500);
         }
 
-        function generateResource(){
+        function generateResource() {
             setResourceValue();
             for (var i = 0; i < 16; i++) {
                 document.getElementById("resource" + (i + 1)).className = resource[i]["type"] + (i + 1);
                 document.getElementById("resource" + (i + 1) + "-label").className = "level" + (resource[i]["level"]);
-                $("#resource" + (i+1) + "-label").prop('title', resource[i]["type"]);
+                $("#resource" + (i + 1) + "-label").prop('title', resource[i]["type"]);
             }
         }
 
@@ -870,8 +1085,8 @@
             index_resource = parseInt($(this).attr("index"));
             console.log("index" + index_resource);
             var upgradeTime = "";
-            console.log(index_resource+"");
-            
+            console.log(index_resource + "");
+
 
             $('#upgrade-resourceModal').modal("show");
             $('#modalupgrade-header-title').text(resource[index_resource]["type"] + " level " + resource[index_resource]["level"]);
@@ -886,20 +1101,22 @@
             $('#setCrop').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][3]);
             upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
             $('#upgrade-time').text(upgradeTime);
-//            $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
-//                $('#upgrade-resourceModal').modal('hide');
-//                console.log('close modal');
-//            })
+            //            $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
+            //                $('#upgrade-resourceModal').modal('hide');
+            //                console.log('close modal');
+            //            })
 
-            $.post("http://localhost:5555/canUpgradeResource",{pos : (index_resource + 1)} ,function(data){
-              if (data=="Something wrong on our server :( Try Again~"){
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#loginModal").modal("show");
-              }else {
-                status_resource = data;
-              }
+            $.post("http://localhost:5555/canUpgradeResource", {
+                pos: (index_resource + 1)
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                } else {
+                    status_resource = data;
+                }
             })
             setTimeout(upgradeResourceDelay, 100);
 
@@ -917,14 +1134,16 @@
                 $('#buttonUpgrade').prop("disabled", true);
             }
         }
-        
-        
+
+
         /* Upgrade resource to database */
         function upgradeResourceLevel(e) {
-            if(resourceUpgradeCall){
+            if (resourceUpgradeCall) {
                 console.log('upgrade law na kub' + (index_resource + 1))
-                $.post("http://localhost:5555/upgradeResource",{pos : (index_resource + 1)}, function(data){
-                    if (data=="Something wrong on our server :( Try Again~"){
+                $.post("http://localhost:5555/upgradeResource", {
+                    pos: (index_resource + 1)
+                }, function (data) {
+                    if (data == "Something wrong on our server :( Try Again~") {
                         $("#modal-header-title").text('Error !');
                         //Update and Show modal if error is occur
                         $("#modal-body").text(data);
@@ -935,7 +1154,7 @@
                 setTimeout(checkResourceTask, 100);
                 isCall = false;
             }
-           
+
         }
 
         function updateResource() {
@@ -961,16 +1180,16 @@
             setProduceRate();
             //console.log(resource_value);
         }
-        
+
         /* check resource upgrading task */
-        function checkResourceTask(){
-            $.post("http://localhost:5555/getStructingTask", function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+        function checkResourceTask() {
+            $.post("http://localhost:5555/getStructingTask", function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     task_resource = JSON.parse(data);
                 }
             })
@@ -989,30 +1208,30 @@
                 // var time = (tasktime_resource_arr[1].split('.'))[0].split(':');
                 // var d = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
                 var d = new Date(tasktime_resource)
-                //console.log("resource Time "+d);
-                var seconds = (d.getTime() / 1000) ;
+                    //console.log("resource Time "+d);
+                var seconds = (d.getTime() / 1000);
                 //console.log('resource : '+JSON.stringify(resource));
                 //console.log("resource "+taskindex_resource+" end: "+seconds);
                 if (currentsecconds < seconds) {
-                    var remainingtime = parseInt(seconds-currentsecconds);
+                    var remainingtime = parseInt(seconds - currentsecconds);
                     document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]) + "-red";
                     $("#resource" + (taskindex_resource) + "-label").removeData("title");
-                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content",resource[taskindex_resource - 1]["type"]+" upgrading remain: "+remainingtime+" sec");
-                    $('body').click(function(){
+                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content", resource[taskindex_resource - 1]["type"] + " upgrading remain: " + remainingtime + " sec");
+                    $('body').click(function () {
                         $("#resource" + (taskindex_resource) + "-label").tooltip('close');
                     });
                     //console.log("remain: "+remainingtime);
                 } else {
-//                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
-                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content","Success!!");
-                    setTimeout(resourceClick,100);
-                    setTimeout(delayFinishUpgraded,1000);
+                    //                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
+                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content", "Success!!");
+                    setTimeout(resourceClick, 100);
+                    setTimeout(delayFinishUpgraded, 1000);
                     //location.reload();
                 }
             }
         }
-        
-        
+
+
         function delayFinishUpgraded() {
             $("#resource" + (taskindex_resource) + "-label").tooltip('close');
             checkResourceTask();
@@ -1020,31 +1239,31 @@
 
         function setResourceValue() {
             console.log('update');
-            $.post("http://localhost:5555/getResource",{}, function(data){
-              if (data=="Something wrong on our server :( Try Again~"){
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#loginModal").modal("show");
-              }else {
-                resource_value = JSON.parse(data);
-              }
+            $.post("http://localhost:5555/getResource", {}, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                } else {
+                    resource_value = JSON.parse(data);
+                }
             })
             setCapacity();
         }
 
         function setCapacity() {
-            $.post("http://localhost:5555/getCapacity", function(data){
-              if (data=="Something wrong on our server :( Try Again~"){
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#loginModal").modal("show");
-              }else {
-                data = JSON.parse(data);
-                resource_capacity[0] = data.granary;
-                resource_capacity[1] = data.warehouse;
-              }
+            $.post("http://localhost:5555/getCapacity", function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                } else {
+                    data = JSON.parse(data);
+                    resource_capacity[0] = data.granary;
+                    resource_capacity[1] = data.warehouse;
+                }
             })
         }
 
@@ -1065,7 +1284,7 @@
         /*Village attribute*/
         var building = null;
         var index_village;
-        var buildingAllTypes = ["villagehall","granary","warehouse","market","barracks","academy","stable","headquarter","smithy","workshop"];
+        var buildingAllTypes = ["villagehall", "granary", "warehouse", "market", "barracks", "academy", "stable", "headquarter", "smithy", "workshop"];
         var buildingCreateStatus = new Array;
         var createBuildingCall = false;
         /* Village function */
@@ -1073,217 +1292,249 @@
         function villageClick() {
             init();
             $('#village_container').show();
-            $.post("http://localhost:5555/loadbuilding", function(data){
-              if (data=="Something wrong on our server :( Try Again~"){
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#loginModal").modal("show");
-              }else {
-                building = JSON.parse(data);
-                console.log(JSON.stringify(building));
-              }
+            $.post("http://localhost:5555/loadbuilding", function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                } else {
+                    building = JSON.parse(data);
+                    console.log(JSON.stringify(building));
+                }
             })
-            setTimeout(generateVillage,100);
+            setTimeout(generateVillage, 100);
         }
 
-        function generateVillage(){
+        function generateVillage() {
             var buildingposlists = new Array;
             for (var i = 0; i < building.length; i++) {
-                $("#village" + building[i]["pos"] + "-label").addClass("level"+building[i]["level"]);
-                document.getElementById("village" + (building[i]["pos"])).className = building[i]["type"] ;
+                $("#village" + building[i]["pos"] + "-label").addClass("level" + building[i]["level"]);
+                document.getElementById("village" + (building[i]["pos"])).className = building[i]["type"];
                 buildingposlists[i] = building[i]["pos"];
             }
             for (var i = 0; i < 14; i++) {
-                if($.inArray(i+1, buildingposlists)==-1){
-                    $("#village" + (i+1) + "-label").addClass("level"+0);
+                if ($.inArray(i + 1, buildingposlists) == -1) {
+                    $("#village" + (i + 1) + "-label").addClass("level" + 0);
                 }
             }
         }
 
-        function upgradeVillage(e){
+        function upgradeVillage(e) {
             index_village = parseInt($(this).attr("index"));
-            var villagelevel = $("#village" + (index_village+1) + "-label").attr('class').split(' ')[1];
-            if(villagelevel == 'level0'){
+            var villagelevel = $("#village" + (index_village + 1) + "-label").attr('class').split(' ')[1];
+            if (villagelevel == 'level0') {
                 createNewVillage();
-            }
-            else{
+            } else {
                 upgradeVillageLevel();
             }
 
         }
 
-        function createNewVillage(){
+        function createNewVillage() {
             $('#create-villageModal').modal("show");
-           
+
             //check building 1
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[0]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[0]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[0] = data;
                 }
             })
-            
-            
+
+
             //check building 2
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[1]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[1]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[1] = data;
                 }
             })
-            
+
             //check building 3
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[2]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[2]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[2] = data;
                 }
             })
-            
+
             //check building 4
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[3]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[3]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[3] = data;
                 }
             })
-            
+
             //check building 5
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[4]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[4]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[4] = data;
                 }
             })
-            
+
             //check building 6
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[5]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[5]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[5] = data;
                 }
             })
-            
+
             //check building 7
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[6]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[6]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[6] = data;
                 }
             })
-            
+
             //check building 8
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[7]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[7]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[7] = data;
                 }
             })
-            
+
             //check building 9
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[8]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[8]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     buildingCreateStatus[8] = data;
                 }
             })
-            
+
             //check building 10
-            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[9]} ,function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
+            $.post("http://localhost:5555/canCreateBuilding", {
+                pos: (index_village + 1)
+                , type: buildingAllTypes[9]
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
-                }else {
+                } else {
                     console.log(data);
                     buildingCreateStatus[9] = data;
                 }
             })
-            
+
             setTimeout(buildingCheckCreate, 600);
         }
-        
-        function buildingCheckCreate(){
-            
+
+        function buildingCheckCreate() {
+
             console.log('kkk');
             console.log(buildingCreateStatus);
-            
-            for(var i=0;i<buildingAllTypes.length;i++){
+
+            for (var i = 0; i < buildingAllTypes.length; i++) {
                 if (buildingCreateStatus[i] == 'true') {
                     console.log('can upgrade');
-                    $('#'+buildingAllTypes[i]+'-create').prop("disabled", false);
+                    $('#' + buildingAllTypes[i] + '-create').prop("disabled", false);
                     createBuildingCall = true;
                     $('.buildingcreate').click(buildingCreate);
                 } else {
                     console.log('can not upgrade');
-                    $('#'+buildingAllTypes[i]+'-create').prop("disabled", true);
-                }   
-            }
-            
-        }
-        
-        function buildingCreate(e){
-            if(createBuildingCall){
-            var buildingtype = $(this).attr("value");
-            console.log(buildingtype+" is creating pos: "+ (index_village+1));
-            
-                console.log('create law na kub' + buildingtype+' pos:'+(index_village+1));
-            $.post("http://localhost:5555/createBuilding",{pos : (index_village+1), type: buildingtype}, function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
-                    $("#modal-header-title").text('Error !');
-                    //Update and Show modal if error is occur
-                    $("#modal-body").text(data);
-                    $("#loginModal").modal("show");
+                    $('#' + buildingAllTypes[i] + '-create').prop("disabled", true);
                 }
-            })
-            setTimeout(villageClick, 100);
+            }
+
+        }
+
+        function buildingCreate(e) {
+            if (createBuildingCall) {
+                var buildingtype = $(this).attr("value");
+                console.log(buildingtype + " is creating pos: " + (index_village + 1));
+
+                console.log('create law na kub' + buildingtype + ' pos:' + (index_village + 1));
+                $.post("http://localhost:5555/createBuilding", {
+                    pos: (index_village + 1)
+                    , type: buildingtype
+                }, function (data) {
+                    if (data == "Something wrong on our server :( Try Again~") {
+                        $("#modal-header-title").text('Error !');
+                        //Update and Show modal if error is occur
+                        $("#modal-body").text(data);
+                        $("#loginModal").modal("show");
+                    }
+                })
+                setTimeout(villageClick, 100);
                 createBuildingCall = false;
             }
         }
 
-        function upgradeVillageLevel(){
+        function upgradeVillageLevel() {
             $('#upgrade-villageModal').modal("show");
             var index_building;
-            for(var i=0;i<building.length;i++){
-                if(building[i]["pos"]==index_village+1){
+            for (var i = 0; i < building.length; i++) {
+                if (building[i]["pos"] == index_village + 1) {
                     index_building = i;
                     break;
                 }
@@ -1326,8 +1577,6 @@
             //TODO remove user from server
         }
 
-
-
         /* Initial */
         init();
 
@@ -1341,6 +1590,8 @@
         $('#statistic_menu').click(statisticClick);
 
         /*Navbar Listener*/
+        $('#account-btn').click(account);
+        $('#setting-btn').click(setting);
         $('#logout-btn').click(logout);
 
         /*Resource Listner*/
