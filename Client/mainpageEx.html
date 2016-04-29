@@ -332,7 +332,7 @@
                     Requirment</p>
                     Wood : 70 Clay : 40 Iron : 60 Crop : 20</p>
                     Contructing time : 00:06:40
-                    <button id="villagehall-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                <button id="villagehall-create buildingcreate" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="villagehall">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Granary</h4></p>
@@ -341,7 +341,7 @@
                     Requirment</p>
                     Wood : 80 Clay : 100 Iron : 70 Crop : 20</p>
                     Contructing time : 00:05:20
-                    <button id="granary-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                <button id="granary-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="granary">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Warehouse</h4></p>
@@ -350,7 +350,7 @@
                     Requirment</p>
                     Wood : 130 Clay : 160 Iron : 90 Crop : 40</p>
                     Contructing time : 00:06:40
-                    <button id="warehouse-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+                <button id="warehouse-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="warehouse">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Market</h4></p>
@@ -359,7 +359,7 @@
                     Requirment</p>
                     Wood : 80 Clay : 70 Iron : 120 Crop : 70</p>
                     Contructing time : 00:06:00
-                    <button id="market-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+            <button id="market-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="market">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Barracks</h4></p>
@@ -368,7 +368,7 @@
                     Requirment</p>
                     Wood : 210 Clay : 140 Iron : 260 Crop : 120</p>
                     Contructing time : 00:06:40
-                    <button id="barracks-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+<button id="barracks-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="barracks">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Academy</h4></p>
@@ -377,7 +377,7 @@
                     Requirment</p>
                     Wood : 220 Clay : 160 Iron : 90 Crop : 40</p>
                     Contructing time : 00:06:40
-                    <button id="academy-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+<button id="academy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="academy">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Stable</h4></p>
@@ -386,7 +386,7 @@
                     Requirment</p>
                     Wood : 260 Clay : 140 Iron : 220 Crop : 100</p>
                     Contructing time : 00:07:20
-                    <button id="stable-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+<button id="stable-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="stable">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Headquarter</h4></p>
@@ -395,7 +395,7 @@
                     Requirment</p>
                     Wood : 700 Clay : 670 Iron : 700 Crop : 240</p>
                     Contructing time : 00:07:40
-                    <button id="headquarter-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+<button id="headquarter-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="headquarter">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Smithy</h4></p>
@@ -404,7 +404,7 @@
                     Requirment</p>
                     Wood : 180 Clay : 250 Iron : 500 Crop : 160</p>
                     Contructing time : 00:06:40
-                    <button id="buttonCreate9" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+<button id="buttonCreate9" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="smithy">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Workshop</h4></p>
@@ -413,7 +413,7 @@
                     Requirment</p>
                     Wood : 460 Clay : 510 Iron : 600 Crop : 320</p>
                     Contructing time : 00:10:00
-                    <button id="workshop-create" type="button" class="btn btn-default" data-dismiss="modal" value="">Create</button>
+<button id="workshop-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="workshop">Create</button>
                 </div>
             </div>
         </div>
@@ -865,27 +865,12 @@
             }
         }
 
-        function upgradeResourceLevel(e) {
-            console.log('upgrade law na kub' + (index_resource + 1))
-            $.post("http://localhost:5555/upgradeResource",{pos : (index_resource + 1)}, function(data){
-              if (data=="Something wrong on our server :( Try Again~"){
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#loginModal").modal("show");
-              }
-            })
-            setTimeout(setResourceValue, 1000);
-        }
-
         function upgradeResource(e) {
-            //var x = e.target;
             index_resource = parseInt($(this).attr("index"));
             console.log("index" + index_resource);
             var upgradeTime = "";
 
             $('#upgrade-resourceModal').modal("show");
-            //console.log(JSON.stringify(resource));
             $('#modalupgrade-header-title').text(resource[index_resource]["type"] + " level " + resource[index_resource]["level"]);
             $('#productIn-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"]]);
             if (resource[index_resource]["level"] < 10) {
@@ -915,12 +900,11 @@
             })
             setTimeout(upgradeResourceDelay, 100);
 
-
         }
 
         function upgradeResourceDelay() {
             console.log(status_resource);
-            if (status_resource) {
+            if (status_resource == 'true') {
                 console.log('can upgrade');
                 $('#buttonUpgrade').prop("disabled", false);
                 $('#buttonUpgrade').click(upgradeResourceLevel);
@@ -928,7 +912,21 @@
                 console.log('can not upgrade');
                 $('#buttonUpgrade').prop("disabled", true);
             }
-            console.log('kakkkkkpaiiii');
+        }
+        
+        /* Upgrade resource to database */
+        function upgradeResourceLevel(e) {
+            console.log('upgrade law na kub' + (index_resource + 1))
+            $.post("http://localhost:5555/upgradeResource",{pos : (index_resource + 1)}, function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }
+            })
+            setTimeout(setResourceValue, 100);
+            setTimeout(checkResourceTask, 100);
         }
 
         function updateResource() {
@@ -954,19 +952,23 @@
             setProduceRate();
             //console.log(resource_value);
         }
+        
+        /* check resource upgrading task */
+        function checkResourceTask(){
+            $.post("http://localhost:5555/getStructingTask", function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    task_resource = JSON.parse(data);
+                }
+            })
+        }
 
         /* updateResourceTask */
         function updateTask() {
-            $.post("http://localhost:5555/getStructingTask", function(data){
-              if (data=="Something wrong on our server :( Try Again~"){
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#loginModal").modal("show");
-              }else {
-                task_resource = JSON.parse(data);
-              }
-            })
             var date = new Date();
             var currentsecconds = date.getTime() / 1000;
             for (var i = 0; i < task_resource.length; i++) {
@@ -980,7 +982,7 @@
                 var d = new Date(tasktime_resource)
                 //console.log("resource Time "+d);
                 var seconds = (d.getTime() / 1000) ;
-                console.log('resource : '+JSON.stringify(resource));
+                //console.log('resource : '+JSON.stringify(resource));
                 //console.log("resource "+taskindex_resource+" end: "+seconds);
                 if (currentsecconds < seconds) {
                     var remainingtime = parseInt(seconds-currentsecconds);
@@ -990,18 +992,22 @@
                     $('body').click(function(){
                         $("#resource" + (taskindex_resource) + "-label").tooltip('close');
                     });
-                    console.log("remain: "+remainingtime);
+                    //console.log("remain: "+remainingtime);
                 } else {
-                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
+//                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
+                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content","Success!!");
+                    setTimeout(resourceClick,100);
+                    setTimeout(delayFinishUpgraded,1000);
                     //location.reload();
                 }
             }
         }
-
-        /*
-        function delay() {
-            document.getElementById("resource" + (index_resource + 1) + "-label").className = "level" + (resource[index_resource]["level"]);
-        }*/
+        
+        
+        function delayFinishUpgraded() {
+            $("#resource" + (taskindex_resource) + "-label").tooltip('close');
+            checkResourceTask();
+        }
 
         function setResourceValue() {
             console.log('update');
@@ -1050,6 +1056,8 @@
         /*Village attribute*/
         var building = null;
         var index_village;
+        var buildingAllTypes = ["villagehall","granary","warehouse","market","barracks","academy","stable","headquarter","smithy","workshop"];
+        var buildingCreateStatus = new Array;
 
         /* Village function */
 
@@ -1097,36 +1105,154 @@
 
         function createNewVillage(){
             $('#create-villageModal').modal("show");
-            $('#villagehall-create').one( "click", function(){
-                console.log('villagehall-create');
-            });
-            $('#granary-create').one( "click", function(){
-                console.log('granary-create');
-            });
-            $('#warehouse-create').one( "click", function(){
-                console.log('warehouse-create');
-            });
-            $('#market-create').one( "click", function(){
-                console.log('market-create');
-            });
-            $('#barracks-create').one( "click", function(){
-                console.log('barracks-create');
-            });
-            $('#academy-create').one( "click", function(){
-                console.log('academy-create');
-            });
-            $('#stable-create').one( "click", function(){
-                console.log('stable-create');
-            });
-            $('#headquarter-create').one( "click", function(){
-                console.log('headquarter-create');
-            });
-            $('#smithy-create').one( "click", function(){
-                console.log('smithy-create');
-            });
-            $('#workshop-create').one( "click", function(){
-                console.log('workshop-create');
-            });
+           
+            //check building 1
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[0]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[0] = data;
+                }
+            })
+            
+            //check building 2
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[1]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[1] = data;
+                }
+            })
+            
+            //check building 3
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[2]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[2] = data;
+                }
+            })
+            
+            //check building 4
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[3]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[3] = data;
+                }
+            })
+            
+            //check building 5
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[4]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[4] = data;
+                }
+            })
+            
+            //check building 6
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[5]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[5] = data;
+                }
+            })
+            
+            //check building 7
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[6]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[6] = data;
+                }
+            })
+            
+            //check building 8
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[7]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[7] = data;
+                }
+            })
+            
+            //check building 9
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[8]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[8] = data;
+                }
+            })
+            
+            //check building 10
+            $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[9]} ,function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }else {
+                    buildingCreateStatus[9] = data;
+                }
+            })
+            
+            setTimeout(buildingCheckCreate, 100);
+            $('.buildingcreate').click(buildingCreate);
+            ;
+        }
+        
+        function buildingCheckCreate(){
+            
+            
+            console.log(status_resource);
+            for(var i=0;i<buildingAllTypes.length;i++){
+                if (buildingCreateStatus[i] == 'true') {
+                    console.log('can upgrade');
+                    $('#buttonUpgrade').prop("disabled", false);
+                    $('.buildingcreate').click(buildingCreate);
+                } else {
+                    console.log('can not upgrade');
+                    $('#buttonUpgrade').prop("disabled", true);
+                }   
+            }
+            
+        }
+        
+        function buildingCreate(e){
+            var buildingtype = $(this).attr("value");
+            console.log(buildingtype+" is creating pos: "+ (index_village+1));
+            
+            
         }
 
         function upgradeVillageLevel(){
