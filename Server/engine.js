@@ -691,8 +691,6 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
             console.log('SELECT vid FROM villege WHERE vid = ?'+generateSQLBuildingRequirement(type,vid));
         //Check this villege requirement by select vid and check on condition
         con.query('SELECT vid FROM villege WHERE vid = ?'+generateSQLBuildingRequirement(type,vid),vid,function (err,result) {
-
-           ;
           if (err) callback(err);
           else {
             if (result.length==1){
@@ -700,8 +698,6 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
               var startTime = new Date();
               //check resource of villege
               con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function(err,result) {
-
-                 ;
                 if (err) callback(err);
                 else {
                   var require_resource = building_info[type].cost[0];
@@ -786,7 +782,7 @@ exports.createBuilding = function(username,pos,type,callback) {
                            ;
                           if (err) callback(err);
                           else {
-                            console.log('New structuringtask tid = '+tid+" vid = "+vid+" sid = "+sid+" level = "+level+" type = "+type+" pos = "+pos);
+                            console.log('New structuringtask tid = '+tid+" vid = "+vid+" sid = "+sid+" type = "+type+" pos = "+pos);
                             //saveStatus
                             saveStatus(username)
                             callback(null,true);
@@ -950,7 +946,7 @@ function updateResource(username) {
         if (err) throw err;
         var resource = [result["wood"],result["clay"],result["iron"],result["crop"]];
         exports.loadResource(username,function (err,result) {
-            console.log('Query Result : '+JSON.stringify(result));
+            //console.log('Query Result : '+JSON.stringify(result));
             if (err) throw err;
             var now_resource = calculateresource(datetime,resource,result,capacity);
             console.log("Now Resouce : "+now_resource);

@@ -1229,8 +1229,6 @@
             })
             
             setTimeout(buildingCheckCreate, 600);
-            $('.buildingcreate').click(buildingCreate);
-            ;
         }
         
         function buildingCheckCreate(){
@@ -1255,7 +1253,16 @@
             var buildingtype = $(this).attr("value");
             console.log(buildingtype+" is creating pos: "+ (index_village+1));
             
-            
+            console.log('create law na kub' + buildingtype);
+            $.post("http://localhost:5555/createBuilding",{pos : (index_village + 1), type: buildingtype}, function(data){
+                if (data=="Something wrong on our server :( Try Again~"){
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#loginModal").modal("show");
+                }
+            })
+            setTimeout(villageClick, 100);
         }
 
         function upgradeVillageLevel(){
