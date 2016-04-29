@@ -979,7 +979,7 @@
                 // var d = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
                 var d = new Date(tasktime_resource)
                 //console.log("resource Time "+d);
-                var seconds = (d.getTime() / 1000) + (7 * 60 * 60);
+                var seconds = (d.getTime() / 1000) ;
                 console.log('resource : '+JSON.stringify(resource));
                 //console.log("resource "+taskindex_resource+" end: "+seconds);
                 if (currentsecconds < seconds) {

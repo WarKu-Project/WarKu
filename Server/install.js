@@ -70,6 +70,11 @@ con.query('CREATE TABLE recentvillegestatus(vid int NOT NULL,lastvisitedtime dat
   if (err) console.log(err.toString());
   else console.log('recentvillegestatus is created to mysql');
 })
+/** Initilize markettask table **/
+con.query('CREATE TABLE markettask (tid int NOT NULL,des_vid int NOT NULL, wood int DEFAULT 0,clay int DEFAULT 0,iron int DEFAULT 0,crop int DEFAULT 0,PRIMARY KEY(tid),FOREIGN KEY(home_vid) REFERENCES villege(vid),FOREIGN KEY(des_vid) REFERENCES villege(vid))',function (err) {
+  if (err) console.log(err.toString());
+  else console.log('markettask is created to mysql');
+});
 //Initialize starter villege
 global.resource_list = ['wood','clay','iron','crop'];
 // for (var j = 0;j<100;j++){

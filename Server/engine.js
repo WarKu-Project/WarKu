@@ -1017,3 +1017,38 @@ exports.getStructingTask = function(username,callback) {
     })
   })
 }
+/** Function to add market task when send some resource **/
+function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
+  getCurrentVillege(username,function (err,home_vid) {
+    if (err) callback(err);
+    else {
+      //Check require resource
+       con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid  = ?',vid,function(err,result) {
+         if (err) callback(err);
+         else {
+           var current_res = result[0];
+           if (wood<=current_res.wood&&clay<=current_res.clay&&iron<=current_res.iron&&crop<=current_res.crop){
+             var left_resource = { wood : (current_res.wood-wood),clay: (current_res.clay-clay),iron : (current_res.iron-iron),crop : (current_res.crop-crop) }
+             //Update left resource in villege
+             con.query('UPDATE villege SET ? WHERE vid  = ?',[left_resource,vid],function(err) {
+               if (err) callback(err);
+               else {
+                 //Add market task
+                 con.query('INSERT INTO markettask(home_vid,des_vid,wood,clay,iron,crop) values(?,?,?,?,?,?)',[des_vid,home_vid,wood,clay,iron,crop],function(err) {
+                   if (err) callback(err);
+                   else callback(true);
+                 })
+               }
+             })
+           }else {
+             callback(null,false);
+           }
+         }
+       })
+    }
+  })
+}
+/** Function to add market task when send some resource **/
+exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
+
+}
