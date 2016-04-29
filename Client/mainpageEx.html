@@ -1325,8 +1325,10 @@
             var villagelevel = $("#village" + (index_village + 1) + "-label").attr('class').split(' ')[1];
             if (villagelevel == 'level0') {
                 createNewVillage();
+                console.log("create");
             } else {
                 upgradeVillageLevel();
+                console.log("upgrade");
             }
 
         }
@@ -1570,6 +1572,16 @@
         function statisticClick() {
             init();
             $('#statistic_container').show();
+        }
+
+        function account() {
+            $('#button-account').show();
+            //TODO remove user from server
+        }
+
+        function setting() {
+            $('#button-setting').show();
+            //TODO remove user from server
         }
 
         function logout() {
