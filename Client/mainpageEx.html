@@ -404,7 +404,7 @@
                     Requirment</p>
                     Wood : 180 Clay : 250 Iron : 500 Crop : 160</p>
                     Contructing time : 00:06:40
-<button id="buttonCreate9" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="smithy">Create</button>
+<button id="smithy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="smithy">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Workshop</h4></p>
@@ -1118,6 +1118,7 @@
                 }
             })
             
+            
             //check building 2
             $.post("http://localhost:5555/canCreateBuilding",{pos : (index_village+1), type: buildingAllTypes[1]} ,function(data){
                 if (data=="Something wrong on our server :( Try Again~"){
@@ -1222,27 +1223,29 @@
                     $("#modal-body").text(data);
                     $("#loginModal").modal("show");
                 }else {
+                    console.log(data);
                     buildingCreateStatus[9] = data;
                 }
             })
             
-            setTimeout(buildingCheckCreate, 100);
+            setTimeout(buildingCheckCreate, 600);
             $('.buildingcreate').click(buildingCreate);
             ;
         }
         
         function buildingCheckCreate(){
             
+            console.log('kkk');
+            console.log(buildingCreateStatus);
             
-            console.log(status_resource);
             for(var i=0;i<buildingAllTypes.length;i++){
                 if (buildingCreateStatus[i] == 'true') {
                     console.log('can upgrade');
-                    $('#buttonUpgrade').prop("disabled", false);
+                    $('#'+buildingAllTypes[i]+'-create').prop("disabled", false);
                     $('.buildingcreate').click(buildingCreate);
                 } else {
                     console.log('can not upgrade');
-                    $('#buttonUpgrade').prop("disabled", true);
+                    $('#'+buildingAllTypes[i]+'-create').prop("disabled", true);
                 }   
             }
             

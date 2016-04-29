@@ -465,7 +465,7 @@ exports.upgradeResource = function(username,pos,callback){
             //INSERT new task
             con.query('INSERT INTO task(vid,endtime) values(?,?)',[vid,finishDate],function(err,result) {
 
-
+               ;
               if (err) callback(err);
               else {
                 console.log('Success Update task with vid = '+finishDate+' vid = '+vid);
@@ -475,7 +475,7 @@ exports.upgradeResource = function(username,pos,callback){
                 //Insert new structuringtask
                 con.query('INSERT INTO structuringtask(tid,sid,level,type,pos) values(?,?,?,?,?)',[tid,sid,level,type,pos],function(err,result) {
 
-
+                   ;
                   if (err) callback(err)
                   else {
                     console.log('Success Update task with tid = '+tid+" sid = "+sid+" level = "+level+" type = "+type+" pos "+pos);
@@ -531,7 +531,7 @@ var building_info = {
     consumption : [4,2,2,2,2,3,3,3,3,3],
     time : [ {hour:0,min:06,sec:00},{hour:0,min:07,sec:58},{hour:0,min:10,sec:14},{hour:0,min:12,sec:52},{hour:0,min:15,sec:56},{hour:0,min:19,sec:28},{hour:0,min:23,sec:36},{hour:0,min:28,sec:22},{hour:0,min:33,sec:54},{hour:0,min:40,sec:20}]
   },
-  "barrack" : {
+  "barracks" : {
     cost : [[210,140,260,120],[270,180,335,155],[345,230,425,195],[440,295,545,250],[565,375,700,320],[720,480,895,410],[925,615,1145,530],[1180,790,1465,675],[1515,1010,1875,865],[1935,1290,2400,1105]],
     consumption : [4,2,2,2,2,3,3,3,3,3],
     time : [  {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52} ]
@@ -575,12 +575,12 @@ var building_require = {
   "warehouse" : [],
   "granary" : [],
   "market" : [{type : "warehouse",level : 1},{type : "granary",level : 1}],
-  "barrack" : [{type : "villagehall",level : 3}],
+  "barracks" : [{type : "villagehall",level : 3}],
   "academy" : [{type : "villagehall",level : 5}],
-  "stable" : [{type : "barrack",level : 3},{type : "academy",level : 5}],
-  "smithy" : [{type : "academy",level : 3},{type : "barrack",level : 3}],
-  "headquarter" : [{type : "villagehall",level : 5},{type : "barrack",level :5},{type : "academy",level : 5}],
-  "workshop" : [{type : "academy",level : 3},{type : "barrack",level : 3}]
+  "stable" : [{type : "barracks",level : 3},{type : "academy",level : 5}],
+  "smithy" : [{type : "academy",level : 3},{type : "barracks",level : 3}],
+  "headquarter" : [{type : "villagehall",level : 5},{type : "barracks",level :5},{type : "academy",level : 5}],
+  "workshop" : [{type : "academy",level : 3},{type : "barracks",level : 3}]
 };
 /** Function to get upgrade status of building**/
 exports.canUpgradeBuilding = function(username,pos,callback) {
@@ -674,9 +674,8 @@ function generateSQLBuildingRequirement(type,vid) {
   var require = building_require[type];
   console.log("Require :" +JSON.stringify(require));
   var statement = "";
-  if (require.length>0) statement+= " AND "
-  for (c in require){
-    statement+= c.level+"<= (SELECT level FROM structure JOIN building ON structure.sid=building.sid WHERE type = \'"+c.type+"\' AND vid = "+vid+") ";
+  for (var i = 0;i<require.length;i++){
+      statement+= " AND "+require[i].level+"<= (SELECT level FROM structure JOIN building ON structure.sid=building.sid WHERE type = \'"+require[i].type+"\' AND vid = "+vid+") ";
   }
   console.log("SQL Statement : "+statement);
   return statement;
@@ -688,7 +687,8 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
   checkAvailableStructingTask(username,function(err,avaiable,vid) {
     if (err) callback(err);
     else {
-      if (avaiable){
+        if (avaiable){
+            console.log('SELECT vid FROM villege WHERE vid = ?'+generateSQLBuildingRequirement(type,vid));
         //Check this villege requirement by select vid and check on condition
         con.query('SELECT vid FROM villege WHERE vid = ?'+generateSQLBuildingRequirement(type,vid),vid,function (err,result) {
 
@@ -706,7 +706,7 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
                 else {
                   var require_resource = building_info[type].cost[0];
                   var timeuse = building_info[type].time[0];
-                  console.log('Building sid = '+sid+" use resoure "+JSON.stringify(require_resource)+" time use "+timeuse.toString());
+                  console.log('Building '+" use resoure "+JSON.stringify(require_resource)+" time use "+timeuse.toString());
                   //check require resource
                   if (result[0].wood>=require_resource[0]&&result[0].clay>=require_resource[1]&&result[0].iron>=require_resource[2]&&result[0].crop>=require_resource[3]){
                     var endTime = calculateFinishDate(startTime,timeuse.hour,timeuse.min,timeuse.sec);
@@ -717,7 +717,7 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
                       crop : (result[0].crop-require_resource[3])
                     };
                     saveStatus(username);
-                    callback(null,true,left_resource,vid,endtime,type,pos);
+                    callback(null,true,left_resource,vid,endTime,type,pos);
                   }
                   else {
                     console.log('Requirement of '+vid+' not pass!');
@@ -1018,112 +1018,10 @@ exports.getStructingTask = function(username,callback) {
   })
 }
 /** Function to add market task when send some resource **/
-function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
-  getCurrentVillege(username,function(err,home_vid) {
-    if (err) callback(err);
-    else {
-      con.query('SELECT level FROM structure JOIN building ON structure.sid = building.sid WHERE vid = ? and type = "market"',home_vid,function(err,result) {
-        if (err) callback(err);
-        else {
-          var num_merchant = 0;
-          //sum number of merchant
-          for (var i = 0;i<result.length;i++){
-            num_merchant+=result[i].level;
-          }
-          con.query('SELECT wood,clay,iron,crop FROM markettask JOIN task ON markettask.tid = task.tid WHERE vid = ?',home_vid,function(err,result) {
-            if (err) callback(err);
-            else {
-              for (var i  =0;i<result.length;i++){
-                var sum = result[i].wood+result[i].clay+result[i].iron+result[i].crop;
-                num_merchant-=Math.ceil(sum/500.0);
-              }
-              var resource = wood+clay+iron+crop;
-              var require_merchant = Math.ceil(resource/500.0);
-              if (require_merchant>num_merchant){
-                console.log('Merchants are not enough : require_merchant = '+require_merchant+" avaiable merchant = "+num_merchant);
-                callback(null,false);
-              }
-              else{
-                con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',home_vid,function(err,result) {
-                  if (err) callback(err);
-                  else {
-                    if (wood<=result[0].wood&&clay<=result[0].clay&&iron<=result[0].iron&&crop<=result[0].crop){
-                      var left_resource = {wood : (result[0].wood-wood), clay : (result[0].clay-clay), iron : (result[0].iron-iron), crop : (result[0].crop-crop)};
-                      //home x,y
-                      con.query('SELECT x,y FROM villege WHERE vid IN (?,?)',[home_vid,des_vid],function(err,result) {
-                        if (err) callback(err);
-                        else {
-                          var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
-                          console.log('distance  = '+distance);
-                          var timeuse_in_sec = distance*0.03;
-                          var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
-                          con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,home_vid],function (err,result) {
-                            if (err) callback(err);
-                            else {
-                              con.query('INSERT INTO task(endtime,vid) values(?,?)',[finishDate,home_vid],function (err,result) {
-                                if (err) callback(err);
-                                else {
-                                  var tid = result.insertId;
-                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop) values(?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop],function (err,result) {
-                                    if (err) callback(err);
-                                    else {
-                                      console.log('Success transfer '+tid);
-                                      callback(null,true);
-                                    }
-                                  })
-                                }
-                              })
-                            }
-                          })
-                        }
-                      })
-                    }else {
-                      console.log("Not enough Resource");
-                      callback(null,false);
-                    }
-                  }
-                })
-              }
-            }
-          })
-        }
-      })
-    }
-  })
+exports.sendResource = function functionName() {
 
 }
 /** Function to add market task when send some resource **/
 exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
-  con.query('SELECT vid FROM villege WHERE name = ?',v_name,function(err,result) {
-    if (err) callback(err);
-    else {
-      var des_vid = result[0].vid;
-      sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
-        if (err) callback(err);
-        else {
-          callback(status);
-        }
-      })
-    }
-  })
-}
-/** Function to add market task when send same resource **/
-exports.sendResource = function(username,x,y,wood,clay,iron,crop,callback){
-  con.query('SELECT vid FROM villege WHERE x = ? AND y=?',[x,y],function(err,result) {
-    if (err) callback(err);
-    else {
-      var des_vid = result[0].vid;
-      sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
-        if (err) callback(err);
-        else {
-          callback(status);
-        }
-      })
-    }
-  })
-}
-/** Function to get map infomation **/
-/** Function to get map infomation **/
-exports.getMap = function (username,callback) {
 
 }
