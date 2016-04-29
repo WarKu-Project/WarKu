@@ -332,7 +332,7 @@
                     Requirment</p>
                     Wood : 70 Clay : 40 Iron : 60 Crop : 20</p>
                     Contructing time : 00:06:40
-                <button id="villagehall-create buildingcreate" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="villagehall">Create</button>
+                <button id="villagehall-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="villagehall">Create</button>
                 </div>
                 <div class="modal-body">
                     <h4>Granary</h4></p>
@@ -824,6 +824,7 @@
         var index_resource;
         var task_resource = new Array;
         var tasktime_resource, taskindex_resource;
+        var resourceUpgradeCall = false;
 
         /* initial function */
         function init() {
@@ -869,6 +870,8 @@
             index_resource = parseInt($(this).attr("index"));
             console.log("index" + index_resource);
             var upgradeTime = "";
+            console.log(index_resource+"");
+            
 
             $('#upgrade-resourceModal').modal("show");
             $('#modalupgrade-header-title').text(resource[index_resource]["type"] + " level " + resource[index_resource]["level"]);
@@ -883,10 +886,10 @@
             $('#setCrop').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][3]);
             upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
             $('#upgrade-time').text(upgradeTime);
-            $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
-                console.log("close");
-              //  location.reload();
-            })
+//            $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
+//                $('#upgrade-resourceModal').modal('hide');
+//                console.log('close modal');
+//            })
 
             $.post("http://localhost:5555/canUpgradeResource",{pos : (index_resource + 1)} ,function(data){
               if (data=="Something wrong on our server :( Try Again~"){
@@ -907,6 +910,7 @@
             if (status_resource == 'true') {
                 console.log('can upgrade');
                 $('#buttonUpgrade').prop("disabled", false);
+                resourceUpgradeCall = true;
                 $('#buttonUpgrade').click(upgradeResourceLevel);
             } else {
                 console.log('can not upgrade');
@@ -914,19 +918,24 @@
             }
         }
         
+        
         /* Upgrade resource to database */
         function upgradeResourceLevel(e) {
-            console.log('upgrade law na kub' + (index_resource + 1))
-            $.post("http://localhost:5555/upgradeResource",{pos : (index_resource + 1)}, function(data){
-                if (data=="Something wrong on our server :( Try Again~"){
-                    $("#modal-header-title").text('Error !');
-                    //Update and Show modal if error is occur
-                    $("#modal-body").text(data);
-                    $("#loginModal").modal("show");
-                }
-            })
-            setTimeout(setResourceValue, 100);
-            setTimeout(checkResourceTask, 100);
+            if(resourceUpgradeCall){
+                console.log('upgrade law na kub' + (index_resource + 1))
+                $.post("http://localhost:5555/upgradeResource",{pos : (index_resource + 1)}, function(data){
+                    if (data=="Something wrong on our server :( Try Again~"){
+                        $("#modal-header-title").text('Error !');
+                        //Update and Show modal if error is occur
+                        $("#modal-body").text(data);
+                        $("#loginModal").modal("show");
+                    }
+                })
+                setTimeout(setResourceValue, 100);
+                setTimeout(checkResourceTask, 100);
+                isCall = false;
+            }
+           
         }
 
         function updateResource() {
@@ -1058,7 +1067,7 @@
         var index_village;
         var buildingAllTypes = ["villagehall","granary","warehouse","market","barracks","academy","stable","headquarter","smithy","workshop"];
         var buildingCreateStatus = new Array;
-
+        var createBuildingCall = false;
         /* Village function */
 
         function villageClick() {
@@ -1072,6 +1081,7 @@
                 $("#loginModal").modal("show");
               }else {
                 building = JSON.parse(data);
+                console.log(JSON.stringify(building));
               }
             })
             setTimeout(generateVillage,100);
@@ -1081,7 +1091,7 @@
             var buildingposlists = new Array;
             for (var i = 0; i < building.length; i++) {
                 $("#village" + building[i]["pos"] + "-label").addClass("level"+building[i]["level"]);
-                document.getElementById("village" + (i + 1)).className = building[i]["type"] ;
+                document.getElementById("village" + (building[i]["pos"])).className = building[i]["type"] ;
                 buildingposlists[i] = building[i]["pos"];
             }
             for (var i = 0; i < 14; i++) {
@@ -1240,6 +1250,7 @@
                 if (buildingCreateStatus[i] == 'true') {
                     console.log('can upgrade');
                     $('#'+buildingAllTypes[i]+'-create').prop("disabled", false);
+                    createBuildingCall = true;
                     $('.buildingcreate').click(buildingCreate);
                 } else {
                     console.log('can not upgrade');
@@ -1250,11 +1261,12 @@
         }
         
         function buildingCreate(e){
+            if(createBuildingCall){
             var buildingtype = $(this).attr("value");
             console.log(buildingtype+" is creating pos: "+ (index_village+1));
             
-            console.log('create law na kub' + buildingtype);
-            $.post("http://localhost:5555/createBuilding",{pos : (index_village + 1), type: buildingtype}, function(data){
+                console.log('create law na kub' + buildingtype+' pos:'+(index_village+1));
+            $.post("http://localhost:5555/createBuilding",{pos : (index_village+1), type: buildingtype}, function(data){
                 if (data=="Something wrong on our server :( Try Again~"){
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1263,6 +1275,8 @@
                 }
             })
             setTimeout(villageClick, 100);
+                createBuildingCall = false;
+            }
         }
 
         function upgradeVillageLevel(){
