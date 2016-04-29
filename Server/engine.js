@@ -874,9 +874,9 @@ function calculateresource(lastvisit,resource,info,capacity) {
     if (info[i].type=="crop") produce_rate[3] += resource_info[info[i].type].produce[info[i].level];
   }
   console.log('produce rate :' +produce_rate );
-  var date_in_sec = lastvisit.getHours()*3600+lastvisit.getMinutes()*60+lastvisit.getSeconds();
+  var date_in_sec = lastvisit.getTime()/1000;
   var now = new Date();
-  var now_in_sec = now.getHours()*3600+now.getMinutes()*60+now.getSeconds();
+  var now_in_sec = now.getTime()/1000;
   var diff_time = now_in_sec-date_in_sec;
   for (var i = 0;i<4;i++){
     if (i<3){
@@ -1018,35 +1018,8 @@ exports.getStructingTask = function(username,callback) {
   })
 }
 /** Function to add market task when send some resource **/
-function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
-  getCurrentVillege(username,function (err,home_vid) {
-    if (err) callback(err);
-    else {
-      //Check require resource
-       con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid  = ?',vid,function(err,result) {
-         if (err) callback(err);
-         else {
-           var current_res = result[0];
-           if (wood<=current_res.wood&&clay<=current_res.clay&&iron<=current_res.iron&&crop<=current_res.crop){
-             var left_resource = { wood : (current_res.wood-wood),clay: (current_res.clay-clay),iron : (current_res.iron-iron),crop : (current_res.crop-crop) }
-             //Update left resource in villege
-             con.query('UPDATE villege SET ? WHERE vid  = ?',[left_resource,vid],function(err) {
-               if (err) callback(err);
-               else {
-                 //Add market task
-                 con.query('INSERT INTO markettask(home_vid,des_vid,wood,clay,iron,crop) values(?,?,?,?,?,?)',[des_vid,home_vid,wood,clay,iron,crop],function(err) {
-                   if (err) callback(err);
-                   else callback(true);
-                 })
-               }
-             })
-           }else {
-             callback(null,false);
-           }
-         }
-       })
-    }
-  })
+exports.sendResource = function functionName() {
+
 }
 /** Function to add market task when send some resource **/
 exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
