@@ -115,7 +115,7 @@ div.village10 {
 .market {
     content: url(picture/village/market.png);
 }
-.ballacks {
+.barracks {
     content: url(picture/village/ballacks.png);
 }
 .academy {
@@ -255,7 +255,7 @@ div.village10 {
     top: 48%;
     left: 70%;
 }
-.ballacks-model {
+.barracks-model {
     content: url(picture/village/ballacks-1.png);
     position: absolute;
     top: 48%;
