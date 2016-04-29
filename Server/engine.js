@@ -1014,10 +1014,124 @@ exports.getStructingTask = function(username,callback) {
   })
 }
 /** Function to add market task when send some resource **/
-exports.sendResource = function functionName() {
+function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
+    console.log("Send Resource "+username);
+
+  getCurrentVillege(username,function(err,home_vid) {
+    if (err) callback(err);
+    else {
+      con.query('SELECT level FROM structure JOIN building ON structure.sid = building.sid WHERE vid = ? and type = "market"',home_vid,function(err,result) {
+        if (err) callback(err);
+        else {
+          var num_merchant = 0;
+          //sum number of merchant
+          for (var i = 0;i<result.length;i++){
+            num_merchant+=result[i].level;
+          }
+          con.query('SELECT wood,clay,iron,crop FROM markettask JOIN task ON markettask.tid = task.tid WHERE vid = ?',home_vid,function(err,result) {
+            if (err) callback(err);
+            else {
+              for (var i  =0;i<result.length;i++){
+                var sum = result[i].wood+result[i].clay+result[i].iron+result[i].crop;
+                num_merchant-=Math.ceil(sum/500.0);
+              }
+              var resource = wood+clay+iron+crop;
+              var require_merchant = Math.ceil(resource/500.0);
+              if (require_merchant>num_merchant){
+                console.log('Merchants are not enough : require_merchant = '+require_merchant+" avaiable merchant = "+num_merchant);
+                callback(null,false);
+              }
+              else{
+                con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',home_vid,function(err,result) {
+                  if (err) callback(err);
+                  else {
+                    if (wood<=result[0].wood&&clay<=result[0].clay&&iron<=result[0].iron&&crop<=result[0].crop){
+                      var left_resource = {wood : (result[0].wood-wood), clay : (result[0].clay-clay), iron : (result[0].iron-iron), crop : (result[0].crop-crop)};
+                      //home x,y
+                      con.query('SELECT x,y FROM villege WHERE vid IN (?,?)',[home_vid,des_vid],function(err,result) {
+                        if (err) callback(err);
+                        else {
+                          var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
+                          console.log('distance  = '+distance);
+                          var timeuse_in_sec = distance*0.03;
+                          var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
+                          con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,home_vid],function (err,result) {
+                            if (err) callback(err);
+                            else {
+                              con.query('INSERT INTO task(endtime,vid) values(?,?)',[finishDate,home_vid],function (err,result) {
+                                if (err) callback(err);
+                                else {
+                                  var tid = result.insertId;
+                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop) values(?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop],function (err,result) {
+                                    if (err) callback(err);
+                                    else {
+                                      console.log('Success transfer '+tid);
+                                      callback(null,true);
+                                    }
+                                  })
+                                }
+                              })
+                            }
+                          })
+                        }
+                      })
+                    }else {
+                      console.log("Not enough Resource");
+                      callback(null,false);
+                    }
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
+    }
+  })
 
 }
 /** Function to add market task when send some resource **/
 exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
+  console.log("Send Resource "+username);
+  con.query('SELECT vid FROM villege WHERE name = ?',v_name,function(err,result) {
+    if (err) callback(err);
+    else {
+      var des_vid = result[0].vid;
+      sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
+        if (err) callback(err);
+        else {
+          callback(status);
+        }
+      })
+    }
+  })
+}
+/** Function to add market task when send same resource **/
+exports.sendResource = function(username,x,y,wood,clay,iron,crop,callback){
+    console.log("Send Resource "+username);
+
+  con.query('SELECT vid FROM villege WHERE x = ? AND y=?',[x,y],function(err,result) {
+    if (err) callback(err);
+    else {
+      var des_vid = result[0].vid;
+      sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
+        if (err) callback(err);
+        else {
+          callback(status);
+        }
+      })
+    }
+  })
+}
+/** Function to get map information **/
+exports.getMap = function(x,y,callback){
+  var xlist = []
+  var ylist = []
+  for (var i = (Math.abs(x-3))%100+1;i<=(Math.abs(x+3))%100+1;i++){
+    
+  }
+}
+/** Function to get map infomation **/
+exports.getMap = function (username,callback) {
 
 }
