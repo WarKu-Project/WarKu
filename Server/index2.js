@@ -311,7 +311,7 @@ app.post('/getMap' ,function (req,res) {
   console.log("\nCurrent IP : "+ip);
   console.log("Current User : "+online_user[ip]);
   console.log('Server Recieve getMap From Client');
-  //engine.update(online_user[ip]);
+  engine.update(online_user[ip]);
   engine.getMap(online_user[ip],function(err,map) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
@@ -328,13 +328,30 @@ app.post('/getMapXY' ,function (req,res) {
   console.log('Server Recieve getMapXY From Client');
   var x= req.body.x;
   var y= req.body.y;
-  //engine.update(online_user[ip]);
+  console.log('X = '+x+' Y = '+y);
+  // engine.update(online_user[ip]);
   engine.getMapXY(x,y,function(err,map) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
     }else {
       res.end(JSON.stringify(map))
+    }
+  })
+})
+app.post('changeName',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var name = req.body.name;
+  console.log('Server Recieve changeName From Client name = '+name);
+  engine.update(online_user[ip]);
+  engine.changeName(online_user[ip],name,function(err,result) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      res.end(JSON.stringify(result))
     }
   })
 })
