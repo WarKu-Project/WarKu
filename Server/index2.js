@@ -162,7 +162,7 @@ app.post('/upgradeResource',function(req,res) {
   console.log("Current User : "+online_user[ip]);
   var pos = req.body.pos;
   console.log('Server Recieve upgradeResource From Client : pos = '+pos);
-  engine.update(online_user[ip]);
+  //engine.update(online_user[ip]);
   engine.upgradeResource(online_user[ip],pos,function(err,status) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
@@ -231,7 +231,6 @@ app.post('/createBuilding',function (req,res) {
   var pos = req.body.pos;
   var type = req.body.type;
   console.log('Server Recieve createBuilding From Client : pos = '+pos+' type = '+type);
-  engine.update(online_user[ip]);
   engine.createBuilding(online_user[ip],pos,type,function (err,status) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
@@ -241,6 +240,7 @@ app.post('/createBuilding',function (req,res) {
       res.end(JSON.stringify(status));
     }
   })
+  //engine.update(online_user[ip]);
 })
 app.post('/upgradeBuilding',function(req,res) {
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -248,7 +248,7 @@ app.post('/upgradeBuilding',function(req,res) {
     console.log("Current User : "+online_user[ip]);
     var pos = req.body.pos;
     console.log('Server Recieve upgradeBuilding From Client : pos = '+pos);
-    engine.update(online_user[ip]);
+    //engine.update(online_user[ip]);
     engine.upgradeBuilding(online_user[ip],pos,function(err,status) {
         if (err) {
           console.log("Server Recieve From Engine : "+err.toString());

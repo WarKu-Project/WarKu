@@ -675,7 +675,7 @@ function generateSQLBuildingRequirement(type,vid) {
   console.log("Require :" +JSON.stringify(require));
   var statement = "";
   for (var i = 0;i<require.length;i++){
-      statement+= " AND "+require[i].level+"<= (SELECT level FROM structure JOIN building ON structure.sid=building.sid WHERE type = \'"+require[i].type+"\' AND vid = "+vid+") ";
+      statement+= " AND "+require[i].level+"<= (SELECT level FROM structure JOIN building ON structure.sid=building.sid WHERE type = \'"+require[i].type+"\' AND vid = "+vid+" ORDER BY level DESC LIMIT 1 ) ";
   }
   console.log("SQL Statement : "+statement);
   return statement;
@@ -691,6 +691,7 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
             console.log('SELECT vid FROM villege WHERE vid = ?'+generateSQLBuildingRequirement(type,vid));
         //Check this villege requirement by select vid and check on condition
         con.query('SELECT vid FROM villege WHERE vid = ?'+generateSQLBuildingRequirement(type,vid),vid,function (err,result) {
+          console.log('Result '+JSON.stringify(result));
           if (err) callback(err);
           else {
             if (result.length==1){
@@ -712,6 +713,7 @@ exports.canCreateBuilding = function(username,pos,type,callback) {
                       iron : (result[0].iron-require_resource[2]) ,
                       crop : (result[0].crop-require_resource[3])
                     };
+                    console.log("Left resource : "+JSON.stringify(left_resource));
                     saveStatus(username);
                     callback(null,true,left_resource,vid,endTime,type,pos);
                   }
@@ -746,12 +748,16 @@ exports.createBuilding = function(username,pos,type,callback) {
     if (err) callback(err);
     else {
       if (status){
+        console.log('left_resource c '+JSON.stringify(left_resource));
         //Update resource in villege
         con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,vid],function(err,result) {
-
-
+          console.log(JSON.stringify(result));
+          console.log('UPDATING');
           if (err) callback(err);
           else {
+            exports.getResourceOfVillege(username,function (err,resource) {
+                console.log(JSON.stringify(resource));
+            })
             console.log('Successful to update resource at '+vid);
             //Insert new structure
             con.query('INSERT INTO structure(level,vid) values(?,?)',[0,vid],function(err,result) {
@@ -763,8 +769,6 @@ exports.createBuilding = function(username,pos,type,callback) {
                 console.log('Structure '+sid+' is created!');
                 //Insert new buidling
                 con.query('INSERT INTO building(sid,pos,type) values(?,?,?)',[sid,pos,type],function(err,result) {
-
-                   ;
                   if(err) callback(err);
                   else {
                     console.log(type+' sid = '+sid+' at pos = '+pos+' is created');
@@ -807,7 +811,9 @@ exports.createBuilding = function(username,pos,type,callback) {
 exports.upgradeBuilding = function(username,pos,callback){
   console.log('upgradeBuilding username  = '+username+' pos = '+pos);
   //Check can upgrade building
-  exports.canUpgradeBuilding(username,pos,type,function(err,status,left_resource,vid,endtime,type,pos) {
+  //null,true,left_resource,vid,endTime,type,pos,level,sid
+
+  exports.canUpgradeBuilding(username,pos,function(err,status,left_resource,vid,endtime,type,pos,level,sid) {
     if (err) callback(err);
     else {
       if (status){
@@ -819,7 +825,7 @@ exports.upgradeBuilding = function(username,pos,callback){
           else {
             console.log('Successful update villege '+vid+' which resource is '+left_resource);
             //insert task
-            con.query('INSERT INTO task(vid,endtime) values(?,?)',[vid,finishDate],function(err,result) {
+            con.query('INSERT INTO task(vid,endtime) values(?,?)',[vid,endtime],function(err,result) {
 
 
               if (err) callback(err);
