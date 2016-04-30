@@ -1123,8 +1123,10 @@ div.box32 {
     height: 10%;
     left: 35%;
     top: 85%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
 }
 
 div.box41 {
@@ -1134,8 +1136,10 @@ div.box41 {
     height: 10%;
     left: 45%;
     top: 85%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
 }
 
 div.box50 {
@@ -1145,8 +1149,10 @@ div.box50 {
     height: 10%;
     left: 55%;
     top: 85%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
 }
 
 div.box59 {
@@ -1156,8 +1162,10 @@ div.box59 {
     height: 10%;
     left: 65%;
     top: 85%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
 }
 
 div.box68 {
@@ -1167,8 +1175,10 @@ div.box68 {
     height: 10%;
     left: 75%;
     top: 85%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
 }
 
 div.box77 {
@@ -1178,6 +1188,23 @@ div.box77 {
     height: 10%;
     left: 85%;
     top: 85%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
+}
+.map-clay{
+    content: url(picture/map/clay.png);
+}
+.map-wood{
+    content: url(picture/map/wood.png);
+}
+.map-crop{
+    content: url(picture/map/crop.png);
+}
+.map-iron{
+    content: url(picture/map/iron.png);
+}
+.map-balance{
+    content: url(picture/map/country.png);
 }
