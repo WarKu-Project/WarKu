@@ -339,7 +339,7 @@ app.post('/getMapXY' ,function (req,res) {
     }
   })
 })
-app.post('changeName',function(req,res) {
+app.post('/changeName',function(req,res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("\nCurrent IP : "+ip);
   console.log("Current User : "+online_user[ip]);
