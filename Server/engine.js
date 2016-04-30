@@ -903,7 +903,7 @@ var capacity = [1700,3100,5000,7800,11800,17600,25900,37900,55100,80000];
 function getCapacity(vid,callback) {
   console.log('getCapacity vid = '+vid);
   //get level of granary and warehouse
-  con.query('SELECT level,type FROM structure JOIN building ON structure.sid = building.sid WHERE type IN (\'granary\',\'warehouse\')',function(err,result) {
+  con.query('SELECT level,type FROM structure JOIN building ON structure.sid = building.sid WHERE type IN (\'granary\',\'warehouse\') AND vid = ?',vid,function(err,result) {
 
     if (err) callback(err);
     else {
@@ -1142,7 +1142,7 @@ exports.getMap = function(x,y,callback){
   var ylist = []
 
 
-  
+
 }
 /** Function to get map infomation **/
 exports.getMap = function (username,callback) {
