@@ -1165,14 +1165,34 @@ exports.getMapXY = function(x,y,callback){
     ylist.push(miny-1);
   }
   console.log(JSON.stringify(xlist),(ylist));
-  con.query('SELECT x,y,name,vid FROM villege WHERE x IN (?) AND y IN (?)',[xlist,ylist],function(err,result) {
+  var select_res = 'SELECT villege.vid AS vid,name,x,y, (CASE WHEN type = \'wood\' THEN 1 ELSE 0 END) AS wood ,(CASE WHEN type = \'clay\' THEN 1 ELSE 0 END) AS clay,(CASE WHEN type = \'iron\' THEN 1 ELSE 0 END) AS iron,(CASE WHEN type = \'crop\' THEN 1 ELSE 0 END) AS crop,username FROM ((villege JOIN structure ON villege.vid = structure.vid) JOIN resource ON structure.sid = resource.sid) JOIN player ON villege.pid = player.pid WHERE x IN (?) AND y IN (?)' ;
+  var select_select_res = 'SELECT username,name,x,y,SUM(wood) AS wood,SUM(clay) AS clay,SUM(iron) AS iron,SUM(crop) AS crop FROM ('+select_res+') AS resourcelist GROUP BY vid'
+  con.query(select_select_res,[xlist,ylist],function(err,result) {
     if (err) callback(err);
     else {
       var villege = result;
-      var vlist = [];
+      var max = 0;
       for (var i = 0;i<result.length;i++){
-        vlist.push(villege[i].vid);
-
+        if (villege[i].wood > max) {
+          villege[i]['type'] = 'wood';
+          max = villege[i].wood;
+        }
+        if (villege[i].clay > max) {
+          villege[i]['type'] = 'clay';
+          max = villege[i].clay;
+        }
+        if (villege[i].iron > max) {
+          villege[i]['type'] = 'iron';
+          max = villege[i].iron;
+        }
+        if (villege[i].crop > max) {
+          villege[i]['type'] = 'crop';
+          max = villege[i].crop;
+        }
+        if (villege[i].clay==villege[i].wood&&villege[i].wood==villege[i].iron&&villege[i].iron==villege[i].crop){
+          villege[i]['type'] = 'balance';
+        }
+        max = 0;
       }
       callback(null,result);
     }
