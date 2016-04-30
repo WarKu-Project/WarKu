@@ -71,7 +71,7 @@ con.query('CREATE TABLE recentvillegestatus(vid int NOT NULL,lastvisitedtime dat
   else console.log('recentvillegestatus is created to mysql');
 })
 /** Initilize markettask table **/
-con.query('CREATE TABLE markettask (tid int NOT NULL,des_vid int NOT NULL, wood int DEFAULT 0,clay int DEFAULT 0,iron int DEFAULT 0,crop int DEFAULT 0,PRIMARY KEY(tid),FOREIGN KEY(des_vid) REFERENCES villege(vid))',function (err) {
+con.query('CREATE TABLE markettask (tid int NOT NULL,des_vid int NOT NULL, wood int DEFAULT 0,clay int DEFAULT 0,iron int DEFAULT 0,crop int DEFAULT 0,type char(1) DEFAULT 'T',PRIMARY KEY(tid),FOREIGN KEY(des_vid) REFERENCES villege(vid))',function (err) {
   if (err) console.log(err.toString());
   else console.log('markettask is created to mysql');
 });

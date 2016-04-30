@@ -333,8 +333,11 @@ function checkAvailableStructingTask(username,callback) {
              ;
             if (err) callback(err);
             else {
-              //total number of worker
-              var num_worker = result[0].level+1;
+                            //total number of worker
+              var num_worker  = 1
+              for (var i = 0;i<result.length;i++){
+                num_worker+=result[i].level;
+              }
               console.log("Villege "+vid +" has "+num_worker+" worker.");
               //check can we upgrade
               if (numtask<num_worker){
@@ -1144,8 +1147,8 @@ exports.getMapXY = function(x,y,callback){
   var miny = x-4;
   var minx = y-4;
   for (var i = 0;i<9;i++){
-    miny+=i;
-    minx+=i;
+    miny+=1;
+    minx+=1;
     if (miny<1){
       miny+=100;
     }
@@ -1158,13 +1161,19 @@ exports.getMapXY = function(x,y,callback){
     if (minx>100){
       minx-=100;
     }
-    xlist.push(minx);
-    ylist.push(miny);
+    xlist.push(minx-1);
+    ylist.push(miny-1);
   }
   console.log(JSON.stringify(xlist),(ylist));
-  con.query('SELECT x,y,name,vid FROM villege WHERE x IN (?) AND y IN (?)',[JSON.stringify(xlist),JSON.stringify(ylist)],function(err,result) {
+  con.query('SELECT x,y,name,vid FROM villege WHERE x IN (?) AND y IN (?)',[xlist,ylist],function(err,result) {
     if (err) callback(err);
     else {
+      var villege = result;
+      var vlist = [];
+      for (var i = 0;i<result.length;i++){
+        vlist.push(villege[i].vid);
+
+      }
       callback(null,result);
     }
   })
@@ -1202,5 +1211,15 @@ exports.getVillegeInfo = function(username,callback) {
         }
       })
     }
+  })
+}
+exports.changeName = function(username,name,callback) {
+  getCurrentVillege(username,function(err,vid) {
+    con.query('UPDATE villege SET name = ? WHERE vid = ?',[name,vid],function(err) {
+      if (err) callback(err)
+      else {
+        callback(null,true);
+      }
+    })
   })
 }
