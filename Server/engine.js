@@ -1078,7 +1078,8 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
                                 if (err) callback(err);
                                 else {
                                   var tid = result.insertId;
-                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop) values(?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop],function (err,result) {
+                                  console.log('Q : '+tid,des_vid,wood,clay,iron,crop,'S');
+                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop,type) values(?,?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop,'S'],function (err,result) {
                                     if (err) callback(err);
                                     else {
                                       console.log('Success transfer '+tid);
@@ -1227,12 +1228,14 @@ exports.getVillegeInfo = function(username,callback) {
       con.query('SELECT name ,x,y FROM villege WHERE vid = ?',vid,function(err,result) {
         if(err) callback(err);
         else {
-          callback(result[0])
+          console.log(JSON.stringify(result[0]));
+          callback(null,result[0])
         }
       })
     }
   })
 }
+/** Function to change name of villege **/
 exports.changeName = function(username,name,callback) {
   getCurrentVillege(username,function(err,vid) {
     con.query('UPDATE villege SET name = ? WHERE vid = ?',[name,vid],function(err) {
@@ -1241,5 +1244,14 @@ exports.changeName = function(username,name,callback) {
         callback(null,true);
       }
     })
+  })
+}
+/** Function to update markettask **/
+exports.updateMarketTask = function(username) {
+  getCurrentVillege(username,function (err,vid) {
+    if (err) console.log(err);
+    else {
+
+    }
   })
 }
