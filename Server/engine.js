@@ -1138,15 +1138,56 @@ exports.sendResource = function(username,x,y,wood,clay,iron,crop,callback){
 }
 /** Function to get map information **/
 exports.getMap = function(x,y,callback){
+  console.log('GET MAP X = '+x+" Y = "+y);
   var xlist = []
   var ylist = []
-
-
-
+  var miny = x-4;
+  var minx = y-4;
+  for (var i = 0;i<9;i++){
+    miny+=i;
+    minx+=i;
+    if (miny<1){
+      miny+=100;
+    }
+    if (minx<1){
+      minx+=100
+    }
+    if (miny>100){
+      miny-=100;
+    }
+    if (minx>100){
+      minx-=100;
+    }
+    xlist.push(minx);
+    ylist.push(miny);
+  }
+  con.query('SELECT x,y,name,vid FROM villege WHERE x IN (?) AND y IN (?)',[xlist,ylist],function(err,result) {
+    if (err) callback(err);
+    else {
+      callback(null,result);
+    }
+  })
 }
 /** Function to get map infomation **/
 exports.getMap = function (username,callback) {
-
+  getCurrentVillege(username,function(err,vid) {
+    if(err) callback(err);
+    else {
+      con.query('SELECT x,y FROM villege WHERE vid = ?',vid,function(err,result) {
+        if (err) callback(err);
+        else {
+          var x= result[0].x;
+          var y = result[0].y;
+          exports.getMap(x,y,function (err,map) {
+            if (err) callback(err);
+            else {
+              callback(null,map)
+            }
+          })
+        }
+      })
+    }
+  })
 }
 /** Function to getName and coordinate of villege **/
 exports.getVillegeInfo = function(username,callback) {

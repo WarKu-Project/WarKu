@@ -306,6 +306,38 @@ app.post('/getVillegeInfo',function(req,res) {
     }
   })
 })
+app.post('/getMap' ,function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  console.log('Server Recieve getStructingTask From Client');
+  engine.update(online_user[ip]);
+  engine.getMap(online_user[ip],function(err,map) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      res.end(JSON.stringify(map))
+    }
+  })
+})
+app.post('/getMap' ,function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  console.log('Server Recieve getStructingTask From Client');
+  var x= req.body.x;
+  var y= req.body.y;
+  engine.update(online_user[ip]);
+  engine.getMap(x,y,function(err,map) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      res.end(JSON.stringify(map))
+    }
+  })
+})
 app.listen(5555,function(){
   console.log("Started on PORT 5555");
 })
