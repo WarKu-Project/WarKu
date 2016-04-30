@@ -62,6 +62,9 @@ img {
     height: 10%;
 }
 
+.stockbarcontainer{
+    width: 100%;
+}
 
 .stockbar {
     margin-left: auto;
@@ -76,32 +79,37 @@ img {
 
 .stockwood{
     content: url(picture/resource/wood.png);
-    width: 50%;
+    width: 30%;
 }
 
 .stockclay{
     content: url(picture/resource/clay.png);
-    width: 50%;
+    width: 30%;
 }
 
 .stockiron{
     content: url(picture/resource/iron.png);
-    width: 50%;
+    width: 30%;
 }
 
 .stockcrop{
     content: url(picture/resource/crop.png);
+    width: 30%;
+}
+
+.stockworker{
+    content: url(picture/resource/worker.png);
     width: 50%;
 }
 
 .stockwarehouse{
     content: url(picture/village/warehouse.png);
-    width: 65%;
+    width: 100%;
 }
 
 .stockgranary{
     content: url(picture/village/granary.png);
-    width: 65%;
+    width: 100%;
 }
 
 .bottombar {

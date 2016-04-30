@@ -131,15 +131,16 @@
 
     <!-- Stockbar -->
     <div class="row">
-        <div class="container">
+        <div class="container stockbarcontainer">
             <div class="jumbotron stockbar">
                 <div class="row">
-                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockwarehouse>&nbsp;&nbsp;<span id="warehousenum" class="stocktext">0</span></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1"><img class = stockwarehouse>&nbsp;&nbsp;<span id="warehousenum" class="stocktext">0</span></div>
                     <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockwood>&nbsp;&nbsp;<span id="woodnum" class="stocktext">0</span></div>
                     <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockclay>&nbsp;&nbsp;<span id="claynum" class="stocktext">0</span></div>
                     <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockiron>&nbsp;&nbsp;<span id="ironnum" class="stocktext">0</span></div>
-                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockgranary>&nbsp;&nbsp;<span id="granarynum" class="stocktext">0</span></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1"><img class = stockgranary>&nbsp;&nbsp;<span id="granarynum" class="stocktext">0</span></div>
                     <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockcrop>&nbsp;&nbsp;<span id="cropnum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockworker>&nbsp;&nbsp;<span id="workernum" class="stocktext">0</span></div>
                 </div>
             </div>
         </div>
@@ -852,6 +853,7 @@
         var task_resource = new Array;
         var tasktime_resource, taskindex_resource;
         var resourceUpgradeCall = false;
+        var worker,fullworker;
 
         /* initial function */
         function init() {
@@ -880,7 +882,28 @@
                     console.log(resource);
                 }
             })
-            setTimeout(generateResource, 500);
+            setTimeout(generateResource, 200);
+            setTimeout(generateWorker, 200);
+        }
+        
+        function generateWorker(){
+            setVillage();
+            setTimeout(generateWorkerDelay, 200);
+            
+        }
+        
+        function generateWorkerDelay(){
+            fullworker = 1;
+            var villagehalls = new Array;
+            for(var i=0;i<building.length;i++){
+                if(building[i]["type"]=='villagehall'){
+                    villagehalls.push(building[i]);
+                }
+            }
+            for(var i=0;i<villagehalls.length;i++){
+                fullworker += villagehalls[i]["level"];
+            }
+//            $('#workernum').text(worker);
         }
         
         function setResourceValue() {
@@ -1109,6 +1132,9 @@
                     setTimeout(delayFinishUpgradedVillage, 1000);
                 }
             }
+            
+            worker = fullworker - task_resource.length - task_village.length; 
+            $('#workernum').text(worker);
         }
 
 
@@ -1141,6 +1167,10 @@
         function villageClick() {
             init();
             $('#village_container').show();
+            setVillage();
+        }
+        
+        function setVillage(){
             $.post("http://localhost:5555/loadbuilding", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1528,9 +1558,9 @@
 
         /* Initial */
         init();
-
-        /*Menu Listener*/
         resourceClick();
+        
+        /*Menu Listener*/
         $('#resource_menu').click(resourceClick);
         $('#village_menu').click(villageClick);
         $('#map_menu').click(mapClick);
