@@ -903,6 +903,7 @@
                     $("#errorModel").modal("show");
                 } else {
                     data = JSON.parse(data);
+                    console.log(JSON.stringify(data));
                     resource_capacity[0] = data.granary;
                     resource_capacity[1] = data.warehouse;
                 }
@@ -1024,8 +1025,8 @@
             $('#claynum').text(parseInt(resource_value.clay));
             $('#ironnum').text(parseInt(resource_value.iron));
             $('#cropnum').text(parseInt(resource_value.crop));
-            $('#warehousenum').text(parseInt(resource_capacity[0]));
-            $('#granarynum').text(parseInt(resource_capacity[1]));
+            $('#warehousenum').text(parseInt(resource_capacity[1]));
+            $('#granarynum').text(parseInt(resource_capacity[0]));
             setProduceRate();
             //console.log(resource_value);
         }
