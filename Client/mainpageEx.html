@@ -655,10 +655,11 @@
     <!-- Initialize -->
     <script type="text/javascript">
         /*global attribute*/
-        var tasktype;
-        
+        var task;
+        var tasktime, taskindex;
         /* resource attribute*/
         var resource = null;
+        var resourceAllTypes = ["wood","clay","iron","crop"];
         var resource_info = {
             "crop": {
                 cost: [[70, 90, 70, 20], [115, 150, 115, 35], [195, 250, 195, 55], [325, 420, 325, 95], [545, 700, 545, 155], [910, 1170, 910, 260], [1520, 1950, 1520, 435], [2535, 3260, 2535, 725], [4235, 5445, 4235, 1210], [7070, 9095, 7070, 2020]]
@@ -850,8 +851,6 @@
         var resource_capacity = new Array;
         var status_resource;
         var index_resource;
-        var task_resource = new Array;
-        var tasktime_resource, taskindex_resource;
         var resourceUpgradeCall = false;
         var worker,fullworker;
 
@@ -864,6 +863,7 @@
             $('#mail_container').hide();
             $('#statistic_container').hide();
             setResourceValue();
+            checkTask();
         }
 
         /*Resource function*/
@@ -1027,7 +1027,6 @@
                     }
                 })
                 setTimeout(setResourceValue, 100);
-                tasktype = 'resource';
                 setTimeout(checkTask,100);
                 resourceUpgradeCall = false;
             }
@@ -1062,7 +1061,6 @@
 
         /* check upgrading task */
         function checkTask() {
-            //console.log(tasktype);
             $.post("http://localhost:5555/getStructingTask", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1070,14 +1068,8 @@
                     $("#modal-body").text(data);
                     $("#errorModel").modal("show");
                 } else {
-                    if(tasktype == "resource"){
-                        task_resource = JSON.parse(data);
-                        console.log('resource up: '+JSON.stringify(task_resource) );
-                    }
-                    else if(tasktype == "village"){
-                        task_village = JSON.parse(data);
-                        console.log('village up: '+JSON.stringify(task_village) );
-                    }
+                        task = JSON.parse(data);
+                        console.log('resource up: '+JSON.stringify(task) );
                     
                 }
             })
@@ -1088,64 +1080,65 @@
             var date = new Date();
             var currentsecconds = date.getTime() / 1000;
             //resource task
-            for (var i = 0; i < task_resource.length; i++) {
-                tasktime_resource = task_resource[i]["endtime"];
-                taskindex_resource = task_resource[i]["pos"];
-                console.log(taskindex_resource);
-                var d = new Date(tasktime_resource)
-                var seconds = (d.getTime() / 1000);
-                if (currentsecconds < seconds) {
-                    //console.log(task_resource[i])
-                    var remainingtime = parseInt(seconds - currentsecconds);
-                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]) + "-red";
-                    $("#resource" + (taskindex_resource) + "-label").removeData("title");
-                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content", resource[taskindex_resource - 1]["type"] + " upgrading remain: " + remainingtime + " sec");
-                    $('body').click(function () {
-                        $("#resource" + (taskindex_resource) + "-label").tooltip('close');
-                    });
-                } else {
-                    $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content", "Success!!");
-                    setTimeout(resourceClick, 100);
-                    setTimeout(delayFinishUpgradedResource, 1000);
+            
+            for (var i = 0; i < task.length; i++) {
+                    tasktime = task[i]["endtime"];
+                    taskindex = task[i]["pos"];
+                    console.log(taskindex);
+                    var d = new Date(tasktime)
+                    var seconds = (d.getTime() / 1000);
+                
+                //resource task
+                if($.inArray(task[i]["type"],resourceAllTypes)!=-1){
+                    if (currentsecconds < seconds) {
+                        var remainingtime = parseInt(seconds - currentsecconds);
+                        document.getElementById("resource" + (taskindex) + "-label").className = "level" + (resource[taskindex - 1]["level"]) + "-red";
+//                        $("#resource" + (taskindex) + "-label").removeData("title");
+                        $("#resource" + (taskindex) + "-label").tooltip("option", "content", resource[taskindex - 1]["type"] + " upgrading remain: " + remainingtime + " sec");
+                        $('body').click(function () {
+                            $("#resource" + (taskindex) + "-label").tooltip('close');
+                        });
+                    } else {
+                        $("#resource" + (taskindex) + "-label").tooltip("option", "content", "Success!!");
+                        setTimeout(resourceClick, 100);
+                        setTimeout(delayFinishUpgradedResource, 1000);
+                    }
+                }
+                
+                //village task
+                else{
+                    if (currentsecconds < seconds) {
+                        var remainingtime = parseInt(seconds - currentsecconds);
+                        var indexbuilding = getIndexBuilding(taskindex);
+                        document.getElementById("village" + (taskindex) + "-label").className = "level" + building[indexbuilding]["level"] + "-red";
+//                        $("#village" + (taskindex) + "-label").removeData("title");
+                        $("#village" + (taskindex) + "-label").tooltip("option", "content","Time remaining: " + remainingtime + " sec");
+                        $('body').click(function () {
+                            $("#village" + (taskindex) + "-label").tooltip('close');
+                        });
+                    } 
+                    else {
+                        $("#village" + (taskindex) + "-label").tooltip("option", "content", "Success!!");
+                        setTimeout(villageClick, 100);
+                        setTimeout(delayFinishUpgradedVillage, 1000);
+                }
                 }
             }
             
-            //village task
-            for (var i = 0; i < task_village.length; i++) {
-                tasktime_village = task_village[i]["endtime"];
-                taskindex_village = task_village[i]["pos"];
-                console.log(taskindex_village);
-                var d = new Date(tasktime_village)
-                var seconds = (d.getTime() / 1000);
-                if (currentsecconds < seconds) {
-                    //console.log(task_village[i])
-                    var remainingtime = parseInt(seconds - currentsecconds);
-                    document.getElementById("village" + (taskindex_village) + "-label").className = "level" + villagelevel + "-red";
-                    $("#village" + (taskindex_village) + "-label").removeData("title");
-                    $("#village" + (taskindex_village) + "-label").tooltip("option", "content","Time remaining: " + remainingtime + " sec");
-                    $('body').click(function () {
-                        $("#village" + (taskindex_village) + "-label").tooltip('close');
-                    });
-                } else {
-                    $("#village" + (taskindex_village) + "-label").tooltip("option", "content", "Success!!");
-                    setTimeout(villageClick, 100);
-                    setTimeout(delayFinishUpgradedVillage, 1000);
-                }
-            }
-            
-            worker = fullworker - task_resource.length - task_village.length; 
+            worker = fullworker - task.length;
             $('#workernum').text(worker);
+            
         }
 
 
         function delayFinishUpgradedResource() {
-            $("#resource" + (taskindex_resource) + "-label").tooltip('close');
-            checkTask('resource');
+            $("#resource" + (taskindex) + "-label").tooltip('close');
+            checkTask();
         }
         
         function delayFinishUpgradedVillage() {
-            $("#village" + (taskindex_village) + "-label").tooltip('close');
-            checkTask('village');
+            $("#village" + (taskindex) + "-label").tooltip('close');
+            checkTask();
         }
 
        
@@ -1157,7 +1150,6 @@
         var upgradeBuildingStatus;
         var createBuildingCall = false;
         var villageUpgradeCall = false;
-        var task_village = new Array;
         var tasktime_village, taskindex_village;
         var villagelevel;
         
@@ -1203,7 +1195,7 @@
 
         function upgradeVillage(e) {
             index_village = parseInt($(this).attr("index"));
-            var villagelevel = $("#village" + (index_village + 1) + "-label").attr('class').split(' ')[1];
+            villagelevel = $("#village" + (index_village + 1) + "-label").attr('class').split(' ')[1];
             if (villagelevel == 'level0') {
                 createNewVillage();
                 console.log("create");
@@ -1409,22 +1401,31 @@
                     }
                 })
                 setTimeout(villageClick, 100);
-                tasktype = 'village';
                 setTimeout(checkTask,100);
                 createBuildingCall = false;
             }
+        }
+        
+        function getIndexBuilding(pos){
+            for (var i = 0; i < building.length; i++) {
+                if (building[i]["pos"] == pos) {
+                    return index_building = i;
+                }
+            }
+            return 0;
         }
 
         function upgradeVillageLevel() {
             //$('#upgrade-villageModal').modal("show");
             
-            var index_building;
+            var index_building = getIndexBuilding(index_village + 1);
+            /*
             for (var i = 0; i < building.length; i++) {
                 if (building[i]["pos"] == index_village + 1) {
                     index_building = i;
                     break;
                 }
-            }
+            }*/
         
             var upgradeType = building[index_building]["type"];
             villagelevel = building[index_building]["level"];
@@ -1475,7 +1476,6 @@
                     }
                 })
                 setTimeout(villageClick, 100);
-                tasktype = 'village';
                 setTimeout(checkTask,100);
                 villageUpgradeCall = false;
             }

@@ -11,7 +11,7 @@
 }
 
 body {
-    background-image: url("picture/BG.jpg");
+    background-image: url("picture/BG2.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -122,6 +122,7 @@ img {
 
 .stocktext{
     color: white;
+    -webkit-text-stroke: 1px black;
 }
 
 
