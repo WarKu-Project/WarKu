@@ -1055,7 +1055,7 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
               var require_merchant = Math.ceil(resource/500.0);
               if (require_merchant>num_merchant){
                 console.log('Merchants are not enough : require_merchant = '+require_merchant+" avaiable merchant = "+num_merchant);
-                callback(null,false);
+                callback(null,false)
               }
               else{
                 con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',home_vid,function(err,result) {
@@ -1079,7 +1079,7 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
                                 else {
                                   var tid = result.insertId;
                                   console.log('Q : '+tid,des_vid,wood,clay,iron,crop,'S');
-                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop,type) values(?,?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop,'S'],function (err,result) {
+                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop,type) values(?,?,?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop,'S'],function (err,result) {
                                     if (err) callback(err);
                                     else {
                                       console.log('Success transfer '+tid);
@@ -1117,7 +1117,7 @@ exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
       sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
         if (err) callback(err);
         else {
-          callback(status);
+          callback(null,status);
         }
       })
     }
@@ -1134,7 +1134,7 @@ exports.sendResource = function(username,x,y,wood,clay,iron,crop,callback){
       sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
         if (err) callback(err);
         else {
-          callback(status);
+          callback(null,status);
         }
       })
     }

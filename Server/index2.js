@@ -299,7 +299,6 @@ app.post('/getVillegeInfo',function(req,res) {
   engine.update(online_user[ip]);
   engine.getVillegeInfo(online_user[ip],function(err,result) {
     if (err) {
-      throw err;
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
     }else {
@@ -369,11 +368,13 @@ app.post('/sendResourceXY',function(req,res) {
   //console.log('Server Recieve changeName From Client name = '+name);
   //engine.update(online_user[ip]);
   engine.sendResource(online_user[ip],x,y,wood,clay,iron,crop,function(err,result) {
+    console.log('err : '+err+" result : "+result);
     if (err) {
       throw err;
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
     }else {
+      console.log("Server Recieve From Engine : "+result);
       res.end(JSON.stringify(result))
     }
   })
