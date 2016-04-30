@@ -861,7 +861,7 @@ function covertToDate(datetime) {
 }
 /** Function to calculate added resource **/
 function calculateresource(lastvisit,resource,info,capacity) {
-  console.log("calculateresource lastvisit : "+lastvisit.toString()+" resource : "+JSON.stringify(resource)+" info "+JSON.stringify(info));
+  console.log("calculateresource lastvisit : "+lastvisit.toString()+" resource : "+JSON.stringify(resource)+" info "+JSON.stringify(info)+" capacity : "+JSON.stringify(capacity));
   var produce_rate = [0,0,0,0];
   for (var i = 0;i<info.length;i++){
     if (info[i].type=="wood") produce_rate[0] += resource_info[info[i].type].produce[info[i].level];
@@ -876,10 +876,14 @@ function calculateresource(lastvisit,resource,info,capacity) {
   var diff_time = now_in_sec-date_in_sec;
   for (var i = 0;i<4;i++){
     if (i<3){
+      console.log('capacity '+capacity["warehouse"]);
       if (resource[i]+produce_rate[i]*diff_time/3600<=capacity["warehouse"])
+      console.log('Product '+(produce_rate[i]*diff_time/3600));
         resource[i]+=produce_rate[i]*diff_time/3600;
+        console.log('i Resource = '+JSON.stringify(resource));
     }
     else {
+      console.log('Capacity g'+capacity["granary"]);
       if (resource[i]+produce_rate[i]*diff_time/3600<=capacity["granary"])
         resource[i]+=produce_rate[i]*diff_time/3600;
     }
@@ -897,7 +901,7 @@ function getCapacity(vid,callback) {
 
     if (err) callback(err);
     else {
-        var sumcapacity = {"granary" : 0, "warehouse" : 0};
+        var sumcapacity = {"granary" : 800, "warehouse" : 800};
         if (result.length == 0) {
           console.log('vid = '+vid+' granary cap = 800 warehouse cap = 800');
           callback(null,{"granary" : 800, "warehouse" : 800});
@@ -905,7 +909,9 @@ function getCapacity(vid,callback) {
         else {
           //sum capacity
           for (var i = 0;i<result.length;i++){
-            sumcapacity[result[i].type]+=capacity[result[i].level-1];
+            if (result[i].level >0){
+              sumcapacity[result[i].type]+=capacity[result[i].level-1];
+            }
           }
           console.log('vid = '+vid+' sumcapacity = '+JSON.stringify(sumcapacity));
           callback(null,sumcapacity);
@@ -941,6 +947,7 @@ function updateResource(username) {
     getCapacity(vid,function(err,sumcapacity) {
       if (err) throw err;
       var capacity = sumcapacity;
+      console.log("Cap : "+capacity);
       exports.getResourceOfVillege(username,function (err,result) {
         console.log('Query Result : '+JSON.stringify(result));
         if (err) throw err;
