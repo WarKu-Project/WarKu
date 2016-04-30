@@ -875,6 +875,52 @@
             })
             setTimeout(generateResource, 500);
         }
+        
+        function setResourceValue() {
+            console.log('update');
+            $.post("http://localhost:5555/getResource", {}, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    resource_value = JSON.parse(data);
+                    console.log(JSON.stringify(resource_value));
+                }
+            })
+            setCapacity();
+        }
+
+        function setCapacity() {
+            $.post("http://localhost:5555/getCapacity", function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    data = JSON.parse(data);
+                    resource_capacity[0] = data.granary;
+                    resource_capacity[1] = data.warehouse;
+                }
+            })
+        }
+
+        function setProduceRate() {
+            resource_produce_rate = [0, 0, 0, 0];
+            for (var i = 0; i < 16; i++) {
+                if (resource[i]["type"] == "wood") resource_produce_rate[0] += (resource_info["wood"].produce[resource[i]["level"]]);
+                else if (resource[i]["type"] == "clay") resource_produce_rate[1] += (resource_info["clay"].produce[resource[i]["level"]]);
+                else if (resource[i]["type"] == "iron") resource_produce_rate[2] += (resource_info["iron"].produce[resource[i]["level"]]);
+                else resource_produce_rate[3] += (resource_info["crop"].produce[resource[i]["level"]]);
+            }
+            $('#wood_produce_rate').text(resource_produce_rate[0]);
+            $('#clay_produce_rate').text(resource_produce_rate[1]);
+            $('#iron_produce_rate').text(resource_produce_rate[2]);
+            $('#crop_produce_rate').text(resource_produce_rate[3]);
+        }
+
 
         function generateResource() {
             setResourceValue();
@@ -891,7 +937,6 @@
             var upgradeTime = "";
             console.log(index_resource + "");
 
-
             $('#upgrade-resourceModal').modal("show");
             $('#modalupgrade-header-title').text(resource[index_resource]["type"] + " level " + resource[index_resource]["level"]);
             $('#productIn-time').text(resource_info[resource[index_resource]["type"]].produce[resource[index_resource]["level"]]);
@@ -905,11 +950,7 @@
             $('#setCrop').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][3]);
             upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
             $('#upgrade-time').text(upgradeTime);
-            //            $('#upgrade-resourceModal').on('hidden.bs.modal', function (e) {
-            //                $('#upgrade-resourceModal').modal('hide');
-            //                console.log('close modal');
-            //            })
-
+  
             $.post("http://localhost:5555/canUpgradeResource", {
                 pos: (index_resource + 1)
             }, function (data) {
@@ -1007,15 +1048,8 @@
                 tasktime_resource = task_resource[i]["endtime"];
                 taskindex_resource = task_resource[i]["pos"];
                 console.log(taskindex_resource);
-                // var tasktime_resource_arr = tasktime_resource.split('T');
-                // var date = tasktime_resource_arr[0].split('-');
-                // var time = (tasktime_resource_arr[1].split('.'))[0].split(':');
-                // var d = new Date(date[0], date[1] - 1, date[2], time[0], time[1], time[2]);
                 var d = new Date(tasktime_resource)
-                    //console.log("resource Time "+d);
                 var seconds = (d.getTime() / 1000);
-                //console.log('resource : '+JSON.stringify(resource));
-                //console.log("resource "+taskindex_resource+" end: "+seconds);
                 if (currentsecconds < seconds) {
                     var remainingtime = parseInt(seconds - currentsecconds);
                     document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]) + "-red";
@@ -1024,13 +1058,10 @@
                     $('body').click(function () {
                         $("#resource" + (taskindex_resource) + "-label").tooltip('close');
                     });
-                    //console.log("remain: "+remainingtime);
                 } else {
-                    //                    document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]);
                     $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content", "Success!!");
                     setTimeout(resourceClick, 100);
                     setTimeout(delayFinishUpgraded, 1000);
-                    //location.reload();
                 }
             }
         }
@@ -1041,50 +1072,7 @@
             checkResourceTask();
         }
 
-        function setResourceValue() {
-            console.log('update');
-            $.post("http://localhost:5555/getResource", {}, function (data) {
-                if (data == "Something wrong on our server :( Try Again~") {
-                    $("#modal-header-title").text('Error !');
-                    //Update and Show modal if error is occur
-                    $("#modal-body").text(data);
-                    $("#errorModel").modal("show");
-                } else {
-                    resource_value = JSON.parse(data);
-                }
-            })
-            setCapacity();
-        }
-
-        function setCapacity() {
-            $.post("http://localhost:5555/getCapacity", function (data) {
-                if (data == "Something wrong on our server :( Try Again~") {
-                    $("#modal-header-title").text('Error !');
-                    //Update and Show modal if error is occur
-                    $("#modal-body").text(data);
-                    $("#errorModel").modal("show");
-                } else {
-                    data = JSON.parse(data);
-                    resource_capacity[0] = data.granary;
-                    resource_capacity[1] = data.warehouse;
-                }
-            })
-        }
-
-        function setProduceRate() {
-            resource_produce_rate = [0, 0, 0, 0];
-            for (var i = 0; i < 16; i++) {
-                if (resource[i]["type"] == "wood") resource_produce_rate[0] += (resource_info["wood"].produce[resource[i]["level"]]);
-                else if (resource[i]["type"] == "clay") resource_produce_rate[1] += (resource_info["clay"].produce[resource[i]["level"]]);
-                else if (resource[i]["type"] == "iron") resource_produce_rate[2] += (resource_info["iron"].produce[resource[i]["level"]]);
-                else resource_produce_rate[3] += (resource_info["crop"].produce[resource[i]["level"]]);
-            }
-            $('#wood_produce_rate').text(resource_produce_rate[0]);
-            $('#clay_produce_rate').text(resource_produce_rate[1]);
-            $('#iron_produce_rate').text(resource_produce_rate[2]);
-            $('#crop_produce_rate').text(resource_produce_rate[3]);
-        }
-
+       
         /*Village attribute*/
         var building = null;
         var index_village;
@@ -1353,22 +1341,11 @@
                     break;
                 }
             }
-//            $('#modalupgradevillage-title').text(building[index_building]["type"]; + " level " + building[index_building]["level"]);
-//            
+        
             upgradeType = building[index_building]["type"];
             upgradeLevel = building[index_building]["level"];
-            injectUpdateModal(upgradeType,upgradeLevel);
+            villageUpgradeModal(upgradeType,upgradeLevel);
             $('#upgrade-village').modal("show");
-            /*
-            $('#upgrade-'+upgradeType).modal("show");
-            $('#level-'+upgradeType).text(upgradeLevel+"");
-            $('#setWood-'+upgradeType).text(building_info[upgradeType].cost[upgradeLevel][0]);
-            $('#setClay-'+upgradeType).text(building_info[upgradeType].cost[upgradeLevel][1]);
-            $('#setIron-'+upgradeType).text(building_info[upgradeType].cost[upgradeLevel][2]);
-            $('#setCrop-'+upgradeType).text(building_info[upgradeType].cost[upgradeLevel][3]);
-            var upgradeTime = twoDigits(building_info[upgradeType].time[upgradeLevel].hour) + ":" + twoDigits(building_info[upgradeType].time[upgradeLevel].min) + ":" + twoDigits(building_info[upgradeType].time[upgradeLevel].sec);
-            $('#upgrade-time-'+upgradeType).text(upgradeTime);*/
-            
             
             
             $.post("http://localhost:5555/canUpgradeBuilding", {
@@ -1419,8 +1396,8 @@
             }
         }
         
-        //add by Trong
-        function injectUpdateModal(upgradeType,upgradeLevel) {
+        //villageUpgradeModal
+        function villageUpgradeModal(upgradeType,upgradeLevel) {
             console.log("injection");
             var inject = "";
             inject += "<div class=\"modal fade\" id=\"upgrade-village\" role=\"dialog\">";
@@ -1480,12 +1457,12 @@
         }
 
         function account() {
-            $('#button-account').show();
+            $('#button-account').modal("show");
             //TODO remove user from server
         }
 
         function setting() {
-            $('#button-setting').show();
+            $('#button-setting').modal("show");
             //TODO remove user from server
         }
 
@@ -1507,8 +1484,8 @@
         $('#statistic_menu').click(statisticClick);
 
         /*Navbar Listener*/
-//        $('#account-btn').click(account);
-//        $('#setting-btn').click(setting);
+        $('#account-btn').click(account);
+        $('#setting-btn').click(setting);
         $('#logout-btn').click(logout);
 
         /*Resource Listner*/
