@@ -71,7 +71,38 @@ img {
     border: 2px solid #000;
     font-size: 1.5em;
     font-size: 2vw;
-    background-color: darksalmon;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.stockwood{
+    content: url(picture/resource/wood.png);
+    width: 50%;
+}
+
+.stockclay{
+    content: url(picture/resource/clay.png);
+    width: 50%;
+}
+
+.stockiron{
+    content: url(picture/resource/iron.png);
+    width: 50%;
+}
+
+.stockcrop{
+    content: url(picture/resource/crop.png);
+    width: 50%;
+}
+
+.stockwarehouse{
+    content: url(picture/village/warehouse.png);
+    width: 65%;
+}
+
+.stockgranary{
+    content: url(picture/village/granary.png);
+    width: 65%;
 }
 
 .bottombar {
@@ -81,4 +112,9 @@ img {
     margin-right: auto;
     border: 2px solid #000;
 }
+
+.stocktext{
+    color: white;
+}
+
 

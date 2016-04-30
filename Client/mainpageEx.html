@@ -132,10 +132,12 @@
         <div class="container">
             <div class="jumbotron stockbar">
                 <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-3">Wood&nbsp;&nbsp;<span id="woodnum">0</span></div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">Clay&nbsp;&nbsp;<span id="claynum">0</span></div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">Iron&nbsp;&nbsp;<span id="ironnum">0</span></div>
-                    <div class="col-md-3 col-sm-3 col-xs-3">Crop&nbsp;&nbsp;<span id="cropnum">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockwarehouse>&nbsp;&nbsp;<span id="warehousenum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockwood>&nbsp;&nbsp;<span id="woodnum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockclay>&nbsp;&nbsp;<span id="claynum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockiron>&nbsp;&nbsp;<span id="ironnum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockgranary>&nbsp;&nbsp;<span id="granarynum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockcrop>&nbsp;&nbsp;<span id="cropnum" class="stocktext">0</span></div>
                 </div>
             </div>
         </div>
@@ -1022,6 +1024,8 @@
             $('#claynum').text(parseInt(resource_value.clay));
             $('#ironnum').text(parseInt(resource_value.iron));
             $('#cropnum').text(parseInt(resource_value.crop));
+            $('#warehousenum').text(parseInt(resource_capacity[0]));
+            $('#granarynum').text(parseInt(resource_capacity[1]));
             setProduceRate();
             //console.log(resource_value);
         }
