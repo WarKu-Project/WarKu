@@ -47,7 +47,7 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    
+
     <!--Account Modal-->
     <div class="modal fade col2" id="button-account" role="dialog">
         <div class="modal-dialog">
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    
+
     <!--Setting Modal-->
     <div class="modal fade" id="button-setting" role="dialog">
         <div class="modal-dialog">
@@ -134,13 +134,13 @@
         <div class="container stockbarcontainer">
             <div class="jumbotron stockbar">
                 <div class="row">
-                    <div class="col-md-1 col-sm-1 col-xs-1"><img class = stockwarehouse>&nbsp;&nbsp;<span id="warehousenum" class="stocktext">0</span></div>
-                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockwood>&nbsp;&nbsp;<span id="woodnum" class="stocktext">0</span></div>
-                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockclay>&nbsp;&nbsp;<span id="claynum" class="stocktext">0</span></div>
-                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockiron>&nbsp;&nbsp;<span id="ironnum" class="stocktext">0</span></div>
-                    <div class="col-md-1 col-sm-1 col-xs-1"><img class = stockgranary>&nbsp;&nbsp;<span id="granarynum" class="stocktext">0</span></div>
-                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockcrop>&nbsp;&nbsp;<span id="cropnum" class="stocktext">0</span></div>
-                    <div class="col-md-2 col-sm-2 col-xs-2"><img class = stockworker>&nbsp;&nbsp;<span id="workernum" class="stocktext">0</span></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1"><img class=stockwarehouse>&nbsp;&nbsp;<span id="warehousenum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class=stockwood>&nbsp;&nbsp;<span id="woodnum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class=stockclay>&nbsp;&nbsp;<span id="claynum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class=stockiron>&nbsp;&nbsp;<span id="ironnum" class="stocktext">0</span></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1"><img class=stockgranary>&nbsp;&nbsp;<span id="granarynum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class=stockcrop>&nbsp;&nbsp;<span id="cropnum" class="stocktext">0</span></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2"><img class=stockworker>&nbsp;&nbsp;<span id="workernum" class="stocktext">0</span></div>
                 </div>
             </div>
         </div>
@@ -232,10 +232,10 @@
             <div class="jumbotron" id="produce_container">
                 <div class="toTop jumbotronwidth">
                     <div class="row row-centered titlerow">Rate of production per hour</div>
-                    <div class="row paddingrow"><img class = woodproduce>&nbsp;<span id="wood_produce_rate"></span></div>
-                    <div class="row paddingrow"><img class = clayproduce>&nbsp;<span id="clay_produce_rate"></span></div>
-                    <div class="row paddingrow"><img class = ironproduce>&nbsp;<span id="iron_produce_rate"></span></div>
-                    <div class="row paddingrow"><img class = cropproduce>&nbsp;<span id="crop_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class=woodproduce>&nbsp;<span id="wood_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class=clayproduce>&nbsp;<span id="clay_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class=ironproduce>&nbsp;<span id="iron_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class=cropproduce>&nbsp;<span id="crop_produce_rate"></span></div>
                 </div>
             </div>
         </div>
@@ -369,6 +369,7 @@
                     <div class="warehouse-model"></div>
                     Requirment</p>
                     Wood : 130 Clay : 160 Iron : 90 Crop : 40</p>
+                    warehouse level 1 , granary level 1</p>
                     Contructing time : 00:06:40
                     <button id="warehouse-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="warehouse">Create</button>
                 </div>
@@ -440,24 +441,25 @@
     </div>
 
     <!--Upgrade Village -->
-<div class="modal fade" id="upgrade-village" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title"><span id="level-village"></span></h3>
+    <div class="modal fade" id="upgrade-village" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title"><span id="level-village"></span></h3>
+                </div>
+                <div class="modal-body">
+                    </p>
+                    <div class="village-upgrademodel"></div>
+                    </p>
+                    <span id="setWood-village"></span><span id="setClay-village"></span><span id="setIron-village"></span><span id="setCrop-village"></span></p>
+                    <span id="upgrade-time-village"></span>
+                    <button id="upgradebtn-village" type="button" class="btn btn-default" data-dismiss="modal" value=""></button>
+                </div>
             </div>
-            <div class="modal-body"></p>
-            <div class="village-upgrademodel"></div>
-            </p>
-        <span id="setWood-village"></span><span id="setClay-village"></span><span id="setIron-village"></span><span id="setCrop-village"></span></p>
-    <span id="upgrade-time-village"></span>
-    <button id="upgradebtn-village" type="button" class="btn btn-default" data-dismiss="modal" value=""></button>
-</div>
-</div>
-</div>
-</div>
+        </div>
+    </div>
 
     <!-- Error Modal -->
     <div class="modal fade" id="errorModel" role="dialog">
@@ -478,7 +480,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <!--map container-->
     <div class="container" id="map_container">
@@ -506,87 +508,87 @@
             <div id="map-posX8" class="posX8"></div>
             <div id="map-posX1" class="posX9"></div>
             <div id="map-free" class="free"></div>
-            <div id="map-box1" class="box1"></div>
-            <div id="map-box2" class="box2"></div>
-            <div id="map-box3" class="box3"></div>
-            <div id="map-box4" class="box4"></div>
-            <div id="map-box5" class="box5"></div>
-            <div id="map-box6" class="box6"></div>
-            <div id="map-box7" class="box7"></div>
-            <div id="map-box8" class="box8"></div>
-            <div id="map-box9" class="box9"></div>
-            <div id="map-box10" class="box10"></div>
-            <div id="map-box11" class="box11"></div>
-            <div id="map-box12" class="box12"></div>
-            <div id="map-box13" class="box13"></div>
-            <div id="map-box14" class="box14"></div>
-            <div id="map-box15" class="box15"></div>
-            <div id="map-box16" class="box16"></div>
-            <div id="map-box17" class="box17"></div>
-            <div id="map-box18" class="box18"></div>
-            <div id="map-box19" class="box19"></div>
-            <div id="map-box20" class="box20"></div>
-            <div id="map-box21" class="box21"></div>
-            <div id="map-box22" class="box22"></div>
-            <div id="map-box23" class="box23"></div>
-            <div id="map-box24" class="box24"></div>
-            <div id="map-box25" class="box25"></div>
-            <div id="map-box26" class="box26"></div>
-            <div id="map-box27" class="box27"></div>
-            <div id="map-box28" class="box28"></div>
-            <div id="map-box29" class="box29"></div>
-            <div id="map-box30" class="box30"></div>
-            <div id="map-box31" class="box31"></div>
-            <div id="map-box32" class="box32"></div>
-            <div id="map-box33" class="box33"></div>
-            <div id="map-box34" class="box34"></div>
-            <div id="map-box35" class="box35"></div>
-            <div id="map-box36" class="box36"></div>
-            <div id="map-box37" class="box37"></div>
-            <div id="map-box38" class="box38"></div>
-            <div id="map-box39" class="box39"></div>
-            <div id="map-box40" class="box40"></div>
-            <div id="map-box41" class="box41"></div>
-            <div id="map-box42" class="box42"></div>
-            <div id="map-box43" class="box43"></div>
-            <div id="map-box44" class="box44"></div>
-            <div id="map-box45" class="box45"></div>
-            <div id="map-box46" class="box46"></div>
-            <div id="map-box47" class="box47"></div>
-            <div id="map-box48" class="box48"></div>
-            <div id="map-box49" class="box49"></div>
-            <div id="map-box50" class="box50"></div>
-            <div id="map-box51" class="box51"></div>
-            <div id="map-box52" class="box52"></div>
-            <div id="map-box53" class="box53"></div>
-            <div id="map-box54" class="box54"></div>
-            <div id="map-box55" class="box55"></div>
-            <div id="map-box56" class="box56"></div>
-            <div id="map-box57" class="box57"></div>
-            <div id="map-box58" class="box58"></div>
-            <div id="map-box59" class="box59"></div>
-            <div id="map-box60" class="box60"></div>
-            <div id="map-box61" class="box61"></div>
-            <div id="map-box62" class="box62"></div>
-            <div id="map-box63" class="box63"></div>
-            <div id="map-box64" class="box64"></div>
-            <div id="map-box65" class="box65"></div>
-            <div id="map-box66" class="box66"></div>
-            <div id="map-box67" class="box67"></div>
-            <div id="map-box68" class="box68"></div>
-            <div id="map-box69" class="box69"></div>
-            <div id="map-box70" class="box70"></div>
-            <div id="map-box71" class="box71"></div>
-            <div id="map-box72" class="box72"></div>
-            <div id="map-box73" class="box73"></div>
-            <div id="map-box74" class="box74"></div>
-            <div id="map-box75" class="box75"></div>
-            <div id="map-box76" class="box76"></div>
-            <div id="map-box77" class="box77"></div>
-            <div id="map-box78" class="box78"></div>
-            <div id="map-box79" class="box79"></div>
-            <div id="map-box80" class="box80"></div>
-            <div id="map-box81" class="box81"></div>
+            <div id="map-box0" class="box0">0</div>
+            <div id="map-box1" class="box1">1</div>
+            <div id="map-box2" class="box2">2</div>
+            <div id="map-box3" class="box3">3</div>
+            <div id="map-box4" class="box4">4</div>
+            <div id="map-box5" class="box5">5</div>
+            <div id="map-box6" class="box6">6</div>
+            <div id="map-box7" class="box7">7</div>
+            <div id="map-box8" class="box8">8</div>
+            <div id="map-box9" class="box9">9</div>
+            <div id="map-box10" class="box10">10</div>
+            <div id="map-box11" class="box11">11</div>
+            <div id="map-box12" class="box12">12</div>
+            <div id="map-box13" class="box13">13</div>
+            <div id="map-box14" class="box14">14</div>
+            <div id="map-box15" class="box15">15</div>
+            <div id="map-box16" class="box16">16</div>
+            <div id="map-box17" class="box17">17</div>
+            <div id="map-box18" class="box18">18</div>
+            <div id="map-box19" class="box19">19</div>
+            <div id="map-box20" class="box20">20</div>
+            <div id="map-box21" class="box21">21</div>
+            <div id="map-box22" class="box22">22</div>
+            <div id="map-box23" class="box23">23</div>
+            <div id="map-box24" class="box24">24</div>
+            <div id="map-box25" class="box25">25</div>
+            <div id="map-box26" class="box26">26</div>
+            <div id="map-box27" class="box27">27</div>
+            <div id="map-box28" class="box28">28</div>
+            <div id="map-box29" class="box29">29</div>
+            <div id="map-box30" class="box30">30</div>
+            <div id="map-box31" class="box31">31</div>
+            <div id="map-box32" class="box32">32</div>
+            <div id="map-box33" class="box33">33</div>
+            <div id="map-box34" class="box34">34</div>
+            <div id="map-box35" class="box35">35</div>
+            <div id="map-box36" class="box36">36</div>
+            <div id="map-box37" class="box37">37</div>
+            <div id="map-box38" class="box38">38</div>
+            <div id="map-box39" class="box39">39</div>
+            <div id="map-box40" class="box40">40</div>
+            <div id="map-box41" class="box41">41</div>
+            <div id="map-box42" class="box42">42</div>
+            <div id="map-box43" class="box43">43</div>
+            <div id="map-box44" class="box44">44</div>
+            <div id="map-box45" class="box45">45</div>
+            <div id="map-box46" class="box46">46</div>
+            <div id="map-box47" class="box47">47</div>
+            <div id="map-box48" class="box48">48</div>
+            <div id="map-box49" class="box49">49</div>
+            <div id="map-box50" class="box50">50</div>
+            <div id="map-box51" class="box51">51</div>
+            <div id="map-box52" class="box52">52</div>
+            <div id="map-box53" class="box53">53</div>
+            <div id="map-box54" class="box54">54</div>
+            <div id="map-box55" class="box55">55</div>
+            <div id="map-box56" class="box56">56</div>
+            <div id="map-box57" class="box57">57</div>
+            <div id="map-box58" class="box58">58</div>
+            <div id="map-box59" class="box59">59</div>
+            <div id="map-box60" class="box60">60</div>
+            <div id="map-box61" class="box61">61</div>
+            <div id="map-box62" class="box62">62</div>
+            <div id="map-box63" class="box63">63</div>
+            <div id="map-box64" class="box64">64</div>
+            <div id="map-box65" class="box65">65</div>
+            <div id="map-box66" class="box66">66</div>
+            <div id="map-box67" class="box67">67</div>
+            <div id="map-box68" class="box68">68</div>
+            <div id="map-box69" class="box69">69</div>
+            <div id="map-box70" class="box70">70</div>
+            <div id="map-box71" class="box71">71</div>
+            <div id="map-box72" class="box72">72</div>
+            <div id="map-box73" class="box73">73</div>
+            <div id="map-box74" class="box74">74</div>
+            <div id="map-box75" class="box75">75</div>
+            <div id="map-box76" class="box76">76</div>
+            <div id="map-box77" class="box77">77</div>
+            <div id="map-box78" class="box78">78</div>
+            <div id="map-box79" class="box79">79</div>
+            <div id="map-box80" class="box80">80</div>
             <div id="map-arrow1" class="arrow1"></div>
             <div id="map-arrow2" class="arrow2"></div>
             <div id="map-arrow3" class="arrow3"></div>
@@ -656,7 +658,7 @@
     <script type="text/javascript">
         /*global attribute*/
         var tasktype;
-        
+
         /* resource attribute*/
         var resource = null;
         var resource_info = {
@@ -853,7 +855,8 @@
         var task_resource = new Array;
         var tasktime_resource, taskindex_resource;
         var resourceUpgradeCall = false;
-        var worker,fullworker;
+        var worker, fullworker;
+        var map = new Array;
 
         /* initial function */
         function init() {
@@ -885,27 +888,27 @@
             setTimeout(generateResource, 200);
             setTimeout(generateWorker, 200);
         }
-        
-        function generateWorker(){
+
+        function generateWorker() {
             setVillage();
             setTimeout(generateWorkerDelay, 200);
-            
+
         }
-        
-        function generateWorkerDelay(){
+
+        function generateWorkerDelay() {
             fullworker = 1;
             var villagehalls = new Array;
-            for(var i=0;i<building.length;i++){
-                if(building[i]["type"]=='villagehall'){
+            for (var i = 0; i < building.length; i++) {
+                if (building[i]["type"] == 'villagehall') {
                     villagehalls.push(building[i]);
                 }
             }
-            for(var i=0;i<villagehalls.length;i++){
+            for (var i = 0; i < villagehalls.length; i++) {
                 fullworker += villagehalls[i]["level"];
             }
-//            $('#workernum').text(worker);
+            //            $('#workernum').text(worker);
         }
-        
+
         function setResourceValue() {
             console.log('update');
             $.post("http://localhost:5555/getResource", {}, function (data) {
@@ -981,7 +984,7 @@
             $('#setCrop').text(resource_info[resource[index_resource]["type"]].cost[resource[index_resource]["level"]][3]);
             upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
             $('#upgrade-time').text(upgradeTime);
-  
+
             $.post("http://localhost:5555/canUpgradeResource", {
                 pos: (index_resource + 1)
             }, function (data) {
@@ -1028,7 +1031,7 @@
                 })
                 setTimeout(setResourceValue, 100);
                 tasktype = 'resource';
-                setTimeout(checkTask,100);
+                setTimeout(checkTask, 100);
                 resourceUpgradeCall = false;
             }
 
@@ -1070,15 +1073,14 @@
                     $("#modal-body").text(data);
                     $("#errorModel").modal("show");
                 } else {
-                    if(tasktype == "resource"){
+                    if (tasktype == "resource") {
                         task_resource = JSON.parse(data);
-                        console.log('resource up: '+JSON.stringify(task_resource) );
-                    }
-                    else if(tasktype == "village"){
+                        console.log('resource up: ' + JSON.stringify(task_resource));
+                    } else if (tasktype == "village") {
                         task_village = JSON.parse(data);
-                        console.log('village up: '+JSON.stringify(task_village) );
+                        console.log('village up: ' + JSON.stringify(task_village));
                     }
-                    
+
                 }
             })
         }
@@ -1109,7 +1111,7 @@
                     setTimeout(delayFinishUpgradedResource, 1000);
                 }
             }
-            
+
             //village task
             for (var i = 0; i < task_village.length; i++) {
                 tasktime_village = task_village[i]["endtime"];
@@ -1122,7 +1124,7 @@
                     var remainingtime = parseInt(seconds - currentsecconds);
                     document.getElementById("village" + (taskindex_village) + "-label").className = "level" + villagelevel + "-red";
                     $("#village" + (taskindex_village) + "-label").removeData("title");
-                    $("#village" + (taskindex_village) + "-label").tooltip("option", "content","Time remaining: " + remainingtime + " sec");
+                    $("#village" + (taskindex_village) + "-label").tooltip("option", "content", "Time remaining: " + remainingtime + " sec");
                     $('body').click(function () {
                         $("#village" + (taskindex_village) + "-label").tooltip('close');
                     });
@@ -1132,8 +1134,8 @@
                     setTimeout(delayFinishUpgradedVillage, 1000);
                 }
             }
-            
-            worker = fullworker - task_resource.length - task_village.length; 
+
+            worker = fullworker - task_resource.length - task_village.length;
             $('#workernum').text(worker);
         }
 
@@ -1142,13 +1144,13 @@
             $("#resource" + (taskindex_resource) + "-label").tooltip('close');
             checkTask('resource');
         }
-        
+
         function delayFinishUpgradedVillage() {
             $("#village" + (taskindex_village) + "-label").tooltip('close');
             checkTask('village');
         }
 
-       
+
         /*Village attribute*/
         var building = null;
         var index_village;
@@ -1160,17 +1162,478 @@
         var task_village = new Array;
         var tasktime_village, taskindex_village;
         var villagelevel;
-        
-        var building_info ={ "villagehall" : { cost : [[70,40,60,20],[90,50,75,25],[115,65,100,35],[145,85,125,40],[190,105,160,55],[240,135,205,70],[310,175,265,90],[395,225,340,115],[505,290,430,145],[645,370,555,185]], consumption : [2,1,1,1,1,2,2,2,2,2], time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Building leaders live in the main building. The much higher level you can more upgrade or create village or resource at the same time."}, "market" : { cost : [ [80,70,120,70],[100,90,155,90],[130,115,195,115],[170,145,250,145],[215,190,320,190],[275,240,410,240],[350,310,530,310],[450,395,675,395],[575,505,865,505],[740,645,1105,645] ], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:00},{hour:0,min:07,sec:58},{hour:0,min:10,sec:14},{hour:0,min:12,sec:52},{hour:0,min:15,sec:56},{hour:0,min:19,sec:28},{hour:0,min:23,sec:36},{hour:0,min:28,sec:22},{hour:0,min:33,sec:54},{hour:0,min:40,sec:20}] ,info : "The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously ."}, "barracks" : { cost : [ [210,140,260,120] ,[270,180,335,155] ,[345,230,425,195] ,[440,295,545,250] ,[565,375,700,320] ,[720,480,895,410] ,[925,615,1145,530], [1180,790,1465,675] ,[1515,1010,1875,865],[1935,1290,2400,1105] ], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52} ],info : "A large military barracks allows you to build more troops at the same time . But resources are three times normal ." }, "academy" : { cost:[[220,160,90,40],[280,205,115,50],[360,260,145,65],[460,335,190,85],[590,430,240,105],[755,550,310,135],[970,705,395,175],[1240,900,505,225],[1585,1155,650,290],[2030,1475,830,370]], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52} ] ,info : "Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village."}, "stable" : { cost : [[260,140,220,100],[335,180,280,130],[425,230,360,165],[545,295,460,210],[700,375,590,270],[895,480,755,345],[1145,615,970,440],[1465,790,1240,565],[1875,1010,1585,720],[2400,1290,2030,920]], consumption : [5,3,3,3,3,3,3,3,3,3], time : [{hour:0,min:07,sec:20},{hour:0,min:09,sec:30},{hour:0,min:12,sec:02},{hour:0,min:14,sec:58},{hour:0,min:18,sec:20},{hour:0,min:22,sec:16},{hour:0,min:26,sec:50},{hour:0,min:32,sec:08},{hour:0,min:38,sec:16},{hour:0,min:45,sec:24}],info : "The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price." }, "headquarter" : { cost : [[700,670,700,240],[930,890,930,320],[1240,1185,1240,425],[1645,1575,1645,565],[2190,2095,2190,750],[2915,2790,2915,1000],[3875,3710,3875,1330],[5155,4930,5155,1765],[6855,6560,6855,2350],[9115,8725,9115,3125]], consumption : [2,1,1,1,1,2,2,2,2,2], time : [ {hour:0,min:07,sec:40},{hour:0,min:08,sec:54},{hour:0,min:10,sec:18},{hour:0,min:11,sec:58},{hour:0,min:13,sec:52},{hour:0,min:16,sec:06},{hour:0,min:18,sec:40},{hour:0,min:21,sec:40},{hour:0,min:25,sec:08},{hour:0,min:29,sec:10}],info : "The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised ."},"workshop" : {cost : [[460,510,600,320],[590,655,770,410],[755,835,985,525],[965,1070,1260,670],[1235,1370,1610,860],[1580,1750,2060,1100],[2025,2245,2640,1405],[2590,2870,3380,1800],[3315,3675,4325,2305],[4245,4705,5535,2950]],consumption : [3,2,2,2,2,2,2,2,2,2],time : [{hour:0,min:10,sec:00},{hour:0,min:12,sec:36},{hour:0,min:15,sec:36},{hour:0,min:19,sec:06},{hour:0,min:23,sec:10},{hour:0,min:27,sec:52},{hour:0,min:33,sec:20},{hour:0,min:39,sec:40},{hour:0,min:47,sec:02},{hour:0,min:55,sec:32}],info : "Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster ."},"smithy":{cost : [[180,250,500,160],[230,320,640,205],[295,410,820,260],[375,525,1050,335],[485,670,1340,430],[620,860,1720,550],[790,1100,2200,705],[1015,1405,2815,900],[1295,1800,3605,1155],[1660,2305,4610,1475]],consumption : [4,2,2,2,2,3,3,3,3,3],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy."}, "granary" : {cost : [[80,100,70,20],[100,130,90,25],[130,165,115,35],[170,210,145,40],[215,270,190,55],[275,345,240,70],[350,440,310,90],[450,565,395,115],[575,720,505,145],[740,920,645,185]],consumption : [1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:05,sec:20},{hour:0,min:07,sec:12},{hour:0,min:09,sec:20},{hour:0,min:11,sec:50},{hour:0,min:14,sec:44},{hour:0,min:18,sec:04},{hour:0,min:21,sec:58},{hour:0,min:26,sec:30},{hour:0,min:31,sec:44},{hour:0,min:37,sec:48}],info : "Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe."},"warehouse" : {cost : [[130,160,90,40],[165,205,115,50],[215,260,145,65],[275,335,190,85],[350,430,240,105],[445,550,310,135],[570,705,395,175],[730,900,505,225],[935,1155,650,290],[1200,1475,830,370]],consumption:[1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe ."}}
-        /* Village function */
+
+        var building_info = {
+                "villagehall": {
+                    cost: [[70, 40, 60, 20], [90, 50, 75, 25], [115, 65, 100, 35], [145, 85, 125, 40], [190, 105, 160, 55], [240, 135, 205, 70], [310, 175, 265, 90], [395, 225, 340, 115], [505, 290, 430, 145], [645, 370, 555, 185]]
+                    , consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+                    , time: [{
+                        hour: 0
+                        , min: 06
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 08
+                        , sec: 44
+                    }, {
+                        hour: 0
+                        , min: 11
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 13
+                        , sec: 54
+                    }, {
+                        hour: 0
+                        , min: 17
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 20
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 25
+                        , sec: 14
+                    }, {
+                        hour: 0
+                        , min: 30
+                        , sec: 16
+                    }, {
+                        hour: 0
+                        , min: 36
+                        , sec: 06
+                    }, {
+                        hour: 0
+                        , min: 42
+                        , sec: 52
+                    }]
+                    , info: "Building leaders live in the main building. The much higher level you can more upgrade or create village or resource at the same time."
+                }
+                , "market": {
+                    cost: [[80, 70, 120, 70], [100, 90, 155, 90], [130, 115, 195, 115], [170, 145, 250, 145], [215, 190, 320, 190], [275, 240, 410, 240], [350, 310, 530, 310], [450, 395, 675, 395], [575, 505, 865, 505], [740, 645, 1105, 645]]
+                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
+                    , time: [{
+                        hour: 0
+                        , min: 06
+                        , sec: 00
+                    }, {
+                        hour: 0
+                        , min: 07
+                        , sec: 58
+                    }, {
+                        hour: 0
+                        , min: 10
+                        , sec: 14
+                    }, {
+                        hour: 0
+                        , min: 12
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 15
+                        , sec: 56
+                    }, {
+                        hour: 0
+                        , min: 19
+                        , sec: 28
+                    }, {
+                        hour: 0
+                        , min: 23
+                        , sec: 36
+                    }, {
+                        hour: 0
+                        , min: 28
+                        , sec: 22
+                    }, {
+                        hour: 0
+                        , min: 33
+                        , sec: 54
+                    }, {
+                        hour: 0
+                        , min: 40
+                        , sec: 20
+                    }]
+                    , info: "The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously ."
+                }
+                , "barracks": {
+                    cost: [[210, 140, 260, 120], [270, 180, 335, 155], [345, 230, 425, 195], [440, 295, 545, 250], [565, 375, 700, 320], [720, 480, 895, 410], [925, 615, 1145, 530], [1180, 790, 1465, 675], [1515, 1010, 1875, 865], [1935, 1290, 2400, 1105]]
+                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
+                    , time: [{
+                        hour: 0
+                        , min: 06
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 08
+                        , sec: 44
+                    }, {
+                        hour: 0
+                        , min: 11
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 13
+                        , sec: 54
+                    }, {
+                        hour: 0
+                        , min: 17
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 20
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 25
+                        , sec: 14
+                    }, {
+                        hour: 0
+                        , min: 30
+                        , sec: 16
+                    }, {
+                        hour: 0
+                        , min: 36
+                        , sec: 06
+                    }, {
+                        hour: 0
+                        , min: 42
+                        , sec: 52
+                    }]
+                    , info: "A large military barracks allows you to build more troops at the same time . But resources are three times normal ."
+                }
+                , "academy": {
+                    cost: [[220, 160, 90, 40], [280, 205, 115, 50], [360, 260, 145, 65], [460, 335, 190, 85], [590, 430, 240, 105], [755, 550, 310, 135], [970, 705, 395, 175], [1240, 900, 505, 225], [1585, 1155, 650, 290], [2030, 1475, 830, 370]]
+                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
+                    , time: [{
+                        hour: 0
+                        , min: 06
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 08
+                        , sec: 44
+                    }, {
+                        hour: 0
+                        , min: 11
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 13
+                        , sec: 54
+                    }, {
+                        hour: 0
+                        , min: 17
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 20
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 25
+                        , sec: 14
+                    }, {
+                        hour: 0
+                        , min: 30
+                        , sec: 16
+                    }, {
+                        hour: 0
+                        , min: 36
+                        , sec: 06
+                    }, {
+                        hour: 0
+                        , min: 42
+                        , sec: 52
+                    }]
+                    , info: "Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village."
+                }
+                , "stable": {
+                    cost: [[260, 140, 220, 100], [335, 180, 280, 130], [425, 230, 360, 165], [545, 295, 460, 210], [700, 375, 590, 270], [895, 480, 755, 345], [1145, 615, 970, 440], [1465, 790, 1240, 565], [1875, 1010, 1585, 720], [2400, 1290, 2030, 920]]
+                    , consumption: [5, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+                    , time: [{
+                        hour: 0
+                        , min: 07
+                        , sec: 20
+                    }, {
+                        hour: 0
+                        , min: 09
+                        , sec: 30
+                    }, {
+                        hour: 0
+                        , min: 12
+                        , sec: 02
+                    }, {
+                        hour: 0
+                        , min: 14
+                        , sec: 58
+                    }, {
+                        hour: 0
+                        , min: 18
+                        , sec: 20
+                    }, {
+                        hour: 0
+                        , min: 22
+                        , sec: 16
+                    }, {
+                        hour: 0
+                        , min: 26
+                        , sec: 50
+                    }, {
+                        hour: 0
+                        , min: 32
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 38
+                        , sec: 16
+                    }, {
+                        hour: 0
+                        , min: 45
+                        , sec: 24
+                    }]
+                    , info: "The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price."
+                }
+                , "headquarter": {
+                    cost: [[700, 670, 700, 240], [930, 890, 930, 320], [1240, 1185, 1240, 425], [1645, 1575, 1645, 565], [2190, 2095, 2190, 750], [2915, 2790, 2915, 1000], [3875, 3710, 3875, 1330], [5155, 4930, 5155, 1765], [6855, 6560, 6855, 2350], [9115, 8725, 9115, 3125]]
+                    , consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+                    , time: [{
+                        hour: 0
+                        , min: 07
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 08
+                        , sec: 54
+                    }, {
+                        hour: 0
+                        , min: 10
+                        , sec: 18
+                    }, {
+                        hour: 0
+                        , min: 11
+                        , sec: 58
+                    }, {
+                        hour: 0
+                        , min: 13
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 16
+                        , sec: 06
+                    }, {
+                        hour: 0
+                        , min: 18
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 21
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 25
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 29
+                        , sec: 10
+                    }]
+                    , info: "The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised ."
+                }
+                , "workshop": {
+                    cost: [[460, 510, 600, 320], [590, 655, 770, 410], [755, 835, 985, 525], [965, 1070, 1260, 670], [1235, 1370, 1610, 860], [1580, 1750, 2060, 1100], [2025, 2245, 2640, 1405], [2590, 2870, 3380, 1800], [3315, 3675, 4325, 2305], [4245, 4705, 5535, 2950]]
+                    , consumption: [3, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+                    , time: [{
+                        hour: 0
+                        , min: 10
+                        , sec: 00
+                    }, {
+                        hour: 0
+                        , min: 12
+                        , sec: 36
+                    }, {
+                        hour: 0
+                        , min: 15
+                        , sec: 36
+                    }, {
+                        hour: 0
+                        , min: 19
+                        , sec: 06
+                    }, {
+                        hour: 0
+                        , min: 23
+                        , sec: 10
+                    }, {
+                        hour: 0
+                        , min: 27
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 33
+                        , sec: 20
+                    }, {
+                        hour: 0
+                        , min: 39
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 47
+                        , sec: 02
+                    }, {
+                        hour: 0
+                        , min: 55
+                        , sec: 32
+                    }]
+                    , info: "Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster ."
+                }
+                , "smithy": {
+                    cost: [[180, 250, 500, 160], [230, 320, 640, 205], [295, 410, 820, 260], [375, 525, 1050, 335], [485, 670, 1340, 430], [620, 860, 1720, 550], [790, 1100, 2200, 705], [1015, 1405, 2815, 900], [1295, 1800, 3605, 1155], [1660, 2305, 4610, 1475]]
+                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
+                    , time: [{
+                        hour: 0
+                        , min: 06
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 08
+                        , sec: 44
+                    }, {
+                        hour: 0
+                        , min: 11
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 13
+                        , sec: 54
+                    }, {
+                        hour: 0
+                        , min: 17
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 20
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 25
+                        , sec: 14
+                    }, {
+                        hour: 0
+                        , min: 30
+                        , sec: 16
+                    }, {
+                        hour: 0
+                        , min: 36
+                        , sec: 06
+                    }, {
+                        hour: 0
+                        , min: 42
+                        , sec: 52
+                    }]
+                    , info: "Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy."
+                }
+                , "granary": {
+                    cost: [[80, 100, 70, 20], [100, 130, 90, 25], [130, 165, 115, 35], [170, 210, 145, 40], [215, 270, 190, 55], [275, 345, 240, 70], [350, 440, 310, 90], [450, 565, 395, 115], [575, 720, 505, 145], [740, 920, 645, 185]]
+                    , consumption: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    , time: [{
+                        hour: 0
+                        , min: 05
+                        , sec: 20
+                    }, {
+                        hour: 0
+                        , min: 07
+                        , sec: 12
+                    }, {
+                        hour: 0
+                        , min: 09
+                        , sec: 20
+                    }, {
+                        hour: 0
+                        , min: 11
+                        , sec: 50
+                    }, {
+                        hour: 0
+                        , min: 14
+                        , sec: 44
+                    }, {
+                        hour: 0
+                        , min: 18
+                        , sec: 04
+                    }, {
+                        hour: 0
+                        , min: 21
+                        , sec: 58
+                    }, {
+                        hour: 0
+                        , min: 26
+                        , sec: 30
+                    }, {
+                        hour: 0
+                        , min: 31
+                        , sec: 44
+                    }, {
+                        hour: 0
+                        , min: 37
+                        , sec: 48
+                    }]
+                    , info: "Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe."
+                }
+                , "warehouse": {
+                    cost: [[130, 160, 90, 40], [165, 205, 115, 50], [215, 260, 145, 65], [275, 335, 190, 85], [350, 430, 240, 105], [445, 550, 310, 135], [570, 705, 395, 175], [730, 900, 505, 225], [935, 1155, 650, 290], [1200, 1475, 830, 370]]
+                    , consumption: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    , time: [{
+                        hour: 0
+                        , min: 06
+                        , sec: 40
+                    }, {
+                        hour: 0
+                        , min: 08
+                        , sec: 44
+                    }, {
+                        hour: 0
+                        , min: 11
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 13
+                        , sec: 54
+                    }, {
+                        hour: 0
+                        , min: 17
+                        , sec: 08
+                    }, {
+                        hour: 0
+                        , min: 20
+                        , sec: 52
+                    }, {
+                        hour: 0
+                        , min: 25
+                        , sec: 14
+                    }, {
+                        hour: 0
+                        , min: 30
+                        , sec: 16
+                    }, {
+                        hour: 0
+                        , min: 36
+                        , sec: 06
+                    }, {
+                        hour: 0
+                        , min: 42
+                        , sec: 52
+                    }]
+                    , info: "Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe ."
+                }
+            }
+            /* Village function */
 
         function villageClick() {
             init();
             $('#village_container').show();
             setVillage();
         }
-        
-        function setVillage(){
+
+        function setVillage() {
             $.post("http://localhost:5555/loadbuilding", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1410,14 +1873,14 @@
                 })
                 setTimeout(villageClick, 100);
                 tasktype = 'village';
-                setTimeout(checkTask,100);
+                setTimeout(checkTask, 100);
                 createBuildingCall = false;
             }
         }
 
         function upgradeVillageLevel() {
             //$('#upgrade-villageModal').modal("show");
-            
+
             var index_building;
             for (var i = 0; i < building.length; i++) {
                 if (building[i]["pos"] == index_village + 1) {
@@ -1425,13 +1888,13 @@
                     break;
                 }
             }
-        
+
             var upgradeType = building[index_building]["type"];
             villagelevel = building[index_building]["level"];
-            villageUpgradeModal(upgradeType,villagelevel);
+            villageUpgradeModal(upgradeType, villagelevel);
             $('#upgrade-village').modal("show");
-            
-            
+
+
             $.post("http://localhost:5555/canUpgradeBuilding", {
                 pos: (index_village + 1)
             }, function (data) {
@@ -1447,7 +1910,7 @@
             setTimeout(upgradeVillageDelay, 100);
         }
 
-        function upgradeVillageDelay(){
+        function upgradeVillageDelay() {
             console.log(upgradeBuildingStatus);
             if (upgradeBuildingStatus == 'true') {
                 console.log('Village can upgrade');
@@ -1459,8 +1922,8 @@
                 $('#upgradebtn-village').prop("disabled", true);
             }
         }
-        
-        function upgradeBuildingLevel(){
+
+        function upgradeBuildingLevel() {
             console.log('buiding will be upgrade');
             if (villageUpgradeCall) {
                 console.log('upgrade Village law na kub' + (index_village + 1))
@@ -1476,13 +1939,13 @@
                 })
                 setTimeout(villageClick, 100);
                 tasktype = 'village';
-                setTimeout(checkTask,100);
+                setTimeout(checkTask, 100);
                 villageUpgradeCall = false;
             }
         }
-        
+
         //villageUpgradeModal
-        function villageUpgradeModal(upgradeType,villagelevel) {
+        function villageUpgradeModal(upgradeType, villagelevel) {
             console.log("injection");
             var inject = "";
             inject += "<div class=\"modal fade\" id=\"upgrade-village\" role=\"dialog\">";
@@ -1490,28 +1953,28 @@
             inject += "<div class=\"modal-content\">";
             inject += "<div class=\"modal-header\">";
             inject += "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
-            inject += "<h3 class=\"modal-title\">" + upgradeType.charAt(0).toUpperCase()+ upgradeType.slice(1) +" Level "+villagelevel+ " <span id=\"level-village\"></span></h3>";
+            inject += "<h3 class=\"modal-title\">" + upgradeType.charAt(0).toUpperCase() + upgradeType.slice(1) + " Level " + villagelevel + " <span id=\"level-village\"></span></h3>";
             inject += "</div>";
             inject += "<div class=\"modal-body\">";
-            inject += building_info[upgradeType].info+"</p>";
-            inject += "<div class=\""+upgradeType+"-upgrademodel\"></div>";
+            inject += building_info[upgradeType].info + "</p>";
+            inject += "<div class=\"" + upgradeType + "-upgrademodel\"></div>";
             inject += "Requirment</p>";
-            inject += "Wood : <span id=\"setWood-village\">"+building_info[upgradeType].cost[villagelevel][0]+"</span> ";
-            inject += "Clay : <span id=\"setClay-village\">"+building_info[upgradeType].cost[villagelevel][1]+"</span> ";
-            inject += "Iron : <span id=\"setIron-village\">"+building_info[upgradeType].cost[villagelevel][2]+"</span> ";
-            inject += "Crop : <span id=\"setCrop-village\">"+building_info[upgradeType].cost[villagelevel][3]+"</span></p>";
+            inject += "Wood : <span id=\"setWood-village\">" + building_info[upgradeType].cost[villagelevel][0] + "</span> ";
+            inject += "Clay : <span id=\"setClay-village\">" + building_info[upgradeType].cost[villagelevel][1] + "</span> ";
+            inject += "Iron : <span id=\"setIron-village\">" + building_info[upgradeType].cost[villagelevel][2] + "</span> ";
+            inject += "Crop : <span id=\"setCrop-village\">" + building_info[upgradeType].cost[villagelevel][3] + "</span></p>";
             var upgradeTime = twoDigits(building_info[upgradeType].time[villagelevel].hour) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].min) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].sec);
-            inject += "Upgrade time : <span id=\"upgrade-time-village\">"+upgradeTime+"</span> ";
+            inject += "Upgrade time : <span id=\"upgrade-time-village\">" + upgradeTime + "</span> ";
             inject += "<button id=\"upgradebtn-village\" type=\"button\" class=\"btn btn-default\"";
             inject += "data-dismiss=\"modal\" value=\"\">Upgrade</button>";
             inject += "</div></div></div></div>";
-            
+
             $("#upgrade-village").replaceWith(inject);
-            
+
         }
-        
-        
-        
+
+
+
         /* Other function */
 
         /** Function to format to two digit**/
@@ -1521,9 +1984,34 @@
             return d.toString();
         }
 
+        function mapShow() {
+            //$("#village" + building[i]["pos"] + "-label").addClass("level" + building[i]["level"]);
+            $.post("http://localhost:5555/getMap", {
+
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    map = JSON.parse(data);
+                    console.log(JSON.stringify(data));
+                    //console.log(map[0]["x"]);
+                    for (var i = 0; i < map.length; i++) {
+                        console.log(map[i]["type"]);
+                        $("#map-box" + i).addClass("map-" + map[i]["type"]);
+                    }
+
+                }
+            })
+
+        }
+
         function mapClick() {
             init();
             $('#map_container').show();
+            mapShow();
         }
 
         function reportClick() {
@@ -1559,7 +2047,7 @@
         /* Initial */
         init();
         resourceClick();
-        
+
         /*Menu Listener*/
         $('#resource_menu').click(resourceClick);
         $('#village_menu').click(villageClick);
