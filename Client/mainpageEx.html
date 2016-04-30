@@ -1457,12 +1457,12 @@
         }
 
         function account() {
-            $('#button-account').show();
+            $('#button-account').modal("show");
             //TODO remove user from server
         }
 
         function setting() {
-            $('#button-setting').show();
+            $('#button-setting').modal("show");
             //TODO remove user from server
         }
 
@@ -1484,8 +1484,8 @@
         $('#statistic_menu').click(statisticClick);
 
         /*Navbar Listener*/
-//        $('#account-btn').click(account);
-//        $('#setting-btn').click(setting);
+        $('#account-btn').click(account);
+        $('#setting-btn').click(setting);
         $('#logout-btn').click(logout);
 
         /*Resource Listner*/
