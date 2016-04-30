@@ -125,7 +125,7 @@ for (var i = 0;i<100;i++){
               else console.log('villege status inserted!');
           })
 
-            con.query('INSERT INTO structure(vid,level) values(?,1)',i,function(err) {
+            con.query('INSERT INTO structure(vid,level) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1),1)',function(err) {
               if (err) console.log(err.toString());
               else console.log('structure inserted!');
             });
@@ -135,14 +135,8 @@ for (var i = 0;i<100;i++){
                   console.log('villagehall is created');
                 }
             })
-            for (var k = 2;k<=14;k++){
-              con.query('INSERT INTO structure(vid) values(?)',i);
-
-              con.query('INSERT INTO building(sid,pos,type) values((SELECT sid FROM structure ORDER BY sid DESC LIMIT 1),1,\'empty\')')
-            }
-
             for (var k = 1;k<=16;k++){
-                  con.query('INSERT INTO structure(vid) values(?)',i,function(err) {
+                  con.query('INSERT INTO structure(vid) values((SELECT vid FROM villege ORDER BY vid DESC LIMIT 1))',function(err) {
                     if (err) console.log(err.toString());
                     else console.log('structure inserted!');
                   });

@@ -754,7 +754,7 @@ exports.createBuilding = function(username,pos,type,callback) {
           else {
             console.log('Successful to update resource at '+vid);
             //Insert new structure
-            con.query('INSERT INTO structure(level,vid) values(?,?)',[1,vid],function(err,result) {
+            con.query('INSERT INTO structure(level,vid) values(?,?)',[0,vid],function(err,result) {
 
                ;
               if (err) callback(err);
@@ -1128,7 +1128,7 @@ exports.getMap = function(x,y,callback){
   var xlist = []
   var ylist = []
   for (var i = (Math.abs(x-3))%100+1;i<=(Math.abs(x+3))%100+1;i++){
-    
+
   }
 }
 /** Function to get map infomation **/
