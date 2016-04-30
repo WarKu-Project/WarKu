@@ -47,7 +47,8 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <!--Account-->
+    
+    <!--Account Modal-->
     <div class="modal fade col2" id="button-account" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -62,7 +63,8 @@
             </div>
         </div>
     </div>
-    <!--Setting-->
+    
+    <!--Setting Modal-->
     <div class="modal fade" id="button-setting" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -108,7 +110,7 @@
                     </div>
                 </li>
                 <!--menu report-->
-                <li>
+                <li class="menu-li">
                     <div class="menu" id="report_menu">
                         <a href="#">
                             <img class="menu_img" src="picture/report.png">
@@ -229,10 +231,10 @@
             <div class="jumbotron" id="produce_container">
                 <div class="toTop jumbotronwidth">
                     <div class="row row-centered titlerow">Rate of production per hour</div>
-                    <div class="row paddingrow">Wood : &nbsp;<span id="wood_produce_rate"></span></div>
-                    <div class="row paddingrow">Clay : &nbsp;<span id="clay_produce_rate"></span></div>
-                    <div class="row paddingrow">Iron : &nbsp;<span id="iron_produce_rate"></span></div>
-                    <div class="row paddingrow">Crop : &nbsp;<span id="crop_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class = woodproduce>&nbsp;<span id="wood_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class = clayproduce>&nbsp;<span id="clay_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class = ironproduce>&nbsp;<span id="iron_produce_rate"></span></div>
+                    <div class="row paddingrow"><img class = cropproduce>&nbsp;<span id="crop_produce_rate"></span></div>
                 </div>
             </div>
         </div>
@@ -651,6 +653,9 @@
 
     <!-- Initialize -->
     <script type="text/javascript">
+        /*global attribute*/
+        var tasktype;
+        
         /* resource attribute*/
         var resource = null;
         var resource_info = {
@@ -999,7 +1004,8 @@
                     }
                 })
                 setTimeout(setResourceValue, 100);
-                setTimeout(checkResourceTask, 100);
+                tasktype = 'resource';
+                setTimeout(checkTask,100);
                 resourceUpgradeCall = false;
             }
 
@@ -1031,8 +1037,9 @@
             //console.log(resource_value);
         }
 
-        /* check resource upgrading task */
-        function checkResourceTask() {
+        /* check upgrading task */
+        function checkTask() {
+            //console.log(tasktype);
             $.post("http://localhost:5555/getStructingTask", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1040,15 +1047,24 @@
                     $("#modal-body").text(data);
                     $("#errorModel").modal("show");
                 } else {
-                    task_resource = JSON.parse(data);
+                    if(tasktype == "resource"){
+                        task_resource = JSON.parse(data);
+                        console.log('resource up: '+JSON.stringify(task_resource) );
+                    }
+                    else if(tasktype == "village"){
+                        task_village = JSON.parse(data);
+                        console.log('village up: '+JSON.stringify(task_village) );
+                    }
+                    
                 }
             })
         }
 
-        /* updateResourceTask */
+        /* update all Task */
         function updateTask() {
             var date = new Date();
             var currentsecconds = date.getTime() / 1000;
+            //resource task
             for (var i = 0; i < task_resource.length; i++) {
                 tasktime_resource = task_resource[i]["endtime"];
                 taskindex_resource = task_resource[i]["pos"];
@@ -1056,6 +1072,7 @@
                 var d = new Date(tasktime_resource)
                 var seconds = (d.getTime() / 1000);
                 if (currentsecconds < seconds) {
+                    //console.log(task_resource[i])
                     var remainingtime = parseInt(seconds - currentsecconds);
                     document.getElementById("resource" + (taskindex_resource) + "-label").className = "level" + (resource[taskindex_resource - 1]["level"]) + "-red";
                     $("#resource" + (taskindex_resource) + "-label").removeData("title");
@@ -1066,15 +1083,43 @@
                 } else {
                     $("#resource" + (taskindex_resource) + "-label").tooltip("option", "content", "Success!!");
                     setTimeout(resourceClick, 100);
-                    setTimeout(delayFinishUpgraded, 1000);
+                    setTimeout(delayFinishUpgradedResource, 1000);
+                }
+            }
+            
+            //village task
+            for (var i = 0; i < task_village.length; i++) {
+                tasktime_village = task_village[i]["endtime"];
+                taskindex_village = task_village[i]["pos"];
+                console.log(taskindex_village);
+                var d = new Date(tasktime_village)
+                var seconds = (d.getTime() / 1000);
+                if (currentsecconds < seconds) {
+                    //console.log(task_village[i])
+                    var remainingtime = parseInt(seconds - currentsecconds);
+                    document.getElementById("village" + (taskindex_village) + "-label").className = "level" + villagelevel + "-red";
+                    $("#village" + (taskindex_village) + "-label").removeData("title");
+                    $("#village" + (taskindex_village) + "-label").tooltip("option", "content","Time remaining: " + remainingtime + " sec");
+                    $('body').click(function () {
+                        $("#village" + (taskindex_village) + "-label").tooltip('close');
+                    });
+                } else {
+                    $("#village" + (taskindex_village) + "-label").tooltip("option", "content", "Success!!");
+                    setTimeout(villageClick, 100);
+                    setTimeout(delayFinishUpgradedVillage, 1000);
                 }
             }
         }
 
 
-        function delayFinishUpgraded() {
+        function delayFinishUpgradedResource() {
             $("#resource" + (taskindex_resource) + "-label").tooltip('close');
-            checkResourceTask();
+            checkTask('resource');
+        }
+        
+        function delayFinishUpgradedVillage() {
+            $("#village" + (taskindex_village) + "-label").tooltip('close');
+            checkTask('village');
         }
 
        
@@ -1086,9 +1131,11 @@
         var upgradeBuildingStatus;
         var createBuildingCall = false;
         var villageUpgradeCall = false;
-        var upgradeType; //add by Trong
-        var upgradeLevel; //add by Trong
-        var building_info ={ "villagehall" : { cost : [[70,40,60,20],[90,50,75,25],[115,65,100,35],[145,85,125,40],[190,105,160,55],[240,135,205,70],[310,175,265,90],[395,225,340,115],[505,290,430,145],[645,370,555,185]], consumption : [2,1,1,1,1,2,2,2,2,2], time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Building leaders live in the main building. The much higher level The new building will be completed faster."}, "market" : { cost : [ [80,70,120,70],[100,90,155,90],[130,115,195,115],[170,145,250,145],[215,190,320,190],[275,240,410,240],[350,310,530,310],[450,395,675,395],[575,505,865,505],[740,645,1105,645] ], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:00},{hour:0,min:07,sec:58},{hour:0,min:10,sec:14},{hour:0,min:12,sec:52},{hour:0,min:15,sec:56},{hour:0,min:19,sec:28},{hour:0,min:23,sec:36},{hour:0,min:28,sec:22},{hour:0,min:33,sec:54},{hour:0,min:40,sec:20}] ,info : "The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously ."}, "barracks" : { cost : [ [210,140,260,120] ,[270,180,335,155] ,[345,230,425,195] ,[440,295,545,250] ,[565,375,700,320] ,[720,480,895,410] ,[925,615,1145,530], [1180,790,1465,675] ,[1515,1010,1875,865],[1935,1290,2400,1105] ], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52} ],info : "A large military barracks allows you to build more troops at the same time . But resources are three times normal ." }, "academy" : { cost:[[220,160,90,40],[280,205,115,50],[360,260,145,65],[460,335,190,85],[590,430,240,105],[755,550,310,135],[970,705,395,175],[1240,900,505,225],[1585,1155,650,290],[2030,1475,830,370]], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52} ] ,info : "Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village."}, "stable" : { cost : [[260,140,220,100],[335,180,280,130],[425,230,360,165],[545,295,460,210],[700,375,590,270],[895,480,755,345],[1145,615,970,440],[1465,790,1240,565],[1875,1010,1585,720],[2400,1290,2030,920]], consumption : [5,3,3,3,3,3,3,3,3,3], time : [{hour:0,min:07,sec:20},{hour:0,min:09,sec:30},{hour:0,min:12,sec:02},{hour:0,min:14,sec:58},{hour:0,min:18,sec:20},{hour:0,min:22,sec:16},{hour:0,min:26,sec:50},{hour:0,min:32,sec:08},{hour:0,min:38,sec:16},{hour:0,min:45,sec:24}],info : "The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price." }, "headquarter" : { cost : [[700,670,700,240],[930,890,930,320],[1240,1185,1240,425],[1645,1575,1645,565],[2190,2095,2190,750],[2915,2790,2915,1000],[3875,3710,3875,1330],[5155,4930,5155,1765],[6855,6560,6855,2350],[9115,8725,9115,3125]], consumption : [2,1,1,1,1,2,2,2,2,2], time : [ {hour:0,min:07,sec:40},{hour:0,min:08,sec:54},{hour:0,min:10,sec:18},{hour:0,min:11,sec:58},{hour:0,min:13,sec:52},{hour:0,min:16,sec:06},{hour:0,min:18,sec:40},{hour:0,min:21,sec:40},{hour:0,min:25,sec:08},{hour:0,min:29,sec:10}],info : "The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised ."},"workshop" : {cost : [[460,510,600,320],[590,655,770,410],[755,835,985,525],[965,1070,1260,670],[1235,1370,1610,860],[1580,1750,2060,1100],[2025,2245,2640,1405],[2590,2870,3380,1800],[3315,3675,4325,2305],[4245,4705,5535,2950]],consumption : [3,2,2,2,2,2,2,2,2,2],time : [{hour:0,min:10,sec:00},{hour:0,min:12,sec:36},{hour:0,min:15,sec:36},{hour:0,min:19,sec:06},{hour:0,min:23,sec:10},{hour:0,min:27,sec:52},{hour:0,min:33,sec:20},{hour:0,min:39,sec:40},{hour:0,min:47,sec:02},{hour:0,min:55,sec:32}],info : "Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster ."},"smithy":{cost : [[180,250,500,160],[230,320,640,205],[295,410,820,260],[375,525,1050,335],[485,670,1340,430],[620,860,1720,550],[790,1100,2200,705],[1015,1405,2815,900],[1295,1800,3605,1155],[1660,2305,4610,1475]],consumption : [4,2,2,2,2,3,3,3,3,3],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy."}, "granary" : {cost : [[80,100,70,20],[100,130,90,25],[130,165,115,35],[170,210,145,40],[215,270,190,55],[275,345,240,70],[350,440,310,90],[450,565,395,115],[575,720,505,145],[740,920,645,185]],consumption : [1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:05,sec:20},{hour:0,min:07,sec:12},{hour:0,min:09,sec:20},{hour:0,min:11,sec:50},{hour:0,min:14,sec:44},{hour:0,min:18,sec:04},{hour:0,min:21,sec:58},{hour:0,min:26,sec:30},{hour:0,min:31,sec:44},{hour:0,min:37,sec:48}],info : "Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe."},"warehouse" : {cost : [[130,160,90,40],[165,205,115,50],[215,260,145,65],[275,335,190,85],[350,430,240,105],[445,550,310,135],[570,705,395,175],[730,900,505,225],[935,1155,650,290],[1200,1475,830,370]],consumption:[1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe ."}}
+        var task_village = new Array;
+        var tasktime_village, taskindex_village;
+        var villagelevel;
+        
+        var building_info ={ "villagehall" : { cost : [[70,40,60,20],[90,50,75,25],[115,65,100,35],[145,85,125,40],[190,105,160,55],[240,135,205,70],[310,175,265,90],[395,225,340,115],[505,290,430,145],[645,370,555,185]], consumption : [2,1,1,1,1,2,2,2,2,2], time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Building leaders live in the main building. The much higher level you can more upgrade or create village or resource at the same time."}, "market" : { cost : [ [80,70,120,70],[100,90,155,90],[130,115,195,115],[170,145,250,145],[215,190,320,190],[275,240,410,240],[350,310,530,310],[450,395,675,395],[575,505,865,505],[740,645,1105,645] ], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:00},{hour:0,min:07,sec:58},{hour:0,min:10,sec:14},{hour:0,min:12,sec:52},{hour:0,min:15,sec:56},{hour:0,min:19,sec:28},{hour:0,min:23,sec:36},{hour:0,min:28,sec:22},{hour:0,min:33,sec:54},{hour:0,min:40,sec:20}] ,info : "The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously ."}, "barracks" : { cost : [ [210,140,260,120] ,[270,180,335,155] ,[345,230,425,195] ,[440,295,545,250] ,[565,375,700,320] ,[720,480,895,410] ,[925,615,1145,530], [1180,790,1465,675] ,[1515,1010,1875,865],[1935,1290,2400,1105] ], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52} ],info : "A large military barracks allows you to build more troops at the same time . But resources are three times normal ." }, "academy" : { cost:[[220,160,90,40],[280,205,115,50],[360,260,145,65],[460,335,190,85],[590,430,240,105],[755,550,310,135],[970,705,395,175],[1240,900,505,225],[1585,1155,650,290],[2030,1475,830,370]], consumption : [4,2,2,2,2,3,3,3,3,3], time : [ {hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52} ] ,info : "Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village."}, "stable" : { cost : [[260,140,220,100],[335,180,280,130],[425,230,360,165],[545,295,460,210],[700,375,590,270],[895,480,755,345],[1145,615,970,440],[1465,790,1240,565],[1875,1010,1585,720],[2400,1290,2030,920]], consumption : [5,3,3,3,3,3,3,3,3,3], time : [{hour:0,min:07,sec:20},{hour:0,min:09,sec:30},{hour:0,min:12,sec:02},{hour:0,min:14,sec:58},{hour:0,min:18,sec:20},{hour:0,min:22,sec:16},{hour:0,min:26,sec:50},{hour:0,min:32,sec:08},{hour:0,min:38,sec:16},{hour:0,min:45,sec:24}],info : "The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price." }, "headquarter" : { cost : [[700,670,700,240],[930,890,930,320],[1240,1185,1240,425],[1645,1575,1645,565],[2190,2095,2190,750],[2915,2790,2915,1000],[3875,3710,3875,1330],[5155,4930,5155,1765],[6855,6560,6855,2350],[9115,8725,9115,3125]], consumption : [2,1,1,1,1,2,2,2,2,2], time : [ {hour:0,min:07,sec:40},{hour:0,min:08,sec:54},{hour:0,min:10,sec:18},{hour:0,min:11,sec:58},{hour:0,min:13,sec:52},{hour:0,min:16,sec:06},{hour:0,min:18,sec:40},{hour:0,min:21,sec:40},{hour:0,min:25,sec:08},{hour:0,min:29,sec:10}],info : "The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised ."},"workshop" : {cost : [[460,510,600,320],[590,655,770,410],[755,835,985,525],[965,1070,1260,670],[1235,1370,1610,860],[1580,1750,2060,1100],[2025,2245,2640,1405],[2590,2870,3380,1800],[3315,3675,4325,2305],[4245,4705,5535,2950]],consumption : [3,2,2,2,2,2,2,2,2,2],time : [{hour:0,min:10,sec:00},{hour:0,min:12,sec:36},{hour:0,min:15,sec:36},{hour:0,min:19,sec:06},{hour:0,min:23,sec:10},{hour:0,min:27,sec:52},{hour:0,min:33,sec:20},{hour:0,min:39,sec:40},{hour:0,min:47,sec:02},{hour:0,min:55,sec:32}],info : "Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster ."},"smithy":{cost : [[180,250,500,160],[230,320,640,205],[295,410,820,260],[375,525,1050,335],[485,670,1340,430],[620,860,1720,550],[790,1100,2200,705],[1015,1405,2815,900],[1295,1800,3605,1155],[1660,2305,4610,1475]],consumption : [4,2,2,2,2,3,3,3,3,3],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy."}, "granary" : {cost : [[80,100,70,20],[100,130,90,25],[130,165,115,35],[170,210,145,40],[215,270,190,55],[275,345,240,70],[350,440,310,90],[450,565,395,115],[575,720,505,145],[740,920,645,185]],consumption : [1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:05,sec:20},{hour:0,min:07,sec:12},{hour:0,min:09,sec:20},{hour:0,min:11,sec:50},{hour:0,min:14,sec:44},{hour:0,min:18,sec:04},{hour:0,min:21,sec:58},{hour:0,min:26,sec:30},{hour:0,min:31,sec:44},{hour:0,min:37,sec:48}],info : "Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe."},"warehouse" : {cost : [[130,160,90,40],[165,205,115,50],[215,260,145,65],[275,335,190,85],[350,430,240,105],[445,550,310,135],[570,705,395,175],[730,900,505,225],[935,1155,650,290],[1200,1475,830,370]],consumption:[1,1,1,1,1,1,1,1,1,1],time : [{hour:0,min:06,sec:40},{hour:0,min:08,sec:44},{hour:0,min:11,sec:08},{hour:0,min:13,sec:54},{hour:0,min:17,sec:08},{hour:0,min:20,sec:52},{hour:0,min:25,sec:14},{hour:0,min:30,sec:16},{hour:0,min:36,sec:06},{hour:0,min:42,sec:52}],info : "Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe ."}}
         /* Village function */
 
         function villageClick() {
@@ -1114,10 +1161,12 @@
                 $("#village" + building[i]["pos"] + "-label").addClass("level" + building[i]["level"]);
                 document.getElementById("village" + (building[i]["pos"])).className = building[i]["type"];
                 buildingposlists[i] = building[i]["pos"];
+                $("#village" + (i + 1) + "-label").prop('title', building[i]["type"]);
             }
             for (var i = 0; i < 14; i++) {
                 if ($.inArray(i + 1, buildingposlists) == -1) {
                     $("#village" + (i + 1) + "-label").addClass("level" + 0);
+                    $("#village" + (i + 1) + "-label").prop('title', "Empty Area");
                 }
             }
         }
@@ -1316,7 +1365,7 @@
             if (createBuildingCall) {
                 var buildingtype = $(this).attr("value");
                 console.log(buildingtype + " is creating pos: " + (index_village + 1));
-
+                villagelevel = 0;
                 console.log('create law na kub' + buildingtype + ' pos:' + (index_village + 1));
                 $.post("http://localhost:5555/createBuilding", {
                     pos: (index_village + 1)
@@ -1330,13 +1379,13 @@
                     }
                 })
                 setTimeout(villageClick, 100);
+                tasktype = 'village';
+                setTimeout(checkTask,100);
                 createBuildingCall = false;
             }
         }
 
         function upgradeVillageLevel() {
-            
-                
             //$('#upgrade-villageModal').modal("show");
             
             var index_building;
@@ -1347,9 +1396,9 @@
                 }
             }
         
-            upgradeType = building[index_building]["type"];
-            upgradeLevel = building[index_building]["level"];
-            villageUpgradeModal(upgradeType,upgradeLevel);
+            var upgradeType = building[index_building]["type"];
+            villagelevel = building[index_building]["level"];
+            villageUpgradeModal(upgradeType,villagelevel);
             $('#upgrade-village').modal("show");
             
             
@@ -1396,13 +1445,14 @@
                     }
                 })
                 setTimeout(villageClick, 100);
-                //setTimeout(checkResourceTask, 100);
+                tasktype = 'village';
+                setTimeout(checkTask,100);
                 villageUpgradeCall = false;
             }
         }
         
         //villageUpgradeModal
-        function villageUpgradeModal(upgradeType,upgradeLevel) {
+        function villageUpgradeModal(upgradeType,villagelevel) {
             console.log("injection");
             var inject = "";
             inject += "<div class=\"modal fade\" id=\"upgrade-village\" role=\"dialog\">";
@@ -1410,17 +1460,17 @@
             inject += "<div class=\"modal-content\">";
             inject += "<div class=\"modal-header\">";
             inject += "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
-            inject += "<h3 class=\"modal-title\">" + upgradeType.charAt(0).toUpperCase()+ upgradeType.slice(1) +" Level "+upgradeLevel+ " <span id=\"level-village\"></span></h3>";
+            inject += "<h3 class=\"modal-title\">" + upgradeType.charAt(0).toUpperCase()+ upgradeType.slice(1) +" Level "+villagelevel+ " <span id=\"level-village\"></span></h3>";
             inject += "</div>";
             inject += "<div class=\"modal-body\">";
             inject += building_info[upgradeType].info+"</p>";
             inject += "<div class=\""+upgradeType+"-upgrademodel\"></div>";
             inject += "Requirment</p>";
-            inject += "Wood : <span id=\"setWood-village\">"+building_info[upgradeType].cost[upgradeLevel][0]+"</span> ";
-            inject += "Clay : <span id=\"setClay-village\">"+building_info[upgradeType].cost[upgradeLevel][1]+"</span> ";
-            inject += "Iron : <span id=\"setIron-village\">"+building_info[upgradeType].cost[upgradeLevel][2]+"</span> ";
-            inject += "Crop : <span id=\"setCrop-village\">"+building_info[upgradeType].cost[upgradeLevel][3]+"</span></p>";
-            var upgradeTime = twoDigits(building_info[upgradeType].time[upgradeLevel].hour) + ":" + twoDigits(building_info[upgradeType].time[upgradeLevel].min) + ":" + twoDigits(building_info[upgradeType].time[upgradeLevel].sec);
+            inject += "Wood : <span id=\"setWood-village\">"+building_info[upgradeType].cost[villagelevel][0]+"</span> ";
+            inject += "Clay : <span id=\"setClay-village\">"+building_info[upgradeType].cost[villagelevel][1]+"</span> ";
+            inject += "Iron : <span id=\"setIron-village\">"+building_info[upgradeType].cost[villagelevel][2]+"</span> ";
+            inject += "Crop : <span id=\"setCrop-village\">"+building_info[upgradeType].cost[villagelevel][3]+"</span></p>";
+            var upgradeTime = twoDigits(building_info[upgradeType].time[villagelevel].hour) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].min) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].sec);
             inject += "Upgrade time : <span id=\"upgrade-time-village\">"+upgradeTime+"</span> ";
             inject += "<button id=\"upgradebtn-village\" type=\"button\" class=\"btn btn-default\"";
             inject += "data-dismiss=\"modal\" value=\"\">Upgrade</button>";
@@ -1499,6 +1549,7 @@
 
         /*Village Listener*/
         $('.village-level').click(upgradeVillage);
+        $('.village-level').tooltip();
         /*Stockbar*/
         setInterval(updateResource, 100);
         setInterval(updateTask, 1000);

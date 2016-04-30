@@ -19,6 +19,28 @@
     background-color: aquamarine;
 }
 
+.woodproduce {
+    content: url(picture/resource/wood.png);
+    width: 40%;
+}
+
+.clayproduce {
+    content: url(picture/resource/clay.png);
+    width: 40%;
+}
+
+.ironproduce {
+    content: url(picture/resource/iron.png);
+    width: 40%;
+}
+
+.cropproduce {
+    content: url(picture/resource/crop.png);
+    width: 40%;
+}
+
+
+
 .paddingrow {
     padding-left: 0%;
     font-size: 18px;
