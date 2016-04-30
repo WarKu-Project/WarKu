@@ -291,6 +291,21 @@ app.post('/getStructingTask',function(req,res) {
     }
   })
 })
+app.post('/getVillegeInfo',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  console.log('Server Recieve getStructingTask From Client');
+  engine.update(online_user[ip]);
+  engine.getVillegeInfo(online_user[ip],function(err,result) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      res.end(JSON.stringify(result))
+    }
+  })
+})
 app.listen(5555,function(){
   console.log("Started on PORT 5555");
 })

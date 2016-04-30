@@ -1148,3 +1148,17 @@ exports.getMap = function(x,y,callback){
 exports.getMap = function (username,callback) {
 
 }
+/** Function to getName and coordinate of villege **/
+exports.getVillegeInfo = function(username,callback) {
+  getCurrentVillege(username,function(err,vid) {
+    if (err) callback(err);
+    else {
+      con.query('SELECT name ,x,y FROM villege WHERE vid = ?',vid,function(err,result) {
+        if(err) callback(err);
+        else {
+          callback(result[0])
+        }
+      })
+    }
+  })
+}
