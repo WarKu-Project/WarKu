@@ -1140,9 +1140,9 @@ exports.sendResource = function(username,x,y,wood,clay,iron,crop,callback){
 exports.getMap = function(x,y,callback){
   var xlist = []
   var ylist = []
-  for (var i = (Math.abs(x-3))%100+1;i<=(Math.abs(x+3))%100+1;i++){
 
-  }
+
+  
 }
 /** Function to get map infomation **/
 exports.getMap = function (username,callback) {
