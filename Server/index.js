@@ -430,6 +430,22 @@ app.post('/getMarkettask',function (req,res) {
     }
   })
 })
+app.post('/checkName',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var name = req.body.name;
+  engine.checkName(name,function(err,status) {
+    if (err) {
+      throw err;
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+result);
+      res.end(JSON.stringify(result))
+    }
+  })
+})
 app.listen(5555,function(){
   console.log("Started on PORT 5555");
 })

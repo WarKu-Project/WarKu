@@ -1411,3 +1411,12 @@ var troop = {
     'time' : {min:15,sec:0}
   }
 }
+exports.checkName = function(name,callback) {
+  con.query('SELECT name FROM villege WHERE name = ? ',name,function(err,result) {
+    if (err) callback(err);
+    else {
+      if (result.length>0) callback(null,true);
+      else callback(null,false);
+    }
+  })
+}
