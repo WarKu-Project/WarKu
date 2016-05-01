@@ -1420,3 +1420,23 @@ exports.checkName = function(name,callback) {
     }
   })
 }
+exports.sendMail = function(username,receiver,title,info,callback) {
+  con.query('SELECT pid FROM player WHERE username = ?',username,function (err,result) {
+    if (err) callback(err)
+    else {
+      var sender_id = result[0].pid;
+      con.query('SELECT pid FROM player WHERE username = ?',receiver,function (err,result) {
+        if (err) callback(err);
+        else {
+          var receiver_id = result[0].pid
+          con.query('INSERT INTO mail(receiver_id,sender_id,sendtime,title,info) values(?,?,NOW(),?,?)',[receiver_id,sender_id,title,info],function(err) {
+            if (err) callback(err);
+            else {
+              callback(null,err);
+            }
+          })
+        }
+      })
+    }
+  })
+}

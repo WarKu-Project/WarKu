@@ -435,7 +435,25 @@ app.post('/checkName',function(req,res) {
   console.log("\nCurrent IP : "+ip);
   console.log("Current User : "+online_user[ip]);
   var name = req.body.name;
-  engine.checkName(name,function(err,status) {
+  engine.checkName(name,function(err,result) {
+    if (err) {
+      throw err;
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+result);
+      res.end(JSON.stringify(result))
+    }
+  })
+})
+app.post('/sendMail',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var receiver = req.body.receiver;
+  var title = req.body.title;
+  var info = req.body.info;
+  engine.sendMail(online_user[ip],receiver,title,info,function(err,result) {
     if (err) {
       throw err;
       console.log("Server Recieve From Engine : "+err.toString());
