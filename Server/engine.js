@@ -1213,6 +1213,7 @@ exports.getMapXY = function(x,y,callback){
         if (village[i].clay==village[i].wood&&village[i].wood==village[i].iron&&village[i].iron==village[i].crop){
           village[i]['type'] = 'balance';
         }
+        if (villege[i].username!='Nature') villege[i]['type'] = 'country'
         max = 0;
       }
       callback(null,result);
