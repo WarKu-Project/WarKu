@@ -2096,7 +2096,7 @@
         function tradeResourceByVillage() {
             $('#upgrade-village').modal("hide");
             console.log('trading by village');
-            var targetvillagename = $("villagetarget").val();
+            var targetvillagename = $("#villagetarget").val();
             if (targetvillagename != "") {
                 var woodnum = parseInt($('#marketwoodnum').val());
                 var claynum = parseInt($('#marketclaynum').val());
@@ -2135,15 +2135,18 @@
         function tradeResourceByCoordinate() {
             $('#upgrade-village').modal("hide");
             console.log('trading by coordinate');
-            var coordinateX = $("markettarget_x").val();
-            var coordinateY = $("markettarget_y").val();
+            var coordinateX = $("#markettarget_x").val();
+            var coordinateY = $("#markettarget_y").val();
+            console.log('x : '+coordinateX+' y: '+coordinateY);
             if (coordinateX <= 100 && coordinateX >= 0 && coordinateY <= 100 && coordinateY >= 0) {
+                console.log('send resource coor');
                 var woodnum = parseInt($('#marketwoodnum').val());
                 var claynum = parseInt($('#marketclaynum').val());
                 var ironnum = parseInt($('#marketironnum').val());
                 var cropnum = parseInt($('#marketcropnum').val());
                 var total = ((woodnum + claynum) + (ironnum + cropnum));
                 if ((total) <= 500 && (total) > 0) {
+                    console.log('send resource coor2');
                     $.post("http://localhost:5555/sendResourceXY", {
                         wood: woodnum,
                         clay: claynum,
