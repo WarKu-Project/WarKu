@@ -1432,7 +1432,7 @@ exports.sendMail = function(username,receiver,title,info,callback) {
           con.query('INSERT INTO mail(receiver_id,sender_id,sendtime,title,info) values(?,?,NOW(),?,?)',[receiver_id,sender_id,title,info],function(err) {
             if (err) callback(err);
             else {
-              callback(null,err);
+              callback(null,true);
             }
           })
         }
