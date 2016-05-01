@@ -58,9 +58,9 @@
                     <h3 class="modal-title">Account</h3>
                 </div>
                 <div class="modal-body">
-                    Account name : <span id="accountname" ></span></p>
-                    Email : <span id="email"></span></p>
-                    Village name : <span id="villagename_account"></span></p>
+                    Account name : <span id="account_accountname"></span></p>
+                    Email : <span id="account_email"></span></p>
+                    Village name : <span id="account_villagename"></span></p>
                     Population : </p>
                     Rank : 
                 </div>
@@ -78,10 +78,17 @@
                     <h3 class="modal-title">Setting</h3>
                 </div>
                 <div class="modal-body">
-                    Account name : <span id="accountname"></span></p>
-                Password : <span id="password"> </span> <button id="changepassword" type="button" class="btn btn-warning">Change Password</button></p>
+                    Account name : <span id="setting_accountname"></span></p>
+                Password : <span id="setting_password"> </span> <button id="changepassword" type="button" class="btn btn-warning">Change Password</button></p>
+            
+            <div class = "changepass">
+                Old password :  <input type="text" name="oldpass" id="oldpassword"></p>
+                New password :  <input type="text" name="newpass" id="newpassword"> 
+            <button id="changepassword_confirm" type="button" class="btn btn-success">Change</button></p>
+            </div>
+            
                 
-            Email : <span id="email"> </span> <button id="changeemail" type="button" class="btn btn-warning">Change Email</button></p>
+            Email : <span id="setting_email"> </span> <button id="changeemail" type="button" class="btn btn-warning">Change Email</button></p>
                 
                 </div>
             </div>
@@ -969,6 +976,21 @@
                     console.log("Account :" + JSON.stringify(account));
                 }
             })
+            
+            setTimeout(setAccount, 300);
+        }
+        
+        function setAccount(){
+            $('#account_accountname').text(account["username"]);
+            $('#setting_accountname').text(account["username"]);
+            $('#account_email').text(account["email"]);
+            $('#setting_email').text(account["email"]);
+            var passwordlength = account["password"].length;
+            var star = "";
+            for(var i=0;i<passwordlength;i++){
+                star += "*";
+            }
+            $('#setting_password').text(star);
         }
 
         function setVillageDetail() {
@@ -994,6 +1016,7 @@
             $("#villagename").text(village_detail["name"]);
             $("#coordinate_x").text(village_detail["x"]);
             $("#coordinate_y").text(village_detail["y"]);
+        $("#account_villagename").text(village_detail["name"]);
         }
 
         /*Resource function*/
@@ -1298,7 +1321,7 @@
         var marketTradeCall = false;
         var tasktime_village, taskindex_village;
         var villagelevel;
-        var marketTask;
+        var marketTask = new Array;
         var tasktime_market;
 
         var building_info = {
@@ -2141,10 +2164,10 @@
             var targetvillagename = $("#villagetarget").val();
             if(marketTradeCall){
             if (targetvillagename != "") {
-                var woodnum = parseInt($('#marketwoodnum').val()) || 0;
-                var claynum = parseInt($('#marketclaynum').val()) || 0;
-                var ironnum = parseInt($('#marketironnum').val()) || 0;
-                var cropnum = parseInt($('#marketcropnum').val()) || 0;
+var woodnum = parseInt($('#marketwoodnum').val()) || 0;
+var claynum = parseInt($('#marketclaynum').val()) || 0;
+var ironnum = parseInt($('#marketironnum').val()) || 0;
+var cropnum = parseInt($('#marketcropnum').val()) || 0;
                 var total = ((woodnum + claynum) + (ironnum + cropnum));
                 console.log(woodnum + " " + claynum + " " + ironnum + " " + cropnum)
                 console.log(total);
@@ -2189,15 +2212,14 @@
             console.log('x : '+coordinateX+' y: '+coordinateY);
             if(marketTradeCall){
             if (coordinateX <= 100 && coordinateX >= 0 && coordinateY <= 100 && coordinateY >= 0) {
-                console.log('send resource coor');
-                var woodnum = parseInt($('#marketwoodnum').val())|| 0;
-                var claynum = parseInt($('#marketclaynum').val())|| 0;
-                var ironnum = parseInt($('#marketironnum').val())|| 0;
-                var cropnum = parseInt($('#marketcropnum').val())|| 0;
+var woodnum = parseInt($('#marketwoodnum').val())|| 0;
+var claynum = parseInt($('#marketclaynum').val())|| 0;
+var ironnum = parseInt($('#marketironnum').val())|| 0;
+var cropnum = parseInt($('#marketcropnum').val())|| 0;
                 var total = ((woodnum + claynum) + (ironnum + cropnum));
-                console.log(woodnum+" "+claynum+" "+ironnum+" "+cropnum);
+console.log(woodnum)+"" +claynumclaynum+"" +ironnum+"" +cropnum;
                 if ((total) <= 500 && (total) > 0) {
-                    console.log('send resource coor2');
+console.log('send resource coor');2
                     $.post("http://localhost:5555/sendResourceXY", {
                         wood: woodnum,
                         clay: claynum,
@@ -2325,15 +2347,15 @@
             inject += "<div class=\"modal-header\">";
             inject += "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
 //            inject += "<h3 class=\"modal-title\">" + map[index_map]["name"].charAt(0).toUpperCase() + map[index_map]["name"].slice(1) + "</h3>";
-            inject += "<h3 class=\"modal-title\">" + map[index_map]["name"] + "</h3>";
+inject += "<h3 class=\"modal-title\">" + map[index_map]["name"].charAt(0).t
             inject += "</div>";
             inject += "<div class=\"modal-body\">";
-            inject += "Username : " + map[index_map]["username"] + "</p>";
+inject += map[index_ma"Username : " + p]["name"] + "</username
             //inject += "<div class=\"" + upgradeType + "-upgrademodel\"></div>";
             inject += "Wood : <span id=\"setWood-village\">" + map[index_map]["wood"] + "</span> areas ";
-            inject += "Clay : <span id=\"setClay-village\">" + map[index_map]["clay"] + "</span> areas ";
-            inject += "Iron : <span id=\"setIron-village\">" + map[index_map]["iron"] + "</span> areas ";
-            inject += "Crop : <span id=\"setCrop-village\">" + map[index_map]["crop"] + "</span> areas</p>";
+inject += "Clay : <span id=\"setClay-village\">" + map[index_map]["clay"] + "</span> areas"; 
+inject += "Iron : <span id=\"setIron-village\">" + map[index_map]["iron"] + "</span> areas"; 
+inject += "Crop : <span id=\"setCrop-village\">" + map[index_map]["crop"] + "</span> areas</p>";
             //            var upgradeTime = twoDigits(building_info[upgradeType].time[villagelevel].hour) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].min) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].sec);
             //            inject += "Upgrade time : <span id=\"upgrade-time-village\">" + upgradeTime + "</span> ";
             //            inject += "<button id=\"upgradebtn-village\" type=\"button\" class=\"btn btn-default\"";
