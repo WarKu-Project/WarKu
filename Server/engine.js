@@ -1089,7 +1089,7 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
                         else {
                           var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
                           console.log('distance  = '+distance);
-                          var timeuse_in_sec = distance*10;
+                          var timeuse_in_sec = distance;
                           var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
                           con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,home_vid],function (err,result) {
                             if (err) callback(err);
@@ -1313,7 +1313,7 @@ function updateMarketTask(vid) {
                   else {
                     var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
                     console.log('distance  = '+distance);
-                    var timeuse_in_sec = distance*10;
+                    var timeuse_in_sec = distance;
                     var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
                     con.query('INSERT INTO task(endtime,vid) values(?,?)',[finishDate,vid],function (err,result) {
                       if (err) console.log(err);
