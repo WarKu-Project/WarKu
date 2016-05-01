@@ -736,7 +736,7 @@
 
     <!--mail container-->
     <div class="container" id="mail_container">
-        <div class="jumbotron">
+        <div class="jumbotron mailjumbotron">
             <ul id="myTab" class="nav nav-tabs">
                 <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
                 <li class=""><a href="#compose" data-toggle="tab">Compose</a></li>
@@ -745,14 +745,47 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="inbox">
                     <div class="jumbotron inbox-container">
-                        inbox
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Sender</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id = "inboxtable">
+                            
+                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="compose">
-                    profile tab!
+                    <div class="jumbotron inbox-container">
+                        <div class="jumbotron compose-page">
+                            Reciever : <input type="email" id="reciever"></p>
+                            Title : <input type="email" id="title"></p>
+                            
+                    <textarea id="message" name="message" class="messageEditor" cols="1" rows="1"></textarea></p>
+                <center>
+                    <button id="sendbutton" type="button" class="btn btn-success" data-dismiss="modal" value="">Send</button></center>
+                    
+                            
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="sendbox">
-                    profile tab!
+                    <div class="jumbotron inbox-container">
+                        <table class="table table-hover table-striped" id="sendboxtable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Sender</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1376,13 +1409,18 @@
 
             //market task
             for (var i = 0; i < marketTask.length; i++) {
-                tasktime_market = task[i]["endtime"];
-
-                console.log(tasktime_market);
+                tasktime_market = marketTask[i]["endtime"];
+                console.log(remainingtime);
                 var d = new Date(tasktime_market)
                 var seconds = (d.getTime() / 1000);
-                if (currentsecconds < seconds) {} else {
-
+                var remainingtime = parseInt(seconds - currentsecconds);
+                if (currentsecconds < seconds) {
+//                    var theDiv = document.getElementById("upgrade-village");
+//                    theDiv.insertAdjacentHTML('afterend', '<div id="two">remainingtime</div>');
+                    console.log(remainingtime);
+                    
+                } else {
+                    setTimeout(delayFinishTrade, 1000);
                 }
             }
 
@@ -1397,6 +1435,10 @@
         function delayFinishUpgradedVillage() {
             $("#village" + (taskindex) + "-label").tooltip('close');
             checkTask();
+        }
+        
+        function delayFinishTrade() {
+            checkMarketTask();
         }
 
 
@@ -2456,6 +2498,80 @@
             mapClickModal(map, index_map);
             $('#map-modal').modal("show");
         }
+        
+        /*Mail Attribute*/
+        var inbox ;
+        
+        /*Mail Function*/
+        function sendEmail(){
+            var mailreceiver = $('#reciever').val();
+            var mailtitle = $('#title').val();
+            var mailinfo  = $('#message').val();
+            
+            $.post("http://localhost:5555/sendMail", {
+                receiver: mailreceiver, 
+                title: mailtitle,
+                info: mailinfo
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                }
+            })
+            
+            $('#reciever').val('');
+            $('#title').val('');
+            $('#message').val('');
+            $("#modal-header-title").text('Send Complete');
+            $("#modal-body").text("Sent "+mailtitle+" To "+mailreceiver);
+            $("#errorModel").modal("show");
+            
+        }
+        
+        function setInbox(){
+            var inject = "";
+            inject += "<tbody id = \"inboxtable\">";
+            //var date = new Date();
+            for(var i=0;i<inbox.length;i++){
+                inject += "<tr>";
+                for(var j=0;j<3;j++){
+                    inject += "<td>";
+                    if(j==0){
+                        inject += inbox[i]["title"];
+                    }
+                    else if(j==1){
+                        inject += inbox[i]["sender"];
+                    }
+                    else{
+                        var date = new Date(inbox[i]["sendtime"]);
+                        inject += date.toDateString()+" ";
+                        inject += date.toTimeString();
+                    }
+                    inject += "</td>";
+                }
+                inject += "</tr>";
+            }
+            inject += "</tbody>";
+            $('#inboxtable').replaceWith(inject);
+        }
+        
+        function getInbox(){
+            $.post("http://localhost:5555/getInbox", {
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                }
+                else{
+                    inbox = JSON.parse(data);
+                    console.log("Inbox "+JSON.stringify(inbox));
+                }
+            })
+            
+            setTimeout(setInbox,200);
+        }
 
 
         function reportClick() {
@@ -2466,6 +2582,7 @@
         function mailClick() {
             init();
             $('#mail_container').show();
+            getInbox();
         }
 
         function statisticClick() {
@@ -2558,6 +2675,9 @@
         $('.mapbox').click(mapModal);
         $('#buttonGo').click(setMap);
         $('.arrow').click(setMap);
+        
+        /*Mailbox Listener*/
+        $('#sendbutton').click(sendEmail);
 
         /*other Listener*/
         $('#changevillagename').click(changeVillageNameClick);
