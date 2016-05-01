@@ -741,71 +741,67 @@
         </div>
     </div>
 
-    <!--mail container-->
-    <div class="container" id="mail_container">
-        <div class="jumbotron mailjumbotron">
-            <ul id="myTab" class="nav nav-tabs">
-                <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
-                <li class=""><a href="#compose" data-toggle="tab">Compose</a></li>
-                <li class=""><a href="#sendbox" data-toggle="tab">Sendbox</a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade active in" id="inbox">
-                    <div class="jumbotron inbox-container">
-                        <table class="table table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Sender</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody id="inboxtable">
+<!--mail container-->
+<div class="container" id="mail_container">
+    <div class="jumbotron mailjumbotron">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
+            <li class=""><a href="#compose" data-toggle="tab">Compose</a></li>
+            <li class="sendboxhead"><a href="#sendbox" data-toggle="tab">Sendbox</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="inbox">
+                <div class="jumbotron inbox-container">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Sender</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "inboxtable">
 
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="compose">
-                    <div class="jumbotron inbox-container">
-                        <div class="jumbotron compose-page">
-                            Reciever :
-                            <input type="email" id="reciever">
-                            </p>
-                            Title :
-                            <input type="email" id="title">
-                            </p>
-
-                            <textarea id="message" name="message" class="messageEditor" cols="1" rows="1"></textarea>
-                            </p>
-                            <center>
-                                <button id="sendbutton" type="button" class="btn btn-success" data-dismiss="modal" value="">Send</button>
-                            </center>
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="sendbox">
-                    <div class="jumbotron inbox-container">
-                        <table class="table table-hover table-striped" id="sendboxtable">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Sender</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
-        <div class="resource1">
-            <image id="resource_pos1"></image>
+            <div class="tab-pane fade" id="compose">
+                <div class="jumbotron inbox-container">
+                    <div class="jumbotron compose-page">
+                        Reciever : <input type="email" id="reciever"></p>
+                    Title : <input type="email" id="title"></p>
+
+                <textarea id="message" name="message" class="messageEditor" cols="1" rows="1"></textarea></p>
+            <center>
+                <button id="sendbutton" type="button" class="btn btn-success" data-dismiss="modal" value="">Send</button></center>
+
+
         </div>
     </div>
+</div>
+<div class="tab-pane fade active in" id="sendbox">
+    <div class="jumbotron inbox-container">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Receiver</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id = "sendboxtable">
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+<div class="resource1">
+    <image id="resource_pos1"></image>
+</div>
+</div>
 
 
     <!-- Initialize -->
@@ -2512,18 +2508,18 @@
         }
 
         /*Mail Attribute*/
-        var inbox;
-
+        var inbox ;
+        var sendbox;
         /*Mail Function*/
-        function sendEmail() {
+        function sendEmail(){
             var mailreceiver = $('#reciever').val();
             var mailtitle = $('#title').val();
-            var mailinfo = $('#message').val();
+            var mailinfo  = $('#message').val();
 
             $.post("http://localhost:5555/sendMail", {
-                receiver: mailreceiver
-                , title: mailtitle
-                , info: mailinfo
+                receiver: mailreceiver, 
+                title: mailtitle,
+                info: mailinfo
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -2536,26 +2532,28 @@
             $('#title').val('');
             $('#message').val('');
             $("#modal-header-title").text('Send Complete');
-            $("#modal-body").text("Sent " + mailtitle + " To " + mailreceiver);
+            $("#modal-body").text("Sent "+mailtitle+" To "+mailreceiver);
             $("#errorModel").modal("show");
 
         }
 
-        function setInbox() {
+        function setInbox(){
             var inject = "";
             inject += "<tbody id = \"inboxtable\">";
             //var date = new Date();
-            for (var i = 0; i < inbox.length; i++) {
+            for(var i=0;i<inbox.length;i++){
                 inject += "<tr>";
-                for (var j = 0; j < 3; j++) {
+                for(var j=0;j<3;j++){
                     inject += "<td>";
-                    if (j == 0) {
+                    if(j==0){
                         inject += inbox[i]["title"];
-                    } else if (j == 1) {
+                    }
+                    else if(j==1){
                         inject += inbox[i]["sender"];
-                    } else {
+                    }
+                    else{
                         var date = new Date(inbox[i]["sendtime"]);
-                        inject += date.toDateString() + " ";
+                        inject += date.toDateString()+" ";
                         inject += date.toTimeString();
                     }
                     inject += "</td>";
@@ -2566,21 +2564,66 @@
             $('#inboxtable').replaceWith(inject);
         }
 
-        function getInbox() {
-            $.post("http://localhost:5555/getInbox", {}, function (data) {
+        function getInbox(){
+            $.post("http://localhost:5555/getInbox", {
+            }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     $("#modal-body").text(data);
                     $("#errorModel").modal("show");
-                } else {
+                }
+                else{
                     inbox = JSON.parse(data);
-                    console.log("Inbox " + JSON.stringify(inbox));
+                    console.log("Inbox "+JSON.stringify(inbox));
                 }
             })
 
-            setTimeout(setInbox, 200);
+            setTimeout(setInbox,200);
         }
 
+        function getSendbox(){
+            $.post("http://localhost:5555/getSentbox", {
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                }
+                else{
+                    sendbox = JSON.parse(data);
+                    console.log("Sendbox "+JSON.stringify(sendbox));
+                }
+            })
+
+            setTimeout(setSendbox,200);
+        }
+
+        function setSendbox(){
+            var inject = "";
+            inject += "<tbody id = \"sendboxtable\">";
+            //var date = new Date();
+            for(var i=0;i<sendbox.length;i++){
+                inject += "<tr>";
+                for(var j=0;j<3;j++){
+                    inject += "<td>";
+                    if(j==0){
+                        inject += sendbox[i]["title"];
+                    }
+                    else if(j==1){
+                        inject += sendbox[i]["receiver"];
+                    }
+                    else{
+                        var date = new Date(sendbox[i]["sendtime"]);
+                        inject += date.toDateString()+" ";
+                        inject += date.toTimeString();
+                    }
+                    inject += "</td>";
+                }
+                inject += "</tr>";
+            }
+            inject += "</tbody>";
+            $('#sendboxtable').replaceWith(inject);
+        }
 
         function reportClick() {
             init();
@@ -2591,6 +2634,8 @@
             init();
             $('#mail_container').show();
             getInbox();
+            $('#sendbox').hide();
+            getSendbox();
         }
 
         function statisticClick() {
@@ -2686,6 +2731,9 @@
 
         /*Mailbox Listener*/
         $('#sendbutton').click(sendEmail);
+        $('.sendboxhead').click(function(){
+            $('#sendbox').show();
+        });
 
         /*other Listener*/
         $('#changevillagename').click(changeVillageNameClick);
@@ -2695,7 +2743,7 @@
         /*Stockbar*/
         setInterval(updateResource, 100);
         setInterval(updateTask, 1000);
-    </script>
+</script>
 
 
 </body>
