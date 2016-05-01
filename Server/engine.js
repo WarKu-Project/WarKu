@@ -1432,11 +1432,17 @@ exports.sendMail = function(username,receiver,title,info,callback) {
           con.query('INSERT INTO mail(receiver_id,sender_id,sendtime,title,info) values(?,?,NOW(),?,?)',[receiver_id,sender_id,title,info],function(err) {
             if (err) callback(err);
             else {
-              callback(null,err);
+              callback(null,true);
             }
           })
         }
       })
     }
+  })
+}
+exports.getPlayerInfo = function(usernamer,callback) {
+  con.query('SELECT username,email FROM player WHERE username = ?',username,function (err,result) {
+    if (err) callback(err)
+    else callback(null,result[0])
   })
 }
