@@ -339,7 +339,7 @@ app.post('/getMapXY' ,function (req,res) {
     }
   })
 })
-app.post('changeName',function(req,res) {
+app.post('/changeName',function(req,res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("\nCurrent IP : "+ip);
   console.log("Current User : "+online_user[ip]);
@@ -351,6 +351,46 @@ app.post('changeName',function(req,res) {
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
     }else {
+      res.end(JSON.stringify(result))
+    }
+  })
+})
+app.post('/sendResourceXY',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var wood = req.body.wood;
+  var clay = req.body.clay;
+  var iron = req.body.iron;
+  var crop = req.body.crop;
+  var x = req.body.x;
+  var y = req.body.y;
+  //console.log('Server Recieve changeName From Client name = '+name);
+  //engine.update(online_user[ip]);
+  engine.sendResource(online_user[ip],x,y,wood,clay,iron,crop,function(err,result) {
+    console.log('err : '+err+" result : "+result);
+    if (err) {
+      throw err;
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+result);
+      res.end(JSON.stringify(result))
+    }
+  })
+})
+app.post('/getMarkettask',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  engine.getMarkettask(online_user[ip],function (err,result) {
+    console.log('err : '+err+" result : "+result);
+    if (err) {
+      throw err;
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+result);
       res.end(JSON.stringify(result))
     }
   })

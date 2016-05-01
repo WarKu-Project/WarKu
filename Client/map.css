@@ -23,7 +23,7 @@ input[type="text"] {
 
 .map-center {
     display: inline-block;
-    height: 10%;
+    height: 0%;
     vertical-align: middle;
 }
 
@@ -31,7 +31,7 @@ input[type="text"] {
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    width: 60%;
+    width: 80%;
 }
 
 div.arrow1 {
@@ -291,24 +291,100 @@ div.free {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box1 {
+div.box4 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
     top: 5%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
 
-div.box2 {
+div.box13 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
+    top: 5%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box22 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 25%;
+    top: 5%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box31 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 5%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box40 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 5%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box49 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 5%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box58 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 5%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box67 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 5%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box76 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 85%;
     top: 5%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
@@ -316,99 +392,10 @@ div.box2 {
 
 div.box3 {
     position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 25%;
-    top: 5%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box4 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 35%;
-    top: 5%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box5 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 45%;
-    top: 5%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box6 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 55%;
-    top: 5%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box7 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 65%;
-    top: 5%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box8 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 75%;
-    top: 5%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box9 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 85%;
-    top: 5%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
-}
-
-div.box10 {
-    position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
-    top: 15%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box11 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 15%;
     top: 15%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
@@ -416,7 +403,18 @@ div.box11 {
 
 div.box12 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 15%;
+    top: 15%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box21 {
+    position: absolute;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -425,9 +423,9 @@ div.box12 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box13 {
+div.box30 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -436,9 +434,9 @@ div.box13 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box14 {
+div.box39 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -447,9 +445,9 @@ div.box14 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box15 {
+div.box48 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -458,9 +456,9 @@ div.box15 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box16 {
+div.box57 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -469,9 +467,9 @@ div.box16 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box17 {
+div.box66 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -480,9 +478,9 @@ div.box17 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box18 {
+div.box75 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -491,12 +489,23 @@ div.box18 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box19 {
+div.box2 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
+    top: 25%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box11 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 15%;
     top: 25%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
@@ -504,106 +513,95 @@ div.box19 {
 
 div.box20 {
     position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 15%;
-    top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box21 {
-    position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
     top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box22 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 35%;
-    top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box23 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 45%;
-    top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box24 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 55%;
-    top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box25 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 65%;
-    top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box26 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 75%;
-    top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box27 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 85%;
-    top: 25%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box28 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 5%;
-    top: 35%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
 }
 
 div.box29 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 35%;
+    top: 25%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box38 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    top: 25%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box47 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 25%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box56 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 25%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box65 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 25%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box74 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 85%;
+    top: 25%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box1 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 5%;
+    top: 35%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box10 {
+    position: absolute;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -612,9 +610,9 @@ div.box29 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box30 {
+div.box19 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -623,9 +621,9 @@ div.box30 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box31 {
+div.box28 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -634,9 +632,9 @@ div.box31 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box32 {
+div.box37 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -645,9 +643,9 @@ div.box32 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box33 {
+div.box46 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -656,9 +654,9 @@ div.box33 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box34 {
+div.box55 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -667,9 +665,9 @@ div.box34 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box35 {
+div.box64 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -678,21 +676,20 @@ div.box35 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box36 {
+div.box73 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
     top: 35%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
 
-div.box37 {
+div.box0 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -701,9 +698,9 @@ div.box37 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box38 {
+div.box9 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -712,9 +709,9 @@ div.box38 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box39 {
+div.box18 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -723,9 +720,9 @@ div.box39 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box40 {
+div.box27 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -734,45 +731,12 @@ div.box40 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box41 {
+div.box36 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
-    top: 45%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box42 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 55%;
-    top: 45%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box43 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 65%;
-    top: 45%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box44 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 75%;
     top: 45%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
@@ -780,19 +744,51 @@ div.box44 {
 
 div.box45 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 45%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box54 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 65%;
+    top: 45%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box63 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 75%;
+    top: 45%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box72 {
+    position: absolute;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
     top: 45%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
 
-div.box46 {
+div.box8 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -801,9 +797,9 @@ div.box46 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box47 {
+div.box17 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -812,9 +808,9 @@ div.box47 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box48 {
+div.box26 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -823,9 +819,9 @@ div.box48 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box49 {
+div.box35 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -834,9 +830,9 @@ div.box49 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box50 {
+div.box44 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -845,9 +841,9 @@ div.box50 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box51 {
+div.box53 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -856,9 +852,9 @@ div.box51 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box52 {
+div.box62 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -867,9 +863,9 @@ div.box52 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box53 {
+div.box71 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -878,21 +874,20 @@ div.box53 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box54 {
+div.box80 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
     top: 55%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
 
-div.box55 {
+div.box7 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -901,9 +896,9 @@ div.box55 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box56 {
+div.box16 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -912,9 +907,9 @@ div.box56 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box57 {
+div.box25 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -923,9 +918,9 @@ div.box57 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box58 {
+div.box34 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -934,9 +929,9 @@ div.box58 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box59 {
+div.box43 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -945,9 +940,9 @@ div.box59 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box60 {
+div.box52 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -958,7 +953,7 @@ div.box60 {
 
 div.box61 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -967,9 +962,9 @@ div.box61 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box62 {
+div.box70 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -978,21 +973,20 @@ div.box62 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box63 {
+div.box79 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
     top: 65%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
 
-div.box64 {
+div.box6 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -1001,9 +995,9 @@ div.box64 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box65 {
+div.box15 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -1012,9 +1006,9 @@ div.box65 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box66 {
+div.box24 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -1023,9 +1017,9 @@ div.box66 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box67 {
+div.box33 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -1034,12 +1028,34 @@ div.box67 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box68 {
+div.box42 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
+    top: 75%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box51 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 55%;
+    top: 75%;
+    border-style: groove;
+    border-width: 1% 1% 1% 1%;
+}
+
+div.box60 {
+    position: absolute;
+    background-color: #ddff99;
+    width: 10%;
+    height: 10%;
+    left: 65%;
     top: 75%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
@@ -1047,29 +1063,7 @@ div.box68 {
 
 div.box69 {
     position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 55%;
-    top: 75%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box70 {
-    position: absolute;
-    background-color: green;
-    width: 10%;
-    height: 10%;
-    left: 65%;
-    top: 75%;
-    border-style: groove;
-    border-width: 1% 1% 1% 1%;
-}
-
-div.box71 {
-    position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -1078,21 +1072,20 @@ div.box71 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box72 {
+div.box78 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
     top: 75%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
 }
 
-div.box73 {
+div.box5 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -1101,9 +1094,9 @@ div.box73 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box74 {
+div.box14 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -1112,9 +1105,9 @@ div.box74 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box75 {
+div.box23 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -1123,9 +1116,9 @@ div.box75 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box76 {
+div.box32 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -1134,9 +1127,9 @@ div.box76 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box77 {
+div.box41 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -1145,9 +1138,9 @@ div.box77 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box78 {
+div.box50 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -1156,36 +1149,50 @@ div.box78 {
     border-width: 1% 1% 1% 1%;
 }
 
-div.box79 {
+div.box59 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
     top: 85%;
     border-style: groove;
-    border-width: 1% 1% 1% 1%;
+    border-width: 0.1% 0.1% 0.1% 0.1%;
 }
 
-div.box80 {
+div.box68 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
     top: 85%;
     border-style: groove;
-    border-width: 1% 1% 1% 1%;
+    border-width: 0.01%;
 }
 
-div.box81 {
+div.box77 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
     top: 85%;
     border-style: groove;
-    border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
+    border-width: 0.01%;
+}
+.map-clay{
+    content: url(picture/map/clay.png);
+}
+.map-wood{
+    content: url(picture/map/wood.png);
+}
+.map-crop{
+    content: url(picture/map/crop.png);
+}
+.map-iron{
+    content: url(picture/map/iron.png);
+}
+.map-balance{
+    content: url(picture/map/country.png);
 }

@@ -202,6 +202,21 @@ function getCurrentVillege(username,callback){
 }
 
 /**- LOAD PART -**/
+function loadResource(vid,callback) {
+  con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = ?',vid,function(err,result) {
+
+     ;
+    if(err) callback(err);
+    else {
+      var list_of_resource = result;
+      //console.log("Resource of "+vid+" is "+JSON.stringify(list_of_resource));
+      // Return list of resource
+      callback(null,list_of_resource);
+      //save status
+
+    }
+  })
+}
 /** Function to Load List of Resource with type **/
 exports.loadResource = function(username,callback){
   console.log("Engine Receive loadResource From Server username =  " + username);
@@ -210,19 +225,11 @@ exports.loadResource = function(username,callback){
     if (err) callback(err);
     else {
       //Select list of resource of current villege
-      con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid = ?',vid,function(err,result) {
-
-         ;
-        if(err) callback(err);
-        else {
-          var list_of_resource = result;
-          console.log("Resource of "+vid+" is "+JSON.stringify(list_of_resource));
-          // Return list of resource
-          callback(null,list_of_resource);
-          //save status
-          saveStatus(username);
-        }
+      loadResource(vid,function (err,resource_list) {
+          if (err) callback(err)
+          else callback(null,resource_list)
       })
+      saveStatus(username);
     }
   })
 }
@@ -500,6 +507,19 @@ exports.upgradeResource = function(username,pos,callback){
     }
   })
 }
+function getResourceOfVillege(vid,callback) {
+  con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function(err,result) {
+
+     ;
+    if (err) callback(err);
+    else {
+      var resource = result[0];
+      console.log('Villege vid = '+vid+" has "+JSON.stringify(resource));
+      //saveStatus
+      callback(null,resource);
+    }
+  })
+}
 /** Function to get resource left from villege **/
 exports.getResourceOfVillege = function(username,callback) {
   console.log('getResourceOfVillege username = '+username);
@@ -507,19 +527,11 @@ exports.getResourceOfVillege = function(username,callback) {
   getCurrentVillege(username,function (err,vid) {
     if (err) callback(err);
     else {
-      /** select resource from sql **/
-      con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',vid,function(err,result) {
-
-         ;
-        if (err) callback(err);
-        else {
-          var resource = result[0];
-          console.log('Villege vid = '+vid+" has "+JSON.stringify(resource));
-          //saveStatus
-          saveStatus(username)
-          callback(null,resource);
-        }
+      getResourceOfVillege(vid,function(err,resource) {
+        if (err) callback(err)
+        else callback(null,resource)
       })
+      saveStatus(username)
     }
   })
 }
@@ -885,14 +897,14 @@ function calculateresource(lastvisit,resource,info,capacity) {
   var diff_time = now_in_sec-date_in_sec;
   for (var i = 0;i<4;i++){
     if (i<3){
-      console.log('capacity '+capacity["warehouse"]);
+      //console.log('capacity '+capacity["warehouse"]);
       if (resource[i]+produce_rate[i]*diff_time/3600<=capacity["warehouse"])
-      console.log('Product '+(produce_rate[i]*diff_time/3600));
+      //console.log('Product '+(produce_rate[i]*diff_time/3600));
         resource[i]+=produce_rate[i]*diff_time/3600;
-        console.log('i Resource = '+JSON.stringify(resource));
+        //console.log('i Resource = '+JSON.stringify(resource));
     }
     else {
-      console.log('Capacity g'+capacity["granary"]);
+      //console.log('Capacity g'+capacity["granary"]);
       if (resource[i]+produce_rate[i]*diff_time/3600<=capacity["granary"])
         resource[i]+=produce_rate[i]*diff_time/3600;
     }
@@ -946,9 +958,9 @@ exports.getCapacity = function (username,callback) {
   })
 }
 /** Function to update resource **/
-function updateResource(username) {
+function updateResource(vid) {
   console.log('Updating Resource');
-  con.query('SELECT recentvillegestatus.lastvisitedtime AS lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = recentstatus.vid WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+  con.query('SELECT recentvillegestatus.lastvisitedtime AS lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = ?',vid,function (err,result) {
     console.log('Query Result : '+JSON.stringify(result));
     if (err) throw err;
     var datetime = result[0].lastvisitedtime;
@@ -957,11 +969,11 @@ function updateResource(username) {
       if (err) throw err;
       var capacity = sumcapacity;
       console.log("Cap : "+capacity);
-      exports.getResourceOfVillege(username,function (err,result) {
+      getResourceOfVillege(vid,function (err,result) {
         console.log('Query Result : '+JSON.stringify(result));
         if (err) throw err;
         var resource = [result["wood"],result["clay"],result["iron"],result["crop"]];
-        exports.loadResource(username,function (err,result) {
+        loadResource(vid,function (err,result) {
             //console.log('Query Result : '+JSON.stringify(result));
             if (err) throw err;
             var now_resource = calculateresource(datetime,resource,result,capacity);
@@ -976,9 +988,9 @@ function updateResource(username) {
   });
 }
 /** Function to update structuringtask **/
-function updateStructure(username) {
+function updateStructure(vid) {
   console.log('Updating Structure');
-  con.query('SELECT recentvillegestatus.lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = recentstatus.vid WHERE pid = (SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+  con.query('SELECT recentvillegestatus.lastvisitedtime,recentvillegestatus.vid FROM recentvillegestatus JOIN recentstatus ON recentvillegestatus.vid = ?',vid,function (err,result) {
     console.log('Query Result : '+JSON.stringify(result));
     if (err) throw err;
     var datetime = result[0].lastvisitedtime;
@@ -1011,8 +1023,16 @@ function updateStructure(username) {
 /** Update **/
 exports.update = function(username){
   console.log('update username= '+username);
-  updateResource(username);
-  updateStructure(username);
+  getCurrentVillege(username,function(err,vid){
+    if (err) console.log(err);
+    else update(vid)
+  })
+}
+function update(vid) {
+  updateResource(vid);
+  updateStructure(vid);
+  updateMarketTask(vid)
+  saveVillegeStatus(vid);
 }
 /** Function tov check what structing task is doing **/
 exports.getStructingTask = function(username,callback) {
@@ -1055,7 +1075,7 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
               var require_merchant = Math.ceil(resource/500.0);
               if (require_merchant>num_merchant){
                 console.log('Merchants are not enough : require_merchant = '+require_merchant+" avaiable merchant = "+num_merchant);
-                callback(null,false);
+                callback(null,false)
               }
               else{
                 con.query('SELECT wood,clay,iron,crop FROM villege WHERE vid = ?',home_vid,function(err,result) {
@@ -1069,7 +1089,7 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
                         else {
                           var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
                           console.log('distance  = '+distance);
-                          var timeuse_in_sec = distance*0.03;
+                          var timeuse_in_sec = distance;
                           var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
                           con.query('UPDATE villege SET ? WHERE vid = ?',[left_resource,home_vid],function (err,result) {
                             if (err) callback(err);
@@ -1078,7 +1098,8 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
                                 if (err) callback(err);
                                 else {
                                   var tid = result.insertId;
-                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop) values(?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop],function (err,result) {
+                                  console.log('Q : '+tid,des_vid,wood,clay,iron,crop,'S');
+                                  con.query('INSERT INTO markettask(tid,des_vid,wood,clay,iron,crop,type) values(?,?,?,?,?,?,?)',[tid,des_vid,wood,clay,iron,crop,'S'],function (err,result) {
                                     if (err) callback(err);
                                     else {
                                       console.log('Success transfer '+tid);
@@ -1116,7 +1137,7 @@ exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
       sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
         if (err) callback(err);
         else {
-          callback(status);
+          callback(null,status);
         }
       })
     }
@@ -1133,7 +1154,7 @@ exports.sendResource = function(username,x,y,wood,clay,iron,crop,callback){
       sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
         if (err) callback(err);
         else {
-          callback(status);
+          callback(null,status);
         }
       })
     }
@@ -1227,12 +1248,14 @@ exports.getVillegeInfo = function(username,callback) {
       con.query('SELECT name ,x,y FROM villege WHERE vid = ?',vid,function(err,result) {
         if(err) callback(err);
         else {
-          callback(result[0])
+          console.log(JSON.stringify(result[0]));
+          callback(null,result[0])
         }
       })
     }
   })
 }
+/** Function to change name of villege **/
 exports.changeName = function(username,name,callback) {
   getCurrentVillege(username,function(err,vid) {
     con.query('UPDATE villege SET name = ? WHERE vid = ?',[name,vid],function(err) {
@@ -1242,4 +1265,95 @@ exports.changeName = function(username,name,callback) {
       }
     })
   })
+}
+/** Function to update markettask **/
+function updateMarketTask(vid) {
+  console.log('UpdaTE markettask');
+  //getCurrentVillege(username,function (err,vid) {
+  //  if (err) console.log(err);
+  //  else {
+      con.query('SELECT markettask.*,endtime FROM task JOIN markettask ON task.tid = markettask.tid WHERE vid = ?',vid,function(err,result) {
+        if (err) throw err;
+        else {
+          for (var i = 0;i<result.length;i++){
+            console.log(JSON.stringify(result[i]));
+            var task = result[i]
+            var now = new Date();
+            var endtime = new Date(result[i].endtime.toString());
+            console.log('END : '+endtime.toString());
+          //  update(task.des_vid);
+            if (endtime<now) {
+              if (result[i].type=='B'){
+                con.query('DELETE FROM markettask WHERE tid=?',task.tid,function (err) {
+                  if (err)  throw err;
+                  else console.log('Success remove from markettask '+task.tid);
+                })
+                con.query('DELETE FROM task WHERE tid=?',task.tid,function (err) {
+                  if (err) throw err;
+                  else console.log('Success remove from task '+task.tid);
+                })
+              }
+              else if (result[i].type=='S'){
+                con.query('UPDATE villege SET wood=wood+?,clay=clay+?,iron=iron+?,crop=crop+? WHERE vid = ?',[task.wood,task.clay,task.iron,task.crop,task.des_vid],function(err) {
+                  if (err) throw err;
+                  else {
+                    console.log('Update '+task.des_vid);
+                  }
+                })
+                con.query('DELETE FROM markettask WHERE tid=?',task.tid,function (err) {
+                  if (err)  throw err;
+                  else console.log('Success remove from markettask '+task.tid);
+                })
+                con.query('DELETE FROM task WHERE tid=?',task.tid,function (err) {
+                  if (err) throw err;
+                  else console.log('Success remove from task '+task.tid);
+                })
+                con.query('SELECT x,y FROM villege WHERE vid IN (?)',[[vid,task.des_vid]],function(err,result) {
+                  if (err) console.log(err);
+                  else {
+                    var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
+                    console.log('distance  = '+distance);
+                    var timeuse_in_sec = distance;
+                    var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
+                    con.query('INSERT INTO task(endtime,vid) values(?,?)',[finishDate,vid],function (err,result) {
+                      if (err) console.log(err);
+                      else {
+                        var tid = result.insertId
+                        con.query('INSERT INTO markettask(tid,type,des_vid) values(?,?,?)',[tid,'B',task.des_vid],function(err) {
+                          if (err) throw err;
+                          else {
+                            console.log('Turn back');
+                          }
+                        })
+                      }
+                    })
+                  }
+                })
+
+
+              }
+            }
+          }
+        }
+      })
+    //}
+  //})
+}
+exports.getMarkettask =function (username,callback) {
+  getCurrentVillege(username,function(err,vid) {
+    if (err) callback(err);
+    else {
+      con.query('SELECT vid AS home_vid,des_vid,type,endtime,wood,clay,iron,crop FROM task JOIN markettask ON task.tid=markettask.tid WHERE vid = ? ORDER BY endtime',vid,function (err,result) {
+        if (err) callback(err);
+        else {
+          console.log('Villege vid working markettask = '+JSON.stringify(result));
+          saveStatus(username);
+          callback(null,result);
+        }
+      })
+    }
+  })
+}
+var troop = {
+
 }
