@@ -179,7 +179,7 @@ app.post('/getResource',function(req,res) {
   console.log("Current User : "+online_user[ip]);
   console.log('Server Recieve getResource From Client');
   engine.update(online_user[ip]);
-  engine.getResourceOfvillage(online_user[ip],function(err,resource) {
+  engine.getResourceOfVillage(online_user[ip],function(err,resource) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
