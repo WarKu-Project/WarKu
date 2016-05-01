@@ -2098,10 +2098,10 @@
             console.log('trading by village');
             var targetvillagename = $("#villagetarget").val();
             if (targetvillagename != "") {
-                var woodnum = parseInt($('#marketwoodnum').val());
-                var claynum = parseInt($('#marketclaynum').val());
-                var ironnum = parseInt($('#marketironnum').val());
-                var cropnum = parseInt($('#marketcropnum').val());
+                var woodnum = parseInt($('#marketwoodnum').val()) || 0;
+                var claynum = parseInt($('#marketclaynum').val()) || 0;
+                var ironnum = parseInt($('#marketironnum').val()) || 0;
+                var cropnum = parseInt($('#marketcropnum').val()) || 0;
                 var total = ((woodnum + claynum) + (ironnum + cropnum));
                 console.log(woodnum + " " + claynum + " " + ironnum + " " + cropnum)
                 console.log(total);
@@ -2140,11 +2140,12 @@
             console.log('x : '+coordinateX+' y: '+coordinateY);
             if (coordinateX <= 100 && coordinateX >= 0 && coordinateY <= 100 && coordinateY >= 0) {
                 console.log('send resource coor');
-                var woodnum = parseInt($('#marketwoodnum').val());
-                var claynum = parseInt($('#marketclaynum').val());
-                var ironnum = parseInt($('#marketironnum').val());
-                var cropnum = parseInt($('#marketcropnum').val());
+                var woodnum = parseInt($('#marketwoodnum').val())|| 0;
+                var claynum = parseInt($('#marketclaynum').val())|| 0;
+                var ironnum = parseInt($('#marketironnum').val())|| 0;
+                var cropnum = parseInt($('#marketcropnum').val())|| 0;
                 var total = ((woodnum + claynum) + (ironnum + cropnum));
+                console.log(woodnum+" "+claynum+" "+ironnum+" "+cropnum);
                 if ((total) <= 500 && (total) > 0) {
                     console.log('send resource coor2');
                     $.post("http://localhost:5555/sendResourceXY", {
