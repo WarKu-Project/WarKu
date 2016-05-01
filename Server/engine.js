@@ -1446,3 +1446,9 @@ exports.getPlayerInfo = function(usernamer,callback) {
     else callback(null,result[0])
   })
 }
+exports.changePassword = function(username,password,callback){
+  con.query('UPDATE player SET password = ? WHERE username = ?',[username,password],function(err,result) {
+    if (err) callback(err);
+    else callback(null,true)
+  })
+}

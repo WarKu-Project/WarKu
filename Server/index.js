@@ -455,7 +455,7 @@ app.post('/sendMail',function(req,res) {
   var info = req.body.info;
   engine.sendMail(online_user[ip],receiver,title,info,function(err,result) {
     if (err) {
-      throw err;
+
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
     }else {
@@ -470,7 +470,6 @@ app.post('/getPlayerInfo',function (req,res) {
   console.log("Current User : "+online_user[ip]);
   engine.getPlayerInfo(online_user[ip],function (err,result) {
     if (err) {
-      throw err;
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
     }else {
@@ -479,6 +478,36 @@ app.post('/getPlayerInfo',function (req,res) {
     }
   })
 })
+app.post('/changePassword',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var username = online_user[ip];
+  var password = req.body.password;
+  var newpassword = req.body.newpassword;
+  engine.verify(username,password,function (err,status) {
+      if (err) {
+        console.log("Server Recieve From Engine : "+err.toString());
+        res.end("Something wrong on our server :( Try Again~");
+      }else {
+        if (status){
+          engine.changePassword(username,newpassword,function (err,status) {
+            if (err) {
+              console.log("Server Recieve From Engine : "+err.toString());
+              res.end("Something wrong on our server :( Try Again~");
+            }
+            else {
+              res.end(JSON.stringify(status));
+            }
+          })
+        }
+        else {
+          res.end(JSON.stringify(false));
+        }
+      }
+  })
+})
+
 app.listen(5555,function(){
   console.log("Started on PORT 5555");
 })
