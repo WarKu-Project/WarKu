@@ -529,7 +529,7 @@ app.post('/getMail',function(req,res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("\nCurrent IP : "+ip);
   console.log("Current User : "+online_user[ip]);
-  var mid = req.body.mid;
+  var mid = parseInt(req.body.mid);
   engine.getMail(mid,function (err,result) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());

@@ -1472,7 +1472,7 @@ exports.getSentbox = function (username,callback) {
   })
 }
 exports.getMail = function(mid,callback) {
-  con.query('SELECT username AS sender,tile,info ,sendtime FROM mail JOIN player ON mail.sender_id = player.pid WHERE mid=?',function (err,result) {
+  con.query('SELECT username AS sender,title,info ,sendtime FROM mail JOIN player ON mail.sender_id = player.pid WHERE mid=?',mid,function (err,result) {
     if (err) callback(err)
     else{
       callback(null,result[0])
