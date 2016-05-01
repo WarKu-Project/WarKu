@@ -1444,7 +1444,7 @@ exports.sendMail = function(username,receiver,title,info,callback) {
   })
 }
 exports.getPlayerInfo = function(username,callback) {
-  con.query('SELECT username,email FROM player WHERE username = ?',username,function (err,result) {
+  con.query('SELECT username,password,email FROM player WHERE username = ?',username,function (err,result) {
     if (err) callback(err)
     else callback(null,result[0])
   })
