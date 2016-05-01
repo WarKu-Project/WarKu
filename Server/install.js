@@ -75,7 +75,8 @@ con.query('CREATE TABLE markettask (tid int NOT NULL,des_vid int NOT NULL, wood 
   if (err) console.log(err.toString());
   else console.log('markettask is created to mysql');
 });
-
+/** Initilize troop table **/
+con.query('CREATE TABLE troop (pid int NOT NULL,vid int NOT NULL,)')
 //Initialize starter village
 // for (var j = 0;j<100;j++){
 //   var randomXY = [Math.floor(Math.random()*100),Math.floor(Math.random()*100)];

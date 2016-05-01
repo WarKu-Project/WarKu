@@ -1144,7 +1144,7 @@ exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
   })
 }
 /** Function to add market task when send same resource **/
-exports.sendResource = function(username,x,y,wood,clay,iron,crop,callback){
+exports.sendResourceXY= function(username,x,y,wood,clay,iron,crop,callback){
     console.log("Send Resource "+username);
 
   con.query('SELECT vid FROM village WHERE x = ? AND y=?',[x,y],function(err,result) {
