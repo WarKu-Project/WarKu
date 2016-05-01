@@ -179,7 +179,7 @@ app.post('/getResource',function(req,res) {
   console.log("Current User : "+online_user[ip]);
   console.log('Server Recieve getResource From Client');
   engine.update(online_user[ip]);
-  engine.getResourceOfVillege(online_user[ip],function(err,resource) {
+  engine.getResourceOfvillage(online_user[ip],function(err,resource) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
@@ -291,13 +291,13 @@ app.post('/getStructingTask',function(req,res) {
     }
   })
 })
-app.post('/getVillegeInfo',function(req,res) {
+app.post('/getVillageInfo',function(req,res) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("\nCurrent IP : "+ip);
   console.log("Current User : "+online_user[ip]);
   console.log('Server Recieve getStructingTask From Client');
   engine.update(online_user[ip]);
-  engine.getVillegeInfo(online_user[ip],function(err,result) {
+  engine.getVillageInfo(online_user[ip],function(err,result) {
     if (err) {
       console.log("Server Recieve From Engine : "+err.toString());
       res.end("Something wrong on our server :( Try Again~");
