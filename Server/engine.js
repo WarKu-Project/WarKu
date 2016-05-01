@@ -1281,36 +1281,9 @@ function updateMarketTask(vid) {
             var now = new Date();
             var endtime = new Date(result[i].endtime.toString());
             console.log('END : '+endtime.toString());
-            update(task.des_vid);
+          //  update(task.des_vid);
             if (endtime<now) {
-              if (result[i].type=='S'){
-                con.query('UPDATE villege SET wood=wood+?,clay=clay+?,iron=iron+?,crop=crop+? WHERE vid = ?',[task.wood,task.clay,task.iron,task.crop,task.des_vid],function(err) {
-                  if (err) throw err;
-                  else {
-                    console.log('Update '+task.des_vid);
-                  }
-                })
-                con.query('UPDATE markettask SET type = ? WHERE tid = ?',['B',task.tid],function(err) {
-                  if (err) throw err;
-                  else {
-                    console.log('Turn back');
-                  }
-                })
-                con.query('SELECT x,y FROM villege WHERE vid IN (?)',[[vid,task.des_vid]],function(err,result) {
-                  if (err) console.log(err);
-                  else {
-                    var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
-                    console.log('distance  = '+distance);
-                    var timeuse_in_sec = distance*10;
-                    var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
-                    con.query('UPDATE task endtime=? WHERE tid = ?',[finishDate,task.tid],function (err) {
-                      if (err) console.log(err);
-                      else console.log('Turn back time');
-                    })
-                  }
-                })
-              }
-              else if (result[i].type=='B'){
+              if (result[i].type=='B'){
                 con.query('DELETE FROM markettask WHERE tid=?',task.tid,function (err) {
                   if (err)  throw err;
                   else console.log('Success remove from markettask '+task.tid);
@@ -1319,6 +1292,45 @@ function updateMarketTask(vid) {
                   if (err) throw err;
                   else console.log('Success remove from task '+task.tid);
                 })
+              }
+              else if (result[i].type=='S'){
+                con.query('UPDATE villege SET wood=wood+?,clay=clay+?,iron=iron+?,crop=crop+? WHERE vid = ?',[task.wood,task.clay,task.iron,task.crop,task.des_vid],function(err) {
+                  if (err) throw err;
+                  else {
+                    console.log('Update '+task.des_vid);
+                  }
+                })
+                con.query('DELETE FROM markettask WHERE tid=?',task.tid,function (err) {
+                  if (err)  throw err;
+                  else console.log('Success remove from markettask '+task.tid);
+                })
+                con.query('DELETE FROM task WHERE tid=?',task.tid,function (err) {
+                  if (err) throw err;
+                  else console.log('Success remove from task '+task.tid);
+                })
+                con.query('SELECT x,y FROM villege WHERE vid IN (?)',[[vid,task.des_vid]],function(err,result) {
+                  if (err) console.log(err);
+                  else {
+                    var distance = Math.sqrt(Math.pow(result[0].x-result[1].x,2)+Math.pow(result[0].y-result[1].y,2))
+                    console.log('distance  = '+distance);
+                    var timeuse_in_sec = distance*10;
+                    var finishDate = calculateFinishDate(new Date(),0,0,timeuse_in_sec);
+                    con.query('INSERT INTO task(endtime,vid) values(?,?)',[finishDate,vid],function (err,result) {
+                      if (err) console.log(err);
+                      else {
+                        var tid = result.insertId
+                        con.query('INSERT INTO markettask(tid,type,des_vid) values(?,?,?)',[tid,'B',task.des_vid],function(err) {
+                          if (err) throw err;
+                          else {
+                            console.log('Turn back');
+                          }
+                        })
+                      }
+                    })
+                  }
+                })
+
+
               }
             }
           }
@@ -1341,4 +1353,7 @@ exports.getMarkettask =function (username,callback) {
       })
     }
   })
+}
+var troop = {
+
 }
