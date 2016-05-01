@@ -153,14 +153,17 @@
             <div class="jumbotron villageDetailbar">
                 <div class="row">
                     Village : <span id="villagename"></span>
-                    <button id="changevillagename" type="button" class="btn btn-default">Change Name</button>
-                    <input type="text" name="Village Name" id="inputvillagename">
-                    <br>
-                    <button id="confirmvillagename" type="button" class="btn btn-default">OK</button>
-                    <button id="cancelvillagename" type="button" class="btn btn-default">Cancel</button>
+
                 </div>
                 <div class="row">
                     Coordinates : [<span id="coordinate_x">0</span>,<span id="coordinate_y">0</span>]
+                </div>
+                <br>
+                <div class="row">
+                    <button id="changevillagename" type="button" class="btn btn-danger">Change Village Name</button>
+                    <input type="text" name="Village Name" id="inputvillagename">
+                    <button id="confirmvillagename" type="button" class="btn btn-success">OK</button>
+                    <button id="cancelvillagename" type="button" class="btn btn-warning">Close</button>
                 </div>
             </div>
         </div>
@@ -666,6 +669,26 @@
 
     </div>
 
+    <div class="modal fade" id="map-modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title"><span id="level-village"></span></h3>
+                </div>
+                <div class="modal-body">
+                    </p>
+                    <div class="village-upgrademodel"></div>
+                    </p>
+                    <span id="setWood-village"></span><span id="setClay-village"></span><span id="setIron-village"></span><span id="setCrop-village"></span></p>
+                    <span id="upgrade-time-village"></span>
+                    <button id="upgradebtn-village" type="button" class="btn btn-default" data-dismiss="modal" value=""></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--report container-->
     <div class="container" id="report_container">
         <div class="village">
@@ -714,187 +737,187 @@
         var resourceAllTypes = ["wood", "clay", "iron", "crop"];
         var resource_info = {
             "crop": {
-                cost: [[70, 90, 70, 20], [115, 150, 115, 35], [195, 250, 195, 55], [325, 420, 325, 95], [545, 700, 545, 155], [910, 1170, 910, 260], [1520, 1950, 1520, 435], [2535, 3260, 2535, 725], [4235, 5445, 4235, 1210], [7070, 9095, 7070, 2020]]
-                , consumption: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
-                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
-                , time: [{
-                    hour: 0
-                    , min: 0
-                    , sec: 30
+                cost: [[70, 90, 70, 20], [115, 150, 115, 35], [195, 250, 195, 55], [325, 420, 325, 95], [545, 700, 545, 155], [910, 1170, 910, 260], [1520, 1950, 1520, 435], [2535, 3260, 2535, 725], [4235, 5445, 4235, 1210], [7070, 9095, 7070, 2020]],
+                consumption: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+                produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500],
+                time: [{
+                    hour: 0,
+                    min: 0,
+                    sec: 30
                 }, {
-                    hour: 0
-                    , min: 1
-                    , sec: 15
+                    hour: 0,
+                    min: 1,
+                    sec: 15
                 }, {
-                    hour: 0
-                    , min: 3
-                    , sec: 0
+                    hour: 0,
+                    min: 3,
+                    sec: 0
                 }, {
-                    hour: 0
-                    , min: 5
-                    , sec: 30
+                    hour: 0,
+                    min: 5,
+                    sec: 30
                 }, {
-                    hour: 0
-                    , min: 9
-                    , sec: 20
+                    hour: 0,
+                    min: 9,
+                    sec: 20
                 }, {
-                    hour: 0
-                    , min: 15
-                    , sec: 30
+                    hour: 0,
+                    min: 15,
+                    sec: 30
                 }, {
-                    hour: 0
-                    , min: 25
-                    , sec: 50
+                    hour: 0,
+                    min: 25,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 36
-                    , sec: 30
+                    hour: 0,
+                    min: 36,
+                    sec: 30
                 }, {
-                    hour: 1
-                    , min: 8
-                    , sec: 15
+                    hour: 1,
+                    min: 8,
+                    sec: 15
                 }, {
-                    hour: 1
-                    , min: 45
-                    , sec: 30
+                    hour: 1,
+                    min: 45,
+                    sec: 30
                 }]
-            }
-            , "iron": {
-                cost: [[100, 80, 30, 60], [165, 135, 50, 100], [280, 225, 85, 165], [465, 375, 140, 280], [780, 620, 235, 465], [1300, 1040, 390, 780], [2170, 1735, 650, 1300], [3625, 2900, 1085, 2175], [6050, 4840, 1815, 3630], [10105, 8080, 3030, 6060]]
-                , consumption: [3, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
-                , time: [{
-                    hour: 0
-                    , min: 1
-                    , sec: 5
+            },
+            "iron": {
+                cost: [[100, 80, 30, 60], [165, 135, 50, 100], [280, 225, 85, 165], [465, 375, 140, 280], [780, 620, 235, 465], [1300, 1040, 390, 780], [2170, 1735, 650, 1300], [3625, 2900, 1085, 2175], [6050, 4840, 1815, 3630], [10105, 8080, 3030, 6060]],
+                consumption: [3, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500],
+                time: [{
+                    hour: 0,
+                    min: 1,
+                    sec: 5
                 }, {
-                    hour: 0
-                    , min: 3
-                    , sec: 0
+                    hour: 0,
+                    min: 3,
+                    sec: 0
                 }, {
-                    hour: 0
-                    , min: 5
-                    , sec: 30
+                    hour: 0,
+                    min: 5,
+                    sec: 30
                 }, {
-                    hour: 0
-                    , min: 9
-                    , sec: 35
+                    hour: 0,
+                    min: 9,
+                    sec: 35
                 }, {
-                    hour: 0
-                    , min: 16
-                    , sec: 0
+                    hour: 0,
+                    min: 16,
+                    sec: 0
                 }, {
-                    hour: 0
-                    , min: 26
-                    , sec: 30
+                    hour: 0,
+                    min: 26,
+                    sec: 30
                 }, {
-                    hour: 0
-                    , min: 42
-                    , sec: 35
+                    hour: 0,
+                    min: 42,
+                    sec: 35
                 }, {
-                    hour: 1
-                    , min: 8
-                    , sec: 0
+                    hour: 1,
+                    min: 8,
+                    sec: 0
                 }, {
-                    hour: 1
-                    , min: 49
-                    , sec: 5
+                    hour: 1,
+                    min: 49,
+                    sec: 5
                 }, {
-                    hour: 2
-                    , min: 58
-                    , sec: 30
+                    hour: 2,
+                    min: 58,
+                    sec: 30
                 }]
-            }
-            , "clay": {
-                cost: [[80, 40, 80, 50], [135, 65, 135, 85], [225, 110, 225, 140], [375, 185, 375, 235], [620, 310, 620, 390], [1040, 520, 1040, 650], [1735, 870, 1735, 1085], [2900, 1450, 2900, 1810], [4840, 2420, 4840, 3025], [8080, 4040, 8080, 5050]]
-                , consumption: [2, 1, 1, 1, 1, 5, 5, 5, 5, 5]
-                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
-                , time: [{
-                    hour: 0
-                    , min: 0
-                    , sec: 40
+            },
+            "clay": {
+                cost: [[80, 40, 80, 50], [135, 65, 135, 85], [225, 110, 225, 140], [375, 185, 375, 235], [620, 310, 620, 390], [1040, 520, 1040, 650], [1735, 870, 1735, 1085], [2900, 1450, 2900, 1810], [4840, 2420, 4840, 3025], [8080, 4040, 8080, 5050]],
+                consumption: [2, 1, 1, 1, 1, 5, 5, 5, 5, 5],
+                produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500],
+                time: [{
+                    hour: 0,
+                    min: 0,
+                    sec: 40
                 }, {
-                    hour: 0
-                    , min: 1
-                    , sec: 50
+                    hour: 0,
+                    min: 1,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 3
-                    , sec: 30
+                    hour: 0,
+                    min: 3,
+                    sec: 30
                 }, {
-                    hour: 0
-                    , min: 6
-                    , sec: 20
+                    hour: 0,
+                    min: 6,
+                    sec: 20
                 }, {
-                    hour: 0
-                    , min: 10
-                    , sec: 50
+                    hour: 0,
+                    min: 10,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 18
-                    , sec: 10
+                    hour: 0,
+                    min: 18,
+                    sec: 10
                 }, {
-                    hour: 0
-                    , min: 29
-                    , sec: 50
+                    hour: 0,
+                    min: 29,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 48
-                    , sec: 20
+                    hour: 0,
+                    min: 48,
+                    sec: 20
                 }, {
-                    hour: 1
-                    , min: 18
-                    , sec: 10
+                    hour: 1,
+                    min: 18,
+                    sec: 10
                 }, {
-                    hour: 2
-                    , min: 5
-                    , sec: 30
+                    hour: 2,
+                    min: 5,
+                    sec: 30
                 }]
-            }
-            , "wood": {
-                cost: [[40, 100, 50, 60], [65, 165, 85, 100], [110, 280, 140, 165], [185, 465, 235, 280], [310, 780, 390, 465], [520, 1300, 650, 780], [870, 2170, 1085, 1300], [1450, 3625, 1810, 2175], [2420, 6050, 3025, 3630], [4040, 10105, 5050, 6060]]
-                , consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2]
-                , produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500]
-                , time: [{
-                    hour: 0
-                    , min: 0
-                    , sec: 50
+            },
+            "wood": {
+                cost: [[40, 100, 50, 60], [65, 165, 85, 100], [110, 280, 140, 165], [185, 465, 235, 280], [310, 780, 390, 465], [520, 1300, 650, 780], [870, 2170, 1085, 1300], [1450, 3625, 1810, 2175], [2420, 6050, 3025, 3630], [4040, 10105, 5050, 6060]],
+                consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2],
+                produce: [15, 25, 45, 75, 125, 155, 255, 355, 505, 725, 1500],
+                time: [{
+                    hour: 0,
+                    min: 0,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 2
-                    , sec: 0
+                    hour: 0,
+                    min: 2,
+                    sec: 0
                 }, {
-                    hour: 0
-                    , min: 3
-                    , sec: 50
+                    hour: 0,
+                    min: 3,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 7
-                    , sec: 0
+                    hour: 0,
+                    min: 7,
+                    sec: 0
                 }, {
-                    hour: 0
-                    , min: 11
-                    , sec: 50
+                    hour: 0,
+                    min: 11,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 18
-                    , sec: 50
+                    hour: 0,
+                    min: 18,
+                    sec: 50
                 }, {
-                    hour: 0
-                    , min: 32
-                    , sec: 0
+                    hour: 0,
+                    min: 32,
+                    sec: 0
                 }, {
-                    hour: 1
-                    , min: 51
-                    , sec: 50
+                    hour: 1,
+                    min: 51,
+                    sec: 50
                 }, {
-                    hour: 1
-                    , min: 23
-                    , sec: 50
+                    hour: 1,
+                    min: 23,
+                    sec: 50
                 }, {
-                    hour: 2
-                    , min: 14
-                    , sec: 50
+                    hour: 2,
+                    min: 14,
+                    sec: 50
                 }]
             }
         };
@@ -1240,464 +1263,464 @@
 
         var building_info = {
                 "villagehall": {
-                    cost: [[70, 40, 60, 20], [90, 50, 75, 25], [115, 65, 100, 35], [145, 85, 125, 40], [190, 105, 160, 55], [240, 135, 205, 70], [310, 175, 265, 90], [395, 225, 340, 115], [505, 290, 430, 145], [645, 370, 555, 185]]
-                    , consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2]
-                    , time: [{
-                        hour: 0
-                        , min: 06
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 08
-                        , sec: 44
-                    }, {
-                        hour: 0
-                        , min: 11
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 13
-                        , sec: 54
-                    }, {
-                        hour: 0
-                        , min: 17
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 20
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 25
-                        , sec: 14
-                    }, {
-                        hour: 0
-                        , min: 30
-                        , sec: 16
-                    }, {
-                        hour: 0
-                        , min: 36
-                        , sec: 06
-                    }, {
-                        hour: 0
-                        , min: 42
-                        , sec: 52
-                    }]
-                    , info: "Building leaders live in the main building. The much higher level you can more upgrade or create village or resource at the same time."
-                }
-                , "market": {
-                    cost: [[80, 70, 120, 70], [100, 90, 155, 90], [130, 115, 195, 115], [170, 145, 250, 145], [215, 190, 320, 190], [275, 240, 410, 240], [350, 310, 530, 310], [450, 395, 675, 395], [575, 505, 865, 505], [740, 645, 1105, 645]]
-                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
-                    , time: [{
-                        hour: 0
-                        , min: 06
-                        , sec: 00
-                    }, {
-                        hour: 0
-                        , min: 07
-                        , sec: 58
-                    }, {
-                        hour: 0
-                        , min: 10
-                        , sec: 14
-                    }, {
-                        hour: 0
-                        , min: 12
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 15
-                        , sec: 56
-                    }, {
-                        hour: 0
-                        , min: 19
-                        , sec: 28
-                    }, {
-                        hour: 0
-                        , min: 23
-                        , sec: 36
-                    }, {
-                        hour: 0
-                        , min: 28
-                        , sec: 22
-                    }, {
-                        hour: 0
-                        , min: 33
-                        , sec: 54
-                    }, {
-                        hour: 0
-                        , min: 40
-                        , sec: 20
-                    }]
-                    , info: "The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously ."
-                }
-                , "barracks": {
-                    cost: [[210, 140, 260, 120], [270, 180, 335, 155], [345, 230, 425, 195], [440, 295, 545, 250], [565, 375, 700, 320], [720, 480, 895, 410], [925, 615, 1145, 530], [1180, 790, 1465, 675], [1515, 1010, 1875, 865], [1935, 1290, 2400, 1105]]
-                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
-                    , time: [{
-                        hour: 0
-                        , min: 06
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 08
-                        , sec: 44
-                    }, {
-                        hour: 0
-                        , min: 11
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 13
-                        , sec: 54
-                    }, {
-                        hour: 0
-                        , min: 17
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 20
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 25
-                        , sec: 14
-                    }, {
-                        hour: 0
-                        , min: 30
-                        , sec: 16
-                    }, {
-                        hour: 0
-                        , min: 36
-                        , sec: 06
-                    }, {
-                        hour: 0
-                        , min: 42
-                        , sec: 52
-                    }]
-                    , info: "A large military barracks allows you to build more troops at the same time . But resources are three times normal ."
-                }
-                , "academy": {
-                    cost: [[220, 160, 90, 40], [280, 205, 115, 50], [360, 260, 145, 65], [460, 335, 190, 85], [590, 430, 240, 105], [755, 550, 310, 135], [970, 705, 395, 175], [1240, 900, 505, 225], [1585, 1155, 650, 290], [2030, 1475, 830, 370]]
-                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
-                    , time: [{
-                        hour: 0
-                        , min: 06
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 08
-                        , sec: 44
-                    }, {
-                        hour: 0
-                        , min: 11
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 13
-                        , sec: 54
-                    }, {
-                        hour: 0
-                        , min: 17
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 20
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 25
-                        , sec: 14
-                    }, {
-                        hour: 0
-                        , min: 30
-                        , sec: 16
-                    }, {
-                        hour: 0
-                        , min: 36
-                        , sec: 06
-                    }, {
-                        hour: 0
-                        , min: 42
-                        , sec: 52
-                    }]
-                    , info: "Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village."
-                }
-                , "stable": {
-                    cost: [[260, 140, 220, 100], [335, 180, 280, 130], [425, 230, 360, 165], [545, 295, 460, 210], [700, 375, 590, 270], [895, 480, 755, 345], [1145, 615, 970, 440], [1465, 790, 1240, 565], [1875, 1010, 1585, 720], [2400, 1290, 2030, 920]]
-                    , consumption: [5, 3, 3, 3, 3, 3, 3, 3, 3, 3]
-                    , time: [{
-                        hour: 0
-                        , min: 07
-                        , sec: 20
-                    }, {
-                        hour: 0
-                        , min: 09
-                        , sec: 30
-                    }, {
-                        hour: 0
-                        , min: 12
-                        , sec: 02
-                    }, {
-                        hour: 0
-                        , min: 14
-                        , sec: 58
-                    }, {
-                        hour: 0
-                        , min: 18
-                        , sec: 20
-                    }, {
-                        hour: 0
-                        , min: 22
-                        , sec: 16
-                    }, {
-                        hour: 0
-                        , min: 26
-                        , sec: 50
-                    }, {
-                        hour: 0
-                        , min: 32
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 38
-                        , sec: 16
-                    }, {
-                        hour: 0
-                        , min: 45
-                        , sec: 24
-                    }]
-                    , info: "The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price."
-                }
-                , "headquarter": {
-                    cost: [[700, 670, 700, 240], [930, 890, 930, 320], [1240, 1185, 1240, 425], [1645, 1575, 1645, 565], [2190, 2095, 2190, 750], [2915, 2790, 2915, 1000], [3875, 3710, 3875, 1330], [5155, 4930, 5155, 1765], [6855, 6560, 6855, 2350], [9115, 8725, 9115, 3125]]
-                    , consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2]
-                    , time: [{
-                        hour: 0
-                        , min: 07
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 08
-                        , sec: 54
-                    }, {
-                        hour: 0
-                        , min: 10
-                        , sec: 18
-                    }, {
-                        hour: 0
-                        , min: 11
-                        , sec: 58
-                    }, {
-                        hour: 0
-                        , min: 13
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 16
-                        , sec: 06
-                    }, {
-                        hour: 0
-                        , min: 18
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 21
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 25
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 29
-                        , sec: 10
-                    }]
-                    , info: "The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised ."
-                }
-                , "workshop": {
-                    cost: [[460, 510, 600, 320], [590, 655, 770, 410], [755, 835, 985, 525], [965, 1070, 1260, 670], [1235, 1370, 1610, 860], [1580, 1750, 2060, 1100], [2025, 2245, 2640, 1405], [2590, 2870, 3380, 1800], [3315, 3675, 4325, 2305], [4245, 4705, 5535, 2950]]
-                    , consumption: [3, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-                    , time: [{
-                        hour: 0
-                        , min: 10
-                        , sec: 00
-                    }, {
-                        hour: 0
-                        , min: 12
-                        , sec: 36
-                    }, {
-                        hour: 0
-                        , min: 15
-                        , sec: 36
-                    }, {
-                        hour: 0
-                        , min: 19
-                        , sec: 06
-                    }, {
-                        hour: 0
-                        , min: 23
-                        , sec: 10
-                    }, {
-                        hour: 0
-                        , min: 27
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 33
-                        , sec: 20
-                    }, {
-                        hour: 0
-                        , min: 39
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 47
-                        , sec: 02
-                    }, {
-                        hour: 0
-                        , min: 55
-                        , sec: 32
-                    }]
-                    , info: "Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster ."
-                }
-                , "smithy": {
-                    cost: [[180, 250, 500, 160], [230, 320, 640, 205], [295, 410, 820, 260], [375, 525, 1050, 335], [485, 670, 1340, 430], [620, 860, 1720, 550], [790, 1100, 2200, 705], [1015, 1405, 2815, 900], [1295, 1800, 3605, 1155], [1660, 2305, 4610, 1475]]
-                    , consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3]
-                    , time: [{
-                        hour: 0
-                        , min: 06
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 08
-                        , sec: 44
-                    }, {
-                        hour: 0
-                        , min: 11
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 13
-                        , sec: 54
-                    }, {
-                        hour: 0
-                        , min: 17
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 20
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 25
-                        , sec: 14
-                    }, {
-                        hour: 0
-                        , min: 30
-                        , sec: 16
-                    }, {
-                        hour: 0
-                        , min: 36
-                        , sec: 06
-                    }, {
-                        hour: 0
-                        , min: 42
-                        , sec: 52
-                    }]
-                    , info: "Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy."
-                }
-                , "granary": {
-                    cost: [[80, 100, 70, 20], [100, 130, 90, 25], [130, 165, 115, 35], [170, 210, 145, 40], [215, 270, 190, 55], [275, 345, 240, 70], [350, 440, 310, 90], [450, 565, 395, 115], [575, 720, 505, 145], [740, 920, 645, 185]]
-                    , consumption: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-                    , time: [{
-                        hour: 0
-                        , min: 05
-                        , sec: 20
-                    }, {
-                        hour: 0
-                        , min: 07
-                        , sec: 12
-                    }, {
-                        hour: 0
-                        , min: 09
-                        , sec: 20
-                    }, {
-                        hour: 0
-                        , min: 11
-                        , sec: 50
-                    }, {
-                        hour: 0
-                        , min: 14
-                        , sec: 44
-                    }, {
-                        hour: 0
-                        , min: 18
-                        , sec: 04
-                    }, {
-                        hour: 0
-                        , min: 21
-                        , sec: 58
-                    }, {
-                        hour: 0
-                        , min: 26
-                        , sec: 30
-                    }, {
-                        hour: 0
-                        , min: 31
-                        , sec: 44
-                    }, {
-                        hour: 0
-                        , min: 37
-                        , sec: 48
-                    }]
-                    , info: "Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe."
-                }
-                , "warehouse": {
-                    cost: [[130, 160, 90, 40], [165, 205, 115, 50], [215, 260, 145, 65], [275, 335, 190, 85], [350, 430, 240, 105], [445, 550, 310, 135], [570, 705, 395, 175], [730, 900, 505, 225], [935, 1155, 650, 290], [1200, 1475, 830, 370]]
-                    , consumption: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-                    , time: [{
-                        hour: 0
-                        , min: 06
-                        , sec: 40
-                    }, {
-                        hour: 0
-                        , min: 08
-                        , sec: 44
-                    }, {
-                        hour: 0
-                        , min: 11
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 13
-                        , sec: 54
-                    }, {
-                        hour: 0
-                        , min: 17
-                        , sec: 08
-                    }, {
-                        hour: 0
-                        , min: 20
-                        , sec: 52
-                    }, {
-                        hour: 0
-                        , min: 25
-                        , sec: 14
-                    }, {
-                        hour: 0
-                        , min: 30
-                        , sec: 16
-                    }, {
-                        hour: 0
-                        , min: 36
-                        , sec: 06
-                    }, {
-                        hour: 0
-                        , min: 42
-                        , sec: 52
-                    }]
-                    , info: "Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe ."
+                    cost: [[70, 40, 60, 20], [90, 50, 75, 25], [115, 65, 100, 35], [145, 85, 125, 40], [190, 105, 160, 55], [240, 135, 205, 70], [310, 175, 265, 90], [395, 225, 340, 115], [505, 290, 430, 145], [645, 370, 555, 185]],
+                    consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2],
+                    time: [{
+                        hour: 0,
+                        min: 06,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 08,
+                        sec: 44
+                    }, {
+                        hour: 0,
+                        min: 11,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 13,
+                        sec: 54
+                    }, {
+                        hour: 0,
+                        min: 17,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 20,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 25,
+                        sec: 14
+                    }, {
+                        hour: 0,
+                        min: 30,
+                        sec: 16
+                    }, {
+                        hour: 0,
+                        min: 36,
+                        sec: 06
+                    }, {
+                        hour: 0,
+                        min: 42,
+                        sec: 52
+                    }],
+                    info: "Building leaders live in the main building. The much higher level you can more upgrade or create village or resource at the same time."
+                },
+                "market": {
+                    cost: [[80, 70, 120, 70], [100, 90, 155, 90], [130, 115, 195, 115], [170, 145, 250, 145], [215, 190, 320, 190], [275, 240, 410, 240], [350, 310, 530, 310], [450, 395, 675, 395], [575, 505, 865, 505], [740, 645, 1105, 645]],
+                    consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3],
+                    time: [{
+                        hour: 0,
+                        min: 06,
+                        sec: 00
+                    }, {
+                        hour: 0,
+                        min: 07,
+                        sec: 58
+                    }, {
+                        hour: 0,
+                        min: 10,
+                        sec: 14
+                    }, {
+                        hour: 0,
+                        min: 12,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 15,
+                        sec: 56
+                    }, {
+                        hour: 0,
+                        min: 19,
+                        sec: 28
+                    }, {
+                        hour: 0,
+                        min: 23,
+                        sec: 36
+                    }, {
+                        hour: 0,
+                        min: 28,
+                        sec: 22
+                    }, {
+                        hour: 0,
+                        min: 33,
+                        sec: 54
+                    }, {
+                        hour: 0,
+                        min: 40,
+                        sec: 20
+                    }],
+                    info: "The markets you can trade resources with other players have . Even higher You can transport more resources simultaneously ."
+                },
+                "barracks": {
+                    cost: [[210, 140, 260, 120], [270, 180, 335, 155], [345, 230, 425, 195], [440, 295, 545, 250], [565, 375, 700, 320], [720, 480, 895, 410], [925, 615, 1145, 530], [1180, 790, 1465, 675], [1515, 1010, 1875, 865], [1935, 1290, 2400, 1105]],
+                    consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3],
+                    time: [{
+                        hour: 0,
+                        min: 06,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 08,
+                        sec: 44
+                    }, {
+                        hour: 0,
+                        min: 11,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 13,
+                        sec: 54
+                    }, {
+                        hour: 0,
+                        min: 17,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 20,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 25,
+                        sec: 14
+                    }, {
+                        hour: 0,
+                        min: 30,
+                        sec: 16
+                    }, {
+                        hour: 0,
+                        min: 36,
+                        sec: 06
+                    }, {
+                        hour: 0,
+                        min: 42,
+                        sec: 52
+                    }],
+                    info: "A large military barracks allows you to build more troops at the same time . But resources are three times normal ."
+                },
+                "academy": {
+                    cost: [[220, 160, 90, 40], [280, 205, 115, 50], [360, 260, 145, 65], [460, 335, 190, 85], [590, 430, 240, 105], [755, 550, 310, 135], [970, 705, 395, 175], [1240, 900, 505, 225], [1585, 1155, 650, 290], [2030, 1475, 830, 370]],
+                    consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3],
+                    time: [{
+                        hour: 0,
+                        min: 06,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 08,
+                        sec: 44
+                    }, {
+                        hour: 0,
+                        min: 11,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 13,
+                        sec: 54
+                    }, {
+                        hour: 0,
+                        min: 17,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 20,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 25,
+                        sec: 14
+                    }, {
+                        hour: 0,
+                        min: 30,
+                        sec: 16
+                    }, {
+                        hour: 0,
+                        min: 36,
+                        sec: 06
+                    }, {
+                        hour: 0,
+                        min: 42,
+                        sec: 52
+                    }],
+                    info: "Education New Forces types being researched at this school. Add school level to study the forces that are even more effective . After research, the military unit that you want done . You can train soldiers in this village."
+                },
+                "stable": {
+                    cost: [[260, 140, 220, 100], [335, 180, 280, 130], [425, 230, 360, 165], [545, 295, 460, 210], [700, 375, 590, 270], [895, 480, 755, 345], [1145, 615, 970, 440], [1465, 790, 1240, 565], [1875, 1010, 1585, 720], [2400, 1290, 2030, 920]],
+                    consumption: [5, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+                    time: [{
+                        hour: 0,
+                        min: 07,
+                        sec: 20
+                    }, {
+                        hour: 0,
+                        min: 09,
+                        sec: 30
+                    }, {
+                        hour: 0,
+                        min: 12,
+                        sec: 02
+                    }, {
+                        hour: 0,
+                        min: 14,
+                        sec: 58
+                    }, {
+                        hour: 0,
+                        min: 18,
+                        sec: 20
+                    }, {
+                        hour: 0,
+                        min: 22,
+                        sec: 16
+                    }, {
+                        hour: 0,
+                        min: 26,
+                        sec: 50
+                    }, {
+                        hour: 0,
+                        min: 32,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 38,
+                        sec: 16
+                    }, {
+                        hour: 0,
+                        min: 45,
+                        sec: 24
+                    }],
+                    info: "The great horse stables allows you to build large military units simultaneously . The cost is three times the normal price."
+                },
+                "headquarter": {
+                    cost: [[700, 670, 700, 240], [930, 890, 930, 320], [1240, 1185, 1240, 425], [1645, 1575, 1645, 565], [2190, 2095, 2190, 750], [2915, 2790, 2915, 1000], [3875, 3710, 3875, 1330], [5155, 4930, 5155, 1765], [6855, 6560, 6855, 2350], [9115, 8725, 9115, 3125]],
+                    consumption: [2, 1, 1, 1, 1, 2, 2, 2, 2, 2],
+                    time: [{
+                        hour: 0,
+                        min: 07,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 08,
+                        sec: 54
+                    }, {
+                        hour: 0,
+                        min: 10,
+                        sec: 18
+                    }, {
+                        hour: 0,
+                        min: 11,
+                        sec: 58
+                    }, {
+                        hour: 0,
+                        min: 13,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 16,
+                        sec: 06
+                    }, {
+                        hour: 0,
+                        min: 18,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 21,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 25,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 29,
+                        sec: 10
+                    }],
+                    info: "The mansion you can train a hero and occupied the area around the oasis when you raise the level to 10 level will affect the rate of production resources raised ."
+                },
+                "workshop": {
+                    cost: [[460, 510, 600, 320], [590, 655, 770, 410], [755, 835, 985, 525], [965, 1070, 1260, 670], [1235, 1370, 1610, 860], [1580, 1750, 2060, 1100], [2025, 2245, 2640, 1405], [2590, 2870, 3380, 1800], [3315, 3675, 4325, 2305], [4245, 4705, 5535, 2950]],
+                    consumption: [3, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                    time: [{
+                        hour: 0,
+                        min: 10,
+                        sec: 00
+                    }, {
+                        hour: 0,
+                        min: 12,
+                        sec: 36
+                    }, {
+                        hour: 0,
+                        min: 15,
+                        sec: 36
+                    }, {
+                        hour: 0,
+                        min: 19,
+                        sec: 06
+                    }, {
+                        hour: 0,
+                        min: 23,
+                        sec: 10
+                    }, {
+                        hour: 0,
+                        min: 27,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 33,
+                        sec: 20
+                    }, {
+                        hour: 0,
+                        min: 39,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 47,
+                        sec: 02
+                    }, {
+                        hour: 0,
+                        min: 55,
+                        sec: 32
+                    }],
+                    info: "Workshop Siege engines like catapults and rams can be built in the workshop. The higher level of engine It will only produce faster ."
+                },
+                "smithy": {
+                    cost: [[180, 250, 500, 160], [230, 320, 640, 205], [295, 410, 820, 260], [375, 525, 1050, 335], [485, 670, 1340, 430], [620, 860, 1720, 550], [790, 1100, 2200, 705], [1015, 1405, 2815, 900], [1295, 1800, 3605, 1155], [1660, 2305, 4610, 1475]],
+                    consumption: [4, 2, 2, 2, 2, 3, 3, 3, 3, 3],
+                    time: [{
+                        hour: 0,
+                        min: 06,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 08,
+                        sec: 44
+                    }, {
+                        hour: 0,
+                        min: 11,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 13,
+                        sec: 54
+                    }, {
+                        hour: 0,
+                        min: 17,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 20,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 25,
+                        sec: 14
+                    }, {
+                        hour: 0,
+                        min: 30,
+                        sec: 16
+                    }, {
+                        hour: 0,
+                        min: 36,
+                        sec: 06
+                    }, {
+                        hour: 0,
+                        min: 42,
+                        sec: 52
+                    }],
+                    info: "Forge weapons and armor of warriors, were developed in the furnace of the forge . You can invent better weapons and armor by increasing the level of the smithy."
+                },
+                "granary": {
+                    cost: [[80, 100, 70, 20], [100, 130, 90, 25], [130, 165, 115, 35], [170, 210, 145, 40], [215, 270, 190, 55], [275, 345, 240, 70], [350, 440, 310, 90], [450, 565, 395, 115], [575, 720, 505, 145], [740, 920, 645, 185]],
+                    consumption: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    time: [{
+                        hour: 0,
+                        min: 05,
+                        sec: 20
+                    }, {
+                        hour: 0,
+                        min: 07,
+                        sec: 12
+                    }, {
+                        hour: 0,
+                        min: 09,
+                        sec: 20
+                    }, {
+                        hour: 0,
+                        min: 11,
+                        sec: 50
+                    }, {
+                        hour: 0,
+                        min: 14,
+                        sec: 44
+                    }, {
+                        hour: 0,
+                        min: 18,
+                        sec: 04
+                    }, {
+                        hour: 0,
+                        min: 21,
+                        sec: 58
+                    }, {
+                        hour: 0,
+                        min: 26,
+                        sec: 30
+                    }, {
+                        hour: 0,
+                        min: 31,
+                        sec: 44
+                    }, {
+                        hour: 0,
+                        min: 37,
+                        sec: 48
+                    }],
+                    info: "Crop produced on your farm are kept here . The barn , which has more than three times as many resources to help you keep safe."
+                },
+                "warehouse": {
+                    cost: [[130, 160, 90, 40], [165, 205, 115, 50], [215, 260, 145, 65], [275, 335, 190, 85], [350, 430, 240, 105], [445, 550, 310, 135], [570, 705, 395, 175], [730, 900, 505, 225], [935, 1155, 650, 290], [1200, 1475, 830, 370]],
+                    consumption: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    time: [{
+                        hour: 0,
+                        min: 06,
+                        sec: 40
+                    }, {
+                        hour: 0,
+                        min: 08,
+                        sec: 44
+                    }, {
+                        hour: 0,
+                        min: 11,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 13,
+                        sec: 54
+                    }, {
+                        hour: 0,
+                        min: 17,
+                        sec: 08
+                    }, {
+                        hour: 0,
+                        min: 20,
+                        sec: 52
+                    }, {
+                        hour: 0,
+                        min: 25,
+                        sec: 14
+                    }, {
+                        hour: 0,
+                        min: 30,
+                        sec: 16
+                    }, {
+                        hour: 0,
+                        min: 36,
+                        sec: 06
+                    }, {
+                        hour: 0,
+                        min: 42,
+                        sec: 52
+                    }],
+                    info: "Resources wood, clay and iron are stored in this warehouse . Warehouse , which has more than three times as many resources to help you keep safe ."
                 }
             }
             /* Village function */
@@ -1758,8 +1781,8 @@
 
             //check building 1
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[0]
+                pos: (index_village + 1),
+                type: buildingAllTypes[0]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1774,8 +1797,8 @@
 
             //check building 2
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[1]
+                pos: (index_village + 1),
+                type: buildingAllTypes[1]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1789,8 +1812,8 @@
 
             //check building 3
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[2]
+                pos: (index_village + 1),
+                type: buildingAllTypes[2]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1804,8 +1827,8 @@
 
             //check building 4
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[3]
+                pos: (index_village + 1),
+                type: buildingAllTypes[3]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1819,8 +1842,8 @@
 
             //check building 5
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[4]
+                pos: (index_village + 1),
+                type: buildingAllTypes[4]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1834,8 +1857,8 @@
 
             //check building 6
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[5]
+                pos: (index_village + 1),
+                type: buildingAllTypes[5]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1849,8 +1872,8 @@
 
             //check building 7
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[6]
+                pos: (index_village + 1),
+                type: buildingAllTypes[6]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1864,8 +1887,8 @@
 
             //check building 8
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[7]
+                pos: (index_village + 1),
+                type: buildingAllTypes[7]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1879,8 +1902,8 @@
 
             //check building 9
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[8]
+                pos: (index_village + 1),
+                type: buildingAllTypes[8]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1894,8 +1917,8 @@
 
             //check building 10
             $.post("http://localhost:5555/canCreateBuilding", {
-                pos: (index_village + 1)
-                , type: buildingAllTypes[9]
+                pos: (index_village + 1),
+                type: buildingAllTypes[9]
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -1937,8 +1960,8 @@
                 villagelevel = 0;
                 console.log('create law na kub' + buildingtype + ' pos:' + (index_village + 1));
                 $.post("http://localhost:5555/createBuilding", {
-                    pos: (index_village + 1)
-                    , type: buildingtype
+                    pos: (index_village + 1),
+                    type: buildingtype
                 }, function (data) {
                     if (data == "Something wrong on our server :( Try Again~") {
                         $("#modal-header-title").text('Error !');
@@ -2084,11 +2107,11 @@
                 console.log(total);
                 if ((total) <= 500 && (total) > 0) {
                     $.post("http://localhost:5555/sendResource", {
-                        wood: woodnum
-                        , clay: claynum
-                        , iron: ironnum
-                        , crop: cropnum
-                        , des: targetvillagename
+                        wood: woodnum,
+                        clay: claynum,
+                        iron: ironnum,
+                        crop: cropnum,
+                        des: targetvillagename
                     }, function (data) {
                         if (data == "Something wrong on our server :( Try Again~") {
                             $("#modal-header-title").text('Error !');
@@ -2122,12 +2145,12 @@
                 var total = ((woodnum + claynum) + (ironnum + cropnum));
                 if ((total) <= 500 && (total) > 0) {
                     $.post("http://localhost:5555/sendResourceXY", {
-                        wood: woodnum
-                        , clay: claynum
-                        , iron: ironnum
-                        , crop: cropnum
-                        , x: coordinateX
-                        , y: coordinateY
+                        wood: woodnum,
+                        clay: claynum,
+                        iron: ironnum,
+                        crop: cropnum,
+                        x: coordinateX,
+                        y: coordinateY
                     }, function (data) {
                         if (data == "Something wrong on our server :( Try Again~") {
                             $("#modal-header-title").text('Error !');
@@ -2159,10 +2182,10 @@
             return d.toString();
         }
 
-        var map = new Array;
-var index_map;
+        var map;
+        var index_map;
 
-function mapShow() {
+        function mapShow() {
             //$("#village" + building[i]["pos"] + "-label").addClass("level" + building[i]["level"]);
             $.post("http://localhost:5555/getMap", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
@@ -2172,7 +2195,6 @@ function mapShow() {
                     $("#errorModel").modal("show");
                 } else {
                     map = JSON.parse(data);
-                    console.log(JSON.stringify(data));
                     //console.log(map[0]["x"]);
                     for (var i = 0; i < map.length; i++) {
                         //console.log(map[i]["type"]);
@@ -2194,8 +2216,8 @@ function mapShow() {
             //$("#village" + building[i]["pos"] + "-label").addClass("level" + building[i]["level"]);
             console.log("mapClickGo");
             $.post("http://localhost:5555/getMapXY", {
-                x: posX
-                , y: posY
+                x: posX,
+                y: posY
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
@@ -2204,7 +2226,7 @@ function mapShow() {
                     $("#errorModel").modal("show");
                 } else {
                     map = JSON.parse(data);
-                    console.log(JSON.stringify(data));
+                    console.log(JSON.stringify(map));
                     //console.log(map[0]["x"]);
                     for (var i = 0; i < map.length; i++) {
                         //console.log(map[i]["type"]);
@@ -2223,22 +2245,22 @@ function mapShow() {
         }
 
         function mapClickModal(map, index_map) {
-            console.log("mapClickModal");
             var inject = "";
             inject += "<div class=\"modal fade\" id=\"map-modal\" role=\"dialog\">";
             inject += "<div class=\"modal-dialog\">";
             inject += "<div class=\"modal-content\">";
             inject += "<div class=\"modal-header\">";
             inject += "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
-            inject += "<h3 class=\"modal-title\">" + map[index_map]["type"].charAt(0).toUpperCase() + map[index_map]["type"].slice(1) + index_map + "</h3>";
+//            inject += "<h3 class=\"modal-title\">" + map[index_map]["name"].charAt(0).toUpperCase() + map[index_map]["name"].slice(1) + "</h3>";
+            inject += "<h3 class=\"modal-title\">" + map[index_map]["name"] + "</h3>";
             inject += "</div>";
             inject += "<div class=\"modal-body\">";
-            //inject += building_info[upgradeType].info + "</p>";
+            inject += "Username : " + map[index_map]["username"] + "</p>";
             //inject += "<div class=\"" + upgradeType + "-upgrademodel\"></div>";
-            inject += "Wood : <span id=\"setWood-village\">" + map[index_map]["wood"] + "</span> ";
-            inject += "Clay : <span id=\"setClay-village\">" + map[index_map]["clay"] + "</span> ";
-            inject += "Iron : <span id=\"setIron-village\">" + map[index_map]["iron"] + "</span> ";
-            inject += "Crop : <span id=\"setCrop-village\">" + map[index_map]["crop"] + "</span></p>";
+            inject += "Wood : <span id=\"setWood-village\">" + map[index_map]["wood"] + "</span> areas ";
+            inject += "Clay : <span id=\"setClay-village\">" + map[index_map]["clay"] + "</span> areas ";
+            inject += "Iron : <span id=\"setIron-village\">" + map[index_map]["iron"] + "</span> areas ";
+            inject += "Crop : <span id=\"setCrop-village\">" + map[index_map]["crop"] + "</span> areas</p>";
             //            var upgradeTime = twoDigits(building_info[upgradeType].time[villagelevel].hour) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].min) + ":" + twoDigits(building_info[upgradeType].time[villagelevel].sec);
             //            inject += "Upgrade time : <span id=\"upgrade-time-village\">" + upgradeTime + "</span> ";
             //            inject += "<button id=\"upgradebtn-village\" type=\"button\" class=\"btn btn-default\"";
@@ -2254,10 +2276,10 @@ function mapShow() {
             var xcordinate = $('#x-cordinate').val();
             var ycordinate = $('#y-cordinate').val();
             console.log(arrow_map);
-            if (arrow_map == "arrow1") getMap(map[49]["x"], map[49]["y"]);
-            else if (arrow_map == "arrow2") getMap(map[39]["x"], map[39]["y"]);
-            else if (arrow_map == "arrow3") getMap(map[31]["x"], map[31]["y"]);
-            else if (arrow_map == "arrow4") getMap(map[41]["x"], map[41]["y"]);
+            if (arrow_map == "arrow1") getMap(map[31]["x"], map[31]["y"]);
+            else if (arrow_map == "arrow2") getMap(map[41]["x"], map[41]["y"]);
+            else if (arrow_map == "arrow3") getMap(map[49]["x"], map[49]["y"]);
+            else if (arrow_map == "arrow4") getMap(map[39]["x"], map[39]["y"]);
             else getMap(xcordinate, ycordinate);
 
         }
