@@ -18,7 +18,9 @@ input[type="text"] {
 .cordinate-text {
     font-size: 25px;
     padding-left: 30px;
-    padding-right: 10px
+    padding-right: 10px;
+    color: white;
+    -webkit-text-stroke: 1px black;
 }
 
 .map-center {
@@ -36,50 +38,62 @@ input[type="text"] {
 
 div.arrow1 {
     position: absolute;
-    background-color: red;
+    background-color: transparent;
     width: 5%;
     height: 10%;
     left: -5%;
     top: 45%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
     content: url(picture/map/arrow1.png);
+    -webkit-user-select: none;
 }
 
 div.arrow2 {
     position: absolute;
-    background-color: red;
+    background-color: transparent;
     width: 10%;
     height: 5%;
     left: 45%;
     top: 0%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
     content: url(picture/map/arrow2.png);
+    -webkit-user-select: none;
 }
 
 div.arrow3 {
     position: absolute;
-    background-color: red;
+    background-color: transparent;
     width: 5%;
     height: 10%;
     left: 95%;
     top: 45%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
     content: url(picture/map/arrow3.png);
+    -webkit-user-select: none;
 }
 
 div.arrow4 {
     position: absolute;
-    background-color: red;
+    background-color: transparent;
     width: 10%;
     height: 5%;
     left: 45%;
     top: 100%;
+/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
+*/
     content: url(picture/map/arrow4.png);
+    -webkit-user-select: none;
 }
 
 div.posY1 {
