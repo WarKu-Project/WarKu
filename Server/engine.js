@@ -1450,7 +1450,7 @@ exports.getPlayerInfo = function(username,callback) {
   })
 }
 exports.changePassword = function(username,password,callback){
-  con.query('UPDATE player SET password = ? WHERE username = ?',[username,password],function(err,result) {
+  con.query('UPDATE player SET password = ? WHERE username = ?',[password,username],function(err,result) {
     if (err) callback(err);
     else callback(null,true)
   })
@@ -1477,5 +1477,11 @@ exports.getMail = function(mid,callback) {
     else{
       callback(null,result[0])
     }
+  })
+}
+exports.changeEmail = function(username,email,callback) {
+  con.query('UPDATE player SET email=? WHERE username=?',[email,username],function (err) {
+    if (err) callback(err);
+    else callback(null,true);
   })
 }
