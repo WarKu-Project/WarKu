@@ -1411,4 +1411,3 @@ var troop = {
     'time' : {min:15,sec:0}
   }
 }
-5
