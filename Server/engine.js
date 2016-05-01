@@ -1455,6 +1455,27 @@ exports.changePassword = function(username,password,callback){
     else callback(null,true)
   })
 }
-// exports.getInbox = function(username,callback) {
-//   con.query('SELECT ')
-// }
+exports.getInbox = function(username,callback) {
+  con.query('SELECT mid,title,sendtime,username AS sender FROM mail JOIN player ON mail.sender_id=player.pid WHERE receiver_id=(SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+    if (err) callback(err)
+    else {
+      callback(null,result)
+    }
+  })
+}
+exports.getSentbox = function (username,callback) {
+  con.query('SELECT mid,title,sendtime,username AS receiver FROM mail JOIN player ON mail.receiver_id=player.pid WHERE sender_id=(SELECT pid FROM player WHERE username = ?)',username,function (err,result) {
+    if (err) callback(err)
+    else {
+      callback(null,result)
+    }
+  })
+}
+exports.getMail = function(mid,callback) {
+  con.query('SELECT username AS sender,tile,info ,sendtime FROM mail JOIN player ON mail.sender_id = player.pid WHERE mid=?',function (err,result) {
+    if (err) callback(err)
+    else{
+      callback(null,result[0])
+    }
+  })
+}

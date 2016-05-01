@@ -497,7 +497,49 @@ app.post('/changePassword',function (req,res) {
       }
   })
 })
-
+app.post('/getInbox',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  engine.getInbox(online_user[ip],function (err,result) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+result);
+      res.end(JSON.stringify(result))
+    }
+  })
+})
+app.post('/getSentbox',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  engine.getSentbox(online_user[ip],function (err,result) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+result);
+      res.end(JSON.stringify(result))
+    }
+  })
+})
+app.post('/getMail',function(req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var mid = req.body.mid;
+  engine.getMail(mid,function (err,result) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      console.log("Server Recieve From Engine : "+result);
+      res.end(JSON.stringify(result))
+    }
+  })
+})
 app.listen(5555,function(){
   console.log("Started on PORT 5555");
 })
