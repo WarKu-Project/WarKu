@@ -873,6 +873,10 @@
         function resourceClick() {
             init();
             $('#resource_container').show();
+            setResource();
+        }
+        
+        function setResource(){
             console.log('Resource');
             $.post("http://localhost:5555/loadresource", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
@@ -888,7 +892,7 @@
             setTimeout(generateResource, 500);
             setTimeout(generateWorker, 200);
         }
-
+        
         function generateWorker() {
             setVillage();
             setTimeout(generateWorkerDelay, 200);
@@ -1101,7 +1105,7 @@
                         });
                     } else {
                         $("#resource" + (taskindex) + "-label").tooltip("option", "content", "Success!!");
-                        setTimeout(resourceClick, 100);
+                        setTimeout(setResource, 100);
                         setTimeout(delayFinishUpgradedResource, 1000);
                     }
                 }
@@ -1112,7 +1116,7 @@
                         var remainingtime = parseInt(seconds - currentsecconds);
                         var indexbuilding = getIndexBuilding(taskindex);
                         document.getElementById("village" + (taskindex) + "-label").className = "level" + building[indexbuilding]["level"] + "-red";
-//                        $("#village" + (taskindex) + "-label").removeData("title");
+
                         $("#village" + (taskindex) + "-label").tooltip("option", "content","Time remaining: " + remainingtime + " sec");
                         $('body').click(function () {
                             $("#village" + (taskindex) + "-label").tooltip('close');
@@ -1120,7 +1124,7 @@
                     } 
                     else {
                         $("#village" + (taskindex) + "-label").tooltip("option", "content", "Success!!");
-                        setTimeout(villageClick, 100);
+                        setTimeout(setVillage, 100);
                         setTimeout(delayFinishUpgradedVillage, 1000);
                 }
                 }
@@ -1637,20 +1641,21 @@
                     console.log(JSON.stringify(building));
                 }
             })
-            setTimeout(generateVillage, 100);
+            setTimeout(generateVillage, 500);
         }
 
         function generateVillage() {
             var buildingposlists = new Array;
             for (var i = 0; i < building.length; i++) {
-                $("#village" + building[i]["pos"] + "-label").addClass("level" + building[i]["level"]);
+                document.getElementById ("village" + building[i]["pos"] + "-label").className = ("village-level"+" "+"level" + building[i]["level"]);
+                buildingposlists[i] = building[i]["pos"];
                 document.getElementById("village" + (building[i]["pos"])).className = building[i]["type"];
                 buildingposlists[i] = building[i]["pos"];
                 $("#village" + (i + 1) + "-label").prop('title', building[i]["type"]);
             }
             for (var i = 0; i < 14; i++) {
                 if ($.inArray(i + 1, buildingposlists) == -1) {
-                    $("#village" + (i + 1) + "-label").addClass("level" + 0);
+                    document.getElementById("village" + (i + 1) + "-label").className = ("village-level"+" "+"level" + 0);
                     $("#village" + (i + 1) + "-label").prop('title', "Empty Area");
                 }
             }
@@ -1863,8 +1868,8 @@
                         $("#errorModel").modal("show");
                     }
                 })
-                setTimeout(villageClick, 100);
                 setTimeout(checkTask,100);
+                setTimeout(villageClick,100);
                 createBuildingCall = false;
             }
         }
