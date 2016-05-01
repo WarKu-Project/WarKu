@@ -23,7 +23,7 @@ input[type="text"] {
 
 .map-center {
     display: inline-block;
-    height: 10%;
+    height: 0%;
     vertical-align: middle;
 }
 
@@ -31,7 +31,7 @@ input[type="text"] {
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    width: 60%;
+    width: 80%;
 }
 
 div.arrow1 {
@@ -293,7 +293,7 @@ div.free {
 
 div.box4 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -304,7 +304,7 @@ div.box4 {
 
 div.box13 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -315,7 +315,7 @@ div.box13 {
 
 div.box22 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -326,7 +326,7 @@ div.box22 {
 
 div.box31 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -337,7 +337,7 @@ div.box31 {
 
 div.box40 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -348,7 +348,7 @@ div.box40 {
 
 div.box49 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -359,7 +359,7 @@ div.box49 {
 
 div.box58 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -370,7 +370,7 @@ div.box58 {
 
 div.box67 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -381,7 +381,7 @@ div.box67 {
 
 div.box76 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -392,7 +392,7 @@ div.box76 {
 
 div.box3 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -403,7 +403,7 @@ div.box3 {
 
 div.box12 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -414,7 +414,7 @@ div.box12 {
 
 div.box21 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -425,7 +425,7 @@ div.box21 {
 
 div.box30 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -436,7 +436,7 @@ div.box30 {
 
 div.box39 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -447,7 +447,7 @@ div.box39 {
 
 div.box48 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -458,7 +458,7 @@ div.box48 {
 
 div.box57 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -469,7 +469,7 @@ div.box57 {
 
 div.box66 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -480,7 +480,7 @@ div.box66 {
 
 div.box75 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -491,7 +491,7 @@ div.box75 {
 
 div.box2 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -502,7 +502,7 @@ div.box2 {
 
 div.box11 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -513,7 +513,7 @@ div.box11 {
 
 div.box20 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -524,7 +524,7 @@ div.box20 {
 
 div.box29 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -535,7 +535,7 @@ div.box29 {
 
 div.box38 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -546,7 +546,7 @@ div.box38 {
 
 div.box47 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -557,7 +557,7 @@ div.box47 {
 
 div.box56 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -568,7 +568,7 @@ div.box56 {
 
 div.box65 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -579,7 +579,7 @@ div.box65 {
 
 div.box74 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -590,7 +590,7 @@ div.box74 {
 
 div.box1 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -601,7 +601,7 @@ div.box1 {
 
 div.box10 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -612,7 +612,7 @@ div.box10 {
 
 div.box19 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -623,7 +623,7 @@ div.box19 {
 
 div.box28 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -634,7 +634,7 @@ div.box28 {
 
 div.box37 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -645,7 +645,7 @@ div.box37 {
 
 div.box46 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -656,7 +656,7 @@ div.box46 {
 
 div.box55 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -667,7 +667,7 @@ div.box55 {
 
 div.box64 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -678,7 +678,7 @@ div.box64 {
 
 div.box73 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -689,7 +689,7 @@ div.box73 {
 
 div.box0 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -700,7 +700,7 @@ div.box0 {
 
 div.box9 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -711,7 +711,7 @@ div.box9 {
 
 div.box18 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -722,7 +722,7 @@ div.box18 {
 
 div.box27 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -733,7 +733,7 @@ div.box27 {
 
 div.box36 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -744,7 +744,7 @@ div.box36 {
 
 div.box45 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -755,7 +755,7 @@ div.box45 {
 
 div.box54 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -766,7 +766,7 @@ div.box54 {
 
 div.box63 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -777,7 +777,7 @@ div.box63 {
 
 div.box72 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -788,7 +788,7 @@ div.box72 {
 
 div.box8 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -799,7 +799,7 @@ div.box8 {
 
 div.box17 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -810,7 +810,7 @@ div.box17 {
 
 div.box26 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -821,7 +821,7 @@ div.box26 {
 
 div.box35 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -832,7 +832,7 @@ div.box35 {
 
 div.box44 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -843,7 +843,7 @@ div.box44 {
 
 div.box53 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -854,7 +854,7 @@ div.box53 {
 
 div.box62 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -865,7 +865,7 @@ div.box62 {
 
 div.box71 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -876,7 +876,7 @@ div.box71 {
 
 div.box80 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -887,7 +887,7 @@ div.box80 {
 
 div.box7 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -898,7 +898,7 @@ div.box7 {
 
 div.box16 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -909,7 +909,7 @@ div.box16 {
 
 div.box25 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -920,7 +920,7 @@ div.box25 {
 
 div.box34 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -931,7 +931,7 @@ div.box34 {
 
 div.box43 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -942,7 +942,7 @@ div.box43 {
 
 div.box52 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -953,7 +953,7 @@ div.box52 {
 
 div.box61 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -964,7 +964,7 @@ div.box61 {
 
 div.box70 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -975,7 +975,7 @@ div.box70 {
 
 div.box79 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -986,7 +986,7 @@ div.box79 {
 
 div.box6 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -997,7 +997,7 @@ div.box6 {
 
 div.box15 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -1008,7 +1008,7 @@ div.box15 {
 
 div.box24 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -1019,7 +1019,7 @@ div.box24 {
 
 div.box33 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
@@ -1030,7 +1030,7 @@ div.box33 {
 
 div.box42 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
@@ -1041,7 +1041,7 @@ div.box42 {
 
 div.box51 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
@@ -1052,7 +1052,7 @@ div.box51 {
 
 div.box60 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
@@ -1063,7 +1063,7 @@ div.box60 {
 
 div.box69 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
@@ -1074,7 +1074,7 @@ div.box69 {
 
 div.box78 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
@@ -1085,7 +1085,7 @@ div.box78 {
 
 div.box5 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 5%;
@@ -1096,7 +1096,7 @@ div.box5 {
 
 div.box14 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 15%;
@@ -1107,7 +1107,7 @@ div.box14 {
 
 div.box23 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 25%;
@@ -1118,80 +1118,68 @@ div.box23 {
 
 div.box32 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 35%;
     top: 85%;
-/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-*/
 }
 
 div.box41 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 45%;
     top: 85%;
-/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-*/
 }
 
 div.box50 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 55%;
     top: 85%;
-/*
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-*/
 }
 
 div.box59 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 65%;
     top: 85%;
-/*
     border-style: groove;
-    border-width: 1% 1% 1% 1%;
-*/
+    border-width: 0.1% 0.1% 0.1% 0.1%;
 }
 
 div.box68 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 75%;
     top: 85%;
-/*
     border-style: groove;
-    border-width: 1% 1% 1% 1%;
-*/
+    border-width: 0.01%;
 }
 
 div.box77 {
     position: absolute;
-    background-color: green;
+    background-color: #ddff99;
     width: 10%;
     height: 10%;
     left: 85%;
     top: 85%;
-/*
     border-style: groove;
-    border-width: 1% 1% 1% 1%;
-*/
+    border-width: 0.01%;
 }
 .map-clay{
     content: url(picture/map/clay.png);
