@@ -312,7 +312,7 @@ div.village {
 .market-upgrademodel {
     content: url(picture/village/market-1.png);
     position: absolute;
-    top: 38%;
+    top: 12%;
     left: 70%;
 }
 .barracks-upgrademodel {
@@ -350,5 +350,21 @@ div.village {
     position: absolute;
     top: 30%;
     left: 70%;
+}
+.marketwood{
+    content: url(picture/resource/wood.png);
+    width: 5%;
+}
+.marketclay{
+    content: url(picture/resource/clay.png);
+    width: 5%;
+}
+.marketiron{
+    content: url(picture/resource/iron.png);
+    width: 5%;
+}
+.marketcrop{
+    content: url(picture/resource/crop.png);
+    width: 5%;
 }
 

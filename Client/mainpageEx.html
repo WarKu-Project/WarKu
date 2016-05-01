@@ -1696,7 +1696,7 @@
                 buildingposlists[i] = building[i]["pos"];
                 document.getElementById("village" + (building[i]["pos"])).className = building[i]["type"];
                 buildingposlists[i] = building[i]["pos"];
-                $("#village" + (i + 1) + "-label").prop('title', building[i]["type"]);
+                $("#village" + buildingposlists[i] + "-label").prop('title', building[i]["type"]);
             }
             for (var i = 0; i < 14; i++) {
                 if ($.inArray(i + 1, buildingposlists) == -1) {
@@ -1964,6 +1964,9 @@
                 console.log('Village can not upgrade');
                 $('#upgradebtn-village').prop("disabled", true);
             }
+            
+            $('#tradebyvillage').click(tradeResourceByVillage);
+            $('#tradebycoordinate').click(tradeResourceByCoordinate);
         }
 
         function upgradeBuildingLevel() {
@@ -2009,10 +2012,112 @@
             inject += "Upgrade time : <span id=\"upgrade-time-village\">" + upgradeTime + "</span> ";
             inject += "<button id=\"upgradebtn-village\" type=\"button\" class=\"btn btn-default\"";
             inject += "data-dismiss=\"modal\" value=\"\">Upgrade</button>";
+            
+            if(upgradeType == "market"){
+                inject += "</p><b>Trade Resource</b></p>"
+                inject += "Merchant <span id=\"merchantnum\">0</span>/<span id=\"merchantfull\">0</span></p>"
+                inject += "One merchant can trade 500 resources </p>"
+                inject +="<img class=\"marketwood\"> wood <input type=\"number\" name=\"woodnumber\" id=\"marketwoodnum\" min=\"0\" max=\"500\"><br>"
+                inject +="<img class=\"marketclay\"> clay <input type=\"number\" name=\"claynumber\" id=\"marketclaynum\"min=\"0\" max=\"500\"><br>"
+                inject +="<img class=\"marketiron\"> iron <input type=\"number\" name=\"ironnumber\" id=\"marketironnum\"min=\"0\" max=\"500\"><br>"
+                inject +="<img class=\"marketcrop\"> crop <input type=\"number\" name=\"cropnumber\" id=\"marketcropnum\"min=\"0\" max=\"500\"></p>"
+                inject += "Destination</p>"
+                inject += "Village name : <input type=\"text\" name=\"villagename\" id=\"villagetarget\"> "
+                inject += "<button id=\"tradebyvillage\" type=\"button\" class=\"btn btn-default\">Trade</button></p>"
+                inject += "Coordinates : "
+                inject += "X:<input type=\"number\" name=\"xcoordinate\" min=\"0\" max=\"100\" id=\"markettarget_x\"> "
+                inject += "Y:<input type=\"number\" name=\"ycoordinate\" min=\"0\" max=\"100\" id=\"markettarget_y\"> "
+                inject += "<button id=\"tradebycoordinate\" type=\"button\" class=\"btn btn-default\">Trade</button>"
+            }
+            
             inject += "</div></div></div></div>";
-
+            
             $("#upgrade-village").replaceWith(inject);
 
+        }
+        
+        function tradeResourceByVillage(){
+            $('#upgrade-village').modal("hide");
+            console.log('trading by village');
+            var targetvillagename = $("villagetarget").val();
+            if(targetvillagename!=""){
+                var woodnum = parseInt($('#marketwoodnum').val());
+                var claynum = parseInt($('#marketclaynum').val());
+                var ironnum = parseInt($('#marketironnum').val());
+                var cropnum = parseInt($('#marketcropnum').val());
+                var total = ((woodnum+claynum)+(ironnum+cropnum));
+                console.log(woodnum+" "+claynum+" "+ironnum+" "+cropnum)
+                console.log(total);
+                if((total)<=500&&(total)>0){
+                    $.post("http://localhost:5555/sendResource", {
+                        wood: woodnum,
+                        clay: claynum,
+                        iron: ironnum,
+                        crop: cropnum,
+                        des: targetvillagename
+                    }, function (data) {
+                        if (data == "Something wrong on our server :( Try Again~") {
+                            $("#modal-header-title").text('Error !');
+                            //Update and Show modal if error is occur
+                            $("#modal-body").text(data);
+                            $("#errorModel").modal("show");
+                        }
+                    })
+                }
+
+                else{
+                    $("#modal-header-title").text('Can not trade resource');
+                    $("#modal-body").text("the total resource must be less than 500 and more than 0");
+                    $("#errorModel").modal("show");
+                }
+            }
+            else{
+                $("#modal-header-title").text('Can not trade resource');
+                $("#modal-body").text("Village name must not empty");
+                $("#errorModel").modal("show");
+            }
+        }
+        
+        function tradeResourceByCoordinate(){
+            $('#upgrade-village').modal("hide");
+            console.log('trading by coordinate');
+            var coordinateX = $("markettarget_x").val();
+            var coordinateY = $("markettarget_y").val();
+            if(coordinateX <= 100 && coordinateX >=0 && coordinateY<=100 && coordinateY>= 0){
+                var woodnum = parseInt($('#marketwoodnum').val());
+                var claynum = parseInt($('#marketclaynum').val());
+                var ironnum = parseInt($('#marketironnum').val());
+                var cropnum = parseInt($('#marketcropnum').val());
+                var total = ((woodnum+claynum)+(ironnum+cropnum));
+                if((total)<=500&&(total)>0){
+                    $.post("http://localhost:5555/sendResourceXY", {
+                        wood: woodnum,
+                        clay: claynum,
+                        iron: ironnum,
+                        crop: cropnum,
+                        x: coordinateX,
+                        y: coordinateY
+                    }, function (data) {
+                        if (data == "Something wrong on our server :( Try Again~") {
+                            $("#modal-header-title").text('Error !');
+                            //Update and Show modal if error is occur
+                            $("#modal-body").text(data);
+                            $("#errorModel").modal("show");
+                        }
+                    })
+                }
+
+                else{
+                    $("#modal-header-title").text('Can not trade resource');
+                    $("#modal-body").text("the total resource must be less than 500 and more than 0");
+                    $("#errorModel").modal("show");
+                }
+            }
+            else{
+                $("#modal-header-title").text('Can not trade resource');
+                $("#modal-body").text("the coordinate has not in worldmap");
+                $("#errorModel").modal("show");
+            }
         }
 
 
