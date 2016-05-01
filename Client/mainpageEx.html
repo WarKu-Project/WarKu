@@ -85,10 +85,10 @@
 
                     <div class="changepass">
                         Old password :
-                        <input type="text" name="oldpass" id="oldpassword">
+                        <input type="password" name="oldpass" id="oldpassword">
                         </p>
                         New password :
-                        <input type="text" name="newpass" id="newpassword">
+            <input type="password" name="newpass" id="newpassword">
                         <button id="changepassword_confirm" type="button" class="btn btn-success">Change </button>
                          <button id="cancelChangePass" type="button" class="btn btn-danger">Cancel</button>
                         </p>
@@ -101,7 +101,10 @@
 
                     <div class="changemail">
                     New email :
-                    <input type="text" name="newmail" id="newemail">
+                        <input type="email" name="newmail" id="newemail"></p>
+                    Your password :
+                        <input type="password" name="yourpass" id="yourpassword">
+                        
                     <button id="changemail_confirm" type="button" class="btn btn-success">Change</button>
                         <button id="cancelChangeMail" type="button" class="btn btn-danger">Cancel</button>
                     </p>
@@ -975,8 +978,6 @@
             $('#inputvillagename').hide();
             $('#confirmvillagename').hide();
             $('#cancelvillagename').hide();
-            $('.changepass').hide();
-            $('.changemail').hide();
             setResourceValue();
             checkTask();
             setVillageDetail();
@@ -1003,13 +1004,19 @@
             $('#account_accountname').text(account["username"]);
             $('#setting_accountname').text(account["username"]);
             $('#account_email').text(account["email"]);
-            $('#setting_email').text(account["email"]);
+        }
+        
+        function setPassword(){
             var passwordlength = account["password"].length;
             var star = "";
             for (var i = 0; i < passwordlength; i++) {
                 star += "*";
             }
             $('#setting_password').text(star);
+        }
+        
+        function setEmail(){
+            $('#setting_email').text(account["email"]);
         }
 
         function changePasswordClick(){
@@ -1029,6 +1036,8 @@
                             $("#errorModel").modal("show");
                         }
                     })
+                    setTimeout(getAccount,200);
+                    setTimeout(setPassword,600);
                 }
                 else{
                     $("#modal-header-title").text('Can not change password');
@@ -1049,10 +1058,11 @@
             $('.changemail').show();
             $('#changemail_confirm').click(function(){
                 var newemail = $('#newemail').val();
-                /*
-                $.post("http://localhost:5555/changePassword", {
-                    password : oldpass,
-                    newpassword : newpass
+                var password = $('#yourpassword').val();
+                if(password == account["password"]){
+                    $.post("http://localhost:5555/changeEmail", {
+                        password : password,
+                        email : newemail
                 }, function (data) {
                     if (data == "Something wrong on our server :( Try Again~") {
                         $("#modal-header-title").text('Error !');
@@ -1060,7 +1070,15 @@
                         $("#modal-body").text(data);
                         $("#errorModel").modal("show");
                     }
-                })*/
+                })
+                    setTimeout(getAccount,200);
+                    setTimeout(setEmail,600);
+                }
+                else{
+                    $("#modal-header-title").text("Can not change email");
+                    $("#modal-body").text("Your password is not correct");
+                    $("#errorModel").modal("show");
+                }
                 $('.changemail').hide();
             });
             $('#cancelChangeMail').click(function(){
@@ -2211,7 +2229,7 @@
                 inject += "<img class=\"marketiron\"> iron <input type=\"number\" name=\"ironnumber\" id=\"marketironnum\"min=\"0\" max=\"500\"><br>"
                 inject += "<img class=\"marketcrop\"> crop <input type=\"number\" name=\"cropnumber\" id=\"marketcropnum\"min=\"0\" max=\"500\"></p>"
                 inject += "Destination</p>"
-                inject += "Village name : <input type=\"text\" name=\"villagename\" id=\"villagetarget\"> "
+                inject += "Village name : <input type=\"email\" name=\"villagename\" id=\"villagetarget\"> "
                 inject += "<button id=\"tradebyvillage\" type=\"button\" class=\"btn btn-default\">Trade</button></p>"
                 inject += "Coordinates : "
                 inject += "X:<input type=\"number\" name=\"xcoordinate\" min=\"0\" max=\"100\" id=\"markettarget_x\"> "
@@ -2498,7 +2516,11 @@
         }
 
         function setting() {
+            $('.changepass').hide();
+            $('.changemail').hide();
             $('#button-setting').modal("show");
+            setPassword();
+            setEmail();
             //TODO remove user from server
         }
 
