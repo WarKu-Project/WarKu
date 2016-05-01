@@ -89,7 +89,8 @@
                         </p>
                         New password :
                         <input type="text" name="newpass" id="newpassword">
-                        <button id="changepassword_confirm" type="button" class="btn btn-success">Change</button>
+                        <button id="changepassword_confirm" type="button" class="btn btn-success">Change </button>
+                         <button id="cancelChangePass" type="button" class="btn btn-danger">Cancel</button>
                         </p>
                     </div>
 
@@ -97,6 +98,14 @@
                     Email : <span id="setting_email"> </span>
                     <button id="changeemail" type="button" class="btn btn-warning">Change Email</button>
                     </p>
+
+                    <div class="changemail">
+                    New email :
+                    <input type="text" name="newmail" id="newemail">
+                    <button id="changemail_confirm" type="button" class="btn btn-success">Change</button>
+                        <button id="cancelChangeMail" type="button" class="btn btn-danger">Cancel</button>
+                    </p>
+                    </div>
 
                 </div>
             </div>
@@ -966,6 +975,8 @@
             $('#inputvillagename').hide();
             $('#confirmvillagename').hide();
             $('#cancelvillagename').hide();
+            $('.changepass').hide();
+            $('.changemail').hide();
             setResourceValue();
             checkTask();
             setVillageDetail();
@@ -999,6 +1010,62 @@
                 star += "*";
             }
             $('#setting_password').text(star);
+        }
+        
+        function changePasswordClick(){
+            $('.changepass').show();
+            $('#changepassword_confirm').click(function(){
+                var oldpass = $('#oldpassword').val();
+                var newpass = $('#newpassword').val();
+                if(oldpass == account["password"]){
+                 $.post("http://localhost:5555/changePassword", {
+                        password : oldpass,
+                        newpassword : newpass
+                    }, function (data) {
+                        if (data == "Something wrong on our server :( Try Again~") {
+                            $("#modal-header-title").text('Error !');
+                            //Update and Show modal if error is occur
+                            $("#modal-body").text(data);
+                            $("#errorModel").modal("show");
+                        }
+                    })
+                }
+                else{
+                    $("#modal-header-title").text('Can not change password');
+                    $("#modal-body").text("Old password is not correct");
+                    $("#errorModel").modal("show");
+                }
+                
+                $('.changepass').hide();
+                
+            });
+            $('#cancelChangePass').click(function(){
+                $('.changepass').hide();
+            });
+            
+        }
+        
+        function changeEmailClick(){
+            $('.changemail').show();
+            $('#changemail_confirm').click(function(){
+                var newemail = $('#newemail').val();
+                /*
+                $.post("http://localhost:5555/changePassword", {
+                    password : oldpass,
+                    newpassword : newpass
+                }, function (data) {
+                    if (data == "Something wrong on our server :( Try Again~") {
+                        $("#modal-header-title").text('Error !');
+                        //Update and Show modal if error is occur
+                        $("#modal-body").text(data);
+                        $("#errorModel").modal("show");
+                    }
+                })*/
+                $('.changemail').hide();
+            });
+            $('#cancelChangeMail').click(function(){
+                $('.changemail').hide();
+            });
         }
 
         function setVillageDetail() {
@@ -2472,6 +2539,8 @@
 
         /*other Listener*/
         $('#changevillagename').click(changeVillageNameClick);
+        $('#changepassword').click(changePasswordClick);
+        $('#changeemail').click(changeEmailClick);
 
         /*Stockbar*/
         setInterval(updateResource, 100);
