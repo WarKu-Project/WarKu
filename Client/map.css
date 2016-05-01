@@ -43,7 +43,7 @@ div.arrow1 {
     top: 45%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
+    content: url(picture/map/arrow1.png);
 }
 
 div.arrow2 {
@@ -55,7 +55,7 @@ div.arrow2 {
     top: 0%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
+    content: url(picture/map/arrow2.png);
 }
 
 div.arrow3 {
@@ -67,7 +67,7 @@ div.arrow3 {
     top: 45%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
+    content: url(picture/map/arrow3.png);
 }
 
 div.arrow4 {
@@ -79,7 +79,7 @@ div.arrow4 {
     top: 100%;
     border-style: groove;
     border-width: 1% 1% 1% 1%;
-    /* Border widths: Top.px Right.px Bottom.px Left.px */
+    content: url(picture/map/arrow4.png);
 }
 
 div.posY1 {
