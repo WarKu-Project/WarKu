@@ -125,4 +125,13 @@ img {
     -webkit-text-stroke: 1px black;
 }
 
+.villageDetailbar{
+    width: 30%;
+    margin-left: 70%;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: lightpink;
+    padding:1% 1%;
+}
+
 

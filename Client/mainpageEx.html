@@ -145,13 +145,25 @@
             </div>
         </div>
     </div>
+    
+    <!-- Village detail -->
+    
+    <div class="row">
+        <div class="container ">
+            <div class="jumbotron villageDetailbar">
+                <div class="row">
+                    Village : <span id="villagename"></span>
+                </div>
+                <div class="row">
+                    Coordinates : [<span id="coordinate_x">0</span>,<span id="coordinate_y">0</span>]
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--resource container-->
     <div class="container" id="resource_container">
-        <span class="Centerer"></span>
         <div class="resoucre">
-
-
             <image src="picture/resource-structure-test.png"></image>
 
             <!--resource 1-16-->
@@ -265,11 +277,10 @@
             </div>
         </div>
     </div>
-
+    
 
     <!--village container-->
     <div class="container" id="village_container">
-        <span class="Centerer"></span>
         <div class="village">
             <image src="picture/building-structure.jpg"></image>
 
@@ -616,7 +627,6 @@
 
     <!--report container-->
     <div class="container" id="report_container">
-        <span class="Centerer"></span>
         <div class="village">
             <image src="picture/report.png"></image>
         </div>
@@ -627,7 +637,6 @@
 
     <!--mail container-->
     <div class="container" id="mail_container">
-        <span class="Centerer"></span>
         <div class="jumbotron">
             <ul id="myTab" class="nav nav-tabs">
                 <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
@@ -856,6 +865,7 @@
         var resourceUpgradeCall = false;
         var worker, fullworker;
         var map = new Array;
+        var village_detail;
 
         /* initial function */
         function init() {
@@ -867,8 +877,35 @@
             $('#statistic_container').hide();
             setResourceValue();
             checkTask();
+            setVillageDetail();
         }
-
+        
+        function setVillageDetail(){
+            $.post("http://localhost:5555/getVillageInfo", {
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    village_detail = JSON.parse(data);
+                    console.log("villagename "+JSON.stringify(village_detail));
+                }
+            })
+            
+            setTimeout(setVillageName,300);
+            //$("#villagename").text = village_detail[0]["name"];
+            //$("#coordinate_x").text = village_detail[0]["x"];
+            //$("#coordinate_y").text = village_detail[0]["y"];
+        }
+        
+        function setVillageName(){
+            $("#villagename").text(village_detail["name"]);
+            $("#coordinate_x").text(village_detail["x"]);
+            $("#coordinate_y").text(village_detail["y"]);
+        }
+        
         /*Resource function*/
         function resourceClick() {
             init();
