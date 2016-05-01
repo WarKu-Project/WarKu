@@ -126,12 +126,15 @@ img {
 }
 
 .villageDetailbar{
-    width: 30%;
-    margin-left: 70%;
+    width: 35%;
+    margin-left: 65%;
     border: 2px solid #000;
     border-radius: 10px;
     background-color: lightpink;
     padding:1% 1%;
 }
 
+#inputvillagename{
+    width: 100px;
+}
 

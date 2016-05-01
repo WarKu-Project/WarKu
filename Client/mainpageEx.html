@@ -153,6 +153,11 @@
             <div class="jumbotron villageDetailbar">
                 <div class="row">
                     Village : <span id="villagename"></span>
+                    <button id="changevillagename" type="button" class="btn btn-default">Change Name</button>
+                    <input type="text" name="Village Name" id="inputvillagename">
+                    <br>
+                    <button id="confirmvillagename" type="button" class="btn btn-default">OK</button>
+                    <button id="cancelvillagename" type="button" class="btn btn-default">Cancel</button>
                 </div>
                 <div class="row">
                     Coordinates : [<span id="coordinate_x">0</span>,<span id="coordinate_y">0</span>]
@@ -875,6 +880,9 @@
             $('#report_container').hide();
             $('#mail_container').hide();
             $('#statistic_container').hide();
+            $('#inputvillagename').hide();
+            $('#confirmvillagename').hide();
+            $('#cancelvillagename').hide();
             setResourceValue();
             checkTask();
             setVillageDetail();
@@ -2062,6 +2070,43 @@
             init();
             $('#statistic_container').show();
         }
+        
+        function changeVillageNameClick(){
+            $('#changevillagename').hide();
+            $('#inputvillagename').show();
+            $('#confirmvillagename').show();
+            $('#cancelvillagename').show();
+            
+            
+            $('#confirmvillagename').click(function(){
+                var newname = $('#inputvillagename').val();
+                if(newname != ""){
+                    $.post("http://localhost:5555/changeName", {
+                        name: newname
+                    }, function (data) {
+                        if (data == "Something wrong on our server :( Try Again~") {
+                            $("#modal-header-title").text('Error !');
+                            //Update and Show modal if error is occur
+                            $("#modal-body").text(data);
+                            $("#errorModel").modal("show");
+                        } 
+                    })
+                    setVillageDetail();
+                }
+                refreshChangeVillageName();
+            });
+            
+            $('#cancelvillagename').click(function(){
+                refreshChangeVillageName();
+            });
+        }
+        
+        function refreshChangeVillageName(){
+            $('#inputvillagename').hide();
+            $('#confirmvillagename').hide();
+            $('#cancelvillagename').hide();
+            $('#changevillagename').show();
+        }
 
         function account() {
             $('#button-account').modal("show");
@@ -2102,6 +2147,10 @@
         /*Village Listener*/
         $('.village-level').click(upgradeVillage);
         $('.village-level').tooltip();
+        
+        /*other Listener*/
+        $('#changevillagename').click(changeVillageNameClick);
+        
         /*Stockbar*/
         setInterval(updateResource, 100);
         setInterval(updateTask, 1000);
