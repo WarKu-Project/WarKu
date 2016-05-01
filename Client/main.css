@@ -123,8 +123,8 @@ img {
 }
 
 .stocktext{
-    color: white;
-   -webkit-text-stroke: 1px black;
+    color: black;
+   -webkit-text-stroke: 0.3px white;
 }
 
 .villageDetailbar{

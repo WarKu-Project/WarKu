@@ -61,7 +61,7 @@
                     Account name : <span id="account_accountname"></span></p>
                     Email : <span id="account_email"></span></p>
                     Village name : <span id="account_villagename"></span></p>
-                    Population : </p>
+        Population : <span id="populationnum"></span></p>
                     Rank :
                 </div>
             </div>
@@ -145,11 +145,11 @@
                         </a>
                     </div>
                 </li>
-                <!--menu report-->
+                <!--menu statistic-->
                 <li class="menu-li">
                     <div class="menu" id="report_menu">
                         <a href="#">
-                            <img class="menu_img" src="picture/report.png">
+                            <img class="menu_img" src="picture/statistic.png">
                         </a>
                     </div>
                 </li>
@@ -731,10 +731,10 @@
         </div>
     </div>
 
-    <!--report container-->
+<!--statistic container-->
     <div class="container" id="report_container">
         <div class="village">
-            <image src="picture/report.png"></image>
+            <image src="picture/statistic.png"></image>
         </div>
         <div class="resource1">
             <image id="resource_pos1"></image>
@@ -752,7 +752,7 @@
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="inbox">
                 <div class="jumbotron inbox-container">
-                    <table class="table table-hover table-striped">
+                    <table class="table table-hover table-striped" id="inbox_table">
                         <thead>
                             <tr>
                                 <th>Title</th>
@@ -1008,7 +1008,7 @@
         var worker, fullworker;
         var map = new Array;
         var village_detail;
-
+        var population;
         /* initial function */
         function init() {
             $('#resource_container').hide();
@@ -1038,6 +1038,18 @@
                     console.log("Account :" + JSON.stringify(account));
                 }
             })
+            
+            $.post("http://localhost:5555/getPopulation", {}, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    population = JSON.parse(data);
+                    console.log("population :" + JSON.stringify(population));
+                }
+            })
 
             setTimeout(setAccount, 300);
         }
@@ -1046,6 +1058,7 @@
             $('#account_accountname').text(account["username"]);
             $('#setting_accountname').text(account["username"]);
             $('#account_email').text(account["email"]);
+            $('#populationnum').text(population);
         }
 
         function setPassword() {
@@ -2733,6 +2746,29 @@
         $('#sendbutton').click(sendEmail);
         $('.sendboxhead').click(function(){
             $('#sendbox').show();
+        });
+        
+        //getMail inbox
+        $('#inbox_table').click(function(){
+            var row_index = $(this).parent().index();
+            var id = inbox[row_index]["mid"];
+            console.log("middd "+id);
+            var message;
+            console.log(row_index);
+            $.post("http://localhost:5555/getMail", {
+                mid: id
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                }
+                else{
+                    message = JSON.parse(data);
+                    console.log('get '+JSON.stringify(message))
+                }
+            })
         });
 
         /*other Listener*/
