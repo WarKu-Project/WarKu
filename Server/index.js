@@ -569,6 +569,20 @@ app.post('/changeEmail',function (req,res) {
       }
   })
 })
+app.post('/getPopulation',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var username = online_user[ip];
+  engine.getPopulation(username,function (err,pop) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      res.end(JSON.stringify(pop));
+    }
+  })
+})
 app.listen(5555,function(){
   console.log("Started on PORT 5555");
 })

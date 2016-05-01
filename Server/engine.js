@@ -62,7 +62,7 @@ exports.exist = function(username,email,callback) {
 exports.createPlayer = function(username,password,email,callback) {
   console.log('Engine Receive createPlayer From Server : username = '+username+' password = '+password+' email = '+email);
   //INSERT NEW PLAYER TO SQL table player
-  con.query('INSERT INTO player(username,password,email) values(?,?,?)',[username,password,email],function(err,result) {
+    con.query('INSERT INTO player(username,password,email) values(?,?,?)',[username,password,email],function(err,result) {
 
 
     if (err) callback(err);
@@ -1483,5 +1483,34 @@ exports.changeEmail = function(username,email,callback) {
   con.query('UPDATE player SET email=? WHERE username=?',[email,username],function (err) {
     if (err) callback(err);
     else callback(null,true);
+  })
+}
+exports.getPopulation = function (username,callback) {
+  getCurrentVillage(username,function (err,vid) {
+    if (err) callback(err);
+    else {
+      con.query('SELECT type,level FROM structure JOIN building ON structure.sid = building.sid WHERE vid = ?',vid,function (err,result) {
+        if (err) callback(err);
+        else {
+          var pop = 0;
+          for (var i = 0;i<result.length;i++){
+            for (var j = 0;j<result[i].level;j++){
+              pop+=building_info[result[i].type].consumption[j];
+            }
+          }
+          con.query('SELECT type,level FROM structure JOIN resource ON structure.sid = resource.sid WHERE vid =?',vid,function (err,result) {
+            if (err) callback(err);
+            else {
+              for (var i = 0;i<result.length;i++){
+                for (var j = 0;j<result[i].level;j++){
+                  pop+=resource_info[result[i].type].consumption[j];
+                }
+              }
+              callback(null,pop);
+            }
+          })
+        }
+      })
+    }
   })
 }
