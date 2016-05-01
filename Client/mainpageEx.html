@@ -885,7 +885,7 @@
                     console.log(resource);
                 }
             })
-            setTimeout(generateResource, 200);
+            setTimeout(generateResource, 500);
             setTimeout(generateWorker, 200);
         }
 
@@ -1029,6 +1029,7 @@
                         $("#errorModel").modal("show");
                     }
                 })
+                resourceUpgradeCall = false;
                 setTimeout(setResourceValue, 100);
                 setTimeout(checkTask,100);
             }
@@ -1124,7 +1125,7 @@
                 }
                 }
             }
-            
+            console.log("tasklengrth"+task.length)
             worker = fullworker - task.length;
             $(workernum).text(worker);
 
