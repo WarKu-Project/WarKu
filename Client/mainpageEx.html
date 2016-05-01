@@ -88,9 +88,9 @@
                         <input type="password" name="oldpass" id="oldpassword">
                         </p>
                         New password :
-            <input type="password" name="newpass" id="newpassword">
+                        <input type="password" name="newpass" id="newpassword">
                         <button id="changepassword_confirm" type="button" class="btn btn-success">Change </button>
-                         <button id="cancelChangePass" type="button" class="btn btn-danger">Cancel</button>
+                        <button id="cancelChangePass" type="button" class="btn btn-danger">Cancel</button>
                         </p>
                     </div>
 
@@ -100,14 +100,15 @@
                     </p>
 
                     <div class="changemail">
-                    New email :
-                        <input type="email" name="newmail" id="newemail"></p>
-                    Your password :
+                        New email :
+                        <input type="email" name="newmail" id="newemail">
+                        </p>
+                        Your password :
                         <input type="password" name="yourpass" id="yourpassword">
-                        
-                    <button id="changemail_confirm" type="button" class="btn btn-success">Change</button>
+
+                        <button id="changemail_confirm" type="button" class="btn btn-success">Change</button>
                         <button id="cancelChangeMail" type="button" class="btn btn-danger">Cancel</button>
-                    </p>
+                        </p>
                     </div>
 
                 </div>
@@ -423,7 +424,6 @@
                     <div class="warehouse-model"></div>
                     Requirment</p>
                     Wood : 130 Clay : 160 Iron : 90 Crop : 40</p>
-                    warehouse level 1 , granary level 1</p>
                     Contructing time : 00:06:40
                     <button id="warehouse-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="warehouse">Create</button>
                 </div>
@@ -433,6 +433,7 @@
                     <div class="market-model"></div>
                     Requirment</p>
                     Wood : 80 Clay : 70 Iron : 120 Crop : 70</p>
+                    warehouse level 1 , granary level 1</p>
                     Contructing time : 00:06:00
                     <button id="market-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="market">Create</button>
                 </div>
@@ -442,6 +443,7 @@
                     <div class="barracks-model"></div>
                     Requirment</p>
                     Wood : 210 Clay : 140 Iron : 260 Crop : 120</p>
+                    villagehall level 3</p>
                     Contructing time : 00:06:40
                     <button id="barracks-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="barracks">Create</button>
                 </div>
@@ -451,6 +453,7 @@
                     <div class="academy-model"></div>
                     Requirment</p>
                     Wood : 220 Clay : 160 Iron : 90 Crop : 40</p>
+                    villagehall level 5</p>
                     Contructing time : 00:06:40
                     <button id="academy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="academy">Create</button>
                 </div>
@@ -460,6 +463,7 @@
                     <div class="stable-model"></div>
                     Requirment</p>
                     Wood : 260 Clay : 140 Iron : 220 Crop : 100</p>
+                    barracks level 3 , academy level 5</p>
                     Contructing time : 00:07:20
                     <button id="stable-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="stable">Create</button>
                 </div>
@@ -469,6 +473,7 @@
                     <div class="headquarter-model"></div>
                     Requirment</p>
                     Wood : 700 Clay : 670 Iron : 700 Crop : 240</p>
+                    villagehall level 5</p>
                     Contructing time : 00:07:40
                     <button id="headquarter-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="headquarter">Create</button>
                 </div>
@@ -478,6 +483,7 @@
                     <div class="smithy-model"></div>
                     Requirment</p>
                     Wood : 180 Clay : 250 Iron : 500 Crop : 160</p>
+                    barracks level 3 , academy level 3</p>
                     Contructing time : 00:06:40
                     <button id="smithy-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="smithy">Create</button>
                 </div>
@@ -487,6 +493,7 @@
                     <div class="workshop-model"></div>
                     Requirment</p>
                     Wood : 460 Clay : 510 Iron : 600 Crop : 320</p>
+                    barracks level 3 , academy level 3</p>
                     Contructing time : 00:10:00
                     <button id="workshop-create" type="button" class="btn btn-default buildingcreate" data-dismiss="modal" value="workshop">Create</button>
                 </div>
@@ -736,7 +743,7 @@
 
     <!--mail container-->
     <div class="container" id="mail_container">
-        <div class="jumbotron">
+        <div class="jumbotron mailjumbotron">
             <ul id="myTab" class="nav nav-tabs">
                 <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
                 <li class=""><a href="#compose" data-toggle="tab">Compose</a></li>
@@ -745,14 +752,53 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="inbox">
                     <div class="jumbotron inbox-container">
-                        inbox
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Sender</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inboxtable">
+
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="compose">
-                    profile tab!
+                    <div class="jumbotron inbox-container">
+                        <div class="jumbotron compose-page">
+                            Reciever :
+                            <input type="email" id="reciever">
+                            </p>
+                            Title :
+                            <input type="email" id="title">
+                            </p>
+
+                            <textarea id="message" name="message" class="messageEditor" cols="1" rows="1"></textarea>
+                            </p>
+                            <center>
+                                <button id="sendbutton" type="button" class="btn btn-success" data-dismiss="modal" value="">Send</button>
+                            </center>
+
+
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="sendbox">
-                    profile tab!
+                    <div class="jumbotron inbox-container">
+                        <table class="table table-hover table-striped" id="sendboxtable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Sender</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1005,8 +1051,8 @@
             $('#setting_accountname').text(account["username"]);
             $('#account_email').text(account["email"]);
         }
-        
-        function setPassword(){
+
+        function setPassword() {
             var passwordlength = account["password"].length;
             var star = "";
             for (var i = 0; i < passwordlength; i++) {
@@ -1014,20 +1060,20 @@
             }
             $('#setting_password').text(star);
         }
-        
-        function setEmail(){
+
+        function setEmail() {
             $('#setting_email').text(account["email"]);
         }
 
-        function changePasswordClick(){
+        function changePasswordClick() {
             $('.changepass').show();
-            $('#changepassword_confirm').click(function(){
+            $('#changepassword_confirm').click(function () {
                 var oldpass = $('#oldpassword').val();
                 var newpass = $('#newpassword').val();
-                if(oldpass == account["password"]){
-                 $.post("http://localhost:5555/changePassword", {
-                        password : oldpass,
-                        newpassword : newpass
+                if (oldpass == account["password"]) {
+                    $.post("http://localhost:5555/changePassword", {
+                        password: oldpass
+                        , newpassword: newpass
                     }, function (data) {
                         if (data == "Something wrong on our server :( Try Again~") {
                             $("#modal-header-title").text('Error !');
@@ -1036,10 +1082,9 @@
                             $("#errorModel").modal("show");
                         }
                     })
-                    setTimeout(getAccount,200);
-                    setTimeout(setPassword,600);
-                }
-                else{
+                    setTimeout(getAccount, 200);
+                    setTimeout(setPassword, 600);
+                } else {
                     $("#modal-header-title").text('Can not change password');
                     $("#modal-body").text("Old password is not correct");
                     $("#errorModel").modal("show");
@@ -1048,40 +1093,39 @@
                 $('.changepass').hide();
 
             });
-            $('#cancelChangePass').click(function(){
+            $('#cancelChangePass').click(function () {
                 $('.changepass').hide();
             });
 
         }
 
-        function changeEmailClick(){
+        function changeEmailClick() {
             $('.changemail').show();
-            $('#changemail_confirm').click(function(){
+            $('#changemail_confirm').click(function () {
                 var newemail = $('#newemail').val();
                 var password = $('#yourpassword').val();
-                if(password == account["password"]){
+                if (password == account["password"]) {
                     $.post("http://localhost:5555/changeEmail", {
-                        password : password,
-                        email : newemail
-                }, function (data) {
-                    if (data == "Something wrong on our server :( Try Again~") {
-                        $("#modal-header-title").text('Error !');
-                        //Update and Show modal if error is occur
-                        $("#modal-body").text(data);
-                        $("#errorModel").modal("show");
-                    }
-                })
-                    setTimeout(getAccount,200);
-                    setTimeout(setEmail,600);
-                }
-                else{
+                        password: password
+                        , email: newemail
+                    }, function (data) {
+                        if (data == "Something wrong on our server :( Try Again~") {
+                            $("#modal-header-title").text('Error !');
+                            //Update and Show modal if error is occur
+                            $("#modal-body").text(data);
+                            $("#errorModel").modal("show");
+                        }
+                    })
+                    setTimeout(getAccount, 200);
+                    setTimeout(setEmail, 600);
+                } else {
                     $("#modal-header-title").text("Can not change email");
                     $("#modal-body").text("Your password is not correct");
                     $("#errorModel").modal("show");
                 }
                 $('.changemail').hide();
             });
-            $('#cancelChangeMail').click(function(){
+            $('#cancelChangeMail').click(function () {
                 $('.changemail').hide();
             });
         }
@@ -1376,13 +1420,18 @@
 
             //market task
             for (var i = 0; i < marketTask.length; i++) {
-                tasktime_market = task[i]["endtime"];
-
-                console.log(tasktime_market);
+                tasktime_market = marketTask[i]["endtime"];
+                console.log(remainingtime);
                 var d = new Date(tasktime_market)
                 var seconds = (d.getTime() / 1000);
-                if (currentsecconds < seconds) {} else {
+                var remainingtime = parseInt(seconds - currentsecconds);
+                if (currentsecconds < seconds) {
+                    //                    var theDiv = document.getElementById("upgrade-village");
+                    //                    theDiv.insertAdjacentHTML('afterend', '<div id="two">remainingtime</div>');
+                    console.log(remainingtime);
 
+                } else {
+                    setTimeout(delayFinishTrade, 1000);
                 }
             }
 
@@ -1397,6 +1446,10 @@
         function delayFinishUpgradedVillage() {
             $("#village" + (taskindex) + "-label").tooltip('close');
             checkTask();
+        }
+
+        function delayFinishTrade() {
+            checkMarketTask();
         }
 
 
@@ -2422,9 +2475,10 @@
             inject += "</div>";
             inject += "<div class=\"modal-body\">";
             inject += "Username : " + map[index_map]["username"] + "</p>";
-            inject += "Wood : <span id=\"setWood-village\">" + map[index_map]["wood"] + "</span> areas ";
-            inject += "Clay : <span id=\"setClay-village\">" + map[index_map]["clay"] + "</span> areas";
-            inject += "Iron : <span id=\"setIron-village\">" + map[index_map]["iron"] + "</span> areas";
+            inject += "Coordinates : [" + map[index_map]["x"] + "," + map[index_map]["y"] + "]</p>";
+            inject += "Wood : <span id=\"setWood-village\">" + map[index_map]["wood"] + "</span> areas</p>";
+            inject += "Clay : <span id=\"setClay-village\">" + map[index_map]["clay"] + "</span> areas</p>";
+            inject += "Iron : <span id=\"setIron-village\">" + map[index_map]["iron"] + "</span> areas</p>";
             inject += "Crop : <span id=\"setCrop-village\">" + map[index_map]["crop"] + "</span> areas</p>";
 
 
@@ -2457,6 +2511,76 @@
             $('#map-modal').modal("show");
         }
 
+        /*Mail Attribute*/
+        var inbox;
+
+        /*Mail Function*/
+        function sendEmail() {
+            var mailreceiver = $('#reciever').val();
+            var mailtitle = $('#title').val();
+            var mailinfo = $('#message').val();
+
+            $.post("http://localhost:5555/sendMail", {
+                receiver: mailreceiver
+                , title: mailtitle
+                , info: mailinfo
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                }
+            })
+
+            $('#reciever').val('');
+            $('#title').val('');
+            $('#message').val('');
+            $("#modal-header-title").text('Send Complete');
+            $("#modal-body").text("Sent " + mailtitle + " To " + mailreceiver);
+            $("#errorModel").modal("show");
+
+        }
+
+        function setInbox() {
+            var inject = "";
+            inject += "<tbody id = \"inboxtable\">";
+            //var date = new Date();
+            for (var i = 0; i < inbox.length; i++) {
+                inject += "<tr>";
+                for (var j = 0; j < 3; j++) {
+                    inject += "<td>";
+                    if (j == 0) {
+                        inject += inbox[i]["title"];
+                    } else if (j == 1) {
+                        inject += inbox[i]["sender"];
+                    } else {
+                        var date = new Date(inbox[i]["sendtime"]);
+                        inject += date.toDateString() + " ";
+                        inject += date.toTimeString();
+                    }
+                    inject += "</td>";
+                }
+                inject += "</tr>";
+            }
+            inject += "</tbody>";
+            $('#inboxtable').replaceWith(inject);
+        }
+
+        function getInbox() {
+            $.post("http://localhost:5555/getInbox", {}, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    inbox = JSON.parse(data);
+                    console.log("Inbox " + JSON.stringify(inbox));
+                }
+            })
+
+            setTimeout(setInbox, 200);
+        }
+
 
         function reportClick() {
             init();
@@ -2466,6 +2590,7 @@
         function mailClick() {
             init();
             $('#mail_container').show();
+            getInbox();
         }
 
         function statisticClick() {
@@ -2558,6 +2683,9 @@
         $('.mapbox').click(mapModal);
         $('#buttonGo').click(setMap);
         $('.arrow').click(setMap);
+
+        /*Mailbox Listener*/
+        $('#sendbutton').click(sendEmail);
 
         /*other Listener*/
         $('#changevillagename').click(changeVillageNameClick);
