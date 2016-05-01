@@ -1165,8 +1165,8 @@ exports.getMapXY = function(x,y,callback){
   console.log('GET MAP X = '+x+" Y = "+y);
   var xlist = []
   var ylist = []
-  var miny = x-4;
-  var minx = y-4;
+  var minx = x-4;
+  var miny = y-4;
   for (var i = 0;i<9;i++){
     miny+=1;
     minx+=1;
@@ -1355,5 +1355,58 @@ exports.getMarkettask =function (username,callback) {
   })
 }
 var troop = {
-
+  "maceman" : {
+    'cost' : [[75,65,40,40],[120,150,180,80]],
+    'status' : [{'atkt' : 30,'atkh' : 10,'deft':15,'defh':5,'spd':45,'crr':60},{'atkt' : 70,'atkh' : 60,'deft':35,'defh':45,'spd':40,'crr':60}],
+    'consumption' : 1,
+    'time' : {min:2,sec:20}
+  },
+  "spearman" : {
+    'cost' : [[100,130,100,30],[150,130,170,50]],
+    'status' : [{'atkt' : 15,'atkh' : 20,'deft':30,'defh':50,'spd':30,'crr':20},{'atkt' : 30,'atkh' : 40,'deft':40,'defh':80,'spd':25,'crr':20}],
+    'consumption' : 1,
+    'time' : {min:3,sec:20}
+  },
+  "warrior" : {
+    'cost' : [[140,150,185,60],[180,190,220,80]],
+    'status' : [{'atkt' : 65,'atkh' : 55,'deft':25,'defh':15,'spd':35,'crr':50},{'atkt' : 100,'atkh' : 65,'deft':40,'defh':25,'spd':35,'crr':50}],
+    'consumption' : 1,
+    'time' : {min:5,sec:0}
+  },
+  "guardian" : {
+    'cost' : [[100,120,150,30],[120,150,170,70]],
+    'status' : [{'atkt' : 20,'atkh' : 15,'deft':50,'defh':20,'spd':30,'crr':20},{'atkt' : 30,'atkh' : 20,'deft':90,'defh':35,'spd':30,'crr':20}],
+    'consumption' : 1,
+    'time' : {min:4,sec:20}
+  },
+  "scout" : {
+    'cost' : [[140,150,20,40],[150,160,30,50]],
+    'status' : [{'atkt' : 0,'atkh' : 0,'deft':20,'defh':10,'spd':80,'crr':0},{'atkt' : 0,'atkh' : 0,'deft':30,'defh':15,'spd':80,'crr':0}],
+    'consumption' : 2,
+    'time' : {min:4,sec:20}
+  },
+  "cavalry" : {
+    'cost' : [[350,400,300,60],[400,450,470,70]],
+    'status' : [{'atkt' : 120,'atkh' : 160,'deft':60,'defh':60,'spd':90,'crr':100},{'atkt' : 180,'atkh' : 160,'deft':70,'defh':70,'spd':90,'crr':100}],
+    'consumption' : 2,
+    'time' : {min:8,sec:00}
+  },
+  "heavycavalry" : {
+    'cost' : [[450,550,700,70],[600,750,970,90]],
+    'status' : [{'atkt' : 200,'atkh' : 180,'deft':90,'defh':100,'spd':50,'crr':70},{'atkt' : 280,'atkh' : 220,'deft':150,'defh':200,'spd':50,'crr':70}],
+    'consumption' : 3,
+    'time' : {min:10,sec:00}
+  },
+  "catapult" :{
+    'cost' : [[900,1200,600,90],[1500,3000,900,120]],
+    'status' : [{'atkt' : 60,'atkh' : 40,'deft':30,'defh':20,'spd':15,'crr':0},{'atkt' : 70,'atkh' : 60,'deft':40,'defh':30,'spd':15,'crr':0}],
+    'consumption' : 6,
+    'time' : {min:24,sec:0}
+  },
+  "ram" : {
+    'cost' : [[900,300,500,90],[1200,500,900,120]],
+    'status' : [{'atkt' : 50,'atkh' : 40,'deft':20,'defh':20,'spd':20,'crr':0},{'atkt' : 60,'atkh' : 50,'deft':40,'defh':30,'spd':20,'crr':0}],
+    'consumption' : 6,
+    'time' : {min:15,sec:0}
+  }
 }
