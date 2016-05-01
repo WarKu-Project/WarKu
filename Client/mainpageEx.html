@@ -58,7 +58,11 @@
                     <h3 class="modal-title">Account</h3>
                 </div>
                 <div class="modal-body">
-
+                    Account name : <span id="accountname" ></span></p>
+                    Email : <span id="email"></span></p>
+                    Village name : <span id="villagename_account"></span></p>
+                    Population : </p>
+                    Rank : 
                 </div>
             </div>
         </div>
@@ -74,7 +78,11 @@
                     <h3 class="modal-title">Setting</h3>
                 </div>
                 <div class="modal-body">
-
+                    Account name : <span id="accountname"></span></p>
+                Password : <span id="password"> </span> <button id="changepassword" type="button" class="btn btn-warning">Change Password</button></p>
+                
+            Email : <span id="email"> </span> <button id="changeemail" type="button" class="btn btn-warning">Change Email</button></p>
+                
                 </div>
             </div>
         </div>
@@ -732,6 +740,7 @@
         /*global attribute*/
         var task;
         var tasktime, taskindex;
+        var account;
         /* resource attribute*/
         var resource = null;
         var resourceAllTypes = ["wood", "clay", "iron", "crop"];
@@ -945,6 +954,21 @@
             setResourceValue();
             checkTask();
             setVillageDetail();
+            getAccount();
+        }
+        
+        function getAccount(){
+            $.post("http://localhost:5555/getPlayerInfo", {}, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    account = JSON.parse(data);
+                    console.log("Account :" + JSON.stringify(account));
+                }
+            })
         }
 
         function setVillageDetail() {
@@ -1234,7 +1258,20 @@
             console.log("tasklengrth" + task.length)
             worker = fullworker - task.length;
             $(workernum).text(worker);
-
+            
+            //market task
+            for (var i = 0; i < marketTask.length; i++) {
+                tasktime_market = task[i]["endtime"];
+                
+                console.log(tasktime_market);
+                var d = new Date(tasktime_market)
+                var seconds = (d.getTime() / 1000);
+                if (currentsecconds < seconds) {
+                }
+                else{
+                    
+                }
+            }
 
         }
 
@@ -1258,8 +1295,11 @@
         var upgradeBuildingStatus;
         var createBuildingCall = false;
         var villageUpgradeCall = false;
+        var marketTradeCall = false;
         var tasktime_village, taskindex_village;
         var villagelevel;
+        var marketTask;
+        var tasktime_market;
 
         var building_info = {
                 "villagehall": {
@@ -2021,7 +2061,8 @@
                 console.log('Village can not upgrade');
                 $('#upgradebtn-village').prop("disabled", true);
             }
-
+            
+            marketTradeCall = true;
             $('#tradebyvillage').click(tradeResourceByVillage);
             $('#tradebycoordinate').click(tradeResourceByCoordinate);
         }
@@ -2084,7 +2125,8 @@
                 inject += "Coordinates : "
                 inject += "X:<input type=\"number\" name=\"xcoordinate\" min=\"0\" max=\"100\" id=\"markettarget_x\"> "
                 inject += "Y:<input type=\"number\" name=\"ycoordinate\" min=\"0\" max=\"100\" id=\"markettarget_y\"> "
-                inject += "<button id=\"tradebycoordinate\" type=\"button\" class=\"btn btn-default\">Trade</button>"
+                inject += "<button id=\"tradebycoordinate\" type=\"button\" class=\"btn btn-default\">Trade</button></p>"
+                inject += "Task"
             }
 
             inject += "</div></div></div></div>";
@@ -2097,6 +2139,7 @@
             $('#upgrade-village').modal("hide");
             console.log('trading by village');
             var targetvillagename = $("#villagetarget").val();
+            if(marketTradeCall){
             if (targetvillagename != "") {
                 var woodnum = parseInt($('#marketwoodnum').val()) || 0;
                 var claynum = parseInt($('#marketclaynum').val()) || 0;
@@ -2119,6 +2162,10 @@
                             $("#modal-body").text(data);
                             $("#errorModel").modal("show");
                         }
+                        else{
+                            setTimeout(checkMarketTask,100);
+                            setTimeout(setResourceValue, 100);
+                        }
                     })
                 } else {
                     $("#modal-header-title").text('Can not trade resource');
@@ -2130,6 +2177,8 @@
                 $("#modal-body").text("Village name must not empty");
                 $("#errorModel").modal("show");
             }
+                marketTradeCall = false;
+            }
         }
 
         function tradeResourceByCoordinate() {
@@ -2138,6 +2187,7 @@
             var coordinateX = $("#markettarget_x").val();
             var coordinateY = $("#markettarget_y").val();
             console.log('x : '+coordinateX+' y: '+coordinateY);
+            if(marketTradeCall){
             if (coordinateX <= 100 && coordinateX >= 0 && coordinateY <= 100 && coordinateY >= 0) {
                 console.log('send resource coor');
                 var woodnum = parseInt($('#marketwoodnum').val())|| 0;
@@ -2162,6 +2212,10 @@
                             $("#modal-body").text(data);
                             $("#errorModel").modal("show");
                         }
+                        else{
+                            setTimeout(checkMarketTask,100);
+                            setTimeout(setResourceValue, 100);
+                        }
                     })
                 } else {
                     $("#modal-header-title").text('Can not trade resource');
@@ -2173,8 +2227,23 @@
                 $("#modal-body").text("the coordinate has not in worldmap");
                 $("#errorModel").modal("show");
             }
+            }
+            marketTradeCall = false;
         }
-
+        
+        function checkMarketTask(){
+            $.post("http://localhost:5555/getMarkettask", function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                } else {
+                    marketTask = JSON.parse(data);
+                    console.log('send resource: ' + JSON.stringify(task));
+                }
+            })
+        }
 
 
         /* Other function */
