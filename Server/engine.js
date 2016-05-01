@@ -1052,7 +1052,7 @@ exports.getStructingTask = function(username,callback) {
 /** Function to add market task when send some resource **/
 function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
     console.log("Send Resource "+username);
-
+    console.log(des_vid);
   getCurrentVillage(username,function(err,home_vid) {
     if (err) callback(err);
     else {
@@ -1071,7 +1071,8 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
                 var sum = result[i].wood+result[i].clay+result[i].iron+result[i].crop;
                 num_merchant-=Math.ceil(sum/500.0);
               }
-              var resource = wood+clay+iron+crop;
+              var resource = (wood+clay+iron+crop);
+              console.log(resource);
               var require_merchant = Math.ceil(resource/500.0);
               if (require_merchant>num_merchant){
                 console.log('Merchants are not enough : require_merchant = '+require_merchant+" avaiable merchant = "+num_merchant);
@@ -1130,10 +1131,12 @@ function sendResource(username,des_vid,wood,clay,iron,crop,callback) {
 /** Function to add market task when send some resource **/
 exports.sendResource = function(username,v_name,wood,clay,iron,crop,callback){
   console.log("Send Resource "+username);
+  console.log(v_name);
   con.query('SELECT vid FROM village WHERE name = ?',v_name,function(err,result) {
     if (err) callback(err);
     else {
       var des_vid = result[0].vid;
+      console.log(des_vid);
       sendResource(username,des_vid,wood,clay,iron,crop,function (err,status) {
         if (err) callback(err);
         else {
@@ -1452,3 +1455,6 @@ exports.changePassword = function(username,password,callback){
     else callback(null,true)
   })
 }
+// exports.getInbox = function(username,callback) {
+//   con.query('SELECT ')
+// }
