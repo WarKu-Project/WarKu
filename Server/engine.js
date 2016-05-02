@@ -101,6 +101,9 @@ function initStatus(pid,vid) {
         //Return null because it doesn't error    }
       }
   })
+  con.query('INSERT INTO statistic(pid,population) values(?,0)',pid,function (err) {
+    if(err) console.log(err);
+  })
 }
 /** Function to save village status **/
 function saveVillageStatus(vid) {
@@ -1027,6 +1030,7 @@ exports.update = function(username){
     if (err) console.log(err);
     else update(vid)
   })
+  updateStatistic(username);
 }
 function update(vid) {
   updateResource(vid);
@@ -1513,4 +1517,30 @@ exports.getPopulation = function (username,callback) {
       })
     }
   })
+}
+function updateStatistic(username) {
+  exports.getPopulation(username,function (err,pop) {
+    if (err) console.log(err);
+    else {
+      con.query('UPDATE statistic SET population = ? WHERE pid = (SELECT pid FROM player WHERE username = ?)',[pop,username],function(err) {
+        if(err) console.log(err);
+      })
+    }
+  })
+}
+exports.getStatistic = function (username,callback) {
+    con.query('SELECT rank FROM (SELECT *, @currank := @currank+1 AS rank FROM `statistic` s, (SELECT @currank := 0) r ORDER BY population DESC) s WHERE pid = (SELECT pid FROM player WHERE username = ? )',username ,function(err,result) {
+      if(err) callback(err);
+      else {
+        var rank = result[0].rank;
+        var lb = parseInt((rank-1)/20)*20+1
+        var ub = lb+19
+        console.log(lb+" "+ub);
+        con.query('SELECT username,rank,population FROM (SELECT *, @currank := @currank+1 AS rank FROM `statistic` s, (SELECT @currank := 0) r ORDER BY population DESC) s JOIN player ON s.pid=player.pid WHERE rank BETWEEN ? AND ?',[lb,ub],function (err,result) {
+          //console.log(err+ " "+result);
+          if (err) callback(err)
+          else callback(null,result)
+        })
+      }
+    })
 }
