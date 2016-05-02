@@ -1,7 +1,12 @@
 /** Initialize express **/
-var app = require('express')();
+var express = require('express')
+var app = express();
 /** initialize body-parser **/
 var bp = require('body-parser');
+
+var http = require('http');
+var path = require('path');
+var fs = require('fs');
 /** use body-parser which parse app/json **/
 app.use(bp.json());
 app.use(bp.urlencoded({
@@ -16,10 +21,17 @@ var engine = require('./engine');
 
 /** online_user list **/
 var online_user = {};
-app.get('/',function (req,res) {
-  console.log('aaaa');
-  res.sendfile('/Client/index.html');
-})
+
+app.use(express.static(path.join('./../Client')));
+
+var html_dir = './../Client/';
+app.get('/', function(req, res) {
+    res.sendFile('index.html');
+});
+app.use(express.static(path.join('./../Client')));
+app.get('/mainpageEx', function(req, res) {
+    res.sendFile('/mainpageEx.html',{root: '../Client'});
+});
 /** login **/
 app.post('/login',function(req,res){
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
