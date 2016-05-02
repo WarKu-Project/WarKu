@@ -1,0 +1,66 @@
+#resource_container {
+    position: relative;
+    height: 500px;
+}
+
+.resoucre {
+    margin-left: auto;
+    margin-right: 100%;
+    width: 70%;
+    position: relative;
+}
+
+#produce_container {
+    position: absolute;
+    top: 20%;
+    left: 79%;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: aquamarine;
+}
+
+.woodproduce {
+    content: url(picture/resource/wood.png);
+    width: 40%;
+}
+
+.clayproduce {
+    content: url(picture/resource/clay.png);
+    width: 40%;
+}
+
+.ironproduce {
+    content: url(picture/resource/iron.png);
+    width: 40%;
+}
+
+.cropproduce {
+    content: url(picture/resource/crop.png);
+    width: 40%;
+}
+
+
+
+.paddingrow {
+    padding-left: 0%;
+    font-size: 18px;
+    font-size: 1.3em;
+}
+
+.toTop {
+    margin-top: -20%;
+    height: 20%;
+    top:20%;
+
+}
+
+.jumbotronwidth{
+    max-width:100%;
+}
+
+.titlerow{
+    font-size: 18px;
+    font-weight: bold;
+    font-size: 1.3em;
+
+}

@@ -1,0 +1,30 @@
+.inbox-container {
+    background-color: white;
+    border: 1px solid #000;
+}
+
+.mailjumbotron{
+    background-color: transparent;
+}
+
+#mail_container{
+    margin-top: -5%;
+}
+
+.compose-page{
+    background-color: antiquewhite;
+    border: 1px solid #000;
+}
+
+.messageEditor {
+    margin-top: 12px;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    height: 370px;
+    width: 100%;
+    border: 0;
+    line-height: 16px;
+    font-size: 13px;
+    padding: 0;
+    border: 1px solid #000;
+}

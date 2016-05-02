@@ -1,0 +1,144 @@
+.row-centered {
+    text-align: center;
+}
+
+.col-centered {
+    display: inline-block;
+    float: none;
+    text-align: left;
+    margin-right: -4px;
+    padding-top: 20px;
+}
+
+body {
+    background-image: url("picture/bg4.jpg");
+    background-color: seagreen;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: monospace;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+.menu {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-frame {
+    position: relative;
+    height: 15%;
+}
+
+.menu_img {
+
+}
+
+.menu-li {
+    height: 100%;
+    width: 10%;
+}
+
+.menu {
+    max-width: 100px;
+    height: auto
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.Centerer {
+    display: inline-block;
+    height: 10%;
+    vertical-align: middle;
+}
+
+.menu-padding {
+    height: 10%;
+}
+
+.stockbarcontainer{
+    width: 100%;
+    height: 0;
+}
+
+.stockbar {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    border: 2px solid #000;
+    font-size: 1.5em;
+    font-size: 2vw;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.stockwood{
+    content: url(picture/resource/wood.png);
+    width: 30%;
+}
+
+.stockclay{
+    content: url(picture/resource/clay.png);
+    width: 30%;
+}
+
+.stockiron{
+    content: url(picture/resource/iron.png);
+    width: 30%;
+}
+
+.stockcrop{
+    content: url(picture/resource/crop.png);
+    width: 30%;
+}
+
+.stockworker{
+    content: url(picture/resource/worker.png);
+    width: 50%;
+}
+
+.stockwarehouse{
+    content: url(picture/village/warehouse.png);
+    width: 100%;
+}
+
+.stockgranary{
+    content: url(picture/village/granary.png);
+    width: 100%;
+}
+
+.bottombar {
+    height: 5%;
+    width: 55%;
+    margin-left: 10%;
+    margin-right: auto;
+    border: 2px solid #000;
+}
+
+.stocktext{
+    color: black;
+   -webkit-text-stroke: 0.3px black;
+}
+
+.villageDetailbar{
+
+    margin-left: 65%;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: lightpink;
+    padding:1% 1%;
+    margin-top: 1%;
+    font-size: 1em;
+    font-size: 1.3vw;
+}
+
+#inputvillagename{
+    width: 100px;
+}
