@@ -122,7 +122,7 @@
                 $("#modal-header-title").text('Login success');
                 $("#modal-body").text(data);
                 $("#loginModal").modal("show");
-                location.assign("http://localhost:5555/mainpageEx")
+                location.assign("http:/mainpageEx.html")
               }else {
                 //Update and show if login is failed
                 $("#modal-header-title").text('Login not success');
@@ -151,7 +151,7 @@
               var password  = $('#regis-password').val();
               var email = $('#regis-email').val();
               //Post username password and email to server
-              $.post("http://localhost:5555/register",{user : username,pass : password, mail : email},function(data) {
+              $.post("/register",{user : username,pass : password, mail : email},function(data) {
                 if (data=="Welcome ! "+username){
                   console.log('Regis Success');
                   $("#login-form").delay(100).fadeIn(100);

@@ -21,17 +21,16 @@ var engine = require('./engine');
 
 /** online_user list **/
 var online_user = {};
+app.use(express.static('public'));
+app.use(express.static('files'));
+app.use(express.static(path.join(__dirname,'./../Client')));
+// app.get('/', function(req, res) {
+//     res.sendFile('index.html');
+// });
+// app.get('/mainpageEx', function(req, res) {
+//     res.sendFile('mainpageEx.html');
+// });
 
-app.use(express.static(path.join('./../Client')));
-
-var html_dir = './../Client/';
-app.get('/', function(req, res) {
-    res.sendFile('index.html');
-});
-app.use(express.static(path.join('./../Client')));
-app.get('/mainpageEx', function(req, res) {
-    res.sendFile('/mainpageEx.html',{root: '../Client'});
-});
 /** login **/
 app.post('/login',function(req,res){
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
