@@ -208,24 +208,24 @@
             $('#login-heading').removeClass('active-panel-heading');
             e.preventDefault();
         });
-        
-        //Listener by Enter key       
-        $('#register-submit').focus(function() {                                              
+
+        //Listener by Enter key
+        $('#register-submit').focus(function() {
                  $(document).bind('keypress', function(e) {
                  if(e.keyCode==13){
                  $('#register-submit').trigger('click');
                 }});
             }
         );
-        
-        $('#login-submit').focus(function() {                                              
+
+        $('#login-submit').focus(function() {
                  $(document).bind('keypress', function(e) {
                  if(e.keyCode==13){
                  $('#login-submit').trigger('click');
                 }});
             }
         );
-        
+
     </script>
 </body>
 
