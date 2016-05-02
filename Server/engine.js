@@ -1528,6 +1528,17 @@ function updateStatistic(username) {
     }
   })
 }
+exports.getPersonalRanking = function (username,callback) {
+  con.query('SELECT rank FROM (SELECT *, @currank := @currank+1 AS rank FROM `statistic` s, (SELECT @currank := 0) r ORDER BY population DESC) s WHERE pid = (SELECT pid FROM player WHERE username = ? )',username ,function(err,result) {
+    if(err) callback(err);
+    else {
+      var rank = result[0].rank;
+    }
+  })
+}
+exports.getRanking = function(x,y,callback) {
+  
+}
 exports.getStatistic = function (username,callback) {
     con.query('SELECT rank FROM (SELECT *, @currank := @currank+1 AS rank FROM `statistic` s, (SELECT @currank := 0) r ORDER BY population DESC) s WHERE pid = (SELECT pid FROM player WHERE username = ? )',username ,function(err,result) {
       if(err) callback(err);
