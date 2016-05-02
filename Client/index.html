@@ -115,7 +115,7 @@
             var username = $('#login-username').val();
             var password = $('#login-password').val();
             //Post username and password to server
-            $.post("http://localhost:5555/login",{user: username,password: password}, function(data){
+            $.post("/login",{user: username,password: password}, function(data){
               if (data=="Welcome ! "+username){
                 console.log('success');
                 //Update and Show modal if login is success
