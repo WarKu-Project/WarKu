@@ -16,6 +16,10 @@ var engine = require('./engine');
 
 /** online_user list **/
 var online_user = {};
+app.get('/',function (req,res) {
+  console.log('aaaa');
+  res.sendfile('../Client/index.html');
+})
 /** login **/
 app.post('/login',function(req,res){
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
