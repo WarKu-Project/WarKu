@@ -611,6 +611,21 @@ app.post('/getPersonalRanking',function (req,res) {
     }
   })
 })
+app.post('/getRanking',function (req,res) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log("\nCurrent IP : "+ip);
+  console.log("Current User : "+online_user[ip]);
+  var username = online_user[ip];
+  var rank = req.body.rank;
+  engine.getRanking(rank,function (err,s) {
+    if (err) {
+      console.log("Server Recieve From Engine : "+err.toString());
+      res.end("Something wrong on our server :( Try Again~");
+    }else {
+      res.end(JSON.stringify(s));
+    }
+  })
+})
 app.listen(5555,function(){
   console.log("Started on PORT 5555");
 })

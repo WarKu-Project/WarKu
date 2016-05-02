@@ -1536,8 +1536,14 @@ exports.getPersonalRanking = function (username,callback) {
     }
   })
 }
-exports.getRanking = function(x,y,callback) {
-  
+exports.getRanking = function(rank,callback) {
+  var lb = parseInt((rank-1)/20)*20+1
+  var ub = lb+19
+  con.query('SELECT username,rank,population FROM (SELECT *, @currank := @currank+1 AS rank FROM `statistic` s, (SELECT @currank := 0) r ORDER BY population DESC) s JOIN player ON s.pid=player.pid WHERE rank BETWEEN ? AND ?',[lb,ub],function (err,result) {
+    //console.log(err+ " "+result);
+    if (err) callback(err)
+    else callback(null,result)
+  })
 }
 exports.getStatistic = function (username,callback) {
     con.query('SELECT rank FROM (SELECT *, @currank := @currank+1 AS rank FROM `statistic` s, (SELECT @currank := 0) r ORDER BY population DESC) s WHERE pid = (SELECT pid FROM player WHERE username = ? )',username ,function(err,result) {
