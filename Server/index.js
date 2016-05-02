@@ -18,7 +18,7 @@ var engine = require('./engine');
 var online_user = {};
 app.get('/',function (req,res) {
   console.log('aaaa');
-  res.sendfile('../Client/index.html');
+  res.sendfile('/Client/index.html');
 })
 /** login **/
 app.post('/login',function(req,res){
