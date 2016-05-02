@@ -745,7 +745,7 @@
 <div class="container" id="mail_container">
     <div class="jumbotron mailjumbotron">
         <ul id="myTab" class="nav nav-tabs">
-            <li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
+            <li class="active inboxhead"><a href="#inbox" data-toggle="tab">Inbox</a></li>
             <li class=""><a href="#compose" data-toggle="tab">Compose</a></li>
             <li class="sendboxhead"><a href="#sendbox" data-toggle="tab">Sendbox</a></li>
         </ul>
@@ -783,7 +783,7 @@
 </div>
 <div class="tab-pane fade active in" id="sendbox">
     <div class="jumbotron inbox-container">
-        <table class="table table-hover table-striped">
+        <table class="table table-hover " id="sendbox_table">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -2523,6 +2523,8 @@
         /*Mail Attribute*/
         var inbox ;
         var sendbox;
+        var mail;
+        var statemail = 'inbox';
         /*Mail Function*/
         function sendEmail(){
             var mailreceiver = $('#reciever').val();
@@ -2549,13 +2551,31 @@
             $("#errorModel").modal("show");
 
         }
+        
+        function getInbox(){
+            $.post("http://localhost:5555/getInbox", {
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                }
+                else{
+                    inbox = JSON.parse(data);
+                    console.log("Inbox "+JSON.stringify(inbox));
+                }
+            })
+
+            setTimeout(setInbox,200);
+        }
+
 
         function setInbox(){
             var inject = "";
             inject += "<tbody id = \"inboxtable\">";
             //var date = new Date();
             for(var i=0;i<inbox.length;i++){
-                inject += "<tr>";
+                inject += "<tr onclick=\"getMail(this)\" id=\"inbox_table\">";
                 for(var j=0;j<3;j++){
                     inject += "<td>";
                     if(j==0){
@@ -2575,23 +2595,6 @@
             }
             inject += "</tbody>";
             $('#inboxtable').replaceWith(inject);
-        }
-
-        function getInbox(){
-            $.post("http://localhost:5555/getInbox", {
-            }, function (data) {
-                if (data == "Something wrong on our server :( Try Again~") {
-                    $("#modal-header-title").text('Error !');
-                    $("#modal-body").text(data);
-                    $("#errorModel").modal("show");
-                }
-                else{
-                    inbox = JSON.parse(data);
-                    console.log("Inbox "+JSON.stringify(inbox));
-                }
-            })
-
-            setTimeout(setInbox,200);
         }
 
         function getSendbox(){
@@ -2616,7 +2619,7 @@
             inject += "<tbody id = \"sendboxtable\">";
             //var date = new Date();
             for(var i=0;i<sendbox.length;i++){
-                inject += "<tr>";
+                inject += "<tr onclick=\"getMail(this)\">";
                 for(var j=0;j<3;j++){
                     inject += "<td>";
                     if(j==0){
@@ -2637,6 +2640,39 @@
             inject += "</tbody>";
             $('#sendboxtable').replaceWith(inject);
         }
+        
+        function getMail(x) {
+            console.log('type: '+$(this).attr('id'))
+            var row_index = x.rowIndex-1;
+            console.log('row: '+row_index);
+            var id ;
+            if(statemail=='inbox') id = inbox[row_index]["mid"];
+            else id = sendbox[row_index]["mid"]
+            console.log("middd "+id);
+            var message;
+            console.log(row_index);
+            $.post("http://localhost:5555/getMail", {
+                mid: id
+            }, function (data) {
+                if (data == "Something wrong on our server :( Try Again~") {
+                    $("#modal-header-title").text('Error !');
+                    //Update and Show modal if error is occur
+                    $("#modal-body").text(data);
+                    $("#errorModel").modal("show");
+                }
+                else{
+                    mail = JSON.parse(data);
+                    console.log('get '+JSON.stringify(mail))
+                }
+            })
+            setTimeout(showMail,200);
+        }
+        
+        function showMail(){
+            $("#modal-header-title").text(mail.title);
+            $("#modal-body").text(mail.info);
+            $("#errorModel").modal("show");
+        }
 
         function reportClick() {
             init();
@@ -2645,6 +2681,7 @@
 
         function mailClick() {
             init();
+            statemail = 'inbox';
             $('#mail_container').show();
             getInbox();
             $('#sendbox').hide();
@@ -2746,30 +2783,14 @@
         $('#sendbutton').click(sendEmail);
         $('.sendboxhead').click(function(){
             $('#sendbox').show();
+            statemail = 'sendbox';
+        });
+        $('.inboxhead').click(function(){
+            statemail = 'inbox';
         });
         
-        //getMail inbox
-        $('#inbox_table').click(function(){
-            var row_index = $(this).parent().index();
-            var id = inbox[row_index]["mid"];
-            console.log("middd "+id);
-            var message;
-            console.log(row_index);
-            $.post("http://localhost:5555/getMail", {
-                mid: id
-            }, function (data) {
-                if (data == "Something wrong on our server :( Try Again~") {
-                    $("#modal-header-title").text('Error !');
-                    //Update and Show modal if error is occur
-                    $("#modal-body").text(data);
-                    $("#errorModel").modal("show");
-                }
-                else{
-                    message = JSON.parse(data);
-                    console.log('get '+JSON.stringify(message))
-                }
-            })
-        });
+        
+
 
         /*other Listener*/
         $('#changevillagename').click(changeVillageNameClick);
