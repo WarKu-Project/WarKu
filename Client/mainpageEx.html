@@ -2728,178 +2728,9 @@
                 refreshChangeVillageName();
             });
 
-<<<<<<< HEAD
-            }
-        })
-
-    }
-
-    function mapClickModal(map, index_map) {
-        var inject = "";
-        inject += "<div class=\"modal fade\" id=\"map-modal\" role=\"dialog\">";
-        inject += "<div class=\"modal-dialog\">";
-        inject += "<div class=\"modal-content\">";
-        inject += "<div class=\"modal-header\">";
-        inject += "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
-        villagelevel + " <span id=\"level-village\"></span></h3>";
-        inject += "<h3 class=\"modal-title\">" + map[index_map]["name"].charAt(0).toUpperCase() + map[index_map]["name"].slice(1) + "</h3>";
-        inject += "</div>";
-        inject += "<div class=\"modal-body\">";
-        inject += "Username : " + map[index_map]["username"] + "</p>";
-        inject += "Coordinates : [" + map[index_map]["x"] + "," + map[index_map]["y"] + "]</p>";
-        inject += "Wood : <span id=\"setWood-village\">" + map[index_map]["wood"] + "</span> areas</p>";
-        inject += "Clay : <span id=\"setClay-village\">" + map[index_map]["clay"] + "</span> areas</p>";
-        inject += "Iron : <span id=\"setIron-village\">" + map[index_map]["iron"] + "</span> areas</p>";
-        inject += "Crop : <span id=\"setCrop-village\">" + map[index_map]["crop"] + "</span> areas</p>";
-
-
-        $("#map-modal").replaceWith(inject);
-
-    }
-
-    function setMap(e) {
-        arrow_map = $(this).attr("val");
-        var xcordinate = $('#x-cordinate').val();
-        var ycordinate = $('#y-cordinate').val();
-
-        if (arrow_map == "arrow1") getMap(map[31]["x"], map[31]["y"]);
-        else if (arrow_map == "arrow2") getMap(map[41]["x"], map[41]["y"]);
-        else if (arrow_map == "arrow3") getMap(map[49]["x"], map[49]["y"]);
-        else if (arrow_map == "arrow4") getMap(map[39]["x"], map[39]["y"]);
-        else getMap(xcordinate, ycordinate);
-
-    }
-
-    function mapClick() {
-        init();
-        $('#map_container').show();
-        mapShow();
-    }
-
-    function mapModal(e) {
-        index_map = parseInt($(this).attr("index"));
-        mapClickModal(map, index_map);
-        $('#map-modal').modal("show");
-    }
-
-    /*Mail Attribute*/
-    var inbox ;
-    var sendbox;
-    var mail;
-    var statemail = 'inbox';
-    /*Mail Function*/
-    function sendEmail(){
-        var mailreceiver = $('#reciever').val();
-        var mailtitle = $('#title').val();
-        var mailinfo  = $('#message').val();
-
-        $.post("/sendMail", {
-            receiver: mailreceiver,
-            title: mailtitle,
-            info: mailinfo
-        }, function (data) {
-            if (data == "Something wrong on our server :( Try Again~") {
-                $("#modal-header-title").text('Error !');
-                $("#modal-body").text(data);
-                $("#errorModel").modal("show");
-            }
-        })
-
-        $('#reciever').val('');
-        $('#title').val('');
-        $('#message').val('');
-        $("#modal-header-title").text('Send Complete');
-        $("#modal-body").text("Sent "+mailtitle+" To "+mailreceiver);
-        $("#errorModel").modal("show");
-
-    }
-
-    function getInbox(){
-        $.post("/getInbox", {
-        }, function (data) {
-            if (data == "Something wrong on our server :( Try Again~") {
-                $("#modal-header-title").text('Error !');
-                $("#modal-body").text(data);
-                $("#errorModel").modal("show");
-            }
-            else{
-                inbox = JSON.parse(data);
-            }
-        })
-
-        setTimeout(setInbox,200);
-    }
-
-
-    function setInbox(){
-        var inject = "";
-        inject += "<tbody id = \"inboxtable\">";
-        //var date = new Date();
-        for(var i=0;i<inbox.length;i++){
-            inject += "<tr onclick=\"getMail(this)\" id=\"inbox_table\">";
-            for(var j=0;j<3;j++){
-                inject += "<td>";
-                if(j==0){
-                    inject += inbox[i]["title"];
-                }
-                else if(j==1){
-                    inject += inbox[i]["sender"];
-                }
-                else{
-                    var date = new Date(inbox[i]["sendtime"]);
-                    inject += date.toDateString()+" ";
-                    inject += date.toTimeString();
-                }
-                inject += "</td>";
-            }
-            inject += "</tr>";
-        }
-        inject += "</tbody>";
-        $('#inboxtable').replaceWith(inject);
-    }
-
-    function getSendbox(){
-        $.post("/getSentbox", {
-        }, function (data) {
-            if (data == "Something wrong on our server :( Try Again~") {
-                $("#modal-header-title").text('Error !');
-                $("#modal-body").text(data);
-                $("#errorModel").modal("show");
-            }
-            else{
-                sendbox = JSON.parse(data);
-            }
-        })
-
-        setTimeout(setSendbox,200);
-    }
-
-    function setSendbox(){
-        var inject = "";
-        inject += "<tbody id = \"sendboxtable\">";
-        for(var i=0;i<sendbox.length;i++){
-            inject += "<tr onclick=\"getMail(this)\">";
-            for(var j=0;j<3;j++){
-                inject += "<td>";
-                if(j==0){
-                    inject += sendbox[i]["title"];
-                }
-                else if(j==1){
-                    inject += sendbox[i]["receiver"];
-                }
-                else{
-                    var date = new Date(sendbox[i]["sendtime"]);
-                    inject += date.toDateString()+" ";
-                    inject += date.toTimeString();
-                }
-                inject += "</td>";
-            }
-            inject += "</tr>";
-=======
             $('#cancelvillagename').click(function () {
                 refreshChangeVillageName();
             });
->>>>>>> 822092e5c51d37b6e85ba9f345d59c01cb110597
         }
 
         function refreshChangeVillageName() {
@@ -2909,46 +2740,6 @@
             $('#changevillagename').show();
         }
 
-<<<<<<< HEAD
-        $.post("/getMail", {
-            mid: id
-        }, function (data) {
-            if (data == "Something wrong on our server :( Try Again~") {
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#errorModel").modal("show");
-            }
-            else{
-                mail = JSON.parse(data);
-
-            }
-        })
-        setTimeout(showMail,200);
-    }
-
-    function showMail(){
-        $("#modal-header-title").text(mail.title);
-        $("#modal-body").text(mail.info);
-        $("#errorModel").modal("show");
-    }
-
-    /* Statistic Attribute */
-    var statistic;
-    /* Statistic function */
-
-    function getStatistic(){
-        $.post("/getStatistic", {
-        }, function (data) {
-            if (data == "Something wrong on our server :( Try Again~") {
-                $("#modal-header-title").text('Error !');
-                //Update and Show modal if error is occur
-                $("#modal-body").text(data);
-                $("#errorModel").modal("show");
-            }
-            else{
-                statistic = JSON.parse(data);
-=======
         function account() {
             $('#button-account').modal("show");
             //TODO remove user from server
@@ -2962,7 +2753,6 @@
             setEmail();
             //TODO remove user from server
         }
->>>>>>> 822092e5c51d37b6e85ba9f345d59c01cb110597
 
         function logout() {
             location.assign("http:/index.html");
@@ -3012,30 +2802,10 @@
 
 
 
-<<<<<<< HEAD
-        $('#confirmvillagename').click(function () {
-            var newname = $('#inputvillagename').val();
-            if (newname != "") {
-                $.post("/changeName", {
-                    name: newname
-                }, function (data) {
-                    if (data == "Something wrong on our server :( Try Again~") {
-                        $("#modal-header-title").text('Error !');
-                        //Update and Show modal if error is occur
-                        $("#modal-body").text(data);
-                        $("#errorModel").modal("show");
-                    }
-                })
-                setVillageDetail();
-            }
-            refreshChangeVillageName();
-        });
-=======
         /*other Listener*/
         $('#changevillagename').click(changeVillageNameClick);
         $('#changepassword').click(changePasswordClick);
         $('#changeemail').click(changeEmailClick);
->>>>>>> 822092e5c51d37b6e85ba9f345d59c01cb110597
 
         /*Stockbar*/
         setInterval(updateResource, 100);
