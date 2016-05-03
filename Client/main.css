@@ -11,7 +11,7 @@
 }
 
 body {
-    background-image: url("picture/bg4.jpg");
+    background-image: url(picture/bg4.jpg);
     background-color: seagreen;
     background-repeat: no-repeat;
     background-position: center;
