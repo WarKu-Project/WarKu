@@ -1046,7 +1046,7 @@
         }
 
         function getAccount() {
-            $.post("http://localhost:5555/getPlayerInfo", {}, function (data) {
+            $.post("/getPlayerInfo", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1057,7 +1057,7 @@
                 }
             })
 
-            $.post("http://localhost:5555/getPopulation", {}, function (data) {
+            $.post("/getPopulation", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1098,7 +1098,7 @@
                 var oldpass = $('#oldpassword').val();
                 var newpass = $('#newpassword').val();
                 if (oldpass == account["password"]) {
-                    $.post("http://localhost:5555/changePassword", {
+                    $.post("/changePassword", {
                         password: oldpass
                         , newpassword: newpass
                     }, function (data) {
@@ -1132,7 +1132,7 @@
                 var newemail = $('#newemail').val();
                 var password = $('#yourpassword').val();
                 if (password == account["password"]) {
-                    $.post("http://localhost:5555/changeEmail", {
+                    $.post("/changeEmail", {
                         password: password
                         , email: newemail
                     }, function (data) {
@@ -1158,7 +1158,7 @@
         }
 
         function setVillageDetail() {
-            $.post("http://localhost:5555/getVillageInfo", {}, function (data) {
+            $.post("/getVillageInfo", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1187,7 +1187,7 @@
         }
 
         function setResource() {
-            $.post("http://localhost:5555/loadresource", {}, function (data) {
+            $.post("/loadresource", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1221,7 +1221,7 @@
         }
 
         function setResourceValue() {
-            $.post("http://localhost:5555/getResource", {}, function (data) {
+            $.post("/getResource", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1235,7 +1235,7 @@
         }
 
         function setCapacity() {
-            $.post("http://localhost:5555/getCapacity", function (data) {
+            $.post("/getCapacity", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1291,7 +1291,7 @@
             upgradeTime = twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].hour) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].min) + ":" + twoDigits(resource_info[resource[index_resource]["type"]].time[resource[index_resource]["level"]].sec);
             $('#upgrade-time').text(upgradeTime);
 
-            $.post("http://localhost:5555/canUpgradeResource", {
+            $.post("/canUpgradeResource", {
                 pos: (index_resource + 1)
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
@@ -1321,7 +1321,7 @@
         /* Upgrade resource to database */
         function upgradeResourceLevel(e) {
             if (resourceUpgradeCall) {
-                $.post("http://localhost:5555/upgradeResource", {
+                $.post("/upgradeResource", {
                     pos: (index_resource + 1)
                 }, function (data) {
                     if (data == "Something wrong on our server :( Try Again~") {
@@ -1365,7 +1365,7 @@
 
         /* check upgrading task */
         function checkTask() {
-            $.post("http://localhost:5555/getStructingTask", function (data) {
+            $.post("/getStructingTask", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1944,7 +1944,7 @@
         }
 
         function setVillage() {
-            $.post("http://localhost:5555/loadbuilding", function (data) {
+            $.post("/loadbuilding", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -1989,7 +1989,7 @@
             $('#create-villageModal').modal("show");
 
             //check building 1
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[0]
             }, function (data) {
@@ -2005,7 +2005,7 @@
 
 
             //check building 2
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[1]
             }, function (data) {
@@ -2020,7 +2020,7 @@
             })
 
             //check building 3
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[2]
             }, function (data) {
@@ -2035,7 +2035,7 @@
             })
 
             //check building 4
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[3]
             }, function (data) {
@@ -2050,7 +2050,7 @@
             })
 
             //check building 5
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[4]
             }, function (data) {
@@ -2065,7 +2065,7 @@
             })
 
             //check building 6
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[5]
             }, function (data) {
@@ -2080,7 +2080,7 @@
             })
 
             //check building 7
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[6]
             }, function (data) {
@@ -2095,7 +2095,7 @@
             })
 
             //check building 8
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[7]
             }, function (data) {
@@ -2110,7 +2110,7 @@
             })
 
             //check building 9
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[8]
             }, function (data) {
@@ -2125,7 +2125,7 @@
             })
 
             //check building 10
-            $.post("http://localhost:5555/canCreateBuilding", {
+            $.post("/canCreateBuilding", {
                 pos: (index_village + 1)
                 , type: buildingAllTypes[9]
             }, function (data) {
@@ -2161,7 +2161,7 @@
                 var buildingtype = $(this).attr("value");
                 villagelevel = 0;
 
-                $.post("http://localhost:5555/createBuilding", {
+                $.post("/createBuilding", {
                     pos: (index_village + 1)
                     , type: buildingtype
                 }, function (data) {
@@ -2193,7 +2193,7 @@
             villagelevel = building[index_building]["level"];
             villageUpgradeModal(upgradeType, villagelevel);
             $('#upgrade-village').modal("show");
-            $.post("http://localhost:5555/canUpgradeBuilding", {
+            $.post("/canUpgradeBuilding", {
                 pos: (index_village + 1)
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
@@ -2227,7 +2227,7 @@
 
             if (villageUpgradeCall) {
 
-                $.post("http://localhost:5555/upgradeBuilding", {
+                $.post("/upgradeBuilding", {
                     pos: (index_village + 1)
                 }, function (data) {
                     if (data == "Something wrong on our server :( Try Again~") {
@@ -2302,7 +2302,7 @@
                     var total = ((woodnum + claynum) + (ironnum + cropnum));
 
                     if ((total) <= 500 && (total) > 0) {
-                        $.post("http://localhost:5555/sendResource", {
+                        $.post("/sendResource", {
                             wood: woodnum
                             , clay: claynum
                             , iron: ironnum
@@ -2347,7 +2347,7 @@
                     var total = ((woodnum + claynum) + (ironnum + cropnum));
 
                     if ((total) <= 500 && (total) > 0) {
-                        $.post("http://localhost:5555/sendResourceXY", {
+                        $.post("/sendResourceXY", {
                             wood: woodnum
                             , clay: claynum
                             , iron: ironnum
@@ -2380,7 +2380,7 @@
         }
 
         function checkMarketTask() {
-            $.post("http://localhost:5555/getMarkettask", function (data) {
+            $.post("/getMarkettask", function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -2405,7 +2405,7 @@
         var index_map;
 
         function mapShow() {
-            $.post("http://localhost:5555/getMap", {}, function (data) {
+            $.post("/getMap", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -2426,7 +2426,7 @@
 
         function getMap(posX, posY) {
 
-            $.post("http://localhost:5555/getMapXY", {
+            $.post("/getMapXY", {
                 x: posX
                 , y: posY
             }, function (data) {
@@ -2510,7 +2510,7 @@
             var mailtitle = $('#title').val();
             var mailinfo = $('#message').val();
 
-            $.post("http://localhost:5555/sendMail", {
+            $.post("/sendMail", {
                 receiver: mailreceiver
                 , title: mailtitle
                 , info: mailinfo
@@ -2532,7 +2532,7 @@
         }
 
         function getInbox() {
-            $.post("http://localhost:5555/getInbox", {}, function (data) {
+            $.post("/getInbox", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     $("#modal-body").text(data);
@@ -2572,7 +2572,7 @@
         }
 
         function getSendbox() {
-            $.post("http://localhost:5555/getSentbox", {}, function (data) {
+            $.post("/getSentbox", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     $("#modal-body").text(data);
@@ -2619,7 +2619,7 @@
 
             var message;
 
-            $.post("http://localhost:5555/getMail", {
+            $.post("/getMail", {
                 mid: id
             }, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
@@ -2646,7 +2646,7 @@
         /* Statistic function */
 
         function getStatistic() {
-            $.post("http://localhost:5555/getStatistic", {}, function (data) {
+            $.post("/getStatistic", {}, function (data) {
                 if (data == "Something wrong on our server :( Try Again~") {
                     $("#modal-header-title").text('Error !');
                     //Update and Show modal if error is occur
@@ -2713,7 +2713,7 @@
             $('#confirmvillagename').click(function () {
                 var newname = $('#inputvillagename').val();
                 if (newname != "") {
-                    $.post("http://localhost:5555/changeName", {
+                    $.post("/changeName", {
                         name: newname
                     }, function (data) {
                         if (data == "Something wrong on our server :( Try Again~") {
