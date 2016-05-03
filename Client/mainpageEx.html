@@ -2503,7 +2503,7 @@ Contructing time : 00:10:00
         var mailtitle = $('#title').val();
         var mailinfo  = $('#message').val();
 
-        $.post("http://localhost:5555/sendMail", {
+        $.post("/sendMail", {
             receiver: mailreceiver,
             title: mailtitle,
             info: mailinfo
@@ -2525,7 +2525,7 @@ Contructing time : 00:10:00
     }
 
     function getInbox(){
-        $.post("http://localhost:5555/getInbox", {
+        $.post("/getInbox", {
         }, function (data) {
             if (data == "Something wrong on our server :( Try Again~") {
                 $("#modal-header-title").text('Error !');
@@ -2569,7 +2569,7 @@ Contructing time : 00:10:00
     }
 
     function getSendbox(){
-        $.post("http://localhost:5555/getSentbox", {
+        $.post("/getSentbox", {
         }, function (data) {
             if (data == "Something wrong on our server :( Try Again~") {
                 $("#modal-header-title").text('Error !');
@@ -2620,7 +2620,7 @@ Contructing time : 00:10:00
 
         var message;
 
-        $.post("http://localhost:5555/getMail", {
+        $.post("/getMail", {
             mid: id
         }, function (data) {
             if (data == "Something wrong on our server :( Try Again~") {
@@ -2648,7 +2648,7 @@ Contructing time : 00:10:00
     /* Statistic function */
 
     function getStatistic(){
-        $.post("http://localhost:5555/getStatistic", {
+        $.post("/getStatistic", {
         }, function (data) {
             if (data == "Something wrong on our server :( Try Again~") {
                 $("#modal-header-title").text('Error !');
@@ -2719,7 +2719,7 @@ Contructing time : 00:10:00
         $('#confirmvillagename').click(function () {
             var newname = $('#inputvillagename').val();
             if (newname != "") {
-                $.post("http://localhost:5555/changeName", {
+                $.post("/changeName", {
                     name: newname
                 }, function (data) {
                     if (data == "Something wrong on our server :( Try Again~") {
